@@ -1,0 +1,19 @@
+BATMAN OBJECTIVE DECK BUILDER v0.3.1 - BUILD VALIDATION
+
+card_records: 438
+reference_entries: 591
+full_card_images: 438
+thumbnail_images: 438
+missing_referenced_images: 0
+files_over_25_MiB: 0
+largest_file: data/cards.json
+largest_file_bytes: 411442
+external_css_link: True
+external_app_script: True
+external_card_data_script: True
+external_reference_data_script: True
+embedded_card_data_uri_count: 0
+tooltip_mounts_to_active_dialog: True
+tooltip_max_z_index: True
+
+RESULT: PASS

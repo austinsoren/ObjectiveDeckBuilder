@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="application-version" content="0.3.1">
+  <title>Batman Objective Deck Builder & Compendium</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Batman Miniature Game</p>
+      <h1>Objective Deck Builder</h1>
+    </div>
+    <div class="header-actions">
+      <nav class="view-nav" aria-label="Application pages">
+        <button id="builderNavButton" class="button ghost nav-button active" type="button">Deck Builder</button>
+        <button id="referenceNavButton" class="button ghost nav-button" type="button">Compendium</button>
+      </nav>
+      <span id="saveStatus" class="save-status">Saved locally</span>
+      <button id="helpButton" class="button ghost" type="button">Deck rules</button>
+    </div>
+  </header>
+
+  <main id="builderView" class="app-shell view-panel">
+    <aside class="filters panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Crew setup</p>
+          <h2>Card pool</h2>
+        </div>
+        <button id="resetFilters" class="icon-button" title="Reset filters" aria-label="Reset filters">↺</button>
+      </div>
+
+      <label class="field">
+        <span>Affiliation</span>
+        <select id="affiliationSelect"></select>
+      </label>
+
+      <label class="field search-field">
+        <span>Search cards</span>
+        <input id="searchInput" type="search" placeholder="Name, rules text, or tag…" autocomplete="off">
+      </label>
+
+      <div class="filter-grid">
+        <label class="field">
+          <span>Library section</span>
+          <select id="categoryFilter">
+            <option value="buildable">Buildable objectives</option>
+            <option value="character">Character objectives</option>
+            <option value="reference">Event / encounter / Speedforce</option>
+            <option value="all">All cards</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Copy bundle</span>
+          <select id="copyFilter">
+            <option value="all">All bundles</option>
+            <option value="single">Single cards</option>
+            <option value="multi">Multiple-copy cards</option>
+            <option value="2">Exactly 2 copies</option>
+            <option value="3">Exactly 3 copies</option>
+            <option value="4">Exactly 4 copies</option>
+            <option value="6">Exactly 6 copies</option>
+          </select>
+        </label>
+      </div>
+
+      <label class="field">
+        <span>Sort</span>
+        <select id="sortSelect">
+          <option value="title">Card name</option>
+          <option value="copies-desc">Largest bundles first</option>
+          <option value="copies-asc">Singles first</option>
+          <option value="category">Category</option>
+        </select>
+      </label>
+
+      <label class="toggle-row">
+        <input id="availableOnly" type="checkbox">
+        <span>Hide cards already in the deck</span>
+      </label>
+
+      <section class="tag-section">
+        <div class="section-title-row">
+          <h3>Quick tags</h3>
+          <button id="clearTags" class="text-button" type="button">Clear</button>
+        </div>
+        <div id="tagFilters" class="tag-cloud"></div>
+      </section>
+
+      <section class="roster-section">
+        <div class="section-title-row">
+          <div>
+            <h3>Crew roster</h3>
+            <p>Used to validate bonus character objectives.</p>
+          </div>
+        </div>
+        <form id="modelForm" class="model-form">
+          <input id="modelName" placeholder="Model name" required>
+          <input id="modelAlias" placeholder="Alias (optional)">
+          <input id="modelRank" placeholder="Rank" required list="rankSuggestions">
+          <datalist id="rankSuggestions">
+            <option value="Leader"></option>
+            <option value="Sidekick"></option>
+            <option value="Free Agent"></option>
+            <option value="Henchman"></option>
+          </datalist>
+          <button class="button compact" type="submit">Add model</button>
+        </form>
+        <div id="rosterList" class="roster-list empty-note">No crew models entered.</div>
+      </section>
+    </aside>
+
+    <section class="library panel">
+      <div class="panel-heading library-heading">
+        <div>
+          <p class="eyebrow">Card library</p>
+          <h2 id="libraryTitle">Buildable objectives</h2>
+        </div>
+        <div class="library-stats">
+          <strong id="visibleCount">0</strong>
+          <span>cards shown</span>
+        </div>
+      </div>
+      <div id="activeFilters" class="active-filters" hidden></div>
+      <div id="cardGrid" class="card-grid" aria-live="polite"></div>
+      <div id="emptyLibrary" class="empty-state" hidden>
+        <h3>No cards match</h3>
+        <p>Clear a tag or broaden the search.</p>
+      </div>
+    </section>
+
+    <aside class="deck panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Current build</p>
+          <h2>Objective deck</h2>
+        </div>
+        <button id="clearDeck" class="icon-button danger" title="Clear deck" aria-label="Clear deck">×</button>
+      </div>
+
+      <section id="validationSummary" class="validation-summary"></section>
+
+      <div class="meter-grid">
+        <div class="meter-card">
+          <span>Base deck</span>
+          <strong><span id="baseTotal">0</span>/20</strong>
+          <div class="meter"><i id="baseMeter"></i></div>
+        </div>
+        <div class="meter-card">
+          <span>General / crew</span>
+          <strong><span id="generalTotal">0</span> / <span id="affiliationTotal">0</span></strong>
+          <div class="meter"><i id="generalMeter"></i></div>
+        </div>
+        <div class="meter-card">
+          <span>Single cards</span>
+          <strong><span id="singleTotal">0</span>/10</strong>
+          <div class="meter"><i id="singleMeter"></i></div>
+        </div>
+        <div class="meter-card">
+          <span>Bonus cards</span>
+          <strong id="bonusTotal">0</strong>
+          <div class="meter"><i id="bonusMeter"></i></div>
+        </div>
+      </div>
+
+      <div class="deck-section-heading">
+        <h3>Selected bundles</h3>
+        <span id="selectedDesignCount">0 designs</span>
+      </div>
+      <div id="deckList" class="deck-list empty-note">Select cards from the library.</div>
+
+      <div class="deck-actions">
+        <button id="startPlay" class="button play-button" type="button">Start play screen</button>
+        <button id="autoBuild" class="button" type="button">Build legal example</button>
+        <button id="exportJson" class="button ghost" type="button">Export JSON</button>
+        <button id="exportText" class="button ghost" type="button">Export list</button>
+        <label class="button ghost file-button">Import JSON<input id="importJson" type="file" accept="application/json"></label>
+        <button id="printDeck" class="button ghost" type="button">Print</button>
+      </div>
+    </aside>
+  </main>
+
+
+  <main id="referenceView" class="reference-shell view-panel" hidden>
+    <aside class="reference-filters panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Compendium v1.4</p>
+          <h2>Rules reference</h2>
+        </div>
+        <button id="resetReferenceFilters" class="icon-button" title="Reset reference filters" aria-label="Reset reference filters">↺</button>
+      </div>
+
+      <label class="field search-field">
+        <span>Search the compendium</span>
+        <input id="referenceSearch" type="search" placeholder="Trait, effect, weapon rule, equipment…" autocomplete="off">
+      </label>
+
+      <label class="field">
+        <span>Section</span>
+        <select id="referenceSection">
+          <option value="all">All sections</option>
+          <option value="Core Rules">Core rules</option>
+          <option value="Traits">Traits</option>
+          <option value="Weapon Rules">Weapon special rules</option>
+          <option value="Templates">Templates</option>
+          <option value="Effects">Effects</option>
+          <option value="Equipment">Equipment</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Sort</span>
+        <select id="referenceSort">
+          <option value="source">Compendium order</option>
+          <option value="alpha">Alphabetical</option>
+        </select>
+      </label>
+
+      <label class="toggle-row">
+        <input id="referenceSelectedOnly" type="checkbox">
+        <span>Only rules referenced by the current deck</span>
+      </label>
+
+      <section class="reference-index-section">
+        <div class="section-title-row">
+          <div>
+            <h3>Alphabet</h3>
+            <p>Quickly narrow long trait and equipment lists.</p>
+          </div>
+        </div>
+        <div id="referenceAlphabet" class="reference-alphabet"></div>
+      </section>
+
+      <section class="reference-source-note">
+        <strong>Parsed source</strong>
+        <span>BMG3 Compendium v1.4 · 40 pages</span>
+        <span id="referenceTotalCount">0 indexed entries</span>
+      </section>
+    </aside>
+
+    <section class="reference-content panel">
+      <div class="panel-heading reference-heading">
+        <div>
+          <p class="eyebrow">Searchable game reference</p>
+          <h2 id="referenceTitle">Complete compendium</h2>
+        </div>
+        <div class="reference-heading-actions">
+          <div class="library-stats"><strong id="referenceVisibleCount">0</strong><span>entries shown</span></div>
+          <button id="referenceExpandAll" class="button ghost compact" type="button">Expand results</button>
+        </div>
+      </div>
+      <div id="referenceActiveFilters" class="active-filters" hidden></div>
+      <div id="referenceList" class="reference-list" aria-live="polite"></div>
+      <div id="emptyReference" class="empty-state" hidden>
+        <h3>No compendium entries match</h3>
+        <p>Clear the search, alphabet, or section filter.</p>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="cardDialog" class="card-dialog">
+    <button class="dialog-close" data-close-dialog aria-label="Close">×</button>
+    <div class="dialog-layout">
+      <img id="dialogImage" alt="Selected card">
+      <div class="dialog-content">
+        <p id="dialogCategory" class="eyebrow"></p>
+        <h2 id="dialogTitle"></h2>
+        <div id="dialogBadges" class="badge-row"></div>
+        <p id="dialogRequirement" class="requirement-note"></p>
+        <section id="dialogRuleRefs" class="dialog-reference-section" hidden>
+          <div class="section-title-row"><h3>Referenced compendium rules</h3></div>
+          <div id="dialogRuleRefList" class="rule-ref-row expanded"></div>
+        </section>
+        <details>
+          <summary>Searchable card text</summary>
+          <div id="dialogText" class="dialog-rules-text"></div>
+        </details>
+        <div class="dialog-actions">
+          <button id="dialogToggleCard" class="button" type="button"></button>
+          <button id="editMetadata" class="button ghost" type="button">Edit metadata</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="metadataDialog" class="metadata-dialog">
+    <button class="dialog-close" data-close-metadata aria-label="Close">×</button>
+    <form id="metadataForm">
+      <p class="eyebrow">Local card correction</p>
+      <h2>Edit metadata</h2>
+      <p class="muted">Corrections are stored in this browser and can be included in deck exports.</p>
+      <label class="field"><span>Card name</span><input id="editTitle" required></label>
+      <label class="field"><span>Character subtitle / model name</span><input id="editSubtitle" placeholder="Only needed for character objectives"></label>
+      <label class="field"><span>Required model rank</span><input id="editRank" list="rankSuggestions"></label>
+      <label class="field"><span>Tags (comma separated)</span><textarea id="editTags" rows="5"></textarea></label>
+      <div class="dialog-actions">
+        <button class="button" type="submit">Save correction</button>
+        <button id="resetMetadata" class="button ghost" type="button">Reset to bundled data</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="rulesDialog" class="rules-dialog">
+    <button class="dialog-close" data-close-rules aria-label="Close">×</button>
+    <p class="eyebrow">Validation rules</p>
+    <h2>Objective deck requirements</h2>
+    <div class="rules-copy">
+      <p>The normal Objective deck contains exactly <strong>20 cards</strong>.</p>
+      <p>General cards cannot outnumber cards unique to the selected crew affiliation.</p>
+      <p>No more than <strong>10 cards</strong> may come from single-card designs.</p>
+      <p>Every selectable design is treated as a fixed bundle. A card printed in three copies is added as exactly three copies.</p>
+      <p>Character objectives sit outside the normal 20. Their subtitle and rank must match a model in the crew roster.</p>
+    </div>
+  </dialog>
+
+  <dialog id="playDialog" class="play-dialog">
+    <div class="play-shell">
+      <header class="play-header">
+        <div>
+          <p class="eyebrow">Objective deck play mode</p>
+          <h2 id="playTitle">Objective game</h2>
+          <p id="playSessionNote" class="muted"></p>
+        </div>
+        <div class="play-header-actions">
+          <button id="playUndo" class="button ghost compact" type="button">Undo</button>
+          <button class="dialog-close play-close" data-close-play aria-label="Close play screen">×</button>
+        </div>
+      </header>
+
+      <section class="play-stat-grid" aria-label="Game status">
+        <div class="play-stat"><span>Round</span><strong id="playRound">1</strong></div>
+        <div class="play-stat"><span>Hand</span><strong id="playHandCount">4</strong></div>
+        <div class="play-stat"><span>Draw pile</span><strong id="playDeckCount">0</strong></div>
+        <div class="play-stat"><span>Discard pile</span><strong id="playDiscardCount">0</strong></div>
+      </section>
+
+      <section class="play-phase-panel">
+        <div>
+          <p id="playPhaseEyebrow" class="eyebrow">Before deployment</p>
+          <h2 id="playPhaseTitle">Opening hand</h2>
+          <p id="playPhaseHelp" class="muted"></p>
+        </div>
+        <div class="play-phase-actions">
+          <button id="playPrimaryAction" class="button" type="button"></button>
+          <button id="playSkipAction" class="button ghost" type="button">No discard this Recount</button>
+        </div>
+      </section>
+
+      <section class="play-board">
+        <div class="play-hand-area">
+          <div class="play-section-heading">
+            <div>
+              <p class="eyebrow">Visible cards</p>
+              <h2>Your hand</h2>
+            </div>
+            <span id="playSelectionCount" class="muted"></span>
+          </div>
+          <div id="playHand" class="play-hand"></div>
+        </div>
+
+        <aside class="play-sidebar">
+          <section class="play-pile-panel">
+            <div class="play-section-heading"><h3>Draw pile</h3><span id="playDeckCountSide" class="muted"></span></div>
+            <div class="objective-card-back" aria-label="Face-down Objective deck">
+              <span>OBJECTIVE</span>
+              <strong>BATMAN</strong>
+              <small>Top card hidden</small>
+            </div>
+          </section>
+
+          <section class="play-pile-panel">
+            <div class="play-section-heading"><h3>Discard pile</h3><span id="playDiscardCountSide" class="muted"></span></div>
+            <div id="playDiscardPreview" class="discard-preview empty-note">No discarded cards.</div>
+          </section>
+
+          <section class="play-log-panel">
+            <div class="play-section-heading"><h3>Action log</h3></div>
+            <ol id="playLog" class="play-log"></ol>
+          </section>
+        </aside>
+      </section>
+
+      <footer class="play-footer">
+        <p class="muted">This game session is saved locally. Closing the screen does not lose your current hand or deck order.</p>
+        <div>
+          <button id="restartPlay" class="button ghost" type="button">Restart &amp; reshuffle</button>
+          <button id="endPlay" class="button danger-button" type="button">End game</button>
+        </div>
+      </footer>
+    </div>
+  </dialog>
+
+  <div id="ruleTooltip" class="rule-tooltip" role="tooltip" hidden></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="data/cards-data.js"></script>
+  <script src="data/reference-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

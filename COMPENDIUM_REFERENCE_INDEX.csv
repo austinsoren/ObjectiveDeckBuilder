@@ -1,0 +1,897 @@
+﻿id,section,subsection,title,page,kind,matchable,aliases,body
+745b727da28f,Core Rules,,About the Compendium,1,core-rules,False,,"This Compendium book collects together all of the special traits, weapon special rules and effects that make the Batman Miniature Game so compelling and tactically diverse. You’ll require a copy of the Batman Miniature Game 3rd Edition rulebook to use the contents of this compendium."
+837d17e7f92e,Core Rules,,Special Modifiers,1,core-rules,False,,"It’s important to differentiate between three types of modifiers:
+• + X Ex. Attack: Means that the model gains a + X to the character characteristic.
+• + X dice of Ex. Attack: Means that the model gains X extra dice when attacking (but the attribute is not modified).
+• + X to its Ex. Attack roll: Means that the model gains an X bonus to the results of its Attack dice (it doesn’t modify its attribute or the number of dice that it rolls)."
+07d6d190b81b,Core Rules,,Special Traits,1,core-rules,False,,"Traits provide models with various special rules. These are an exception to the basic rules and always take precedence over them where there is a conflict. In order to benefit from a trait, the model must, of course, possess it (it will be listed on the model’s Character Card). Additionally, some traits require you to spend a Special action to activate the ability – these will be denoted clearly by the appearance of the Bat-Symbol ().
+When a model activates a trait, it only benefits from that trait’s effect during its own activation, unless otherwise specified. Finally, if a trait affects friendly models within a certain range, the model using the trait is also included, unless otherwise specified."
+ff44d5748f0e,Core Rules,,One Use Only,1,core-rules,False,One use only | Once per game | Once per round,"(ONCE PER ROUND, ONCE PER GAME)
+Many traits contain these sentences at the beginning of their description. This simply means that the model may use this trait only once per game, once per round..."
+2ec489c12887,Core Rules,,Doses,1,core-rules,False,,"Several traits contain the keyword ‘Dose’. This simply means that the model can use the trait once for each Dose it possesses. For example, if a model has 2 Venom Doses, it can use it twice during the game. Each time a model gains a Dose, it may use the ability one more time if the model is able to do so. A model may only use one Dose per round."
+dc95ee0b78e9,Core Rules,,Keywords,1,core-rules,False,,"Some traits (such as Cop and Criminal) don’t have any special rules at all – these are known as ‘keywords’. Other rules and traits reference these keywords, but they don’t do anything on their own."
+8c0f619c9b1b,Core Rules,,Dodging,1,core-rules,True,Dodge,A model that benefits from this rule may make an Effort to reduce the attack dice from a Ranged Attack that targets this model.
+5084da1b7cd3,Core Rules,,Special Markers,2,core-rules,False,,"Some of the traits and other special rules in this compendium grant one or more special markers to a model. These represent various temporary bonuses. If a model receives more than one special marker of the same type, the effects are cumulative. Markers must be used and discarded the first time the model performs the action of the specified type.
+• Attack Marker +: A model with one or more + markers gains one extra attack die in its next Melee Attack action for each marker it possesses. A model cannot have more than 3 + markers at any one time.
+• Defense Marker: A model with one or more markers gains one extra die to its next Defense roll for each marker it possesses. A model cannot have more than 3 markers at any one time.
+• Movement Boost Marker: A model with a marker adds +2 +2 a number of inches to its basic move distance for its next Movement action, equal to value on the marker. These markers aren’t cumulative, when a model receives a marker with a higher value, it replaces the lower value marker.
+• Movement Penalty Marker: A model with one marker 2 2 deducts a number of inches from its basic move distance for its next Movement action, equal to the value on the marker, to a minimum of 0. These markers aren’t cumulative, when a model receives a marker with a higher value, it replaces the lower value marker.
+Note that Movement Boost and Movement Penalty markers counter each other (so a model with a +6” from boost marker and -4” from penalty marker would gain a +2” bonus to its next Movement action).
+There are also markers known as Numeric Counters, that markers contain ever a number between the 1 and 6. It cannot be increased below 6, but can reach 0, when it happens, the Numeric Counter is removed."
+1093fb04a6bc,Core Rules,Special Markers,Attack Marker,2,marker,True,Attack markers,A model with one or more Attack markers gains one extra attack die in its next Melee Attack action for each marker it possesses. A model cannot have more than 3 Attack markers at any one time.
+3bcf52c5cfe3,Core Rules,Special Markers,Defense Marker,2,marker,True,Defense markers,A model with one or more Defense markers gains one extra die to its next Defense roll for each marker it possesses. A model cannot have more than 3 Defense markers at any one time.
+a7bf9e456675,Core Rules,Special Markers,Movement Boost Marker,2,marker,True,Movement Boost,A Movement Boost marker adds its value in inches to the model’s basic move distance for its next Movement action. These markers are not cumulative; a higher value replaces a lower one.
+9a9c266c3c3d,Core Rules,Special Markers,Movement Penalty Marker,2,marker,True,Movement Penalty,"A Movement Penalty marker deducts its value in inches from the model’s basic move distance for its next Movement action, to a minimum of 0. These markers are not cumulative; a higher value replaces a lower one."
+cf1f12a8d570,Core Rules,Special Markers,Numeric Counter,2,marker,True,Numeric Counters,"A Numeric Counter contains a number between 1 and 6. It cannot be increased above 6, but can reach 0; when it reaches 0, remove it."
+264e64b6a519,Traits,,A Challenge for you,2,trait,True,,"Every time your crew places a Suspect, you must place a Numeric Counter on it. You decide the number on the counter, unless a card or ability specifies the number. These Numeric Counters cannot be reduced below 0."
+fa97dce6aba6,Traits,,Absolute Power,2,trait,True,,"If this model is your crew’s Boss, you can hire Henchmen with the Cop trait, regardless of their Affiliation. In addition, this model doubles the range of its Inspire rule."
+064175029813,Traits,,Acrobat,2,trait,True,,"This model gains +1” to its basic move distance. It does not suffer Impaired Movement for Jumping, or for Stand Up actions. Models with Acrobat can use the Dodging rule."
+311526109856,Traits,,Adaptable,2,trait,True,,"At the beginning of the Raise the Plan phase, the player controlling this model must choose between the Attack (+1), Defense (+1) or Movement (+2) basic skills. The model receives the bonus to the chosen skill until the end of the round."
+b4eb98e1469b,Traits,,Addict,2,trait,True,,"This model suffers -1 to its Attacks and Defense skills unless it uses a Dose. As soon as the model uses a Dose, the penalties cease to apply until the end of the round."
+df6854570fbc,Traits,,Affinity (Model),2,trait,True,Affinity,"This model may be recruited by any crew that also includes the model named in parentheses, even if they would not ordinarily be permitted to join that crew. This model may treat its rank as Free Agent for the purposes of forming the crew (but cannot use the Free agent rank during the game). Recruiting this model does not allow a further use of the trait (if, for example, another character has an Affinity to this model)."
+370a8363da94,Traits,,Agent of Chaos,2,trait,True,,"When friendly models within 4” of this model activate, they may take an Audacity marker from a friendly model that is yet to activate."
+5395b9168aa7,Traits,,Agent of Order,2,trait,True,,Friendly models within 4” cannot lose Actions because of an opponent’s rules.
+c4ae4b6f0d0d,Traits,,Light Radiance,2,trait,True,,When this model uses the Medic trait it affects all friendly models within 2”.
+851878352cfe,Traits,,Aggressive Schizophrenia (Mental Disorder),2,trait,True,Aggressive Schizophrenia,"If this model is in contact with another model (friend or foe) at the beginning of its activation, it gains an extra Attack action, which must immediately be performed against one model in contact. Once this attack is resolved, this model may continue its turn normally."
+000e98d6bc56,Traits,,Agile,3,trait,True,,"This model can’t suffer Falling Damage. However, if the result of the Fall is to remove the model from the game, it is still made a Casualty."
+2012a423da39,Traits,,Air Combat,3,trait,True,,"If this model uses the Batclaw trait or Falls during its activation, then for the remainder of the activation it gains a +1 bonus to its attack and Strength rolls, and triggers CRTs on a natural roll of 4+ when performing Melee Attacks."
+5a64503df8a8,Traits,,Air Support,3,trait,True,,"Place the Explosive template anywhere on the board. During this round, the area under the template is under the effect of Lights."
+34c59be1725a,Traits,,Amazon,3,trait,True,,"This model receives a +1 bonus to its attack and Defense rolls. In addition, enemy models roll 1 less attack die when targeting this model."
+4f734fe4abcd,Traits,,Alpha,3,trait,True,,This model’s Attacks and Defense skills cannot be reduced below 4 by any means.
+b93e792c6d06,Traits,,Always on the Move,3,trait,True,,"This model can interrupt its Movement action to perform an Attack action, and then continue with its Movement action. The model must have enough actions available to use this trait."
+52f277ae8507,Traits,,Amazon Lineage,3,trait,True,,"If this model is your crew’s Boss, you can only recruit models with Affiliation:. TM TM"
+22964b9f62dd,Traits,,Amazon Princess,3,trait,True,,"This model automatically gains the Charge trait. However, targets of this model’s Charge incur a -1 penalty to their Defense rolls. While this Upgrade Character Card is added to Wonder Woman, she cannot use the Bracelets of Submission trait or the Lasso of Hestia weapon, and does not benefit from the effects of her Magic Shield."
+444d1acc75eb,Traits,,Amphibious,3,trait,True,,"This model does not suffer Impaired Movement when moving through Difficult Ground elements that are considered water (i. e. rivers, swamps, canals, ponds, etc.). Players should agree on what counts as a water feature before the game begins. In addition, this Model can enter a Sewer without performing a Manipulate action."
+aa63faffc59c,Traits,,Anger Management (Mental disorder),3,trait,True,Anger Management,"When performing a Ranged Attack, this model must always select the closest model in line of sight, friend or enemy, as the target."
+82461da3d1c5,Traits,,Animal,3,trait,True,,"This model gains a bonus of +2” to its basic move distance. When it moves, it can ignore obstacles up to 2” high, but cannot Climb or Jump. If this model suffers the Fire effect, during the Recount phase (before resolving the effect) make a Willpower roll (which cannot be rerolled). If this roll is failed, the model cannot move in the following round. This model cannot purchase equipment."
+a8df3f7f7b41,Traits,,Anxiety (Mental Disorder),3,trait,True,Anxiety,"This model gains +2” to its basic move distance, but must perform a Movement action during its activation if the model can do it."
+7739fb6780e4,Traits,,Archie,3,trait,True,,"This model is not deployed as normal at the start of the game. Once per game, at the start of the Raise the Plan phase of any round, you may place this model anywhere on the table (not inside a building or within a similarly enclosed space)."
+cec149073dc1,Traits,,Arkham Asylum Doctor,3,trait,True,,All friendly models with a Mental Disorder trait within 4” of this model gain 1 extra Tactical Action.
+71cbc9bf4c00,Traits,,Arrest,3,trait,True,,"When in contact with a KO enemy model (not a Vehicle), this model may immediately remove the KO model from the game as a Casualty."
+b95a13f0b6a2,Traits,,Arrogant,3,trait,True,,"When this model performs an Attack against a model with a lower Reputation cost than its own, it rolls one less attack die."
+c259f6cb45bb,Traits,,Arsenal,3,trait,True,,"After deployment, this model may equip up to one Hands equipment card, and one Back equipment card. These cards cannot be equipped in any other way, and cannot be cancelled by an opponen."
+669d423ca05c,Traits,,Assassin X,3,trait,True,Assassin,"If this model removes an enemy model as a Casualty, you may pick 1 Objective card from the Spent Resource pile with a maximum Victory Points value of X, and then add that card to your hand."
+570a2ec0b45b,Traits,,Assistance,4,trait,True,,"While a friendly Robin (Boy Wonder) is in play, this model gains +1 Willpower. If a friendly Robin (Boy Wonder) is removed as a Casualty, this model gains +1 Strength until the end of the game."
+82fcc893199e,Traits,,Atomica,4,trait,True,,"When this model attacks an enemy model (not a Vehicle), the enemy model must pass a Willpower roll before any attack dice are rolled. If it fails, it suffers -1 Defense until the end of the round."
+ae259d740234,Traits,,Attorney’s Allegation,4,trait,True,,One Use Only. All friendly Henchman within 8” gain 1 extra Action.
+17e9ba871335,Traits,,Autorepair X,4,trait,True,Autorepair,"At the beginning of the Recount phase, this model rolls 1D6. On a result of X+ remove a Damage marker (any type) from this model."
+30a943925e5c,Traits,,Aversion X,4,trait,True,Aversion,This model cannot be included in the same crew as the specified model.
+7a868972ac87,Traits,,Backpack,4,trait,True,,This model can perform a Reveal Manipulate action once per activation without spending an Action.
+34dc917d7810,Traits,,Bat-Armor Mk I,4,trait,True,,Enemy models don’t roll a Strength die when attacking this model.
+156514811f78,Traits,,Bat-Armor Mk II,4,trait,True,,"This model ignores enemy Strength dice unless the roll is a natural 6. In addition, this model gains +1” to its basic move distance."
+a074c9802fb3,Traits,,Bat-Armor Mk III,4,trait,True,,"Enemy models don’t roll a Strength die when attacking this model. In addition, if this model has moved this activation, it can make Melee Attacks against enemies up to 2” away in line of sight (ignore all traits that improve the model’s line of sight, such as Total Vision, for the purpose of these attacks)."
+f25df3cf137b,Traits,,Bat Cape,4,trait,True,,"This model does not take Damage, nor can it be removed as a Casualty, as a result of Falling."
+6f96392931e0,Traits,,Batclaw,4,trait,True,Grapple Gun | Grapple-gun,"Once per round, this model gains +6” to its basic move distance, and can move in any direction (including vertically). When using this ability, the model can move over obstacles and Difficult Ground without penalty. However, the model cannot use this rule in two consecutive activations. *Some models list this trait as ‘Grapple Gun’, and others as ‘Batclaw’. The rules are the same in both instances - the distinction is just for fun!"
+77de1f786147,Traits,,Batman Lives,4,trait,True,,"This model may perform an extra Movement action at the start of its activation if no enemy models have LoS to it. When in contact with a KO enemy model that does not have Affiliation:, this model may remove it as a Casualty by spending a Special Action. In addition, when this model is included in your crew, you can also include a model with Name: William Cobb (ignoring its Affiliation), but if you do so you may not include any model with the Free Agent rank unless it also has Affiliation:."
+7d63dd4a56d5,Traits,,Batman’s Tumbler,4,trait,True,,"This model can neither Jump nor Climb. When the Upgrade Card becomes disabled, you can immediately exchange this Upgrade Card with the Batman’s Batpod Upgrade card."
+0efe174b1eaa,Traits,,Bat-Signal,4,trait,True,,"One use only. This model can use this trait to place a friendly model (not KO or Knocked Down) with Alias: Batman in contact with itself. Until the end of that round, this model is considered Illuminated."
+77a045a14afc,Traits,,Bipolar (Mental Disorder),4,trait,True,Bipolar,"At the beginning of this model’s activation, roll a die or flip a coin. If the result is even/heads, this model may make 1 Effort this round without taking a [[B]] marker. If the result is odd/tails, this model suffers the Enervating 1 effect."
+f64992a4f7e8,Traits,,Biting,4,trait,True,,"Enemies within 6” that wish to perform an Action must first suffer the Enervating 1 effect. If they already have Enervating, they must instead increase their Enervating value by 1."
+ff099aecc87e,Traits,,Blood Scent,4,trait,True,,"When targeting a model with at least 1 [[A]] marker with an Attack, this model gains +1 to its attack dice rolls, +1 to the Strength roll, and gains the Bleed 1 effect."
+f2ed60f74326,Traits,,Bloodthirsty (Mental Disorder),4,trait,True,Bloodthirsty,"During the Raise the Plan phase, if this model has at least 1 Damage marker of any kind, it gains +1 +."
+f0fec53d6e6f,Traits,,Boosted Jump,5,trait,True,,"One use only. During this model activation, place this model within 8” of its start position."
+337657ab8e90,Traits,,Bluff,5,trait,True,,"Choose an enemy model within 6” and line of sight. The target reduces its Attacks skill by 1 until the end of the round. If multiple models with this trait target the same model, the effect is not cumulative."
+ad68a17554eb,Traits,,Bodyguard,5,trait,True,,"If a friendly model with the Leader or Sidekick rank within 4” of this model and LoS suffers any number of hits from an Attack (of any kind), this model may make an Effort to take the hits instead, and all the effects of that attack. Only one Effort [[B]] is required per enemy Attack."
+e75e6ccbad7c,Traits,,Bonebreaker,5,trait,True,,"Until the end of the round, this model’s unarmed attacks gain Bleed: 2."
+0129109ef748,Traits,,Boom!,5,trait,True,,"Each time this model receives any damage, roll a D6 – on the natural score of a 6, this model explodes! Alternatively, during its activation, you may choose to make this model explode. When the model explodes, center an Explosive template on it. Roll a Strength 3+ die against each model affected. On a success, the model suffers [[A]] [[A]] [[B]] Damage. After resolving the explosion, remove this model as a Casualty."
+6e722f5c4084,Traits,,Born in the Darkness,5,trait,True,,"When this model is not within the area effect of a Light source, it gains a +1 bonus to its Defense rolls, and enemy models cannot benefit from the Sneak Attack trait when targeting this model."
+abbb8c1d571c,Traits,,Boss’s Orders,5,trait,True,,All friendly Henchmen that attack an enemy model within 8” of this model gain +1 to their attack dice rolls in close combat until the end of the round.
+369c96889c09,Traits,,Bot Bomb,5,trait,True,,"Choose one of your models with the Bot trait to explode. Center the Explosion template over the bot. Roll a Strength 4+ die against each model affected. On a success, the model suffers [[A]] [[A]] Damage. Once the trait is resolved, remove the Bot as a Casualty."
+6c0da65af6dc,Traits,,Bot,5,trait,True,,"This model cannot recover from KO or recover Stun damage in the Recount phase. However, attacks with the Firearm, Mechanical and Beam rule deduct 1 attack die when rolling against this model. In addition, this model cannot use Doses of any kind, and is immune to the Enervating, Hypnotize, Poison, Scared and Terror effects."
+b4e2af03fbb5,Traits,,Bot Mechanic,5,trait,True,,Target a model with the Bot trait within 4” and Line of Sight. Remove up to 3 Damage markers from that model.
+e24df2701399,Traits,,Boy Wonder,5,trait,True,,Enemy models cannot reroll attack dice against this model granted by the Handy rule.
+6c436d9b4b90,Traits,,Bracelets of submission,5,trait,True,,"The first time this model is selected as a target by an enemy ranged attack in each round, it reduces the attacker’s RoF by -1."
+585ae4a02578,Traits,,Brutal,5,trait,True,,This model scores Critical results on a natural roll of 5 or 6.
+519ade586155,Traits,,Bullet Time,5,trait,True,,"One use only. After activating this trait, if this model performs a Ranged Attack, it gains an extra Ranged Attack action. The model cannot use the same ranged weapon more than once. This model doesn’t lose attack dice this round for firing after moving."
+e54199a2b153,Traits,,Bulletproof Vest,5,trait,True,,Traits and attacks with the Firearm rule deduct 1 attack die when rolling against this model.
+2e327b2974ad,Traits,,Business Agent,5,trait,True,,"When this model is recruited, add $350 to the crew’s available Funding."
+852621325364,Traits,,Canary Cry,5,trait,True,,Place the Spray template in base contact with this model – all models affected receive one automatic hit with the Sonic special rule. Affected models must pass a Willpower roll or take [[A]] Damage and become Stunned.
+72424039a23d,Traits,,Cannibal,5,trait,True,,"When this model removes an enemy model (not a Vehicle) as a Casualty in Melee, remove up to 2 Damage markers (any type) from its character card."
+6db04ce26d41,Traits,,Can you solve this? X,5,trait,True,Can you solve this?,"Once per round, this model may move up to 4” a suspect marker within 4” during its activation by rolling a +X result in a die roll."
+021c112e87a1,Traits,,Carry,6,trait,True,,"If this model passes within 2” of one or more friendly models during a Movement Action, it may make an Effort and target one of those models and place it in base contact at the end of the move. The chosen model cannot have the Large or Huge traits. The target model suffers Impaired Movement during its next activation unless it is Damian Wayne. This model cannot use the Carry trait in two consecutive activations."
+9f8bc3a96ae5,Traits,,Catcher Gear,6,trait,True,,Enemies attacking this model never benefit from the Heavy weapon special rule.
+5c05854f85f8,Traits,,Chain of Command,6,trait,True,,"When its crew’s Boss becomes a Casualty, this model immediately becomes the new Boss, taking the. This model does not halve the range of the Inspire trait when taking over as Boss. If more than one model in the crew has this trait, or another trait with the same effect (such as Hidden Boss) the controlling player must choose between them."
+a97ded23422a,Traits,,Chill Touch,6,trait,True,,Unarmed Melee Attacks made by this model deal [[A]] and gain CRT: Cooled.
+429844933193,Traits,,Chaotic Friends,6,trait,True,,Friendly models with the Gotham City Siren trait in this model’s crew gain the Unpredictable rule until the end of the game.
+fed29af57678,Traits,,Charge,6,trait,True,,"This trait must be activated before the model moves during its activation. During a Movement action this activation, this model may only move in a straight line. Roll 1 Strength die for each model contacted during this move, inflicting Damage [[B]] [[B]] . Any other damage the model could normally inflict is ignored."
+232cfbd3b87b,Traits,,Charismatic,6,trait,True,,"A crew that includes this model can recruit 1 additional Free Agent, ignoring the usual restrictions."
+248c685dff80,Traits,,Charm,6,trait,True,,"Whenever this model becomes the target of a Melee Attack, the attacker must pass a Willpower roll or the attack automatically fails."
+ef3a04ae120f,Traits,,Chlorokinesis,6,trait,True,,"This model can be removed from one point inside of a Plant’s action zone, and placed at another point in the same action zone."
+ab7ce1945918,Traits,,Claws,6,trait,True,,This model’s Unarmed attacks inflict Damage [[A]] [[B]] .
+ccc6622a5f21,Traits,,Clay Body,6,trait,True,,"This model automatically gains the Charge trait. In addition, this model is immune to the Steal effect and gains -1 to its Endurance rolls. All ranged attacks against this model convert Injury markers [[A]] to Stun markers [[B]] , unless the attack had the Cold or Freeze effects. Conversely, when this model is targeted with an attack with the Electric special rule or Discharge effect, all Stun markers [[B]] are converted to Injury markers [[A]] . In addition, at the start of each of this model’s activations, it may exchange its attached Upgrade card for a different one."
+3c65f86d0341,Traits,,Climbing Claws,6,trait,True,,"This model never suffers Impaired Movement when Climbing. In addition, the model may end its movement at any point on a climbable surface, such as on the side of a wall. Make the model’s end position clear to the opposing player if it is not possible to physically place the model there."
+635a7ecfc370,Traits,,Cloak of Bats,6,trait,True,,"Enemy models can only see this model if it is in contact with them. This ability works even when the model is within the area of effect of a Light. However, the model is still subject to other rules that aid detection, such as Total Vision or Night Vision, etc. This model can be affected by templates, but cannot be targeted directly. Also, when an enemy model enters contact with this model, or this model enters contact with an enemy model, that model must take a Willpower roll: if the roll is failed, the model suffers the Scared effect."
+4eda464b036c,Traits,,Close Combat Master,6,trait,True,,"When fighting Unarmed, this model may reroll failed attack dice in Melee."
+f05e05d943aa,Traits,,Combat Flip,6,trait,True,,This ability may be used when the model is in contact with an enemy. Move this model up to 3”.
+c6c8b3494878,Traits,,Combo: (Weapon),6,trait,True,Combo:,"For every two successful hits in its attack roll while using the specified weapon or trait (before the enemy rolls to defend), this model gains an additional hit."
+c88a103a2e65,Traits,,Commissioner,6,trait,True,,Friendly models with the Arrest trait within 6” of this model can use that trait as an extra action.
+a66f7a9f1e10,Traits,,Concealment,7,trait,True,,"Until the end of the round in which this ability is used, enemy models can only see this model if it is in contact with them. This ability works even when the model is within the area of effect of a Light. However, the model is still subject to other rules that aid detection, such as Total Vision or Superior Sense of Smell, etc. This model can be affected by templates, but cannot be targeted directly."
+155198c2b949,Traits,,Confusion,7,trait,True,,"Target an enemy model (not a Vehicle) within 8” and line of sight. Perform an opposed Willpower roll against the target. If successful, reduce the target model’s Attack and Defense skills by 1. Also, the target cannot perform Special Actions. Both effects last until the end of the round."
+4bdd5159ab9e,Traits,,Contractor,7,trait,True,,"This model may treat its rank as, but if it does so its Affiliation changes to. In addition, if this model is recruited as the Boss, all models in the crew with the Veteran trait also gain Assassin 2."
+142bee784eb4,Traits,,Control Pheromones,7,trait,True,,Choose an enemy model (not a Vehicle) within 5” and line of sight. The target immediately suffers the Hypnotize effect.
+e40b1fe31bde,Traits,,Cool Under Fire,7,trait,True,,"A crew that includes this model gains +1 Resource Point each round. Also, when a friendly model with the Veteran trait (not Bane himself) activates within 8”, remove one Effect from that model."
+0eeddb8f5874,Traits,,Competitive,7,trait,True,,"This model gains +1 to Attack, Defense and Willpower while there is at least one other friendly model in play with this trait."
+98b58b3bd9be,Traits,,Computer Intrusion,7,trait,True,,This model may choose up to 2 Suspect markers within 8” and move them up to 2”.
+4ff8cb5ae4a9,Traits,,Cop,7,trait,True,,Keyword.
+70e44f5771bd,Traits,,Corrupt,7,trait,True,,"If this model is included your crew, you can recruit up to 3 Henchmen with the Cop trait. Additional models in the crew with this trait have no further effect."
+d278deb3f3c2,Traits,,Counter Attack,7,trait,True,,"When targeted by a Melee Attack, this model can make an Effort to activate this trait. For the remainder of the activation, when this model successfully defends against an enemy Melee Attack, this model gains one Counter Attack for every attack blocked. Once the enemy attack is resolved, assuming this model is not KO or a Casualty, each Counter Attack is converted into an automatic hit against the attacker, calculated as per this model’s preferred Melee Weapon. These Counter Attacks are resolved immediately, out of sequence. After resolving the Counter Attacks, play resumes as normal."
+307cb0c50105,Traits,,Countermeasures,7,trait,True,,"This model gains one of the following bonuses at the start of each activation, until its next activation: gain the Stealth trait; gain the Night Vision trait; or ignore the Anti-tank rule."
+f3b3ba85ef16,Traits,,Cooperative Fighting,7,trait,True,,"When targeting an enemy with a Melee Attack that is already in contact with another friendly model, this model inflicts 1 additional [[B]] for each hit that inflicts damage."
+d47d1cc00acb,Traits,,Court of Owls Crew,7,trait,True,,This crew can only hire models with the Affiliation:.
+910d543f38ec,Traits,,Coward’s Reward,7,trait,True,,"If this model it not KO when an enemy model moves out of contact from this model, that enemy suffers [[A]] ."
+6bb17b4c20fc,Traits,,Criminal,7,trait,True,,Keyword.
+6e427a2ec288,Traits,,Criminology,7,trait,True,,All enemy models within 12” of this model lose the benefit of the Runaway trait.
+b4e0c476ce0a,Traits,,Critical Strike,7,trait,True,,"After activating this trait, any Melee Attacks performed by this model automatically treat the Strength die as scoring a natural 6. No die is rolled, but the success is counted."
+69ca0ab2e141,Traits,,Cruel,7,trait,True,,Choose a KO enemy (not a Vehicle) in contact. That model is removed from play as a Casualty.
+5d6b4933a219,Traits,,Cybernetic,7,trait,True,,"This model gains +1 to its Defense rolls, and can reroll Recovery rolls."
+08f6d6ee8235,Traits,,Cyclops,8,trait,True,,This model’s ranged attacks gain the Imprecise rule when the target is more than 8” away.
+51b84a313afd,Traits,,Daddy’s Girrrl,8,trait,True,,"If this model starts its activation within 6” of the Boss, its gains +1 +."
+fdb7ac043873,Traits,,Deadliest Man on Earth,8,trait,True,,"The target of this model’s attacks cannot be changed (for example, by use of the Bodyguard trait)."
+3d311b7d6397,Traits,,Deadly Strike,8,trait,True,,"Once this trait is activated, this model gains CRT: Casualty on its Melee Attack Actions for the rest of the round."
+4dedcb66b86f,Traits,,Dealer,8,trait,True,,"During the Recount phase, if the opponent scores an Objective, you may take an Objective from behind your Plot card, and score it immediately, ignoring the usual rules."
+990787f4f7f6,Traits,,Death Marks,8,trait,True,,"When this model inflicts a Casualty, it gains +2 or +2 or. + + 4"
+aeb15ce15089,Traits,,Death or Exile,8,trait,True,,Target one KO model (not a Vehicle) within 8” and line of sight. The target model is removed as a Casualty.
+ca575dec814f,Traits,,Death Pack,8,trait,True,,"If the target of this model’s Melee Attack is already in contact with one or more other friendly models with this trait, this model gains a +1 bonus to its attack dice rolls, and one extra attack die against that target."
+a40912346bbc,Traits,,Defensive Stance,8,trait,True,,"This model ignores the penalties for being Outnumbered in combat, and chooses the direction when it is Pushed."
+c71728291fe9,Traits,,Delirium,8,trait,True,,"In the Recount phase, this model does not recover [[B]] Damage, and cannot take rolls to Recover from KO."
+d65bda497028,Traits,,Demon,8,trait,True,,"Enemy models roll 1 less attack die when targeting this model. In addition, this model never reduces its Effort Limit for accumulated Damage."
+6d9691753453,Traits,,Demon Curse,8,trait,True,,"At the beginning of the Take the Lead phase, if there are no models in contact, roll 2D6 for this model and add the results together. For each friendly model removed as a Casualty in the game so far, add +2 to the result. On a result of 11+, place a friendly Etrigan model within 4” of this model, then remove this model from play."
+8c8e7c4255b6,Traits,,Demoralize,8,trait,True,,All enemy Henchmen within 6” suffer the Enervating 1 effect.
+baeea8302f0e,Traits,,Demotivate,8,trait,True,,Target a model within 8” and line of sight. That model must pass a Willpower roll or immediately suffer the Enervating 2 effect.
+ea9daf6f702e,Traits,,Desensitized,8,trait,True,,"This model doesn’t suffer KO through accumulated [[B]] . Instead, once it has accumulated [[B]] equal to its Willpower, any additional [[B]] Damage automatically becomes [[A]] Damage instead."
+747172a3bae6,Traits,,Detective,8,trait,True,,This model may place or reveal a Suspect marker within 3” and LoS instead of in contact.
+2c232a279375,Traits,,Detective Mode,8,trait,True,,This model does not suffer the Blind effect and can see through Smoke.
+ec27dcfd37eb,Traits,,Detonate,8,trait,True,,"Target a Suspect marker within 8”. Center an Explosive template on that marker. Roll a Strength 3+ die against each model affected. On a success, the model suffers [[A]] [[B]] . Remove the Suspect marker."
+1c6a3f5ecd73,Traits,,Devastating Blow,8,trait,True,,"Once this trait is activated, this model gains a +1 Strength die roll bonus and Bleed 1 on its Melee Attack Actions until the end of the round."
+86309172f56a,Traits,,Dimensional Portal,8,trait,True,,"Remove this model and place it up to 12” away. At a cost of a Movement Action (If it has one left to spend), this model may choose one friendly model within 2” before it is removed – the target model is also removed, and placed in contact with this model in its new position. After being placed, this model ends its activation. Any model that was placed with it counts as having moved during its activation, and its Basic Move Distance is 0 for the rest of the round. A model cannot use this trait in two consecutive activations."
+b915ec3f17d9,Traits,,Direct Connection to the Speed Force,9,trait,True,,This model may reroll the Paradox roll.
+9743e9a891e4,Traits,,Dirty Fighter,9,trait,True,,"This model can perform Ranged Attacks even if it is in contact with enemy models. If it uses a ranged weapon to target an enemy model in contact, it gains +1 to its attack dice rolls."
+008bf989cb19,Traits,,Dirty Money,9,trait,True,,"If this model is the Boss, its crew has an extra $300 Funding."
+442dde22ad13,Traits,,Disappearing,9,trait,True,,"Once per round, when this model becomes the target of an enemy attack, this model can move up to 4” before the attack is performed. If this means the enemy could no longer target this model, it can choose a different target."
+220dbf9d7019,Traits,,Disarray,9,trait,True,,"Target an enemy model within 8” and Line of Sight. If that model has an Audacity marker, you can move the marker to another enemy model within 8” that has yet to activate, and does not already have an Audacity marker."
+2a24b92562d2,Traits,,Discharge,9,trait,True,,"After activating this ability, the next ranged attack this model performs this round inflicts 1 additional [[A]] damage per hit and costs 1 additional Ammo."
+1830396219f2,Traits,,Discourage,9,trait,True,,"Choose an enemy model (not a Vehicle) within 8” and line of sight. Perform an opposed Willpower roll against the target. If successful, the target model suffers -2 to its Willpower value when performing a Willpower roll until the end of the round."
+36cfa2af7c74,Traits,,Disguised Sneak Attack,9,trait,True,,"Target a model within 2”. Perform an opposed Willpower roll against the target. If successful, the target cannot take Defense rolls or make Efforts against this model’s Attacks until the end of the round."
+72410defa3d3,Traits,,Disruptor,9,trait,True,,Target one enemy model within 8” and line of sight. The target cannot use ranged weapons with the Firearm or Beam rule this round.
+898333141e42,Traits,,Distort Magic,9,trait,True,,"Make an Effort to active this trait. When the trait is activated, choose any point on the tabletop within 4” of this model. Until the end of the round, this model can cast spells as though it was located at that point."
+bad9e3c5e26f,Traits,,Distract,9,trait,True,,"Target one enemy model within 4” and line of sight. The target reduces its Defense skill by -1 until the end of the round. If multiple models with this trait target the same model, the effect is not cumulative."
+9e2a52f4ed49,Traits,,Disturb,9,trait,True,,"Target an enemy model within 8” and line of sight that is yet to activate this round. Make an opposed Willpower roll against that model. If successful, you may look at the opponent’s Objective card hand, and Discard one of the cards."
+a1c003b031b1,Traits,,Divination,9,trait,True,,"This model can use Divination Spells. In addition, once per game the model can reroll one die – you don’t need to accept the second result, and instead may choose between both."
+b1a4cc80216f,Traits,,Divine Magic,9,trait,True,,"This model can use Divine Magic Spells. In addition, once per game this model can spend 1 Magic Point (MP) during its activation to remove 1 Damage marker from its Character Card."
+878bcec18852,Traits,,Dodge,9,trait,True,Dodging,This model can use the Dodging rule.
+ac84e1c7110a,Traits,,Dollotrons,9,trait,True,,"When you recruit Professor Pyg, you must also recruit three Dollotron models, at no additional Reputation cost."
+21de3a11d2f3,Traits,,Drag,9,trait,True,,"If this model passes within 2” of one or more friendly models during a Movement Action, it may make an Effort and target one of those models and place it in base contact at the end of the move. The chosen model cannot have the Large or Huge traits. The target model suffers Impaired Movement during its next activation. This model cannot use the Drag trait in two consecutive activations."
+caf649617b35,Traits,,Drop a Riddle,9,trait,True,,"If you have played during this round at least 2 Objective cards as Resources, place a Suspect or a Riddle marker within 4” of this model."
+cd419d0340b0,Traits,,Duelist,9,trait,True,,"While in contact with only one enemy model, this model may reroll failed attack dice rolls in Melee."
+dddb8e3547bb,Traits,,Duke of Duality,9,trait,True,,"When this model scores an Objective card, flip a coin or roll a D6: if the result is ‘heads’ (or an even number) draw an additional card. If the result is ‘tails’ (or an odd number), Discard an Objective card at random before drawing a new card."
+281671892455,Traits,,Echolocation,10,trait,True,,"This model does not suffer the Blind effect and can see through Smoke. In addition, this model may see at any distance, limited only by line of sight and intervening scenery."
+44079d700773,Traits,,ECM,10,trait,True,,All Light sources within 6” of this model are nullified (effectively illuminating an area of 0”).
+795580ce9347,Traits,,Ectokinesis,10,trait,True,,"This model can use Ectokinesis Spells. In addition, once per game this model can spend 1 MP during its activation to reroll its Attack and Strength dice rolls against models with the Incorporeal trait."
+6e422384a43e,Traits,,Electric Handshake,10,trait,True,,Choose a model in contact. The target model must pass a Willpower roll or suffer the Stunned effect.
+8e889e78fa30,Traits,,Electric Storm,10,trait,True,,Center the Explosive template on this model. Roll a Strength 3+ die against all models affected by the template (except the attacking model itself) with Damage [[B]] [[B]] .
+2d0c1495c539,Traits,,Eldritch,10,trait,True,,"This model can use Eldritch Spells. In addition, once per game during its activation, the model gains +1 to its Attacks value until the end of the round."
+db9d49110f53,Traits,,Elite: X,10,trait,True,Elite,"Your crew can only include 1 Elite model of each type, unless you also include the Elite Boss: Type."
+5a20e4c75163,Traits,,Elite Boss: X,10,trait,True,Elite Boss,"If your crew includes a model with this trait, you may include any number of Elite models of the same type as the Elite Boss (following the normal restrictions for forming a crew)."
+9db6045859f7,Traits,,Elusive,10,trait,True,,"When targeted by a Ranged Attack, this model may make an Effort to force the attacker to reroll one attack die."
+394edd21e804,Traits,,EMP,10,trait,True,,"This model rerolls failed Strength die rolls against models with the Cybernetic, Bot or Robot traits, and against models with the Vehicle rank."
+373e0077d1a3,Traits,,Enemies of the Court,10,trait,True,,"While this model is in play, if any of your models removes an enemy as a Casualty, you may pick one Objective card from the Spent Resources pile and add it to your hand."
+541df135f3ec,Traits,,Energy Field,10,trait,True,,"Roll 1D6 for each hit this model suffers from a Ranged Attack. On a result of 5+, the hit is ignored."
+2335271da1ea,Traits,,Enhanced Vision,10,trait,True,,"This model can see at any distance and ignores the Concealment trait. In addition, the model is immune to the Blind effect."
+1280b59ff66b,Traits,,Escape Artist,10,trait,True,,"After resolving an enemy attack against this model, as long as it is not made KO or a Casualty, it may immediately move up to 4”."
+34b09bcbde25,Traits,,Evidence Tampering,10,trait,True,,"When this model Reveals an enemy Suspect marker, it may place a friendly Suspect marker in contact with it first. Then, remove the enemy Suspect marker as normal."
+f621cfe6f864,Traits,,Exhaustive Planner,10,trait,True,,"One use only. When the opponent plays an Objective card as a Resource, this model can cancel that card’s effect. The opponent must immediately Discard the card."
+5615665f0c4a,Traits,,Exorcism,10,trait,True,,"This model can use Exorcism Spells. In addition, once per game during its activation but before casting any Spell, this model can spend 1 MP to add +1 to the result of all Magical tests until the end of the round."
+5d08805d6a38,Traits,,Expendable,10,trait,True,,"When this model is removed from the game as a Casualty, you may draw an Objective card."
+da81e529d670,Traits,,Experimental Ammo,10,trait,True,,This model can’t Manipulate Ammo Crates.
+58e3b280a14b,Traits,,Expert Marksman,10,trait,True,Ranged Master,This model gains a +1 bonus to its attack dice rolls when performing Ranged Attacks. Note: This trait is also called Ranged Master on some character cards.
+645f8839b1f6,Traits,,Exploit the Weakness,10,trait,True,,"When a friendly model with the Assassin trait within 8” of this model makes an attack, the target reduces its Effort limit by -1 for the duration of that action."
+05d5a588cbe1,Traits,,Explosive Gel,11,trait,True,,"Once per activation, this model may mark a Streetlamp, Sewer or Suspect marker in contact as being sprayed with Explosive Gel (use a spare token or dice to remind you). In any subsequent activation, this model may use a Manipulate action to destroy any number of marked items. Center an Explosive template on each chosen marker, and roll a Strength 3+ die against each affected model. Any model hit suffers [[B]] [[B]] Damage. Then, remove that marked items from the game"
+d2896cf0d0e9,Traits,,Extended Limbs,11,trait,True,,This model can perform Melee Attacks against models up to 3” away as if they were in contact.
+723e9d0ae044,Traits,,Extremely Mutated,11,trait,True,,This model cannot buy more than one item of Equipment.
+3a973dff5b10,Traits,,Fast,11,trait,True,,This model gains +2” to its basic move distance.
+e68733dcae4b,Traits,,Feint,11,trait,True,,"Target a single enemy model in contact with this model and take a Willpower roll. If the roll is successful, the target can’t make an Effort against this model’s attacks this round."
+ceff31775d7e,Traits,,Feral (SPECIAL),11,trait,True,Feral,"Once this trait is activated, this model’s Melee Attacks this round gain a +1 bonus to attack dice rolls, and gain the Pinned Down effect."
+9fba980af379,Traits,,Ferocious,11,trait,True,,This model’s Melee Attacks gain the Push effect.
+f063c3ef35f9,Traits,,Fire Immunity,11,trait,True,,This model cannot be affected by the Fire effect.
+f3e96d3d6797,Traits,,Flak Armor,11,trait,True,,This model is immune to Damage caused by hits with the Explosive and/or Expansive rules.
+c00723e35d54,Traits,,Flaming Wave,11,trait,True,,"Center the Explosive template on this model. Roll a Strength 3+ die against all models affected by the template (except the attacking model itself) with Damage [[A]] and the Fire effect. After the use of this trait is resolved, this model receives [[B]] Damage."
+be622e07d740,Traits,,Flare,11,trait,True,,One use only. Make the entire gaming area count as being under the effect of Light until the end of round.
+07d9694b7bf0,Traits,,Fly,11,trait,True,,"Once per round, this model may add +8” to its basic move distance, and can move in any direction (including vertically). When using this ability, the model can move over obstacles and Difficult Ground without extra cost or penalty."
+b8262a9a5e84,Traits,,Flying High,11,trait,True,,"One use only. This model may add +20” to its basic move distance, and can move in any direction (including vertically). When using this ability, the model can move over obstacles and Difficult Ground without extra cost or penalty."
+ef127668c76c,Traits,,Follow Me!,11,trait,True,,Choose a friendly Henchman within 4” of this model (but not the activated model itself). That model gains a +4” marker. +4
+9bf4acda2684,Traits,,Football Gear,11,trait,True,,Enemies attacking this model never benefit from the Sharp and Heavy weapon special rules.
+f21f24d78897,Traits,,For the Family,11,trait,True,,"If a friendly Carmine Falcone within 4” and LoS of this model suffers any number of hits from an Attack (of any kind), this model may make an Effort to take the hits instead and all the effects of that attack. Only one Effort [[B]] is required per enemy Attack. This trait can’t be used against attacks from a model with Name: Selina Kyle."
+f5bae0cfa4d4,Traits,,Force Field,11,trait,True,,"Target friendly model in contact benefits from Cover until the end of the round, even if it is not behind Cover.
+Fully Equipped: This model can purchase any equipment listed for Jason Todd even if it comes from a different crew’s equipment list."
+6ef909c28a78,Traits,,Funny Bomb,11,trait,True,,"Center the Explosive template over this model. This is resolved as an Explosive Ranged Attack, rolling a Strength 3+ die for each affected model – on a successful roll, the model receives [[A]] [[B]] Damage. Once this action is resolved, remove this model as a Casualty."
+ac764f5291be,Traits,,Gas Jumper,11,trait,True,,"This model adds +6” to its basic move distance, and can move in any direction (including vertically). The model can move over obstacles and Difficult Ground without penalty. All models within 4” and Los of this model at the end of the Movement action suffer Poison and Enervating 1, with the Gas effect. When this trait is activated, this model may perform Melee Attacks against models within 3” instead of only in contact, until the end of the round."
+8f4bf71ffd93,Traits,,Gas Mask,12,trait,True,,This model ignores Damage and effects caused by any Attack or trait with the Gas special rule.
+198cdc8cf512,Traits,,Genius,12,trait,True,,"Once per round, this model can remove an Audacity marker from one friendly model, and give it to another friendly model that is yet to activate."
+51a7bc9d878e,Traits,,Get ’Em,12,trait,True,,One friendly model within 8” and line of sight of this model gains +2 +.
+46dd6afc2f52,Traits,,Ghost,12,trait,True,,"This model has the Invulnerability 1 and Incorporeal traits. Its Incorporeal trait is always active, and never has to be activated by spending an Action."
+5646830ec6e7,Traits,,Goad,12,trait,True,,"Target one enemy model (not a Vehicle) within 8” and line of sight, and take an opposed Willpower roll against it. If you succeed, you may move the enemy model up to 4”, following all of the usual Movement rules. During this movement, you cannot force the target to Fall."
+555a2d5efd59,Traits,,Good Aim,12,trait,True,,"This model can move and fire (or fire and move) when using a weapon with the Aim weapon special rule. In addition, the model gains +1 to its attack dice rolls with Ranged Attacks until the end of the round."
+4648d2e346e1,Traits,,Gotham City Siren,12,trait,True,,One use only. Target another friendly model with this trait within 4” – the target gains +2 + or.
+788e97e76797,Traits,,Grand Strategist,12,trait,True,,"While this model is in play and not KO, you gain +2 Resource points."
+541ad784e7d8,Traits,,Grapple Gun,12,trait,True,,See Batclaw.
+3b08328fe203,Traits,,Greed,12,trait,True,,"This model cannot contribute to or fulfil criteria for Objective cards that award VP for inflicting Damage, making models KO, or removing models as Casualties."
+4c2a4c9a5e43,Traits,,Green Magic,12,trait,True,,"This model can use Green Spells. In addition, once per game this model can spend 1 MP to remove 2 Damage markers from its character card."
+5e40db853a07,Traits,,Green Travel,12,trait,True,,One use only. Remove this model and immediately place it up to 20” away. A model may not perform a Movement Action in the same round that it uses Green Travel.
+1c297c43f6c2,Traits,,Green Web,12,trait,True,,Target friendly model with the Plant trait within 8” of this model immediately performs an Attack action.
+d0ac84a252c6,Traits,,Grin Twins,12,trait,True,,"This model gains +1 to Attack, Defense and Willpower while there is at least one other friendly model in play with this trait."
+087b679d7144,Traits,,Gunman,12,trait,True,,"After activating this trait, if this model performs a Ranged Attack, it gains an extra Ranged Attack action."
+837b6b3f44c2,Traits,,Hacking,12,trait,True,,This model may move up to 2 markers within 8” up to 4”.
+56cc079ebe65,Traits,,Hallucination,12,trait,True,,This model can use this trait to place a friendly model (not KO or Knocked Down) with Alias: Bat-Mite in contact with itself.
+5a3a47d4b7aa,Traits,,Handyman,12,trait,True,,"This model can make an extra Manipulate action during its activation. Also, this model can use a Manipulate action in contact with a model with the Vehicle rank to remove up to 2 Damage markers from it."
+8f9fca6c38e2,Traits,,Hard Guys,12,trait,True,,"If this model is your Boss, friendly Henchmen that attack with Brass Knuckles or Reinforced Gloves may re-roll failed Strength die rolls."
+66759f738b75,Traits,,Hardened,12,trait,True,,"Once per round, when this model suffers Damage, it can choose to change the Damage type of up to 1 Damage marker received."
+b0ed5abad957,Traits,,Hates: Crew/s,12,trait,True,Hates,This model can never be Included in the specified crew/s.
+bb36ae7fe6bb,Traits,,Hates Humanity,12,trait,True,,This model cannot be affected by friendly models’ traits.
+2984cc33a7b0,Traits,,Hazard Armor,13,trait,True,,"This model ignores the Poison, Toxic and Fire effects. In addition, enemies roll 1 less attack die when targeting this model."
+cd0f29d95a2f,Traits,,Heavy Armor,13,trait,True,,Enemy models roll 3 less attack dice when targeting this model.
+26bfcc51574f,Traits,,Heir to the Cowl,13,trait,True,,"When forming your crew, if there is no model with the Alias: Batman (any version) in the same crew, this model changes its rank to."
+63a3a75d1d94,Traits,,Henchman Bomb,13,trait,True,,"One use only. This model may choose one friendly Henchman model and center an Explosive template on it. This is resolved as an Explosive Ranged Attack, rolling a Strength 2+ die for each affected model, and inflicting Damage [[A]] [[A]] [[A]] on a successful roll. After resolving this attack, the chosen Henchman is removed as a casualty."
+2134eeefba8f,Traits,,Heroic,13,trait,True,,Target any one friendly model on the board. That model can perform 1 extra Action this round.
+727db16a6cde,Traits,,Hidden,13,trait,True,,"After both groups of both crews are deployed, this model may be deployed anywhere on the gaming area. If both sides have Hidden models, start with the player with setup initiative. This model must be placed out of line of sight of all enemy models if possible, or at least 12” away from enemy models that can see it. If this is not possible, this model must be deployed in the usual deployment zone."
+dbd781d09937,Traits,,Hidden Boss,13,trait,True,,"When its crew’s Boss becomes a Casualty, this model immediately becomes the new Boss, taking the marker. Increase this model’s Willpower by +1 for the rest of the game. In addition, this model does not halve the range of the Inspire trait when taking over as Boss. If more than one model in the crew has this trait, or another trait with the same effect (such as Chain of Command) the controlling player must choose between them."
+9d9c7cf04eff,Traits,,Hidden Plans,13,trait,True,,"Unless a friendly Boss is within 8” of this model (or this model is the Boss), friendly models does not inflict additional damage for attacking K. O. models. If this model is the Boss, when you score an Objective card other than for making enemies models KO or Casualty, you gain 1 Resource point."
+af46b757ff17,Traits,,Hidden Sniper,13,trait,True,,"Select a target that this model can see, and that is also within 12” of any board edge. The target receives a Ranged Attack, ignoring Cover. This attack has RoF 1, Damage [[A]] [[A]] , and the Firearm rule."
+e1155c7b07e1,Traits,,Hockey Gear,13,trait,True,,Enemies attacking this model never benefit from the Sharp weapon special rule.
+ae9549f5041a,Traits,,Hold Breath,13,trait,True,,"When performing a Ranged Attack, this model may spend any markers it has to gain a +1 bonus to the attack dice rolls, and increase the natural score required for a Critical Hit on the Strength die by 1 for each marker spent (so, if the model spends 2 markers, it gains +2 to hit and scores a CRT on a 4+ instead of a 6). In addition, in any activation in which this model does not perform a Movement and Attack action, it may immediately gain up to 3 markers, but suffers the Enervating X effect (where X is equal to the number of markers it gains)."
+eb82495869d3,Traits,,Homo Magi,13,trait,True,,This model counts its Willpower value as 1 point higher when taking Magical tests.
+7941490e6d42,Traits,,Hover,13,trait,True,,"At the start of this model’s activation, you may place a Hover marker on the character card until the end of the round, to show that it is in Hover mode. While a model is in Hover mode, it can only be hit in Melee on a natural result of 6. A model with a Hover marker cannot benefit from the Cover rule and cannot perform the Manipulate action."
+52671d256b35,Traits,,Huge,13,trait,True,,This model ignores up to 2 [[B]] Damage per enemy Attack.
+a2eeb67cdac9,Traits,,I Believe in Harvey Dent,13,trait,True,,"If this model is the Boss, friendly Henchmen must roll a die or flip a coin at the start of their activation. If the result is even/heads, that model gains 1 free Effort until the end of the round. If the result is odd/tails, it suffers Enervating 1."
+4f81b907baf0,Traits,,I Know What I’m Doing,13,trait,True,,One use only. This model can ignore the result on the Paradox table. The Speed Power still fails.
+8d18b3c7a9ae,Traits,,I’m Batman,13,trait,True,,"After all other models have deployed, this model deploys anywhere on the gaming area. When it deploys, all models within 2” must pass an Endurance roll or become Knocked Down. In addition, once per game, this model may reroll a Strength die."
+97f6030ed1d7,Traits,,Iceberg Lounge,14,trait,True,,"If this model is your Boss, one of your Henchmen may purchase a single Equipment option at double Funding cost from another crew list when configuring the crew. This does not include Equipment that requires the inclusion of a specific model to purchase."
+0dc2884b56bd,Traits,,Ice Flash,14,trait,True,,"Select a target model within 10” and line of sight. The target must pass an Endurance roll, or become subject to the Cooled effect. If the target passes the Endurance roll, it still suffers -1 to its Defense skill until the end of the round, and the Slow 2 effect."
+9bdce39a74d5,Traits,,Immortal,14,trait,True,,Removing this model as a Casualty cannot fulfil the requirements of an opponent’s Objective card.
+b17e825d09f5,Traits,,Impetuous,14,trait,True,,"If this model Attacks the model that was closest to it when it activated, it gains 2 additional attack dice, but suffers -1 to its Defense skill until the end of the round. If two or more enemy models are equally closest, attacking either of them will trigger this trait."
+556095094d9f,Traits,,Incorporeal,14,trait,True,,"This model is immune to [[B]] Damage until the end of the round. In addition, the model can move ‘through’ other models and scenery as though they weren’t there, but still cannot end its move overlapping another model or inside solid scenery."
+56c937a7d173,Traits,,Informer,14,trait,True,,"As long as this model is not KO, the crew gains one additional Pass on Activation."
+eea2228f5d8b,Traits,,Inspire,14,trait,True,,All friendly Henchmen that start their activation within 8” of this model gain 1 extra Manipulate action.
+03cc1a8b87f9,Traits,,Inspire Fear,14,trait,True,,"Target an enemy model (not a Vehicle) within 4” and line of sight. The target must take a Willpower roll. If this roll is failed, consult the following chart:
+Fails by 1-2: Target suffers the Scared effect.
+Fails by 3-5: Target suffers the Scared, Terror 1 and Slow 2 effects.
+Fails by 6 or more: Target is removed as a casualty."
+21c18dece739,Traits,,Instinctive Shooting,14,trait,True,,"In the round in which this trait is activated, this model’s ranged weapons don’t lose dice for moving before attacking."
+cc17e6d7e386,Traits,,Intel Support,14,trait,True,,"This model cannot be the target of an attack, and does not suffer effects or damage inflicted by traits. When an enemy model removes 1 of your Suspects, this model takes 1 [[A]] damage. When this model would be removed as a Casualty, remove all the damage from its character card and remove the model from the gaming area. In any subsequent Raise the Plan phase, you may reduce your Audacity markers by 1 during that round to return this model to play, placing it anywhere on the gaming area."
+b20a54080e5f,Traits,,Interrogation,14,trait,True,,"When this model scores at least 2 hits with a Melee Attack, this model or another friendly model in play, may immediately make an extra move of 4” or place a Suspect marker."
+9a511b680535,Traits,,Intimidate,14,trait,True,,"Target an enemy model (not a Vehicle) within 8” and line of sight. For the rest of the round, the target cannot perform Special Actions and loses a die when performing Willpower rolls."
+ff0da938dff7,Traits,,Intimidation,14,trait,True,,Target an enemy model (not a Vehicle) within 8” and line of sight. The target must pass a Willpower roll or be unable to perform Melee Attacks this round.
+673e6d216c05,Traits,,Invaluable,14,trait,True,,"When this model becomes a Casualty, the opponent gains 1 Resource point."
+565c37461bc6,Traits,,Invulnerability (X),14,trait,True,Invulnerability,"This model is immune to the CRT: Casualty effect. In addition, the first ‘X’ Damage markers received by this model during each round are ignored."
+1a0a5628747a,Traits,,It’s Mine,14,trait,True,,Enemy models cannot Reveal your Suspect markers while the marker is within 2” of this model.
+c748b4028e06,Traits,,I Will Break You,14,trait,True,,"When you recruit this model, choose one of the following options:
+• Bane gains +3 Extra Venom Doses and may apply them to a friendly model within 4” during his activation.
+• Bane gains Exhaustive Planner and +1 Willpower.
+• Bane Gains Close Combat Master."
+7b80834c6c64,Traits,,Joker’s Gas,15,trait,True,,"All other models within 4” and LoS suffer Enervating 1 and the Poison effect, with the Gas rule."
+78b885eee875,Traits,,Joy for the Victory,15,trait,True,,"Friendly models within 8” gain +1 to their Willpower value while performing Willpower rolls. In addition, friendly models within 8” that score an Objective card during their activation may immediately move up to 2”."
+47cb8b065a8e,Traits,,Judgment,15,trait,True,,"When this model makes an enemy model KO, flip a coin or roll a D6: if the result is ‘heads’ (or an even number) remove the enemy model as a Casualty."
+ee77373ea3df,Traits,,Juggernaut,15,trait,True,,"When this model completes a Movement action you may Push all models in contact 2” (no hits are required). In addition, this model gains +1 to its attack dice rolls against models contacted in this way this round."
+86c8f26ba130,Traits,,Jump Up,15,trait,True,,"Whenever this model would suffer the Knocked Down effect, it may first immediately make an Effort to remove the effect."
+f895c7c10659,Traits,,Kaos Agent,15,trait,True,,"All Henchmen in this model’s crew gain the Trickster trait for the duration of the game. You do not have to place all of your Audacity Activation markers during the Raise the Plan phase (or any, if you wish). Instead, whenever a friendly model with the Trickster trait activates, you may give it one of your remaining Audacity Activation markers."
+883c50e32c0b,Traits,,KaPow!!!,15,trait,True,,Until the end of its activation this model’s Melee Attacks gain +1 to attack dice rolls and Blunt 3.
+5023f2bb9449,Traits,,Kevlar Vest,15,trait,True,,"Whenever this model takes Damage from an enemy attack or special rule, reduce the total number of Damage markers it receives by 1, to a minimum of 1. You may choose which marker is ignored."
+26e9bd6f774c,Traits,,Kill them!,15,trait,True,,Target a friendly Henchmen within 4” of this model (but not the activated model itself). Target model gains +2 +.
+2efe84f9d141,Traits,,Kite,15,trait,True,,"While performing a Move action, this model increases the maximum distance it can move by 2” for each Suspect within 4” (measured once at any point during the Move). In addition, this model can move in any direction (including vertically) over obstacles and Difficult Ground without extra cost or penalty."
+bd42179e6db0,Traits,,Kobra Armor,15,trait,True,,"Once per round, this model may make 1 Effort to gain 1 marker."
+ff1fb3bf67ff,Traits,,Kryptonian (X),15,trait,True,Kryptonian,"A model with this trait gains a number of rules determined by the trait’s level (X), see below.
+1: Fast, Invulnerability/1, Natural Immunities.
+2: Fast, Invulnerability/2, Natural Immunities, Super Jump.
+3: Fast, Fly, Invulnerability/3, Natural Immunities.
+4: Fast, Fly, Invulnerability/3, Natural Immunities, Tough Skin.
+5: Fast, Fly, Hover, Flying High, Invulnerability/4, Natural Immunities, Tough Skin.
+6: Fast, Fly, Hover, Flying High, Invulnerability/5, Natural Immunities, Tough Skin.
+If the game is affected by the Day rules, the Invulnerability rule is improved by +1 and all the levels gain the Regeneration trait."
+fb6f8e4a8289,Traits,,Kryptonite,15,trait,True,,"While a model with this trait is within 4” of a model with the Kryptonian trait, the Kryptonian model loses the Invulnerability and Regeneration traits (if they possess them)."
+4f7ab8ac4353,Traits,,Lantern,15,trait,True,,A model with this trait can activate it at any time during its activation. The model counts as a Light source with a radius of 2” until the end of the round.
+3670ee9a0177,Traits,,Large,15,trait,True,,This model ignores up to 1 [[B]] Damage per attack suffered.
+da40a4b853bd,Traits,,Laser Sight,15,trait,True,,"Target one model in line of sight. The target counts as being under the effect of Lights until the end of the round, or until the target moves or changes its current position."
+796dacf964f4,Traits,,Lasso of Persuasion,15,trait,True,,One use only. Target an enemy model within 2”. That model suffers the Hypnotize effect.
+c1a7bdee76b4,Traits,,Leadership,16,trait,True,,All friendly models within 8” of this model may reroll Willpower rolls.
+c259ac0921bb,Traits,,Lethal Blow,16,trait,True,,"Once this trait is activated, for the rest of the round when this model damages a non-vehicle enemy with a Melee Attack Action, the damaged model suffers the Stunned effect too."
+f0c8c3223fd2,Traits,,Let’s Ride,16,trait,True,,"Once per round, choose another model within 6” and line of sight. If the target is a friendly model, it gains two + or markers. If the target model is an enemy, it immediately suffers the Enervating 2 effect."
+77264cd05f5f,Traits,,Light Armor,16,trait,True,,Enemy models roll 1 less attack dice when targeting this model.
+368a3931fd87,Traits,,Living Legend,16,trait,True,,"This model can be activated twice each round. Each activation is independent of the other (and cannot be made consecutively unless there is no other choice). If the model has an Audacity marker, it is only used for one of its activations. In addition, once per round, when a trait specifies this model as a target, you may cancel the use of that trait. A crew that includes a Living Legend loses one Pass on Activation each round (if applicable)."
+aa83f86cb7ce,Traits,,Long Guns,16,trait,True,,"If this model is the Boss, then at the start of the first Raise the Plan phase you may select up to three friendly Henchmen with ranged weapons with the Short Range and Firearm rules. Those weapons replace the Short Range rule with the Medium Range rule for the duration of the game."
+931c443ead31,Traits,,Lord of Business,16,trait,True,,"If this model is the Boss, its crew has an extra $500 in its Funding stash. In addition, when a friendly model plays the Valuable Commodities card, you may place an additional Loot marker in contact with another Suspect marker."
+f35885ede3f3,Traits,,Lord of the Sewers,16,trait,True,,"This model may deploy in contact with any Sewer marker. In addition, this model’s crew generates 1 extra Sewer marker. Once per game, this model can exit from a sewer and continue moving."
+a79a41205d3a,Traits,,Luck,16,trait,True,,"Once per round, this model may reroll any single die that it has rolled, for whatever reason."
+bf23ca3c0080,Traits,,Lunatic Laugh,16,trait,True,,All other models (not Vehicles) within 4” of this model lose 1 Defense die during their next roll.
+0184e018cbc6,Traits,,Magical Power X,16,trait,True,Magical Power,"All models with this trait can use Elemental Spells. The value ‘X’ is the number of Magic Points (MP) the model can spend during a round. Each spell costs a number of MPs to cast. At the Beginning of the Raise the Plan phase, the model gains a number of MPs equal to X. At the end Recovery phase, all unspent MPs are lost."
+fcad2b90f931,Traits,,Magic Tattoos,16,trait,True,,This model is immune to the Steal and Fire effects.
+16fd0dbf42fd,Traits,,Make them Perfect,16,trait,True,,"This model’s Attack actions gain the Push effect, but the direction of the Push must be directly towards a friendly Professor Pyg model if he is in play."
+67a83edbdd0d,Traits,,Manipulative,16,trait,True,,"When this model is in your Crew, you may redeploy up to two friendly models after normal deployment but before the game starts. In addition, at the end of each Raise the Plan phase you may nominate one model to take a Willpower roll. If this roll fails, the target model must be the last model in its crew to be activated that round."
+cec3234fbb32,Traits,,Martial Artist,16,trait,True,,This model ignores the penalty for being Outnumbered in combat.
+57bc7dbf4cf3,Traits,,Martial Expert,16,trait,True,,"This model causes a Critical on a Strength die natural result of 4, 5, or 6, not just 6."
+5f3a6c468bbe,Traits,,Master Criminal,16,trait,True,,All friendly Henchmen with the Criminal trait benefit from a +1 bonus to their attack dice rolls when making Attacks.
+584e05c38f8a,Traits,,Master Fighter,16,trait,True,,This model gains a +1 bonus to its attack dice rolls when performing Unarmed Melee Attacks.
+d7596090eead,Traits,,Master Marksman,16,trait,True,,This model can reroll failed attack dice rolls when performing Ranged Attacks.
+4b5466da070c,Traits,,Master of Stealth,17,trait,True,,"When this model is under the effect of the Night rule, it can only be seen by enemies within 6” instead of the usual range. It is still subject to rules that aid detection, such as Lights, Total Vision, etc. When this model benefits from the Sneak Attack trait, it gains +1 to its attack dice rolls."
+bcc9cf8bb636,Traits,,Mastermind,17,trait,True,,"If this model is in play and not KO, its controlling player gains +1 to the Take the Lead roll."
+7fcdee7e8b88,Traits,,Mechanical Mount,17,trait,True,,"This model gains +4” to its basic move distance, but can neither Jump nor Climb."
+a0931ae47021,Traits,,Medic,17,trait,True,,"This model may remove up to 2 damage markers from a friendly model in contact (not Vehicle) with at least 1 Damage marker of any kind. If this ability is used to recover a model that is yet to activate that round from KO, the opponent gains a Pass marker."
+a7d7a3fcd786,Traits,,Meditation X,17,trait,True,Meditation,At the start of this model’s activation it may make up to X Efforts. The model gains X Magic Points until the end of the round. These points can exceed the maximum that a model can generate and spend as detailed by the Magical Power trait.
+8eb8eb75e9af,Traits,,Medium Armor,17,trait,True,,Enemy models roll 2 less attack dice when targeting this model.
+ceabbb29009c,Traits,,Meet Goliath!,17,trait,True,,"This model can only be recruited in a crew or Team containing a model with Name: Damian Wayne. However, this model can never be recruited to a crew. This model does not reduce its Effort Limit due to accumulated Damage and it may make 2 free Efforts when performing an Attack, and when Defending."
+0b1290060d6e,Traits,,Menace,17,trait,True,,Enemy models must spend one additional Action (of its choice) to choose this model as the target of an Attack. This effect lasts until the end of the round.
+3d3f4e129b02,Traits,,Mental Dominance,17,trait,True,,"Once per round, this model may target an enemy model within 4” and line of sight. That model must take a Willpower roll. If it fails, you can perform one Action with that model, out of sequence, temporarily treating it as though it was one of your own models. You may not perform any action that could cause Damage to the target model (such as Falling, or deliberately positioning an Explosive template so it is affected, etc)."
+7d0c42fdd1de,Traits,,Mentoring,17,trait,True,,"This model can only purchase one piece of Equipment. If its crew or Team list contains a Leader or Sidekick with Affiliation: Brave and the Bold, all [[A]] Damage inflicted by this model is automatically converted to [[B]] Damage. In addition, this model gains the Boy Wonder and True Love: Bruce Wayne traits, and any model with Name: Bruce Wayne in the same crew or Team gains True Love: Damian Wayne until the end of the game."
+8a1672fe6d74,Traits,,Mercenary,17,trait,True,,You can only recruit this model in a League of Assassins crew if a model with Name: Bane is also included in the crew.
+5cdd96b88e72,Traits,,Military Teamwork,17,trait,True,,A friendly model performing an Attack against an enemy in contact with this model gains +1 to its Attacks skill for the duration of the Attack.
+f62b256e6b45,Traits,,Military Tradition,17,trait,True,,Other friendly models with the Veteran trait within 8” can move up to 2” immediately.
+f1b6b9692b5f,Traits,,Millionaire,17,trait,True,,This model’s crew gains an additional $400 Funding.
+e037dc64fca6,Traits,,Mind Blast,17,trait,True,,Target a model (not a Vehicle) within 8” and line of sight. The target must pass a Willpower roll or receive [[A]] [[A]] damage.
+33facd6310ab,Traits,,Mind Control Device,17,trait,True,,Choose a Suspect marker within 8”. Target a model within 4” of that Suspect marker. That model immediately suffers the Hypnotize effect. Remove that marker.
+d4c051a3efd6,Traits,,Mind Control Substance,17,trait,True,,"When this model is recruited to your crew, friendly models with the Henchman rank cannot have their Willpower value reduced by any means, and during the Recovery phase they recovers automatically from KO."
+9fdd335dec27,Traits,,Mind Trick,17,trait,True,,"After a model within 8” of this model reveals a Suspect, you may move one Suspect in play up to 4”."
+09f01c439545,Traits,,Mine,18,trait,True,,"Convert a Suspect marker in contact with this model into a Mine marker (is still a Suspect marker). When a model moves within 2” of the Mine marker, immediately roll a Strength 2+ die against it. If the roll is successful, the model suffers [[A]] [[A]] Damage, and the marker is removed from play. If the roll fails, remove the Mine Marker."
+4cc21c85360b,Traits,,Minion,18,trait,True,,"This model can be hired up to three times in a crew, regardless of its Name."
+07c10c901889,Traits,,Mixed Combat Style,18,trait,True,,After this model performs an Attack action it can perform an extra Attack action (of a different type from the first) during the same activation.
+41a591187f97,Traits,,Mob,18,trait,True,,A crew that includes this model may have up to +2 additional Suspect markers in play at any one time.
+55f0bd6161a1,Traits,,Mobster,18,trait,True,,"When attacking an Outnumbered model in close combat, this model rolls an additional attack die."
+6ca2ab628826,Traits,,Monitoring Device,18,trait,True,,"Until the end of the round, this model gains Total Vision and its ranged weapons gain Remote Controlled."
+4785b5d695e1,Traits,,Moral Compass,18,trait,True,,This model cannot attack KO models.
+516671742f08,Traits,,Mortal Kiss,18,trait,True,,"If this model successfully performs at least 3 hits against a model (not a Vehicle), remove the target model as Casualty."
+f922cb56351a,Traits,,Mud,18,trait,True,,"Enemy models in contact with this model that wish to move must spend a Special action as well as a Movement action. In addition, this model’s attacks gain the Slow 4 effect."
+7573307617cf,Traits,,Multifire,18,trait,True,,"When using a ranged weapon, this model gains +2 attack dice. The model cannot move in the same round that it uses this ability."
+515310b7e1f4,Traits,,Multitask,18,trait,True,,"This model chooses one of the following options before the game begins:
+• Explorer: Gain the Undercover trait and +2 basic move distance.
+• Hacker: Gain +1 Willpower. Also gains the Computer Intrusion trait.
+• Defender: Gain +2 Endurance. Also gains the Force Field trait.
+• Fighter: Gains +1 Attack, +1 Defense and the Claws trait."
+870d714eeef5,Traits,,Multiverse Teleportation Device,18,trait,True,,"This model may not be deployed as normal at the start of the game. Instead, at the start of the Raise the Plan phase of the second round, place this model anywhere on the board (but not inside a building or similar enclosed space)."
+342556383803,Traits,,My Idol!,18,trait,True,,"This model can only be recruited if a model with the Alias: Zur- En-Arrh Batman is part of the crew. In addition, while a friendly model with Alias: Zur-En-Arrh Batman is in play and not KO, this model gains +1 Willpower."
+7beda989b8ed,Traits,,Narcotic Dose (DOSE),18,trait,True,Narcotic Dose,"A model may use a Narcotics Dose at any time during its activation. If it does so, the model gains the Desensitized trait until the end of the round."
+455df49c600f,Traits,,Natural Immunities,18,trait,True,,"This model cannot be affected by the Blind, Poison or Steal effects."
+dd5940f8f32d,Traits,,Necromancy,18,trait,True,,"This model can use Necromancy Spells. In addition, once per game during its activation this model can spend 2 MPs to inflict [[A]] Damage to another model in contact, and then remove 1 Damage marker from itself."
+4ba5a2ff3f2e,Traits,,Negative Speed Force,18,trait,True,,"While this model is in play, the Speed Force Pool maximum is reduced by 2."
+438f95953a49,Traits,,Night Vision,18,trait,True,,This model ignores the Night rule.
+8a9a1d60bc55,Traits,,No Mercy!!!,18,trait,True,,All friendly Henchmen add the Bleed 1 effect to their Attacks.
+6efa8e8821d3,Traits,,Non-Lethal Ammo,18,trait,True,,"When this model attacks non-Vehicle models with its ranged weapons, all [[A]] damage becomes [[B]] damage."
+7a62449798e9,Traits,,Objectives? Puzzles everywhere!!!,19,trait,True,,"A crew that includes this model does not accomplish Objective cards following the normal rules. Instead, when a model that share an Affiliation with this model place a Suspect marker, you must roll 1D3. Place a Number Counter on top of that Suspect marker with an equal value as the roll. At the end of the round, you score Objective cards that shown the same VP value as the Number Counters on top of the friendly Suspect markers. Each Number Counter only accomplish 1 Objective card and then, is removed."
+545bb2c1ec97,Traits,,Obsessive (Mental Disorder),19,trait,True,Obsessive,"If this model selects the same target for all of its Attacks in a single activation, it gains +1 to the Strength die roll."
+25e94fe6c1ff,Traits,,Obstinate,19,trait,True,,"Once per round, when this model cannot make an Effort because it has reached the Effort Limit, it gains 1 free Effort. Additionally, this model can make Effort once per round when taking a Willpower roll."
+9ba11eff0ce0,Traits,,OCD (Mental Disorder),19,trait,True,OCD,"If this model selects the same target for all of its attacks in a single activation, it gains +1 to its attack dice rolls."
+b6281ccd64d5,Traits,,Occultism,19,trait,True,,"This model can use Occultism Spells. In addition, once per game during its activation, the model gains +1 to its Defense value until the end of the round."
+f7f62a2286e9,Traits,,Offensive Defense,19,trait,True,,"When this model blocks at least 1 hit from a melee attack, then after resolving the action the attacking model suffers [[B]] [[B]] damage and is Pushed 2” (in a direction of your choice)."
+b82473e9fbc5,Traits,,One-Armed,19,trait,True,,This model suffers a -1 penalty to its defense die rolls.
+18288e3aa633,Traits,,One of the Boys,19,trait,True,,This model benefits from the Boss’s Inspire rule exactly as if it held the Henchman rank.
+5b2ab652c829,Traits,,One Shot Gun,19,trait,True,,"One use only. Choose an enemy model within 8” and line of sight. Roll a Strength 2+ die with Damage [[A]] [[A]] [[A]] , and Bleed 3. This ability is considered a Ranged Attack with the Anti-Tank rule, so all rules, traits and abilities that relate to it are in effect (i. e. Line of Sight, Cover, and traits that affect Ranged Attacks)."
+1b98804a8f45,Traits,,Order,19,trait,True,,Target another friendly model within line of sight. The chosen model can immediately place a Suspect marker.
+0f4449aa58ce,Traits,,Outlaw Field Commander,19,trait,True,,Choose another friendly model within 4” and line of sight. That model gains +2 + or.
+db8418613782,Traits,,Painful Empathy,19,trait,True,,"Transfer up to 2 Damage markers from another friendly model in line of sight (not a Vehicle) to this model. If any Damage markers are moved in this way, this model gains +1 to its Attacks and Defense skills until the end of the round."
+7344bf830a77,Traits,,Panda Costume,19,trait,True,,This model must spend an Action (any type) to stand up. This model may do nothing else during that Action.
+39691871e6b6,Traits,,Paranoid (Mental Disorder),19,trait,True,Paranoid,"If this model has at least 1 Damage marker on its character card, then during the Raise the Plan phase it gains a marker."
+9b63c501b27c,Traits,,Penguin Caller,19,trait,True,,"If you have less than 3 friendly Explosive Penguins in play you may place an Explosive Penguin within 2” of this model and in contact with a friendly Suspect marker. Then, remove that friendly Suspect marker. For each model with the Animal trait within 4” of this model, add +1” to the distance at which the Explosive Penguin may be placed. Finally, the opponent gains a Pass marker."
+6c0661f30932,Traits,,Penguin Feeder,19,trait,True,,"Once per activation, this model can restore Ammo Magazines used earlier in the game to friendly models with the Animal trait within 4”. Remove 1 friendly Suspect marker within 4” of this model for each magazine restored. In addition, Explosive Penguin models within 4” inflict 1 additional [[A]] when using the Self- Destruct trait. This model’s Inspire trait range is improved by +2”. However, it cannot benefit from the Protective or Small special rules until this Upgrade is disabled."
+00f64fc69836,Traits,,Perfect Creations,19,trait,True,,"If a friendly Professor Pyg is removed from the game as a Casualty, all friendly Dollotrons are removed as well. Dollotrons never count towards Objective requirements for being made KO or becoming a Casualty. If a friendly Professor Pyg within 4” of this model and LoS is hit by an Attack (of any kind), this model can make an Effort to take the hit instead, and all the effects of that attack. Dollotrons can only be recruited in a crew that contains Professor Pyg."
+f705f0f8639b,Traits,,Performance,20,trait,True,,"If this model is in play and not KO, enemy models within 6” that wish to perform an Attack, or use traits, must first take a Willpower roll. If they fail the test they suffer -1 to their attack dice rolls until the end of the round."
+739b80f92e29,Traits,,Personalities,20,trait,True,,"At the end of each Take the Lead phase, shuffle all the Personalities cards and draw one at random. Apply the rules on that card to this model until the end of the round. This model cannot use its weapons unless it draws the Personalities card that allows it. In addition, if the opponent has 5 VP more than you, and/or this model has 3 or more Damage markers, you may draw 3 cards and choose one."
+9e07e7cc4f34,Traits,,Persuasive,20,trait,True,,"At the end of this model’s activation, nominate any enemy model in line of sight that is yet to activate this round. That model must be the next to activate. The opponent can’t use a Pass to ignore this rule. A model can use this trait once per round."
+58dbcdac807a,Traits,,Pickpocket,20,trait,True,,"This model may perform a Manipulate action to target a KO model in contact. If it does so, immediately follow the rules for the Steal effect."
+4f60235c2155,Traits,,Planning the Move,20,trait,True,,All other friendly models with the Gotham City Siren rule in this model’s crew gain the Primary Target trait until the end of the game.
+6f64cb3fe6f0,Traits,,Plant,20,trait,True,,"Each Plant recruited to your crew grants you one friendly Suspect marker that may be placed anywhere on the board at the end of the Choose Plot Cards step of the pre-game sequence. Plants are not deployed as usual – instead, during a friendly model’s activation, you may place one of your Plants in contact with a friendly Suspect and then remove that Suspect. Always are considered an activable model and inside the gaming area.
+• If a Plant gets Knocked Out, immediately remove it as a Casualty.
+• A plant may receive an Audacity marker even if it is not in play.
+• A Plant’s basic move distance cannot be increased by any means.
+• Plants have a 4” ‘action zone’ radius. Within that radius, Plants are able to attack in Melee (no line of sight or contact is needed), and may perform the Manipulate action.
+• Plants can only Manipulate to reveal Suspects.
+• Plants are immune to the Poison, Knocked Down, Hypnotize and Blind effects.
+• When a Plant is removed as a Casualty, it can be placed in play again in a subsequent round with its usual rules, removing all damage and effects suffered previously."
+1103a5909df2,Traits,,Play Nice!,20,trait,True,,All friendly Henchmen in this model’s crew gain the Bluff trait.
+79c0ca8c0cfc,Traits,,Plead,20,trait,True,,Choose one enemy model (not a Vehicle) within 4” and line of sight. The target must pass a Willpower roll or be unable to attack this model this round.
+cdf43025ef85,Traits,,Poison Immunity,20,trait,True,,This model is immune to the Poison effect.
+f7dfe76de6d0,Traits,,Poison Master,20,trait,True,,Models that perform a roll to resist the Poison effect within 8” of this model may roll 1 less dice (at your choice).
+4b5f808aee91,Traits,,Pollination,20,trait,True,,"When this model places a Suspect, it may be placed completely within a friendly plant action zone."
+0c1bc7f6afeb,Traits,,Pollution Hate,20,trait,True,,This model cannot enter Sewers.
+e25ba546441a,Traits,,Possessed,20,trait,True,,"When this model is the Boss you can recruit up to three Henchman with any Affiliation (as long as they don’t have the Bot or Cybernetic traits). Their Affiliation is assumed to be the same as this model. However, Henchmen hired in this way lose -1 Willpower and gain the Self-Discipline trait if they do not have it already."
+745eb98e2d4d,Traits,,Possession,20,trait,True,,"Target a model within 4” (not a Vehicle, or a model with the Bot trait). The target must take a Willpower roll with a -1 Willpower penalty. If it fails the roll, the target becomes Possessed! Remove this model (the ‘Possessor’ hereafter) from play – it cannot be activated while this trait is in effect, and it does not count for the purposes of Passes. However, the Possessed model is now controlled by you, rather than its own player. Treat it as a member of your crew (if the model has already activated this round, then you may award the model an Audacity marker in the following round). At the end of its next activation, the Possessed model must pass a Willpower roll (again with a -1 Willpower penalty) or continue being possessed. If the Possessed model passes the Willpower roll, the possession ends – see below. Alternatively, at the end of the Possessed model’s activation, immediately before the Willpower roll is taken, the Possessor may choose to end the possession.
+• When the possession ends, return the Possessor to play by placing it within 4” of the Possessed model. The Possessor cannot be activated this round; the model that was Possessed returns immediately to the control of its owning player.
+• If the Possessed model becomes KO or Casualty while possessed, then the possession ends as described above. However, as soon as the Possessor is placed on the board, assign [[A]] [[A]] Damage to its character card."
+81a916feb832,Traits,,Power Armor,21,trait,True,,"Enemy models roll 1 less attack dice when targeting this model. In addition, you can make Efforts to ignore up to 2 Damage markers received per Effort."
+81b4527bccce,Traits,,Power Armor MkII,21,trait,True,,"This model is Immune to CRT. In addition, you can make Efforts to ignore up to 2 Damage markers received per Effort."
+da7e2bb5e9db,Traits,,Power Dampening,21,trait,True,,All models within 4” of this model lose the Incorporeal and Invulnerability traits and cannot cast Spells this round.
+d1b846b3d79b,Traits,,Power Strike,21,trait,True,,"Once this trait is activated, for the rest of the round when this model damages a non-vehicle enemy with a Melee Attack Action, the damaged model suffers the Knocked Down effect too."
+fda5f4ccb39d,Traits,,Power Supply,21,trait,True,,"This model starts the game with 3 Power counters. Once per model activation, this model can spend 1 Power counter as follows:
+• During its activation: This model gains a marker. +4
+• During its Attack: Each Hit scored needs two successful blocks to cancel it.
+• When receiving Damage: This model ignores up to 2 Damage markers suffered.
+In addition, this model can Manipulate a Streetlamp marker to gain 2 Power counters."
+8ed47b2376a8,Traits,,Precise Aim,21,trait,True,,"If this model has not moved, when performing a Ranged Attack it gains +2 to its attack dice rolls. This model may not move after using Precise Aim."
+6c96f865bc32,Traits,,Precise Blow,21,trait,True,,"Once this trait is activated, for the rest of the round this model gains a +1 bonus to its attack dice rolls, and may reroll the Strength die."
+1ec12c2382c1,Traits,,Primary Target,21,trait,True,,This model can treat enemy Suspect markers as friendly.
+00f0d66d2899,Traits,,Protect Me!,21,trait,True,,"If this model is hit by an enemy attack (any type), you may make an Effort to nominate a friendly model within 4” and LoS (not a Vehicle) to take the attack instead. Resolve any Damage and/or effects against the nominated model."
+56e616be47ba,Traits,,Psychiatrist,21,trait,True,,All friendly Henchmen models with a Mental Disorder trait within 8” and line of sight of this model gain +1 to their Attack and Defense skills. These bonuses last until the end of the next Raise the Plan phase.
+17fa49132c4d,Traits,,Psycho,21,trait,True,,This model’s Willpower skill cannot be reduced under any circumstances.
+205ed6be063f,Traits,,Psychologist,21,trait,True,,"When a model within 4” scores an Objective, that model suffers Enervating 1 or removes 1 [[B]] from its character card (your choice)."
+168ee0af129e,Traits,,Psychoanalysis,21,trait,True,,"Target a model with a Mental Disorder trait, friendly or enemy, within 8” and LoS. The target ignores the effects of their Mental Disorder until the end of the round."
+c61e010e5d3a,Traits,,Public Resources,21,trait,True,,"If this model is included in your crew, add $300 to the crew’s available Funding. In addition, you may place one additional Streetlamp and Sewer marker before the game starts."
+17ac12a964c7,Traits,,Puzzle Master,21,trait,True,,"This model can place 2 Suspect markers when performing a Manipulate action, and can place them within 6” instead of in contact."
+53c69031cd56,Traits,,Pyromania (Mental Disorder),21,trait,True,Pyromania,"If, at the beginning of its activation, this model can see any model with a Fire marker, this model gains a marker."
+4a41536bff58,Traits,,Quiz Master,21,trait,True,,"When this model scores an Objective card with multiple copies in the deck, you can search the Objective deck for another copy of the same card and put it in your hand. Then, shuffle your deck."
+30410945ba83,Traits,,Radio,22,trait,True,,This model is always treated as though it were within range of the Inspire rule.
+98d84a7fe072,Traits,,Radioactive Soul-Self,22,trait,True,,"When this trait is used, this model becomes immune to all Damage and effects, cannot be targeted by any model, cannot move, and cannot perform Manipulate actions. However, this model gains +1 Attacks skill, adds +2 to its attack dice rolls, and its Unarmed Melee Attacks produce [[B]] [[B]] Damage. This model can make Melee Attacks against models up to 8” away as if it were in contact. These conditions last until the end of the model’s next activation. This trait cannot be used in two consecutive rounds."
+0341d2049cc2,Traits,,Raised in the Sewers,22,trait,True,,This model can deploy in contact with a Sewer marker instead of in its deployment zone.
+f1fb401bef98,Traits,,Ranged Master,22,trait,True,,See Expert Marksman.
+e2d27545c13a,Traits,,Rapid Fire,22,trait,True,,"When making a Ranged Attack, this model gains +1 Attack die."
+85af1a170679,Traits,,Rat Tamer,22,trait,True,,Sewer Swarm models within 8” of this model gain a + marker and a marker. +2
+4ae28469dcc7,Traits,,Really Huge,22,trait,True,,This model ignores up to 2 [[B]] Damage per enemy Attack.
+8b6fdc5b1dfa,Traits,,Reanimated Owl,22,trait,True,,"This model can re-roll failed rolls to recover from KO. When this model becomes a Casualty, the opponent gains 1 Resource point."
+4d27801f0f78,Traits,,Reflexes,22,trait,True,,"When performing a Ranged Attack against this model, successful hits must be rerolled."
+3bbd77ccf161,Traits,,Regeneration,22,trait,True,,"During the Recount phase, if this model is not KO it can remove 1 additional Damage marker (any type)."
+4838805279d6,Traits,,Regrets,22,trait,True,,"At the start of each of this model’s activations, it must pass a Willpower roll or be unable to make any Attacks or use Flaming Wave during this round. For each friendly model that is KO or removed as a Casualty so far this game, this model gets -1 to the roll."
+41763ca70c77,Traits,,Reinforced Gloves,22,trait,True,,This model’s Unarmed Melee Attacks inflict Damage [[B]] [[B]] .
+420dd99337d3,Traits,,Repairman,22,trait,True,,Remove 2 Damage marker from a target Vehicle in contact.
+189214cd79bb,Traits,,Resilient,22,trait,True,,This model can reroll failed Endurance rolls.
+c08437f08595,Traits,,Retractable Claws,22,trait,True,,This model’s Unarmed Melee Attacks inflict Damage [[A]] [[B]] and have the Sharp weapon special rule.
+9608689001f6,Traits,,Revenge,22,trait,True,,All friendly Henchmen that attack an enemy model within 8” of this model gain one extra attack die this round.
+5776b0abe8dc,Traits,,Ricochet,22,trait,True,,"After this model scores any successful hits with a Ranged Attack, select another enemy model within 2” and line of sight of the target. Perform an extra Ranged Attack (without spending Ammo) against this second target with the same weapon, ignoring line of sight, effective range and cover."
+0f65fc48233e,Traits,,Riddler Bots,22,trait,True,,"When you hire a model with the trait ‘Can you solve this?/X’, this trait changes to Autorepair/X (X is the value of the ‘Can you solve this?’ trait) and Multitask."
+bba80185d39d,Traits,,Riddles Addict,22,trait,True,,"Once per round, this model can Reveal enemy markers without spending an Action."
+6a3dcddf0a07,Traits,,Rock,22,trait,True,,This model’s attacks gain the Overwhelming weapon special rule.
+5877afbfa109,Traits,,Roots,22,trait,True,,"Target an enemy model within 8” and line of sight. Perform an opposed Endurance roll against that model – if you succeed, the target suffers the Pinned Down effect until the end of the round."
+1ba1223d792d,Traits,,Runaway,22,trait,True,,This model is immune to the Arrest trait.
+fd731d67a5dd,Traits,,Sad Life,22,trait,True,,"Enemies within 6” that wish to perform an Action must first make
+1 Effort (if the target cannot make an Effort, it can ignore this rule)."
+c2119fbdd3b6,Traits,,Safe Hands,23,trait,True,,This model is immune to the Steal effect.
+893a2148f3f4,Traits,,Sapper,23,trait,True,,One use only. Place a friendly Suspect marker in base contact. That Suspect marker is treated as a small obstacle that provides Cover.
+c14cc29ebb3e,Traits,,Savage Fighter,23,trait,True,,This model gains +1 to its attack dice rolls and the Push effect when performing a melee attack until the end of the round.
+215177580b82,Traits,,Scheming (X),23,trait,True,Scheming,"During the Raise the Plan phase, if this model is in play and not KO, you can move up to X Suspect markers 4”, ignoring the minimum range between Suspect markers."
+d20de9a11b36,Traits,,Scientific,23,trait,True,,"This model may roll one additional die when performing a Willpower roll. When this model performs a Special action during its activation, it may perform an additional different Special action as an extra action."
+25a052df48c2,Traits,,Scout,23,trait,True,,"This model may move before the first Take the Lead phase of the game, following the rules for Movement Actions (this does not affect the model’s normal activation)."
+796481e9d1aa,Traits,,Sealed Cabin,23,trait,True,,"Only attacks listed on the Upgrade card can be made by this model, plus the Charge trait. In addition, this model (and any model transported in it) cannot perform Manipulate actions."
+b85ad7d3b859,Traits,,Searcher,23,trait,True,,"While this model is in play and not KO, the opponent’s Resource points are reduced by -1."
+f62f42685d8b,Traits,,Security Chief,23,trait,True,,"If this model is within 4” of your crew’s Boss, enemy models suffer a -1 penalty to Attack rolls against that Boss."
+f77a72414330,Traits,,Self-Destruction,23,trait,True,,"Center the Explosive template over this model. This is resolved as an Explosive Ranged Attack, rolling a Strength 2+ die for each affected model – on a successful roll, the model receives [[A]] [[B]] Damage. Once this action is resolved, remove this model as a Casualty."
+922fcb4c73b5,Traits,,Self-discipline,23,trait,True,Self Discipline,"This character cannot be controlled by an opponent (for example, by means of an ability that inflicts the Hypnotize effect)."
+3ff3b42c064e,Traits,,Sewer Swarm X,23,trait,True,Sewer Swarm,"After deployment, but before the game begins, place X Sewer Swarm models within 2” of this model. If, during this model’s activation, you have less than X Sewer Swarms in play, you may make X Efforts to place X Sewer Swarm models within 2” of this model, then, the opponent gains X Pass markers. While a Sewer Swarm is within 8” of this model, it gains the Poison Master rule. In addition, if this model is hit by an enemy attack (close combat or ranged), you may make an Effort to nominate a friendly Sewer Swarm model within 4” and LoS to take the attack instead. Resolve any Damage and/or effects against the nominated model."
+7a9fb9f05dfc,Traits,,Sewer Worker,23,trait,True,,"One use only. During this model’s activation, you can place a Sewer marker anywhere on the gaming area at least 2” from any other marker."
+614abcdb7853,Traits,,Shapeshifting,23,trait,True,,"At the start of the Raise the Plan phase, if this model is not KO then it may exchange an Upgrade card with the name ‘(Animal) Form’. Place the new model in contact, then remove the original model."
+8c6b5cfb800d,Traits,,Sharpshooter,23,trait,True,,Ranged Attacks made by this model ignore the Cover rule.
+a3ef514d10d4,Traits,,Shockwave,23,trait,True,,Enemy models within 4” of this model suffer the Slow 2 effect.
+cb8fd0f94fe0,Traits,,Shooter,23,trait,True,,"When this model performs Ranged Attacks against targets within 8”, the target does not benefit from the Cover rule."
+72315862f80d,Traits,,Simple Mind,23,trait,True,,This model cannot benefit from the Inspire rule.
+84a1fac0c0f7,Traits,,Slow Digestion,23,trait,True,,"After resolving a Devour attack that inflicts damage, remove the target from the gaming area. That model is ‘Devoured’. A Devoured model may still be activated each round, but can only take an Endurance roll. If it is successful, place the Devoured model within 2” of this model and continue its activation. If the Endurance roll fails, the Devoured model suffers [[A]] [[A]] damage. This model can only remove one enemy from the game in this way at the same time. If this model becomes a Casualty, place any model it Devoured within 2” before removing this model. If a model is still Devoured when the game ends, it is considered a Casualty."
+7f3dd618983f,Traits,,Small,24,trait,True,,This model gains +1 Defense against enemy Ranged Attacks.
+cc500485d861,Traits,,Smuggler,24,trait,True,,"When this model is recruited, its crew can buy Magazines and Radio equipment at half of the usual $ cost."
+8f7e82826cc1,Traits,,Sneak Attack,24,trait,True,,"If, at the beginning of the attacker’s activation, the target could not see the attacker, the target model cannot make Efforts when defending against this model during that activation."
+8719f3f0a191,Traits,,Sneaking,24,trait,True,,"During the Recount phase, this model can move up to 2”, using the rules for Movement Actions."
+822ac1167311,Traits,,Soul Armor,24,trait,True,,Remove up to 2 Damage markers (any type) from this model.
+1f96f776aacf,Traits,,Soul Voices,24,trait,True,,"If this model has an Audacity marker, but has not yet activated this round, you may remove the marker to gain two free Efforts when defending. In addition, this model may spend an additional action when attacking to gain two free Efforts."
+8cd30efc0e67,Traits,,Speedster X,24,trait,True,Speedster,"This model can use Speed Force Powers, and has a maximum reserve of X Speed Force markers. A Speedster model gains +2” to its basic move distance. The model does not treat Difficult Ground and Climbing as Impaired Movement, although other effects that modify the terrain (i. e. Ice) must be taken into account. Enemy models cannot defend against this model’s Melee Attacks unless the target has the Speedster trait too."
+5eb4252d08b2,Traits,,Speed Force Absorption,24,trait,True,,This model can steal 1 Speed Force marker from another model with the Speedster trait at the end of the Drain Speed Force subphase. This marker may cause the model to exceed the normal maximum reserve of Speed Force markers.
+5e7605da8923,Traits,,Speed Force Master,24,trait,True,,This model can spend up to 2 Speed Power markers during its activation to gain up to 2 + or.
+317f5fea326d,Traits,,Stay in Formation,24,trait,True,,"One use only. During this model’s activation, choose another friendly model within 8”. That model may immediately move up to 6” directly towards this model."
+e049d117e0e7,Traits,,Stealth,24,trait,True,,"When this model is under the effect of the Night rule, it can only be seen by enemies within 8” instead of the usual range. It is still subject to rules that aid detection, such as Lights, Total Vision, etc."
+6cdac8c72ed2,Traits,,Steel Hands,24,trait,True,,This model’s Unarmed Melee Attacks [[B]] [[B]] [[B]] inflict Damage with the Push effect.
+78cd065fcdb6,Traits,,Stop!,24,trait,True,,"Target an enemy model within 8” and line of sight (not a Vehicle). Perform an opposed Willpower roll against that model. If successful, reduce the target model’s Defense skill by 1 (this trait is not cumulative if used multiple times on the same model). In addition, the target suffers the Slow 4 effect. Both effects last until the end of the round."
+5815b9be617b,Traits,,Strategist,24,trait,True,,"While this model is in play and not KO, you gain +1 Resource point."
+0c9cd71fa72b,Traits,,Street Fighter,24,trait,True,,"When attacking or defending, this model can remove a friendly Suspect within 2” to gain 2 free Efforts."
+c192091feb15,Traits,,Street Guy,24,trait,True,,"When this model benefits from the Cover rule, it may force the attacker to reroll one successful hit."
+3acb249d5a77,Traits,,Stretching,24,trait,True,,"At the start of this model’s activation, you may change any number of its [[A]] Damage to [[B]] Damage markers. In addition, once per round, during its activation, this model can choose to increase its size or decrease it. Until its next activation, if the model increases its size it gains +1 to its Strength rolls, and its Unarmed Melee Attacks inflict [[B]] [[B]] damage, but the model reduces its Defense by -1. If the model decreases its size, it gains +1 to Defense and gains the Dodging rule, but suffers a -1 penalty to its Strength rolls."
+3a029b5fec9b,Traits,,Stupid,24,trait,True,,"This model cannot perform Manipulate Actions, under any circumstances."
+355b63308a99,Traits,,Sturdy,25,trait,True,,This model does not reduce its Effort Limit due to accumulated Damage.
+c8a83eefe7f4,Traits,,Subliminal Suggestion,25,trait,True,,Choose a single model (friendly or enemy) with a Mental Disorder trait within 8” and line of sight. You may move the target model up to 4” (but cannot move it so that it Falls).
+253015de6af4,Traits,,Superior Sense of Smell,25,trait,True,,"This model doesn’t need an uninterrupted line of sight to see its target. Instead, anything within 10” can be seen by this model. In addition, this model is immune to the Blind effect."
+6b9166f606ce,Traits,,Super Jump,25,trait,True,,Remove this model and immediately place it completely within 6”.
+eb3a715dd126,Traits,,Supernatural,25,trait,True,,All attacks made by this model have the Magic rule.
+af0936ee617d,Traits,,Surgical madness (Mental disorder),25,trait,True,Surgical madness,"When this model uses the Medic trait, the target model removes 1 extra Damage marker (any type). In addition, roll 1D6. The target model gains the following trait until the end of its next activation:
+Result Trait
+1 Weak
+2 Stupid
+3 Aggressive Schizophrenia
+4 The Voices
+5 OCD
+6 Desensitized"
+a9f0cb0b2f52,Traits,,Survivor,25,trait,True,,"When this model is made a Casualty, do not remove it from play. Instead, roll a D6: on a result of 5+ the model removes 1 Injury marker [[A]] and remains in play. If the roll is failed, the model becomes a Casualty."
+c1100cf121cd,Traits,,Sustained Defense,25,trait,True,,"For every two successful defense rolls made by this model, cancel one extra enemy hit."
+f3ae8a8a6e5d,Traits,,Swarm,25,trait,True,,"This model cannot be recruited, but can only be brought into play by the Sewer Swarm X trait. This model gains +1 Defense skill vs enemy Ranged Attacks. This model cannot perform Manipulate Actions by any means. Swarms do not fulfill enemy Objective criteria for making models KO or removing them as Casualties. If this model is made KO, remove it as a Casualty."
+b824f4ca7967,Traits,,Swift,25,trait,True,,This model can make 1 Effort to improve its basic move distance by +2” for the remainder of the round.
+d7c786023c78,Traits,,Tachyon Device,25,trait,True,,"In the Drain Speed Force sub-phase, if there aren’t any Speed Force markers in the Speed Force pool, this model adds up to 2 Speed Force markers to its own reserve."
+84079a72cfc2,Traits,,Take Cover!,25,trait,True,,Choose a friendly Henchmen within 4” of this model (but not the activated model itself). That model gains 2 markers.
+4bb0ca61d301,Traits,,Takedown,25,trait,True,,"When this model makes another model KO with an Attack, it may immediately make an Effort to make the target a Casualty."
+5c74fa93e0a7,Traits,,Taunt,25,trait,True,,"Choose one enemy model (not a Vehicle) within 8” and line of sight. Perform an opposed Willpower roll against that model. If it successful, then for the rest of the round increase the target’s Attacks skill by +1, but reduce its Defense skill by -2."
+be16b092069a,Traits,,Teamwork X (All),25,trait,True,Teamwork,"During its activation,this model may roll X additional dice when performing Melee Attacks and defense rolls while another model with the Teamwork trait is within 4”."
+91af06dfb307,Traits,,Teamwork X (Model),25,trait,True,Teamwork,"During its activation,this model may roll X additional dice when performing Melee Attacks and defense rolls while the named model is within 4”."
+d1b24ab51402,Traits,,Technique,25,trait,True,,"Once this trait is activated, for the rest of the round when this model damages a non-vehicle enemy with a Melee Attack Action, the damaged model suffers the Paralyze effect too."
+680cc55e9bd0,Traits,,Teen Titans Founder,25,trait,True,,"This model can be recruited in a Teen Titans Team, ignoring ‘The Sidekick’ trait. When operating as part of a Teen Titans crew, this model gains +1 Willpower, +1 Strength and the Reinforced Gloves trait."
+acbfb43f6b7d,Traits,,Telekinesis,26,trait,True,,"At the start of each of this model’s activations, choose one of the following effects until the end of the round:
+• This model’s weapons can still be used at full RoF if it moves.
+• This model’s Unarmed Melee Attacks inflict [[B]] [[B]] [[B]] and its Strength roll always succeeds on a 3+, ignoring any other rule (but it cannot benefit from the Mixed Combat Style trait)."
+d7bc28d9dc3a,Traits,,Tension,26,trait,True,,This model gains +1 to its Attacks and Defense values while it has at least one [[A]] Damage marker on its Character Card.
+ea575bd3ae8d,Traits,,The Boss,26,trait,True,,"If this model is the crew’s Boss, friendly Henchmen gain the Expendable trait."
+9474a4578159,Traits,,The Dark Knight Returns,26,trait,True,,Keyword.
+18c1dd936d63,Traits,,The Devil You Know,26,trait,True,,"When this model casts a Spell, it may apply any Failure result to a friendly model instead of itself."
+008379b929b9,Traits,,The Dynamic Duo,26,trait,True,,"This model can activate immediately after a friendly Robin (Boy Wonder) model within 8”, interrupting the usual sequence of play."
+df31eeb1bbf6,Traits,,The Fear Master,26,trait,True,,"When this model uses the Inspire Fear trait, it can choose to have it affect all non-vehicle models within 4” and line of sight (friendly and enemy). When using this ability, Inspire Fear also inflicts the Terror 2 effect, Slow 4 instead of 2, and gains the Gas weapon special rule."
+53beec4fd39c,Traits,,The Holiday Killer,26,trait,True,,"When this model attacks a target with a Reputation cost higher than 50, it may reroll attack dice and Strength die rolls."
+c2d939e25f41,Traits,,The Hunter,26,trait,True,,"Once per round, when an enemy model ends a movement action, you can immediately move this model 4” (unless it is in contact with an enemy model)."
+5860f715a46b,Traits,,The Murderer,26,trait,True,,"This model can only score Objective cards during its activation for inflicting Damage, making enemy models KO, or removing them as a Casualty."
+cf07d326d1d8,Traits,,The Professional,26,trait,True,,"Each time this model removes an enemy Leader, Sidekick and/or Free Agent as a Casualty, gain 1 Resource point."
+d7b1e93c3628,Traits,,The Sidekick,26,trait,True,,"This model can only be hired if Batman (Modern Age) is leading the crew. While a friendly model with Alias: Batman is in play, this model gains +1 to its Strength die rolls. If a friendly model with Alias: Batman is removed as a Casualty, this model suffers -1 Willpower for the rest of the game."
+8c5a7fa10a82,Traits,,The Song of the Sirens,26,trait,True,,Friendly models can use their Bodyguard rule on any model in the crew with the Gotham City Siren trait until the end of the game.
+898c554e1600,Traits,,The Target of the Bat,26,trait,True,,"If a model with Name: Bruce Wayne KO’s this model, the Bruce Wayne model’s controlling player may pick an Objective card from its Spent Resource pile and add it to their hand."
+4ef832fbfacc,Traits,,The Time has Come,26,trait,True,,"One use per game. During this activation, this model’s Unarmed Melee Attacks inflict Damage [[B]] [[B]] ."
+1d26b82c675e,Traits,,The Untouchable,26,trait,True,,"If this model is your crew’s Boss, friendly Henchmen using the Bodyguard trait to take a hit on its behalf do not need to make an Effort to do so. In addition, while this model is the Boss, all friendly Henchmen gain the For the Family trait for the duration of the game."
+5a99792e40f7,Traits,,The Voices (Mental Disorder),26,trait,True,The Voices,"This model’s Tactical Action is a ‘wildcard’, which may be spent as another type of Action if you wish (this means the model can perform the same Action twice in its activation if it has sufficient Actions to spend)."
+01ff96c6dcf9,Traits,,The Wizard,26,trait,True,,"This model does not spend a Special Action when using the Good Aim special rule. In addition, once per game, at the start of the Raise the Plan phase, you may move this model up to 4”."
+8f651d4800b8,Traits,,The World’s Greatest Detective,26,trait,True,,"At the end of the Raise the Plan phase, you may choose one enemy model on the board (not a Vehicle). LoS is not required. The target model must immediately perform a Willpower roll. If it fails, you may force the opponent to activate the target model first."
+26a5270d8a3e,Traits,,They’re Cheap,27,trait,True,,"One use only. At the end of the Raise the Plan phase, you may activate this trait. For the remainder of the round, ranged attacks performed by friendly models spend no Ammo."
+7058a6692bb1,Traits,,Thirty days has…,27,trait,True,,"Depending on the month the game starts Calendar Man gains the specific trait for that month: January-Demotivate, February- Confusion, March-Luck, April-Trickster, May-Disarray, June- Demoralize, July-Veteran, August-Intimidate, September-Cruel, October-Undead, November-Unpredictable, December-Survivor."
+00a083f9df04,Traits,,Thief,27,trait,True,,"Once this trait is activated, for the rest of the round this model’s Melee Attacks gain Steal."
+6e7d8859c108,Traits,,This... is... Awesome-Sauce!,27,trait,True,,"Target a friendly model within 4” and line of sight. The target model gains an Audacity marker, and adds +1 to its Strength die rolls until the end of the round."
+bbcabf513905,Traits,,Timely arrival,27,trait,True,,"This model is not deployed as normal at the start of the game. Instead, at the start of the Raise the Plan phase of the second round, you may place this model anywhere on the gaming area, no closer than 4” to any enemy model."
+e45b7fc1be46,Traits,,Time Bomb,27,trait,True,,"Target a Suspect within 8” and LoS. Place a numeric counter with a value of 3 on this model’s character card. When a model performs a Manipulate action within 8” of this model, reduce the value of the counter by -1. If the chosen Suspect is still in play when the counter reaches 0, place an Explosive template on top of it – all models affected suffer 1 [[A]] and the Slow 4 effect."
+1b02011efe0c,Traits,,Time Control,27,trait,True,,"When this model places a Suspect, you may nominate 1 enemy model. If that model is not the next enemy model to be activated, and it places a Suspect during its activation, you may search your deck for one of your Objective cards and add it to your hand. Shuffle your deck."
+ba15401b4adc,Traits,,Time Manipulation,27,trait,True,,"When this model reveals an enemy Suspect, you may look at the top two cards of any player’s Objective deck. Then, place one of those cards on top of the deck, and one on the bottom."
+4e5c90255bb5,Traits,,Time Stretch,27,trait,True,,One use only. This model may target a friendly model within 4” and line of sight. The target Model gains the Living Legend trait until the end of the round.
+a325e40c6dc6,Traits,,Tireless,27,trait,True,,This model can spend a Special Action (as well as Its Movement Action) to gain +2” to its basic move distance.
+116fc80a6d20,Traits,,Titan Dose (DOSE),27,trait,True,Titan Dose,"A model may use a Titan Dose during its activation. If it does so, the model gains +1 to all of its basic skills until the end of the round. The same model cannot use more than one Titan Dose in the game."
+6368bcedcff2,Traits,,To Prove a Point,27,trait,True,,"Enemy models within 6” and LoS suffer -1 to their Willpower value while making a Willpower roll. In addition, as an extra Action, this model can target an enemy model (not a Vehicle) within 8” and line of sight. For the rest of the round, the target cannot perform Special Actions and loses a die when performing Willpower rolls."
+d7aaede4a08f,Traits,,Total Vision,27,trait,True,,"This model may see at any distance, and its line of sight can cross any obstacle or scenery element. It may not, however, shoot through these elements, unless using a weapon with a special rule that permits it (such as Remote Control)."
+62bb0e262687,Traits,,Tough Skin,27,trait,True,,Strength die rolls against this model suffer a -1 penalty and can be defended against just like an attack dice.
+1d70a8ba02cd,Traits,,Toxicologist,27,trait,True,,"Before performing an Attack, this model can exchange the Poison effect with one of the following effects during that Attack:
+• Enervating 2.
+• Scared.
+In addition, models suffering damage from the Poison effect within 8” of this model suffer 1 additional [[A]] ."
+3e98c66ebeab,Traits,,Tracking,27,trait,True,,"At the start of the Recount phase, this model can move up to 1D6”."
+4f7758290b1c,Traits,,Transport X,27,trait,True,Transport,"X friendly models (not a Vehicle) in contact with this model during its activation can perform a Manipulate action to be removed from the game – the friendly model is not a Casualty, but is now effectively transported inside this model as a ‘passenger’ – attach this model’s Upgrade card to the passenger. Any effects affecting a passenger trigger as normal at the end of the round. The passenger must be activated as normal during each round, but the range of its traits and attacks are measured from this model’s base (unless the Vehicle has the Sealed Cabin trait). The passenger cannot be affected by any attack. During any subsequent round, the passenger can disembark the Vehicle by performing a Manipulate action – place it in contact with this model, and disable the Upgrade card, then continue its activation as normal."
+6a6ac7240fec,Traits,,Treacherous,28,trait,True,,This model cannot be the Boss of your crew.
+4f43ac4e13bf,Traits,,Trickster,28,trait,True,,"If this model does not have an Audacity marker when it is activated, it may take one from another friendly model that is yet to activate this round."
+eac371255606,Traits,,True Love (Name),28,trait,True,True Love,"If the model named as the True Love (in parentheses) is in the same crew, and is removed as a Casualty, this model gains +1 Willpower and +1 Attack until the end of the game."
+71d1bd37639b,Traits,,Truly Immortal,28,trait,True,,"This model cannot become KO or be removed as Casualty from the game by any means. Instead, remove one Damage marker, then the opponent relocates this model, placing it within 4”."
+be347327fd7c,Traits,,Truth-Seeker,28,trait,True,,"When a model within 10” of this model becomes KO or is removed as a Casualty, you may first place a friendly Suspect marker in contact with it (ignoring the normal minimum distance between Suspect markers). This model may remove 1 friendly Suspect marker within 4” during its activation to perform an extra move of up to 4”. In addition, when a friendly model within 4” of a friendly Suspect marker scores an Objective card, you may remove that marker to draw an additional Objective card."
+5633a7b4bb3b,Traits,,Undead,28,trait,True,,"This model is immune to all effects and CRT, except Knock Down and Smoke."
+8b493a2bd056,Traits,,Undercover,28,trait,True,,This model may be deployed up to 8” away from its deployment area.
+bc16b7e4ac82,Traits,,Underworld King,28,trait,True,,"When a friendly model within 8” scores an Objective card during its activation, you may place a +1 Number counter near your Objective deck (starting with 1, and adding a value of 1 each time). Each time your opponent scores an Objective card during an enemy model’s activation, reduce the value of the Number counter by -1. At the end of the game, the current value of the Number counter is the amount of extra VP that you score.
+Unnatural Flight: During the round in which this model return to the game zone, due to the Flying High Trait, its BMD becomes 0, and cannot use the Fly Trait."
+6faa7d6bfb0f,Traits,,Unstoppable,28,trait,True,,Each successful hit scored by this model this round requires 2 successful defense rolls to block.
+829921c3dc2d,Traits,,Unstoppable Monster,28,trait,True,,"At the start of this model’s activation, it must move 2” in a straight line as an extra Action. Enemy models within 4” of this model cannot perform the Manipulate Action."
+f850ad02a0e1,Traits,,Unpredictable,28,trait,True,,"This model’s Special Action is a ‘wildcard’, which may be spent as another type of Action if you wish (this means the model can perform the same Action twice in its activation if it has sufficient Actions to spend)."
+4bb8a3c61cff,Traits,,Vanish,28,trait,True,,"Perform an extra Attack action with this model’s EM Smoke Grenades (not affected by Rapid Fire), inflicting a single automatic hit. For the duration of this attack, the EM Smoke Grenades gain the Light special rule. If this model has not moved during its activation and is beneath the template when it makes this attack, this model may be placed anywhere within 4” of its current position. This model cannot move (or use the Grapple Gun/Batclaw Trait) for the remainder of its activation. This model ignores the effects and Damage caused by its own EM Smoke Grenades (like the Smoke effect). This use of this trait requires a magazine as usual but does not count as the model’s Attack Action."
+180dd25b2ae2,Traits,,Venom Dose (DOSE),28,trait,True,Venom Dose,"A model may use a Venom Dose during its activation. If it does so, for the rest of the round the model gains +1 to its Strength die rolls and may make 2 free Efforts when performing a Melee Attack."
+573f7c21b765,Traits,,Venom Enrage,28,trait,True,,When this model uses the Venom Dose trait it gains Invulnerability (2) for that round.
+d8ccb58787a9,Traits,,Vertigo Dose (DOSE),29,trait,True,Vertigo Dose,"A model may use a Vertigo Dose during its activation. If it does so, for the rest of the round the model gains +1 Willpower and can reroll failed Willpower rolls."
+4080d5bbb2e9,Traits,,Veteran,29,trait,True,,"When one of your Objective cards requires the possession of a named trait to complete it, this model counts as having that trait (it can’t actually use the trait, but it is able to fulfill the Objectives)."
+28137885ce91,Traits,,Vocational,29,trait,True,,"This model may be included in a crew as if it had the affiliation, as long as all members of the crew have the Cop trait."
+2f7970e8f46e,Traits,,Void Priest,29,trait,True,,One use only. This model may spend 2 Faith Points. Enemy models within 2” suffer the Slow 2 effect.
+329d7f8b8b0d,Traits,,Volunteer,29,trait,True,,This model cannot be removed from play due to the Suicide Mission rule. The Boss of a Suicide Squad Team automatically gains this trait.
+1d157114d8c8,Traits,,Vulnerability to Fire,29,trait,True,,Each Fire marker inflicts Damage [[A]] [[A]] to this model instead of the normal damage.
+b88255870481,Traits,,War Goes On,29,trait,True,,"If you purchase this upgrade, then before deployment you may equip it, or another upgrade available to this model, for free. Discard the unused Upgrade."
+6d48454165c7,Traits,,Weak,29,trait,True,,This model’s Effort Limit begins at 2 Instead of 3.
+5c341a6a4555,Traits,,Weakness to Cold,29,trait,True,,"If this model receives the Cooled or Freeze effect, they also receive a [[A]] marker."
+9c54e0f50e3d,Traits,,Weapon Master,29,trait,True,,"This model gains a +1 bonus to attack dice rolls when performing Melee Attacks, as long as it is not Unarmed."
+e23cf024c424,Traits,,Welcome to Hell,29,trait,True,,"If this crew contains only models with The Dark Knight Returns and Cop traits, all your models with The Dark Knight Returns keyword may take [[A]] instead of [[B]] when making an Effort."
+e732e9e17a3b,Traits,,Wheelchair,29,trait,True,,"Friendly models in contact with this model can take a Manipulate Action to move it up to 3” directly away. Then, the model that took the action is placed in contact with this model."
+8a2c0b49d3f0,Traits,,Wizard of Quiz,29,trait,True,,"When this model places a Suspect within 8” of an enemy model, if that enemy model can see this model and the Suspect, you may look at the top 2 cards in that model’s controller’s Objective deck. Discard one of the cards and place the other one on top of the deck."
+ce0696528a62,Traits,,360° Strike,29,trait,True,,"When this model performs a Melee Attack this round, it must be performed against all the models available to be a target (friendly and enemy). During this attack, no one model can make Efforts. Roll only once, and compare with all the targets results. Friendly models cannot make defense rolls against these attacks, but they cannot be the only models affected by it (there must be at least one enemy to target)."
+357b88418acb,Weapon Rules,,Weapon Special Rules,30,weapon-rule-intro,False,,"The following special rules are attributes that are usually applied to weapons. Remember, once a model attacks with a particular weapon, it must use it for the full duration of the attack – a model does not benefit from all of the weapon special rules it has, just those for the weapon it is using."
+7dbcc408b57a,Weapon Rules,,Accurate,30,weapon-rule,True,,An attack made by this weapon gains +1 to its attack dice rolls.
+cddf28ac626e,Weapon Rules,,Acid,30,weapon-rule,True,,"When this weapon damages a target, that model reduces its Attacks and Defense skills by -1 until the end of the round (this effect does not stack if the weapon or another weapon with the same rule damages the target several times). In addition, these weapons ignore the Light Armor trait."
+7c5743735b26,Weapon Rules,,Aim,30,weapon-rule,True,,A model cannot move in the same activation that it uses this weapon.
+33561f3cb0ac,Weapon Rules,,Anti-Tank,30,weapon-rule,True,,"This weapon ignores the penalty of Light, Medium and Heavy Armor traits, and may re-roll failed Strength die rolls against models with those traits. Furthermore, Anti-Tank weapons ignore the Bulletproof Vest, Hardened and Kevlar Vest traits."
+a0cd1d96781e,Weapon Rules,,Assault,30,weapon-rule,True,,"When using this weapon, this model can choose to ignore the penalty for move before attacking, but instead suffer a -1 penalty to its Ranged attack dice rolls."
+916281f2381f,Weapon Rules,,Beam,30,weapon-rule,True,,"The Strength die when using this weapon always hits on a result of 2+. Ignore the wielder’s Strength for the Damage roll. In addition, ignore the target’s Cover. Beam weapons cannot receive an Ammo Magazine from an Ammo Crate."
+d31de59da4e9,Weapon Rules,,Bleed (X),30,weapon-rule,True,Bleed,"Instead of inflicting normal Critical effect, the target suffers X [[A]] Damage upon a Critical Hit."
+cce02ff2999e,Weapon Rules,,Blunt (X),30,weapon-rule,True,Blunt,"Instead of inflicting normal Critical effect, the target suffers X [[B]] Damage upon a Critical Hit."
+aa7d865acaa0,Weapon Rules,,Cold,30,weapon-rule,True,,"When this weapon hits, the target model suffers the Slow 2 effect."
+e48e0273de06,Weapon Rules,,Caustic,30,weapon-rule,True,,"Even when this weapon’s Strength die fails, the target takes [[A]] Damage."
+b621f64f3cbe,Weapon Rules,,Crushing,30,weapon-rule,True,,Each successful hit scored with this weapon requires 2 successful defense rolls to block.
+dddb54897b6b,Weapon Rules,,Defensive,30,weapon-rule,True,,"A model carrying this weapon can reroll failed Defense rolls. This is a passive ability, and may be used even if the model used a different weapon during its activation."
+d4519d438a0c,Weapon Rules,,Devastating,30,weapon-rule,True,,Attacks with this weapon roll two Strength dice. You must apply both results.
+3aad405e1d0a,Weapon Rules,,Electric,30,weapon-rule,True,,"This weapon has CRT: Stunned, and can reroll failed Strength die rolls against targets with the Bot, Cybernetic or Robot traits."
+d9910db01f67,Weapon Rules,,Expansive,30,weapon-rule,True,,"Instead of having a Rate of Fire, this weapon uses the Spray Template to determine how many models are hit (see Templates, below)."
+d070991bc724,Weapon Rules,,Explosive,30,weapon-rule,True,,"Place the Explosion Template over the impact point (usually the target model). See Templates, below."
+4e425e892ab6,Weapon Rules,,Firearm,30,weapon-rule,True,,The Strength die when using this weapon always hits on a result of 2+. Ignore the wielder’s Strength for the Damage roll.
+5a874609db15,Weapon Rules,,Gas,30,weapon-rule,True,,"This weapon ignores the penalty of Light, Medium and Heavy Armor traits."
+e96198d8b152,Weapon Rules,,Grenade,30,weapon-rule,True,,"These weapons use their own special rules. See Grenades, later."
+78adb0d29396,Weapon Rules,,Handy,30,weapon-rule,True,,"When using this weapon, the wielder may reroll failed attack dice rolls."
+dcc1e1b11c9f,Weapon Rules,,Heavy,30,weapon-rule,True,,"When using this weapon, the attacker gains a +1 to its Strength die rolls."
+f35d074298ed,Weapon Rules,,Imprecise,31,weapon-rule,True,,This weapon suffers a -1 penalty to attack dice rolls.
+bc31b04e5cb0,Weapon Rules,,Kryptonite,31,weapon-rule,True,,"If a weapon with this rule hits a model with the Kryptonian trait, the Kryptonian model loses the Invulnerability and Regeneration traits (if they possess them) until the end of the round."
+f9717324e4ab,Weapon Rules,,Light,31,weapon-rule,True,,A model can fire this weapon even when it is in contact with an enemy model.
+e2a5213414e8,Weapon Rules,,Magic,31,weapon-rule,True,,"If a weapon with this rule hits a model with the Invulnerability, Incorporeal and/or Tough Skin traits, that model loses those traits (if they possess them) until the end of the round."
+7c35deb8c5e3,Weapon Rules,,Mechanical,31,weapon-rule,True,,The Strength die when using this weapon always hits on a result of 3+. Ignore the wielder’s Strength for the Damage roll.
+b51ac9e4ab97,Weapon Rules,,Medium Range,31,weapon-rule,True,,The effective range of this weapon is 16”.
+44feaacb493d,Weapon Rules,,One Use,31,weapon-rule,True,,This weapon can only be used once per game.
+553a2b1558e4,Weapon Rules,,Overwhelming,31,weapon-rule,True,,The target of an attack made by this weapon suffers -1 to its Defense rolls.
+766bf0ea21de,Weapon Rules,,Protective,31,weapon-rule,True,,"These weapons award a +1 to the wielder’s defense dice rolls. Furthermore, the wielder benefits from the Cover rule at all times. This is a passive ability, and may be used even if the model used a different weapon during its activation. If the model also benefits from the Cover rule by other means, then the bonus is doubled. Once per round a friendly model in contact can benefit from this rule too."
+2b300bb45d96,Weapon Rules,,Reach,31,weapon-rule,True,,"These weapons do not require the wielder to be in contact with an enemy model in order to perform a Melee Attack against it. Instead, the wielder may strike a model up to 1” away and in LoS."
+8599becfdf27,Weapon Rules,,Red Dot,31,weapon-rule,True,,Weapons with this special rule can reroll up to 1 failed attack die roll when performing a Ranged Attack.
+4e47634742a0,Weapon Rules,,Reload,31,weapon-rule,True,,"Weapons with this special rule cannot be used in two consecutive rounds. In order to reload the weapon, the wielder must spend at least one round in which it does not declare any Ranged Attacks with this weapon. If the model has more than one weapon that requires reloading, it may only reload one per round spent reloading – declare which weapon is being reloaded during the activation. These weapons cannot be reloaded while a model is KO."
+bbdad7ecd15b,Weapon Rules,,Remote Controlled,31,weapon-rule,True,,"When using these weapons, the model needs to be able to see the target as usual, but does not need to draw a straight uninterrupted line to it. Instead, measure range from the attacker’s base to the target, carefully measuring around obstacles. The weapon’s maximum range cannot be exceeded in order to reach the target. Targets of Remote Controlled weapons cannot benefit from Cover against these attacks."
+898eae1c1f8e,Weapon Rules,,Scope,31,weapon-rule,True,,"While performing a Ranged Attack with this weapon, the firer can see at any distance, limited only by LoS. Targets cannot benefit from Cover against attacks with this weapon."
+7b3c84718fab,Weapon Rules,,Sharp,31,weapon-rule,True,,"When using these weapons, the wielder may reroll failed Strength die rolls."
+ea335ba792e4,Weapon Rules,,Short Range,31,weapon-rule,True,,The effective range of this weapon is 8”.
+ddda80ab0d50,Weapon Rules,,Silencer,31,weapon-rule,True,,The target of an attack made by this weapon cannot use the Dodging rule against it.
+b3066ceeee9c,Weapon Rules,,Sonic,31,weapon-rule,True,,"When this weapon hits, the target model suffers -1 to its Special skill until the end of the round."
+5ff72c77a7be,Weapon Rules,,Throwing,31,weapon-rule,True,,This ranged weapon don’t lose dice for moving before attacking.
+6032eeeb0a8c,Templates,,Templates,32,template-intro,False,,"Some weapons shoot clouds of gas, flames or other lethal substances rather than conventional ammunition. Others, such as grenades, rockets or Molotov cocktails explode upon impact. To represent the area of effect of these weapons, we use templates. There are two types of template – Explosive and Spray (you can download printable versions from the Knight Models website, or buy physical templates from the webstore). If a weapon requires the use of a template, the exact type will be noted in its special rules or Rate of Fire. Special rules that allow a model to avoid ranged attacks (such as Dodge) may be used against templates as normal - a model doesn’t have to be the target of an Attack to be affected by a template.
+These weapons don’t roll any attack dice. Instead, the RoF of these weapons indicate the number of times the template is placed when attacking with them. An exception to this rule are Melee Attacks that place a template – these follow the usual rules for Melee Attacks, but place a template for every hit.
+A model is affected by a template if its base and/or main physical block is even partially covered by the template. Only a Strength die is rolled against affected models, once for each model, following the usual rules for the Strength die during an attack.
+A model cannot be affected more than once by multiple templates placed by the same Attack action.
+All hits caused by a template are resolved at the same time.
+Note: Depending on how your tabletop scenery is arranged, sometimes models on different levels of the board (on stairs, walkways, or rooftops, etc.) may be affected by a template on another level. Templates are considered to extend 2” above and below the point of impact. Simply take a top-down view to see which models are affected, then measure vertically."
+827ae33dc36f,Templates,,Explosive Template,32,template,True,,"When an attack or weapon uses an Explosive template, place the template completely within the Effective range and in line of sight, targeting at least 1 enemy model. Make a Strength roll (following the usual rules and applying the special rules of the weapon) against all models affected by the template.
+Affected models may suffer additional effects depending on the exact weapon used (for example, CRT: Freeze).
+Explosive templates do not pass through solid objects like walls – see the rulebook."
+2be34df9b1af,Templates,,Grenades,32,template,True,,"Weapons with the ‘Grenade’ type (i. e. Freeze Grenades) are used just like other ranged weapons for the purposes of line of sight. However, when a model throws a grenade, it may target any point on the table completely within Effective range and line of sight, not needing a target. Center the Explosion template on the target point, applying any effects to all models affected by the template."
+461907fec481,Templates,,Spray Template,32,template,True,,"If a weapon requires the use of a Spray template, the controlling player must place the narrow end of the template in contact with the base of the firing model, pointing the other end in any direction they wish. To affect a model with this template, the attacker must be able to trace LoS to the affected model, although Cover is ignored."
+660e54ce81ce,Templates,,Ice Template,32,template,True,,"When an attack or weapon uses an Ice Template, place the explosive template completely within the Effective range and in line of sight, targeting at least 1 enemy model. Make a Strength roll (following the usual rules and applying the special rules of the weapon) against all models affected by the template.
+Affected models may suffer additional effects depending on the exact weapon used (for example, CRT: Freeze).
+Ice templates do not pass through solid objects like walls – see the rulebook
+The Ice template is not removed at the end of the attack action, instead, at the end of the Recount phase, remove all Ice Templates.
+Any model moving through or into contact with the template suffers Impaired Movement and must make all its moves in a straight line (unless they ignore Impaired Movement for whatever reason).
+Models with the Speedster trait that come into contact with the template lose 1 Speed Power counter from their personal reserve."
+e1b0c8a2d1fc,Effects,,Effects,33,effect-intro,False,Effects,"The following special ‘effects’ are shared between a wide range of rules, and thus they are collected together here for convenience.
+• Traits or special rules usually trigger particular effects as a result of their use.
+• Weapons trigger their effects if the attack scores at least one hit after any defense has been resolved, or when they roll a Critical (CRT). Multiple hits or CRT rolls in the same attack only apply the effect once.
+Any marker produced by an effect must be placed on the affected model’s character card. When effects and special rules remove Actions from a model at the same time, the active player must decide the order in which to resolve them.
+A model can only suffer an effect once (unless the effect states otherwise). However, if a model suffers the same effect but with a higher value (for example, Slow 4 when it already suffered Slow 2), then the effect is upgraded to the higher value."
+078d9b8e7f9b,Effects,,Blind (FLASH),33,effect,True,Blind | Blind (FLASH),"A model suffering from Blind cannot trace Line of Sight, and cannot perform Ranged Attacks. All of the model’s attack, Strength and defense dice rolls will only succeed on a natural result of 6. In addition, the model cannot use its Movement value to increase its basic move distance. This effect lasts until the end of the round."
+60795ea3a57f,Effects,,Casualty,33,effect,True,Casualty,"If this effect is triggered (as part of a Critical effect for example), then the target model is removed from play as though it had received its maximum allocation of [[A]] counters."
+d98433bcf5d0,Effects,,Cooled,33,effect,True,Cooled,"Place a Cooled marker on the character card of the affected model. A cooled model reduces its Defense skill by -1, and cannot make Efforts. Affected Speedsters cannot use Speed Force Powers. This effect lasts until the end of the round."
+785acdb8acf2,Effects,,Enervating X,33,effect,True,Enervating | Enervating X,The target reduces its Effort Limit by -X for the next Effort it wants to make.
+4553d60302cf,Effects,,Fire,33,effect,True,Fire,"If a model is affected by Fire, place a Fire marker on its character card (a model may have more than one Fire marker). During an activation, a model with Fire markers must perform a Movement action if it can. Before moving, a model may choose to suffer -X Movement marker to replace Fire markers, at cost of -2” penalty suffered for each Fire marker removed (so a model that receives a marker removes 3 Fire markers, for example). During the 6 Recount phase, models with at least one Fire marker receive [[A]] for each Fire marker they have, and add 1 more Fire marker."
+ce7e8ec68ec4,Effects,,Freeze,33,effect,True,Freeze,"Place a Freeze marker on the character card of the affected model. The model reduces its Defense skill by -1, and cannot perform Actions. At the beginning of the model’s activation, it must pass an Endurance roll to remove the Freeze effect. Speedsters cannot use Speed Force Powers If they are affected by the Freeze effect."
+7aab8b5ff8f2,Effects,,Hypnotize,33,effect,True,Hypnotize,"Any non-vehicle model affected by Hypnotize must make a Willpower roll immediately. If it fails, it immediatelly performs up to 2 different actions under the control of the player who hypnotized it counting as one of that player’s crew in all respects. Counts as if you are performing an activation for traits and performing actions. Models that are Hypnotized cannot be moved so they would Fall or otherwise take Damage. Nb: If you move and shoot per example, you lose attack dice as usual, you cannot repeat actions, but you are affected by active traits (special actions) that remains active for the activation of the model (like Inspire, Sewer Worker...). That model may be activated by its owner later, because is not an activation."
+127ec6d4c87c,Effects,,Knocked Down,33,effect,True,Knocked Down | Knocked,"Place a Knocked Down marker on the Character Card of the affected model. A Knocked Down model cannot attack, or defend itself. It cannot make Efforts, and cannot use any trait that requires an Action or Effort to activate until it Stands Up. A Knocked Down model suffers -1 to its Defense value."
+442329be23ee,Effects,,Paralyze,33,effect,True,Paralyze,"Place a Paralyze marker on the card of the affected model. A paralyzed model reduces its Defense skill by -2, and cannot perform Actions until the end of the round."
+0cec018e0ab9,Effects,,Push,33,effect,True,Push,"The affected model is moved directly away from the attacker up to X” (where X is the number of hits inflicted or a fixed value if any). If the affected model cannot be moved the full distance, simply move as far as you can up to the maximum, then end the move."
+11656d47f164,Effects,,Poison 1,33,effect,True,Poison | Poison | Poison Status | Poison 1,"If a non-vehicle model is affected by Poison, place a Poison marker on its character card. A model affected a subsequent time by the Poison effect increases its Poison value by 1 (up to a maximum of 4). During the Recount phase, the poisoned model must make an Endurance roll, with a -X penalty to its Endurance value for the roll (where X is the current Poison value). If the roll fails, the model suffers 1 [[A]] Damage if its Poison value is 1-3, or [[A]] [[A]] if it has a Poison value of 4."
+218fb97a7402,Effects,,Scared,34,effect,True,Scared,"The affected non-vehicle model cannot use the Dodging rule, and suffers -1 to its attack and defense dice rolls. This effect lasts until the end of the round."
+0b274de2a876,Effects,,Slow X,34,effect,True,Slow | Slow | Slow Status | Slow X,A model suffering this effect reduces by its basic movement distance by X” during its next Movement action.
+916eacc5e837,Effects,,Smoke,34,effect,True,Smoke,"Place an Explosive template in the location of the Smoke cloud. Models cannot draw line of sight through the template. Models affected (or models that enter/contact the template) suffer the Blind effect. The Smoke template is removed at the end of the Recovery phase. Weapons with the Smoke rule cannot be canceled. Unlike other templates, a Smoke template is considered to be of infinite height."
+9f9fff11edd4,Effects,,Steal,34,effect,True,Steal,"If you trigger this effect, the opponent must show you their Objective card hand. Choose one of those cards – the opponent must Discard it."
+f59213e6c626,Effects,,Stunned,34,effect,True,Stunned,A Stunned model can only perform Movement actions until the end of the round.
+a6bebd0b4b07,Effects,,Terror X,34,effect,True,Terror | Terror | Terror Status | Terror X,"When a non-vehicle model is affected by Terror, it reduces the number of Actions it can perform by X during its next activation. Additionally, until its next activation the target reduces by -X its Effort Limit and its Willpower value when performing a Willpower roll."
+358ba6b7748b,Effects,,Toxic X,34,effect,True,Toxic | Toxic X,The target receives a number of [[A]] Damage markers equal to X.
+f568603f228a,Equipment,,Equipment Rules,35,equipment-rules,False,,"Henchmen have several options of available weapons or equipment, depending on their crew’s affiliation. A Henchman may only choose equipment from their crew’s list (which can
+be found in the accompanying compendium), deducting the cost from the $ available to him (and/or from the crew’s Funding stash). A Henchman may not select the same item twice.
+The $ cost listed next to each item of equipment is the price per item (so if you buy two flares for your Joker Crew, these cost $300 each, not $300 for the pair). Once purchased, the new equipment is treated just like the Henchman’s normal equipment and rules. You may like to note the items on the Henchman’s Character Card (using a pencil, so you can re-use the same card in later games and change the equipment if you need to).
+Finally, each piece of equipment in the lists has a number or range of numbers (such as 0-2) before its name. This is the limitation on the number of those items that can be purchased for your crew.
+NB: If an item of equipment bestows a trait, a model cannot have the same trait more than once."
+42499a99375d,Equipment,,Special Equipment,35,equipment-rules,False,,"Some special items of equipment, as well as certain special upgrades, can only be taken by a crew if a particular named character is included.
+In addition, some special equipments may be taken by a model of a Rank other than Henchman, if the option specifically states so (for example, a Bruce Wayne model may take an Upgraded Batsuit, even though Leaders cannot normally purchase Equipment)."
+6d5d3e3e4bc6,Equipment,,Batman Crew,35,crew-equipment,False,,"• 0-2 Magazine ($200): +1 to Ammunition for one weapon.
+• 0-2 Flashlight ($100): Model gains the Lantern rule.
+• 0-2 Handcuffs ($200): Model gains the Arrest rule.
+• 0-2 Whistle ($200): Model gains the Halt/Stop rule.
+• 0-1 Street Patrol ($50): Model gains the Street Guy rule.
+• 0-1 Intensive training ($100): Model gains the Teamwork:1 (All) rule.
+• 0-2 Radio ($100): This model is always treated as though it were within range of the Inspire rule.
+• 0-1 Antidote ($100): Model is immune to the Poison effect.
+• 0-1 Grapple-gun ($200): Model gains the Batclaw/Grapple-gun rule.
+• Helmet ($300): Model gains the Hardened rule.
+• 0-1 Patrol Training ($150): Model gains the Undercover rule.
+• 0-1 Gas Mask ($100): Model gains the Gas Mask rule.
+• 0-2 Riot Gear ($150): The models gains the Football Gear rule.
+• 0-1 Medic ($150): Model gains the Medic rule.
+• 0-2 SWAT Special Training ($100): If the model has Elite (SWAT) trait you can choose one of these options:
+- Model gains the Tracking rule.
+- Model gains the Precise Aim rule.
+The following options may be taken only when a model with Name: Bruce Wayne is in the crew:
+• 0-1 Upgraded Batsuit ($100) (Can only be purchased by Bruce Wayne): Model gains +1 to Endurance.
+• 0-1 Kevlar Cowl ($250) (Can only be purchased by Bruce Wayne): Model gains Immunity to CRT.
+• 0-1 EMP ($100): Model Gains the EMP rule.
+• 0-1 Batman Inc. ($400+3 Rep Points) (Can only be purchased by Sidekicks or Free Agents): Model gains the Bat-Armor MKII rule. A model cannot have more than one Bat-Armor rule.
+• 0-1 Martial Arts Training ($100+2 Rep Points) (Can only be purchased by Sidekicks or Free Agents): Model gains the Martial Artist rule.
+• 0-1 Mentor ($200+3 Rep Points) (Can only be purchased by Sidekicks or Free Agents): Model gains the Hidden Boss rule.
+• 0-1 Hidden Magazine ($300) (Can only be purchased by Sidekicks or Leaders): +1 to Ammunition for one weapon.
+• 0-1 Morality ($50) (Can only be purchased by Batman): Model gains Moral Compass and Demotivate rules.
+Equipment marked * cannot be affected by the Broken Equipment rule.
+The following options may be taken only when a model with Name: Dick Grayson is in the crew:
+• 0-1 Circus Training ($300+5 Rep Points): Model gains the Acrobat rule.
+• 0-1 Runner ($100): Model gains the Tireless rule.
+The following option may be taken only when a model with Name: Oliver Queen is in the crew:
+• 0-1 Command Center Support ($250): Model gains the Scheming:2 rule.
+• 0-1 Tactical Gloves ($50) Only can be taken by Oliver Queen, gains Reinforced Gloves rule.
+The following option may be taken only when a model with Name: Roy Harper is in the crew:
+• 0-1 Hi-Tech Ammo ($150+2 Rep Points): One of the model’s ranged weapons gains Bleed:2.
+The following option may be taken only when a model with Name: Kathy Kane is in the crew:
+• 0-1 Officer training ($100+2 Rep Points): Model gains the Follow Me! rule.
+The following option may be taken only when a model with Name: Tim Drake is in the crew:
+• 0-1 Inspiring Presence ($250) (Can only be taken by Tim Drake): Model gains Leadership rule.
+The following option may be taken only when a model with Name: Barbara Gordon is in the crew:
+• 0-1 Oracle ($200) (Can only be taken by Batgirl): Model gains Exhaustive Planner rule.
+The following option may be taken only when a character with Alias: Red Hood (Arkham Knight) is in the crew:
+• 0-1 Deadly Weapons ($150+2 Rep points) (Can only be taken by Red Hood Arkham Knight): Weapons gain the Silencer rule.
+The following option may be taken only when a model with Name: James Gordon is in the crew:
+• 0-1 Heliport ($150) (Can only be taken by James Gordon): When you use the Air Support rule, target an enemy model affected by the template, the target receives a Ranged attack with ROF 1, the Firearm weapon special rule and damage [[A]] [[A]] which ignores the Cover Rule. *
+• 0-2 Sergeant Training ($50): Model gains the Order rule. *
+The following option may be taken only when a model with Name: Selina Kyle is in the crew:
+• 0-1 Feline Stalk ($200): Model gains Tracking rule.*
+Equipment marked * cannot be affected by the Broken Equipment rule."
+dd718591bdba,Equipment,,Joker Crew,36,crew-equipment,False,,"• 0-2 Magazine ($200): +1 to Ammunition for one weapon.
+• 0-2 Grapple-gun ($300): Model gains the Batclaw/Grapple-gun rule.
+• 0-2 Clown Paint ($150): Model gains the Distract rule.
+• 0-2 Flare ($300): Model gains the Flare rule.
+• 0-1 Neurotoxic Drugs ($250): Model gains the Fast and Dodge rules.
+• 0-1 Improvised Armor ($150): Model gains the Hockey Gear rule.
+• 0-1 Gas Mask ($100): Model gains the Gas Mask rule.
+• 0-1 Antidote ($100): Model is immune to the Poison effect.
+The following option may be taken only when a model with Alias: Joker is in the crew:
+• 0-2 Nerve Gas ($200+3 Rep Points): Model gains the Sturdy rule.
+The following option may be taken only when a model with Name: Harleen Quinzel is in the crew:
+• 0-1 Sexy Costume ($300+5 Rep Points): Model gains the Disarray rule.
+• 0-1 Pole Dancer ($100): Model gains Escape Artist rule.
+The following option may be taken only when a model with Alias: Gaggy is in the crew:
+• 0-1 Enhanced Gas ($200)(Can only be Purchased by Leaders & Sidekicks): When an enemy model within 8” suffers the Enervating effect is increased by +1.
+The following option may be taken only when a model with Name: Duela Dent is in the crew:
+• 0-1 Rusty Tools ($200+2 Rep Points): Model gains the Cruel rule.
+The following option may be taken only when a model with Name: Mr. Hammer is in the crew:
+• 0-1 Brutal Training ($150): Model gains the Savage Fighter rule."
+b377daa3e94b,Equipment,,Penguin Crew,36,crew-equipment,False,,"• 0-2 Magazine ($200): +1 to Ammunition for one weapon.
+• 0-2 Grapple-gun ($300): Model gains the Batclaw/Grapple-gun rule.
+• 0-2 Laser Sight ($150): Model gains the Laser Sight rule.
+• 0-2 Camo Vest ($300): Model gains the Stealth rule.
+• 0-2 Radio ($100): This model is always treated as though it were within range of the Inspire rule.
+• 0-1 Backpack ($100): Model gains the Backpack rule.
+• 0-3 Improvised Armor ($100): Model gains the Hockey Gear rule.
+• 0-1 Helmet ($300): Model gains the Hardened rule.
+The following option may be taken only when a model with Name: Oswald C. Cobblepot is in the crew:
+• 0-1 Ostentatious Clothes ($200+2 Rep Points): Model gains the Goad rule.
+The following option may be taken only when a model with Alias: Penguin (Arkham Knight) is in the crew:
+• 0-1 Grow in the Street ($150): Model gains Plead rule.
+The following option may be taken only when a model with Name: Sickle is in the crew:
+• 0-1 Brutal Training ($100): Model gains the Savage Fighter rule."
+b4d1897441c8,Equipment,,Soldiers of Fortune Crew,37,crew-equipment,False,,"• 0-2 Magazine ($200): To Ammunition for one weapon.
+• 0-2 Grapple-gun ($300): Model gains the Batclaw/Grapple-gun rule.
+• 0-1 Titan Dose ($100): Model gains one Titan Dose.
+• 0-1 Night Vision Goggles ($200): Model gains the Night Vision rule.
+• 0-3 Venom Dose ($100): Model gains one Venom Dose.
+• 0-1 Backpack ($100): Model gains the Backpack rule.
+• 0-2 Antidote ($150): Model is immune to Poison effect.
+• 0-1 Neurotoxic Drugs ($250): Model gains the Fast and Dodge rules.
+• 0-2 Camo Vest ($300): Model gains the Stealth rule.
+• 0-3 Gas Mask ($150): Model gains the Gas Mask rule.
+The following options may be taken only when a model with Name: Bane is in the crew:
+• 0-1 Handcuffs ($100): Model gains the Arrest rule.
+• 0-1 Venom Laboratory ($100+5 Rep Points)* (Can only be purchased by Leaders or Sidekicks): All model in your crew can use more than 1 Titan Dose per game. This bonus remains in play even if this model is removed from play or leaves the board. Also, the cost of Venom Doses in the equipment list is reduced to $50.
+• 0-2 Venom Applicator ($0+2 Rep Points): This model can use Titan and Venom Doses on a friendly model in contact.
+The following options may be taken only when a model with Name: Bird is in the crew:
+• 0-2 Military Progress ($150) Model gains Veteran rule.
+The following option may be taken only when a model with Alias: Scarecrow (Arkham Knight) is in the crew:
+• 0-1 Fear Gas Dispenser ($250): Model gains the Inspire Fear rule.
+• 0-1 Secret Laboratory ($100+2Rep points)* (Can only be purchased by Scarecrow): At the start of the game you can chose up to 2 henchmen in your crew. These models let you use Scarecrow Inspire Fear from those models position as if Scarecrow would be placed over there. The Willpower roll caused by any Inspire Fear suffers a +1 Penalty to the roll.
+The following option may be taken only when a character with Name: Jason Todd is in the crew:
+• 0-2 Radio ($50): This model is always treated as though it were within range of the Inspire rule.
+• 0-1 Hidden Magazines ($200) (Only can be taken by Jason Todd): +1 Magazines to one weapon.
+• 0-1 Cybernetic Arms ($50) (Can only be purchased by Jason Todd): Gains Reinforced Gloves. rule.
+• 0-1 Arkham Knight Secret Armoury ($100): One ranged weapon of this model gains the Acid rule.
+• 0-1 Hook Pistol (400$) (Can only be purchased by the Jason Todd, and only if he is the Boss): Gains the Grapplegun and the following ranged weapon:
+S. Range /Mechanical / Electric / Electric Hook [[B]] [[B]] 1 2 Devastating
+The following option may be taken only when a model with Name: Slade Wilson is in the crew:
+• 0-1 Martial Training ($150): Model gains the Martial Artist and Master Fighter rules.
+• 0-1 Contract ($0)* (Can only be purchased by Slade Wilson): Gains rank Sidekick of.
+Equipment marked * cannot be affected by the Broken Equipment rule."
+dfe1a26cc675,Equipment,,Court of Owls Crew,38,crew-equipment,False,,"The following options may be taken only for Henchman and Free Agents models:
+• 0-2 Magazine ($200): +1 to Ammunition for one weapon.
+• 0-2 Climbing Claws ($200): Model gains the Climbing Claws rule.
+• 0-1 Antidote ($200): Model is immune to the Poison effect.
+• 0-2 Camo Vest ($100): Model gains the Stealth rule.
+• 0-1 C-4 ($300): Model gains the Explosive Gel rule.
+• 0-1 Gas Mask ($150): Model gains the Gas Mask rule.
+• 0-1 Grapple-gun ($400): Model gains the Grapple-gun rule.
+• 0-1 Ancient Weapon ($200): Model’s close combat weapon attacks gain Bleed:1
+• 0-3 Genetic Alteration ($100): Model gains the Fast rule.
+• 0-2 Hunter Training ($200): Model gains the Tracking rule.
+• 0-2 Ancient Training ($150): Model gains Master Fighter rule.
+• 0-1 Mixed Martial Arts ($150): Model gains Combat Flip rule.
+The following option may be taken only when a model with Name: Lincoln March is in the crew:
+• 0-1 Talon Serum Infusion ($200) (Can only be purchased by Lincoln March): Once per game, at the start of the Raise the Plan phase, choose up to three friendly models with the Reanimated Owl trait. Those models gain 1 additional Strength die to their attacks until the end of the round, but then at the Recovering phase (when resolving effects) suffer 1 [[A]] ."
+cbdf330b195a,Equipment,,The Riddler Crew,38,crew-equipment,False,,"• 0-2 Magazine ($200): +1 to Ammunition for one weapon.
+• 0-2 Grapple-gun ($300): Model gains the Grapple-gun rule.
+• 0-2 Flare ($300): Model gains the Flare rule.
+• 0-2 Enigma Data-Pack ($150): Model gains the Distract rule.
+• 0-1 Broken Equipment ($250): Before Phase A of the pre-game sequence choose one item of equipment purchased by the opposing player before the game begins. That item may not be used during the game.
+• 0-1 Gas Mask ($200): Model gains the Gas Mask rule.
+• 0-2 Another One! ($200): This model gains the Drop a Riddle Trait.
+• 0-1 Weird Ammo ($100): This model choose one: Enervating 2 or Anti-Tank. Its ranged weapons gain that rule.
+• 0-1 Inspiration ($100): When this model plays an Objective card, it may immediately take 1 card from its Spent Resource pile and add it to its controller’s hand.
+• 0-1 Level Up ($150)(Can only be purchased by the Riddler): Enemy models suffers the Slow 2 effect when Revealing a Suspect marker. Also, at the start of your first Raise the Plan phase, you may place up to 2 friendly Suspect markers at least 4” away from your Deployment zone.
+The following option may be taken only by models with the Bot trait:
+• 0-1 Battle Bot ($250+3 Rep Points): Model gains the Claws rule.
+• 0-1 Shock droid ($50): Model gains the CRT: Stunned rule.
+• 0-1 Improved Chassis MK ($50): The model gains Tireless rule.
+The following option may be taken only when a models with Alias: The Riddler (Arkham Knight) or The Riddler’s Mech (Arkham Knight) is in the crew:
+• 0-1 Improved Armor ($250+2Rep points)* Can only be purchased by the Riddler): Bots in your Crew gain Light Armor Trait.
+• 0-1 Enhanced Servo-engines ($150)* (Can only be taken by Riddler’s Mech): Riddler’s Mech gains +1 to Movement and Combo: Mechanic Claw.*
+Equipment marked * cannot be affected by the Broken Equipment rule."
+97c3da027ab9,Equipment,,Mr. Freeze Crew,38,crew-equipment,False,,"• 0-2 Magazine ($200): +1 to Ammunition for one weapon.
+• 0-1 Grapple-gun ($150): Model gains the Grapple-gun rule.
+• 0-2 Bulletproof Vest ($150): Model gains the Bulletproof Vest rule.
+• 0-1 Med-pack ($300): Once per game, during this model activation, remove 2 Damage markers from a model in contact.
+• 0-1 Scope ($300): One of the model’s ranged weapons gains the Scope rule.
+• 0-1 Gas Mask ($150): Model gains the Gas Mask rule.
+• 0-1 Cool Generator ($300): Model gains the Stop! rule.
+• 0-1 Improvised Armor ($150): Model gains rhe Hockey Gear rule.
+The following option may be taken only when a model with Name: Victor Fries is in the crew:
+• 0-1 Freeze Generator ($150): Model gains Shockwave rule.
+• 0-2 Engineer Training ($100): Model gains Handyman rule.
+• 0-1 Cryo-Blast ($50): model gains Bluff rule.
+Equipment marked * cannot be affected by the Broken Equipment rule."
+2929ca3201e3,Equipment,,League of Assassins Crew,39,crew-equipment,False,,"• 0-2 Magazine ($200): +1 to Ammunition for one weapon.
+• 0-1 Loyalty Tattoo ($200): Model gains the Bodyguard rule.
+• 0-1 Climbing Claws ($100): Model gains the Climbing Claws rule.
+• 0-1 Trained in the Shadows ($300): Model gains the Hidden rule.
+• 0-1 Gas Mask ($150): Model gains the Gas Mask rule.
+• 0-1 Grapple-gun ($400): Model gains the Grapple-gun rule.
+• 0-2 Combat Bracers ($150): The model’s close combat weapons and unarmed attacks gain the Defensive weapon special rule.
+• 0-1 Venom Dose ($100): Model gains one Venom Dose.
+• 0-1 Precise Orders ($150): model gains Chain of Command.
+The following option may be taken only when a model with Name: Ra’s Al Ghul is in the crew:
+• 0-2 Ancient Weapon ($150+1 Rep Point): Model’s close combat weapon attacks gain Bleed:1.
+The following option may be taken only when a model with Name: Talia Al Ghul is in the crew:
+• 0-1 Shadow Training ($200): Model gains the Undercover rule.
+The following option may be taken only when a character with Name: Nyssa Al Ghul is in the crew:
+• Bow Training ($100): Model gains the Shooter rule.
+• Traditional Way (0$)* (Can only be chosen when Nyssa Al Ghul Arkham Knight is the Boss): this Crew can´t recruit models with weapons with firearm or beam rules, instead this Crew Affiliate Henchman can buy this equipment:
+0-2 Bow ($150):
+Bow [[A]] [[A]] 1 2 Mechanical / Aim
+0-2 Katana ($100+5 Rep Cost):
+Katana [[A]] [[A]] 1 2 Handy / Sharp The following option may be taken only when a model with Alias: Lady Shiva is in the crew:
+• 0-1 Unarmed Combat Training ($150): Model gains the Close Combat Master rule.
+The following option may be taken only when a model with Alias: Cheshire is in the crew:
+• 0-1 Poison Training ($50): Model gains the Poison Master rule.
+The following option may be taken only when a model with Alias: Bane is in the crew:
+• 0-2 Military Progress ($150): Model gains the Veteran rule.
+Equipment marked * cannot be affected by the Broken Equipment rule."
+5396c334d9e8,Equipment,,Birds of Prey Crew,39,crew-equipment,False,,"• 0-2 Titanic Mutation 2($150): Model gains one Titan Dose.
+• 0-1 Sense Mutation 1($100): Model gains the Night Vision rule.
+• 0-2 Extra Spores 1($200): +1 to Ammunition for one weapon.
+• 0-2 Spikes Mutation 1($200): Model gains the Claws rule.
+• 0-1 Luminescent Mutation 1($100): Model gains the Lantern rule.
+• 0-1 Large Roots 1($200): Models moving within this plant action radius suffer Impaired Movement.
+• 0-1 Grapple-gun 2($300): Model gains the Grapple-gun rule.
+• 0-1 Camo Vest 2($300): Model gains the Stealth rule.
+• 0-1 Mutation Serum 2($200+3Rep. points): Model gains the Tough Skin and Desensitized rules.
+• 0-2 Mutant alterations 2($150+2Rep. points): Model gains the Adaptable rule.
+• 0-3 Corrosive Blood ($50): When this model becomes a casualty, all models in Contact must pass an Endurance roll or receive [[A]] Damage.
+The following option may be taken only when a model with Name: Dr. Pamela Lillian Isley is in the crew:
+• 0-1 Modified Pheromones 2(5 rep Points+$150) (Can only be purchased by Leader, Sidekicks or Free Agents): When using the Control Pheromones trait, all models in the crew can target up to 2 enemy models instead of 1. Resolve the effect one a time.
+• 0-1 Ancient Plants 1,3($200+40Rep. points): Model gains Large, +1 all Basic Skills except Endurance, +4 Endurance, Tough Skin, and the next Trait: Millennia-old Roots: The action area radius is increased to 6”.
+The following option may be taken only when a model with Name: Alec Holland is in the crew:
+• 0-1 Passage ($200): Model gains the Undercover rule.
+1 Only Plants can purchase this equipment.
+2 Plants cannot purchase this equipment.
+3 This Equipment cannot be affected by the Broken Equipment rule."
+51ccffca7257,Equipment,,Organized Crime Crew,40,crew-equipment,False,,"• 0-3 Magazine ($150): +1 to Ammunition for one weapon.
+• 0-1 Bribe ($100): Model gains the Informer rule.
+• 0-1 Kevlar Vest ($300): Model gains the Kevlar Vest rule.
+• 0-2 Grapple-gun ($250): Model gains the Grapple-gun rule.
+• 0-1 C-4 ($250): Model gains the Explosive Gel rule.
+• 0-1 Gas Mask ($150): Model gains the Gas Mask rule.
+• 0-1 Silencer ($200): One of the models ranged weapons gains the Silencer rule.
+• 0-1 Mechanic ($100): Model gains Repairman rule.
+• 0-2 Brass Knuckles ($200): Model gains the Reinforced Gloves rule.
+• 0-1 Lock picks ($100): Model gains the Runaway rule.
+• 0-2 Backpack ($100): Model gains the Backpack rule.
+• 0-2 Morphine ($150): Model gains the Sturdy rule.
+• 0-1 Rusty Tools ($300+3 Rep Points): Model gains the Cruel rule.
+The following option may be taken only when a model with Name: Roman Sionis is in the crew:
+• 0-1 Psychotic ($150) (Can only be purchased by Black Mask): Gain Protect Me! rule.
+The following option may be taken only when a model with Name: Carmine Falcone is in the crew:
+• 0-1 High Confidence ($200): Model gains the Sturdy and Mobster rules.
+The following option may be taken only when a model with Name: Salvatore Maroni is in the crew:
+• 0-2 Mafia ($100): Model gains the Criminal rule. The following options may be taken only for Elite Gangster model:
+• 0-1 Old-School Training ($50): Model gains the Veteran rule.
+• 0-1 Loyalty Tattoo ($100): Model gains the Bodyguard rule.
+The following options may be taken only when a model with Name: Harvey Dent is in the crew:
+• 0-1 VOTE HARVEY DENT Banner ($350+5 Rep Points): Your Leader´s Inspire rule has a 12”radius instead of 8”.
+• 0-1 Gunslinger ($150): model gains Dirty Fighter rule.
+The following option may be taken only when a model with Name: Jervis Tetch is in the crew:
+• 0-1 Broken Equipment ($250): Before Phase A of the pre-game sequence choose one item of equipment purchased by the opposing player before the game begins. That item may not be used during the game.
+• 0-2 Weird Device ($200): Model gains the Goad rule.
+• Trained Mind ($100): Model gains Desensitized rule.
+• 0-1 Rhyme with Me ($200): Model gains Disarray rule.
+• 0-3 Masks of Wonderland ($200): When choosing this equipment, choose only one of the following masks:
+0-1 Queen of Hearts mask: model gains Assassin:2 and Order rules.
+0-1 White Rabbit mask: model gains Fast and Tireless rules.
+0-1 Cheshire Cat mask: model gains Stealth and Climbing Claws rules.
+The following option may be taken only when a model with Name: Alexander Joseph Luthor is in the crew:
+• 0-1 Advanced Weaponry ($200): One of this model ranged weapons gain the Accurate rule."
