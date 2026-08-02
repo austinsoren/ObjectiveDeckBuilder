@@ -1,0 +1,58 @@
+{
+  "archive": "Spades.zip",
+  "crop": {
+    "left": 0,
+    "top": 191,
+    "right": 1320,
+    "bottom": 2760
+  },
+  "inputDimensions": [
+    1320,
+    2868
+  ],
+  "outputDimensions": [
+    1320,
+    2569
+  ],
+  "uniqueCards": 7,
+  "duplicateFiles": {
+    "IMG_1786.PNG": "IMG_1785.PNG"
+  },
+  "characters": [
+    {
+      "source": "IMG_1782.PNG",
+      "id": "spades-10-of-spades",
+      "name": "10 of Spades"
+    },
+    {
+      "source": "IMG_1783.PNG",
+      "id": "spades-5-of-spades",
+      "name": "5 of Spades"
+    },
+    {
+      "source": "IMG_1784.PNG",
+      "id": "spades-ace-of-spades",
+      "name": "Ace of Spades"
+    },
+    {
+      "source": "IMG_1785.PNG",
+      "id": "spades-jack-of-spades",
+      "name": "Jack of Spades"
+    },
+    {
+      "source": "IMG_1787.PNG",
+      "id": "spades-king-of-spades",
+      "name": "King of Spades"
+    },
+    {
+      "source": "IMG_1788.PNG",
+      "id": "spades-punchline",
+      "name": "Punchline"
+    },
+    {
+      "source": "IMG_1789.PNG",
+      "id": "spades-queen-of-spades",
+      "name": "Queen of Spades"
+    }
+  ]
+}

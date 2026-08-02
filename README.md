@@ -1,6 +1,6 @@
-# Batman Objective Deck Builder & Compendium v0.3.1
+# Batman Objective Deck Builder, Character Archive & Compendium v0.4.0
 
-A database-free static web application for building and playing Batman Miniature Game Objective decks, with a searchable reference parsed from BMG3 Compendium v1.4.
+A database-free static web application for building and playing Batman Miniature Game Objective decks, browsing recovered Third Edition character cards, and searching the BMG3 Compendium v1.4.
 
 ## GitHub Pages deployment
 
@@ -30,9 +30,13 @@ There is no server-side code, database, package installation, or build step.
 - `app.js` — deck builder, play screen, Compendium, and tooltip behavior.
 - `data/cards-data.js` — card metadata loaded by the browser.
 - `data/reference-data.js` — parsed Compendium reference loaded by the browser.
-- `data/*.json` — editable/exportable source copies of the same metadata.
-- `cards/` — full-resolution card images, one file per unique card design.
-- `thumbs/` — smaller WebP images used in the card library.
+- `data/character-data.js` — recovered character-card metadata loaded by the browser.
+- `data/*.json` — editable/exportable source copies of the metadata.
+- `cards/` — full-resolution Objective card images, one file per unique card design.
+- `thumbs/` — smaller WebP Objective images used in the card library.
+- `characters/` — cropped, full-resolution character-card screenshots grouped by crew.
+- `character-thumbs/` — smaller WebP character images used in the archive grid.
+- `tools/import_character_screenshots.py` — reusable phone-chrome crop and pixel-deduplication utility.
 
 ## Deck builder and play mode
 
@@ -42,6 +46,18 @@ There is no server-side code, database, package installation, or build step.
 - Printed multi-copy cards are fixed bundles.
 - Character Objectives are additional cards validated against crew model Name/Alias and Rank.
 - Play mode shuffles the physical cards, draws four, supports the one opening mulligan, and handles the Recount discard/shuffle/replacement sequence.
+
+
+## Character card archive
+
+- New **Character Cards** page with search, crew, base-size, and sorting controls.
+- The first recovered set contains seven unique Spades cards.
+- Black phone/status-bar regions were removed from every screenshot.
+- Two Jack of Spades source screenshots were pixel-identical; only one asset is retained.
+- Character aliases, base sizes, reputation, funding, and printed statistics were visually transcribed.
+- Traits and weapon rules are shown as chips. Exact Compendium matches retain the existing hover tooltip and click-through behavior.
+- Full images are stored separately from thumbnails and compressed as high-quality WebP to keep the static deployment practical.
+- The card image remains the source of truth where recovered metadata is incomplete.
 
 ## Compendium reference
 
