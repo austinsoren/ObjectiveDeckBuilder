@@ -3,6 +3,7 @@
 
   const STORAGE_KEY = 'batman-objective-deck-builder-v1';
   const rawCards = Array.isArray(window.BATMAN_CARD_DATA) ? window.BATMAN_CARD_DATA : [];
+  const rawCharacters = Array.isArray(window.BATMAN_CHARACTER_DATA) ? window.BATMAN_CHARACTER_DATA.map(normalizeCharacterRecord) : [];
   const referenceData = window.BATMAN_REFERENCE_DATA && typeof window.BATMAN_REFERENCE_DATA === 'object' ? window.BATMAN_REFERENCE_DATA : { entries: [] };
   const referenceEntries = Array.isArray(referenceData.entries) ? referenceData.entries : [];
   const referenceById = new Map(referenceEntries.map(entry => [entry.id, entry]));
@@ -14,6 +15,20 @@
   const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
   const slug = (value = '') => normalize(value).replace(/\s+/g, '-');
 
+
+  function normalizeCharacterRecord(character) {
+    const crews = Array.isArray(character.crews)
+      ? character.crews.filter(Boolean)
+      : character.crew
+        ? [character.crew]
+        : [];
+    return {
+      ...character,
+      crews,
+      crew: crews[0] || character.crew || ''
+    };
+  }
+
   const affiliations = [...new Set(rawCards.map(card => card.affiliation).filter(Boolean))].sort((a, b) => a.localeCompare(b));
   const defaults = {
     affiliation: affiliations[0] || '',
@@ -22,6 +37,7 @@
     overrides: {},
     play: null,
     filters: { search: '', category: 'buildable', copies: 'all', sort: 'title', availableOnly: false, tags: [] },
+    characterFilters: { search: '', crew: 'all', baseSize: 'all', sort: 'name' },
     referenceFilters: { search: '', section: 'all', sort: 'source', selectedOnly: false, letter: 'all' }
   };
 
@@ -47,7 +63,15 @@
     playDeckCountSide: $('#playDeckCountSide'), playDiscardCountSide: $('#playDiscardCountSide'), playPhaseEyebrow: $('#playPhaseEyebrow'),
     playPhaseTitle: $('#playPhaseTitle'), playPhaseHelp: $('#playPhaseHelp'), playPrimaryAction: $('#playPrimaryAction'),
     playSkipAction: $('#playSkipAction'), playUndo: $('#playUndo'), playHand: $('#playHand'), playSelectionCount: $('#playSelectionCount'),
-    playDiscardPreview: $('#playDiscardPreview'), playLog: $('#playLog'), startPlay: $('#startPlay')
+    playDiscardPreview: $('#playDiscardPreview'), playLog: $('#playLog'), startPlay: $('#startPlay'),
+    characterView: $('#characterView'), characterNav: $('#characterNavButton'), characterSearch: $('#characterSearch'),
+    characterCrew: $('#characterCrew'), characterBaseSize: $('#characterBaseSize'), characterSort: $('#characterSort'),
+    characterGrid: $('#characterGrid'), characterVisibleCount: $('#characterVisibleCount'), characterTotalCount: $('#characterTotalCount'),
+    characterCrewCount: $('#characterCrewCount'), characterTitle: $('#characterTitle'), characterActiveFilters: $('#characterActiveFilters'),
+    emptyCharacters: $('#emptyCharacters'), characterDialog: $('#characterDialog'), characterDialogImage: $('#characterDialogImage'),
+    characterDialogCrew: $('#characterDialogCrew'), characterDialogTitle: $('#characterDialogTitle'), characterDialogAlias: $('#characterDialogAlias'),
+    characterDialogBadges: $('#characterDialogBadges'), characterDialogStats: $('#characterDialogStats'),
+    characterDialogTraits: $('#characterDialogTraits'), characterDialogWeapons: $('#characterDialogWeapons'), characterDialogSource: $('#characterDialogSource')
   };
   Object.assign(elements, {
     builderView: $('#builderView'), referenceView: $('#referenceView'), builderNav: $('#builderNavButton'), referenceNav: $('#referenceNavButton'),
@@ -74,6 +98,7 @@
     elements.referenceSort.value = state.referenceFilters.sort;
     elements.referenceSelectedOnly.checked = state.referenceFilters.selectedOnly;
     elements.referenceTotalCount.textContent = `${referenceEntries.length} indexed entries`;
+    initializeCharacterFilters();
     bindEvents();
     renderAll();
     applyRoute();
@@ -86,6 +111,7 @@
         ...structuredClone(defaults),
         ...parsed,
         filters: { ...defaults.filters, ...(parsed?.filters || {}) },
+        characterFilters: { ...defaults.characterFilters, ...(parsed?.characterFilters || {}) },
         referenceFilters: { ...defaults.referenceFilters, ...(parsed?.referenceFilters || {}) },
         selected: Array.isArray(parsed?.selected) ? parsed.selected.filter(id => rawCards.some(card => card.id === id)) : [],
         roster: Array.isArray(parsed?.roster) ? parsed.roster : [],
@@ -121,6 +147,23 @@
     return card ? cardWithOverrides(card) : null;
   }
   function isSelected(id) { return state.selected.includes(id); }
+
+  function initializeCharacterFilters() {
+    if (!elements.characterCrew) return;
+    const crews = [...new Set(rawCharacters.flatMap(character => character.crews || (character.crew ? [character.crew] : [])).filter(Boolean))].sort((a,b) => a.localeCompare(b));
+    const baseSizes = [...new Set(rawCharacters.map(character => character.baseSizeMm).filter(Number.isFinite))].sort((a,b) => a-b);
+    elements.characterCrew.innerHTML = '<option value="all">All crews</option>' + crews.map(crew => `<option value="${escapeHtml(crew)}">${escapeHtml(crew)}</option>`).join('');
+    elements.characterBaseSize.innerHTML = '<option value="all">All base sizes</option>' + baseSizes.map(size => `<option value="${size}">${size} mm</option>`).join('');
+    elements.characterSearch.value = state.characterFilters.search;
+    elements.characterCrew.value = crews.includes(state.characterFilters.crew) ? state.characterFilters.crew : 'all';
+    elements.characterBaseSize.value = baseSizes.includes(Number(state.characterFilters.baseSize)) ? String(state.characterFilters.baseSize) : 'all';
+    elements.characterSort.value = ['name','reputation-desc','funding-desc','base'].includes(state.characterFilters.sort) ? state.characterFilters.sort : 'name';
+    state.characterFilters.crew = elements.characterCrew.value;
+    state.characterFilters.baseSize = elements.characterBaseSize.value;
+    state.characterFilters.sort = elements.characterSort.value;
+    elements.characterTotalCount.textContent = `${rawCharacters.length} unique character card${rawCharacters.length === 1 ? '' : 's'}`;
+    elements.characterCrewCount.textContent = `${crews.length} crew${crews.length === 1 ? '' : 's'}`;
+  }
 
   function bindEvents() {
     elements.affiliation.addEventListener('change', event => {
@@ -221,16 +264,48 @@
     $('#editMetadata').addEventListener('click', openMetadataEditor);
     elements.metadataForm.addEventListener('submit', saveMetadata);
     $('#resetMetadata').addEventListener('click', resetMetadata);
-    [elements.cardDialog, elements.metadataDialog, elements.rulesDialog].forEach(dialog => {
+    [elements.cardDialog, elements.metadataDialog, elements.rulesDialog, elements.characterDialog].forEach(dialog => {
       dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
     });
-    [elements.cardDialog, elements.metadataDialog, elements.rulesDialog, elements.playDialog].forEach(dialog => {
+    [elements.cardDialog, elements.metadataDialog, elements.rulesDialog, elements.playDialog, elements.characterDialog].forEach(dialog => {
       dialog.addEventListener('close', hideRuleTooltip);
     });
 
     elements.builderNav.addEventListener('click', () => navigateTo('builder'));
+    elements.characterNav.addEventListener('click', () => navigateTo('characters'));
     elements.referenceNav.addEventListener('click', () => navigateTo('reference'));
     window.addEventListener('hashchange', applyRoute);
+    elements.characterSearch.addEventListener('input', event => {
+      state.characterFilters.search = event.target.value;
+      persist(); renderCharacters();
+    });
+    elements.characterCrew.addEventListener('change', event => {
+      state.characterFilters.crew = event.target.value;
+      persist(); renderCharacters();
+    });
+    elements.characterBaseSize.addEventListener('change', event => {
+      state.characterFilters.baseSize = event.target.value;
+      persist(); renderCharacters();
+    });
+    elements.characterSort.addEventListener('change', event => {
+      state.characterFilters.sort = event.target.value;
+      persist(); renderCharacters();
+    });
+    $('#resetCharacterFilters').addEventListener('click', () => {
+      state.characterFilters = structuredClone(defaults.characterFilters);
+      elements.characterSearch.value = '';
+      elements.characterCrew.value = 'all';
+      elements.characterBaseSize.value = 'all';
+      elements.characterSort.value = 'name';
+      persist(); renderCharacters();
+    });
+    elements.characterGrid.addEventListener('click', event => {
+      const tile = event.target.closest('[data-character-id]');
+      if (!tile || event.target.closest('[data-rule-ref]')) return;
+      openCharacter(tile.dataset.characterId);
+    });
+    $('[data-close-character]').addEventListener('click', () => elements.characterDialog.close());
+    elements.characterDialog.addEventListener('click', event => { if (event.target === elements.characterDialog) elements.characterDialog.close(); });
     elements.referenceSearch.addEventListener('input', event => {
       state.referenceFilters.search = event.target.value;
       persist(); renderReference();
@@ -280,6 +355,7 @@
     renderRoster();
     renderLibrary();
     renderDeck();
+    if (!elements.characterView.hidden) renderCharacters();
     if (!elements.referenceView.hidden) renderReference();
   }
 
@@ -910,8 +986,115 @@
   }
 
 
+  function characterRules(character) {
+    return [...(character.traits || []), ...(character.weaponRules || [])];
+  }
+
+  function filteredCharacters() {
+    const filters = state.characterFilters;
+    const search = normalize(filters.search);
+    let characters = rawCharacters.filter(character => {
+      if (filters.crew !== 'all' && !(character.crews || []).includes(filters.crew)) return false;
+      if (filters.baseSize !== 'all' && Number(character.baseSizeMm) !== Number(filters.baseSize)) return false;
+      if (search) {
+        const rules = characterRules(character).map(rule => rule.label).join(' ');
+        const stats = Object.values(character.stats || {}).join(' ');
+        const crewText = (character.crews || [character.crew]).join(' ');
+        const haystack = normalize([character.name, character.alias, crewText, character.baseSizeMm, character.reputation, character.funding, rules, stats].join(' '));
+        if (!search.split(' ').every(token => haystack.includes(token))) return false;
+      }
+      return true;
+    });
+    const sorters = {
+      name: (a,b) => a.name.localeCompare(b.name),
+      'reputation-desc': (a,b) => (b.reputation || 0) - (a.reputation || 0) || a.name.localeCompare(b.name),
+      'funding-desc': (a,b) => (b.funding || 0) - (a.funding || 0) || a.name.localeCompare(b.name),
+      base: (a,b) => (a.baseSizeMm || 0) - (b.baseSizeMm || 0) || a.name.localeCompare(b.name)
+    };
+    characters.sort(sorters[filters.sort] || sorters.name);
+    return characters;
+  }
+
+  function renderCharacters() {
+    if (!elements.characterGrid) return;
+    const characters = filteredCharacters();
+    elements.characterGrid.innerHTML = characters.map(renderCharacterTile).join('');
+    elements.characterVisibleCount.textContent = characters.length;
+    elements.emptyCharacters.hidden = characters.length > 0;
+    elements.characterTitle.textContent = state.characterFilters.crew === 'all' ? 'All character cards' : `${state.characterFilters.crew} character cards`; // includes dual-faction memberships
+    const filters = [];
+    if (state.characterFilters.search) filters.push(`Search: ${state.characterFilters.search}`);
+    if (state.characterFilters.crew !== 'all') filters.push(state.characterFilters.crew);
+    if (state.characterFilters.baseSize !== 'all') filters.push(`${state.characterFilters.baseSize} mm base`);
+    elements.characterActiveFilters.hidden = filters.length === 0;
+    elements.characterActiveFilters.innerHTML = filters.map(filter => `<span class="badge">${escapeHtml(filter)}</span>`).join('');
+  }
+
+  function renderCharacterRuleChip(rule) {
+    if (rule.referenceId && referenceById.has(rule.referenceId)) {
+      return `<button class="character-rule-chip linked" data-rule-ref="${escapeHtml(rule.referenceId)}" type="button">${escapeHtml(rule.label)}</button>`;
+    }
+    return `<span class="character-rule-chip">${escapeHtml(rule.label)}</span>`;
+  }
+
+  function renderCharacterTile(character) {
+    const previewRules = characterRules(character).slice(0,4);
+    const remaining = Math.max(0, characterRules(character).length - previewRules.length);
+    return `<article class="character-tile" data-character-id="${escapeHtml(character.id)}">
+      <button class="character-image-button" type="button" aria-label="View ${escapeHtml(character.name)}">
+        <img src="${escapeHtml(character.thumbnail || character.image)}" data-full="${escapeHtml(character.image)}" loading="lazy" alt="${escapeHtml(character.name)}">
+      </button>
+      <div class="character-card-info">
+        <h3>${escapeHtml(character.name)}</h3>
+        <p class="character-alias">${escapeHtml(character.alias || 'Alias unknown')}</p>
+        <div class="character-card-meta">
+          ${(character.crews || [character.crew]).map(crew => `<span class="badge">${escapeHtml(crew)}</span>`).join('')}
+          <span class="badge">${character.reputation ?? '—'} REP</span>
+          <span class="badge">${character.funding ?? '—'} $</span>
+          <span class="badge">${character.baseSizeMm ?? '—'} mm</span>
+        </div>
+        <div class="rule-ref-row character-rule-preview">${previewRules.map(renderCharacterRuleChip).join('')}${remaining ? `<span class="rule-ref-more">+${remaining} more</span>` : ''}</div>
+      </div>
+    </article>`;
+  }
+
+  function openCharacter(id) {
+    const character = rawCharacters.find(item => item.id === id);
+    if (!character) return;
+    elements.characterDialogImage.src = character.image;
+    elements.characterDialogImage.alt = character.name;
+    const crewNames = (character.crews || [character.crew]).filter(Boolean);
+    elements.characterDialogCrew.textContent = crewNames.length ? `${crewNames.join(' · ')} crew${crewNames.length > 1 ? 's' : ''}` : 'Unassigned crew';
+    elements.characterDialogTitle.textContent = character.name;
+    elements.characterDialogAlias.textContent = character.alias && normalize(character.alias) !== 'unknown' ? character.alias : 'Civilian identity unknown';
+    const crewBadges = (character.crews || [character.crew]).filter(Boolean).map(crew => `<span class="badge">${escapeHtml(crew)}</span>`);
+    elements.characterDialogBadges.innerHTML = [
+      ...crewBadges,
+      `<span class="badge">${character.reputation ?? '—'} REP</span>`,
+      `<span class="badge">${character.funding ?? '—'} $ funding</span>`,
+      `<span class="badge">${character.baseSizeMm ?? '—'} mm base</span>`
+    ].join('');
+    const statLabels = [
+      ['willpower','Willpower'],['endurance','Endurance'],['attack','Attack'],
+      ['defense','Defense'],['strength','Strength'],['movement','Movement']
+    ];
+    elements.characterDialogStats.innerHTML = statLabels.map(([key,label]) => `<div class="character-stat"><span>${label}</span><strong>${escapeHtml(character.stats?.[key] ?? '—')}</strong></div>`).join('');
+    elements.characterDialogTraits.innerHTML = (character.traits || []).map(renderCharacterRuleChip).join('') || '<span class="muted">No traits transcribed.</span>';
+    elements.characterDialogWeapons.innerHTML = (character.weaponRules || []).map(renderCharacterRuleChip).join('') || '<span class="muted">No weapon rules transcribed.</span>';
+    const duplicateNote = character.duplicateSources?.length ? ` ${character.duplicateSources.length} pixel-identical duplicate screenshot${character.duplicateSources.length === 1 ? ' was' : 's were'} discarded (${character.duplicateSources.join(', ')}).` : '';
+    const crewNote = (character.crews || []).length > 1 ? ` This character appeared in multiple archived crew folders: ${(character.crews || []).join(', ')}.` : ''; 
+    const metadataNote = character.metadataStatus === 'image-only-import'
+      ? `Imported from ${character.sourceFiles?.join(', ') || 'an archived screenshot'}; structured stats and rules have not yet been transcribed.`
+      : `Metadata was visually transcribed from ${character.sourceFiles?.join(', ') || 'the card image'}.`;
+    elements.characterDialogSource.textContent = `Recovered from ${character.source || 'an archived screenshot'}. ${metadataNote}${duplicateNote}${crewNote} The image remains the source of truth.`;
+    elements.characterDialog.showModal();
+  }
+
+
   function navigateTo(view, entryId = '') {
-    const target = view === 'reference' ? `#reference${entryId ? `/${entryId}` : ''}` : '#builder';
+    const target = view === 'reference'
+      ? `#reference${entryId ? `/${entryId}` : ''}`
+      : view === 'characters' ? '#characters' : '#builder';
     if (location.hash === target) applyRoute();
     else location.hash = target;
   }
@@ -920,14 +1103,20 @@
     const route = decodeURIComponent((location.hash || '#builder').replace(/^#/, ''));
     const [page, entryId] = route.split('/');
     const showReference = page === 'reference';
-    elements.builderView.hidden = showReference;
+    const showCharacters = page === 'characters';
+    const showBuilder = !showReference && !showCharacters;
+    elements.builderView.hidden = !showBuilder;
+    elements.characterView.hidden = !showCharacters;
     elements.referenceView.hidden = !showReference;
-    elements.builderNav.classList.toggle('active', !showReference);
+    elements.builderNav.classList.toggle('active', showBuilder);
+    elements.characterNav.classList.toggle('active', showCharacters);
     elements.referenceNav.classList.toggle('active', showReference);
-    elements.builderNav.setAttribute('aria-current', showReference ? 'false' : 'page');
+    elements.builderNav.setAttribute('aria-current', showBuilder ? 'page' : 'false');
+    elements.characterNav.setAttribute('aria-current', showCharacters ? 'page' : 'false');
     elements.referenceNav.setAttribute('aria-current', showReference ? 'page' : 'false');
-    document.title = showReference ? 'BMG Compendium Reference' : 'Batman Objective Deck Builder';
+    document.title = showReference ? 'BMG Compendium Reference' : showCharacters ? 'BMG Character Card Archive' : 'Batman Objective Deck Builder';
     hideRuleTooltip();
+    if (showCharacters) renderCharacters();
     if (showReference) {
       renderReference();
       if (entryId) requestAnimationFrame(() => focusReferenceEntry(entryId));
@@ -935,7 +1124,7 @@
   }
 
   function openReferenceEntry(id) {
-    [elements.cardDialog, elements.metadataDialog, elements.rulesDialog, elements.playDialog].forEach(dialog => {
+    [elements.cardDialog, elements.metadataDialog, elements.rulesDialog, elements.playDialog, elements.characterDialog].forEach(dialog => {
       if (dialog?.open) dialog.close();
     });
     navigateTo('reference', id);

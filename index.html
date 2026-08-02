@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#0b0d10">
-  <meta name="application-version" content="0.3.1">
-  <title>Batman Objective Deck Builder & Compendium</title>
+  <meta name="application-version" content="0.4.0">
+  <title>Batman Miniature Game Archive</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -17,6 +17,7 @@
     <div class="header-actions">
       <nav class="view-nav" aria-label="Application pages">
         <button id="builderNavButton" class="button ghost nav-button active" type="button">Deck Builder</button>
+        <button id="characterNavButton" class="button ghost nav-button" type="button">Character Cards</button>
         <button id="referenceNavButton" class="button ghost nav-button" type="button">Compendium</button>
       </nav>
       <span id="saveStatus" class="save-status">Saved locally</span>
@@ -185,6 +186,69 @@
   </main>
 
 
+  <main id="characterView" class="character-shell view-panel" hidden>
+    <aside class="character-filters panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Recovered BatApp archive</p>
+          <h2>Character cards</h2>
+        </div>
+        <button id="resetCharacterFilters" class="icon-button" title="Reset character filters" aria-label="Reset character filters">↺</button>
+      </div>
+
+      <label class="field search-field">
+        <span>Search characters</span>
+        <input id="characterSearch" type="search" placeholder="Name, alias, trait, weapon rule…" autocomplete="off">
+      </label>
+
+      <label class="field">
+        <span>Crew</span>
+        <select id="characterCrew"></select>
+      </label>
+
+      <label class="field">
+        <span>Base size</span>
+        <select id="characterBaseSize">
+          <option value="all">All base sizes</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Sort</span>
+        <select id="characterSort">
+          <option value="name">Character name</option>
+          <option value="reputation-desc">Highest reputation</option>
+          <option value="funding-desc">Highest funding</option>
+          <option value="base">Base size</option>
+        </select>
+      </label>
+
+      <section class="reference-source-note">
+        <strong>Current recovery set</strong>
+        <span id="characterCrewCount">0 crews</span>
+        <span id="characterTotalCount">0 unique character cards</span>
+        <span>Phone chrome removed; exact duplicate screenshots discarded.</span>
+      </section>
+    </aside>
+
+    <section class="character-content panel">
+      <div class="panel-heading character-heading">
+        <div>
+          <p class="eyebrow">Searchable model library</p>
+          <h2 id="characterTitle">All character cards</h2>
+        </div>
+        <div class="library-stats"><strong id="characterVisibleCount">0</strong><span>cards shown</span></div>
+      </div>
+      <div id="characterActiveFilters" class="active-filters" hidden></div>
+      <div id="characterGrid" class="character-grid" aria-live="polite"></div>
+      <div id="emptyCharacters" class="empty-state" hidden>
+        <h3>No character cards match</h3>
+        <p>Clear the search or broaden the crew and base-size filters.</p>
+      </div>
+    </section>
+  </main>
+
+
   <main id="referenceView" class="reference-shell view-panel" hidden>
     <aside class="reference-filters panel">
       <div class="panel-heading">
@@ -262,6 +326,33 @@
       </div>
     </section>
   </main>
+
+  <dialog id="characterDialog" class="character-dialog">
+    <button class="dialog-close" data-close-character aria-label="Close">×</button>
+    <div class="dialog-layout character-dialog-layout">
+      <img id="characterDialogImage" alt="Selected character card">
+      <div class="dialog-content">
+        <p id="characterDialogCrew" class="eyebrow"></p>
+        <h2 id="characterDialogTitle"></h2>
+        <p id="characterDialogAlias" class="character-alias"></p>
+        <div id="characterDialogBadges" class="badge-row"></div>
+        <section class="character-stat-section">
+          <div class="section-title-row"><h3>Printed statistics</h3></div>
+          <div id="characterDialogStats" class="character-stat-grid"></div>
+        </section>
+        <section class="dialog-reference-section">
+          <div class="section-title-row"><h3>Traits</h3></div>
+          <div id="characterDialogTraits" class="rule-ref-row expanded"></div>
+        </section>
+        <section class="dialog-reference-section">
+          <div class="section-title-row"><h3>Weapon special rules</h3></div>
+          <div id="characterDialogWeapons" class="rule-ref-row expanded"></div>
+        </section>
+        <p id="characterDialogSource" class="requirement-note"></p>
+      </div>
+    </div>
+  </dialog>
+
 
   <dialog id="cardDialog" class="card-dialog">
     <button class="dialog-close" data-close-dialog aria-label="Close">×</button>
@@ -399,6 +490,7 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script src="data/cards-data.js"></script>
+  <script src="data/character-data.js"></script>
   <script src="data/reference-data.js"></script>
   <script src="app.js"></script>
 </body>
