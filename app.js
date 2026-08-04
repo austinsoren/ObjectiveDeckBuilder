@@ -38,13 +38,25 @@
     play: null,
     filters: { search: '', category: 'buildable', copies: 'all', sort: 'title', availableOnly: false, tags: [] },
     characterFilters: { search: '', crew: 'all', baseSize: 'all', sort: 'name' },
-    referenceFilters: { search: '', section: 'all', sort: 'source', selectedOnly: false, letter: 'all' }
+    referenceFilters: { search: '', section: 'all', sort: 'source', selectedOnly: false, letter: 'all' },
+    crewFilters: { search: '', sort: 'name' },
+    crewBuilder: { crew: '', repCap: 350, fundingCap: 1500, bossId: null, roster: [] }
+  };
+
+  // Traits that raise a crew's Funding cap when recruited (some only while the model is the Boss).
+  const FUNDING_BONUS_TRAITS = {
+    '2e327b2974ad': { amount: 350, bossOnly: false, label: 'Business Agent' },
+    '008bf989cb19': { amount: 300, bossOnly: true, label: 'Dirty Money' },
+    '931c443ead31': { amount: 500, bossOnly: true, label: 'Lord of Business' },
+    'f1b6b9692b5f': { amount: 400, bossOnly: false, label: 'Millionaire' },
+    'c61e010e5d3a': { amount: 300, bossOnly: false, label: 'Public Resources' }
   };
 
   let state = loadState();
   let activeCardId = null;
   let activeCardContext = 'builder';
   let toastTimer = null;
+  let playSearchQuery = '';
 
   const elements = {
     affiliation: $('#affiliationSelect'), search: $('#searchInput'), category: $('#categoryFilter'), copies: $('#copyFilter'),
@@ -63,7 +75,10 @@
     playDeckCountSide: $('#playDeckCountSide'), playDiscardCountSide: $('#playDiscardCountSide'), playPhaseEyebrow: $('#playPhaseEyebrow'),
     playPhaseTitle: $('#playPhaseTitle'), playPhaseHelp: $('#playPhaseHelp'), playPrimaryAction: $('#playPrimaryAction'),
     playSkipAction: $('#playSkipAction'), playUndo: $('#playUndo'), playHand: $('#playHand'), playSelectionCount: $('#playSelectionCount'),
-    playDiscardPreview: $('#playDiscardPreview'), playLog: $('#playLog'), startPlay: $('#startPlay'),
+    playLog: $('#playLog'), startPlay: $('#startPlay'),
+    playCrewCount: $('#playCrewCount'), playCrewList: $('#playCrewList'), playDrawCard: $('#playDrawCard'),
+    playSearchInput: $('#playSearchInput'), playSearchResults: $('#playSearchResults'),
+    playDiscardSummary: $('#playDiscardSummary'), playDiscardList: $('#playDiscardList'), playDiscardShuffleAll: $('#playDiscardShuffleAll'),
     characterView: $('#characterView'), characterNav: $('#characterNavButton'), characterSearch: $('#characterSearch'),
     characterCrew: $('#characterCrew'), characterBaseSize: $('#characterBaseSize'), characterSort: $('#characterSort'),
     characterGrid: $('#characterGrid'), characterVisibleCount: $('#characterVisibleCount'), characterTotalCount: $('#characterTotalCount'),
@@ -80,6 +95,16 @@
     referenceVisibleCount: $('#referenceVisibleCount'), referenceTotalCount: $('#referenceTotalCount'), referenceTitle: $('#referenceTitle'),
     referenceActiveFilters: $('#referenceActiveFilters'), emptyReference: $('#emptyReference'), referenceExpandAll: $('#referenceExpandAll'),
     dialogRuleRefs: $('#dialogRuleRefs'), dialogRuleRefList: $('#dialogRuleRefList'), ruleTooltip: $('#ruleTooltip')
+  });
+  Object.assign(elements, {
+    crewView: $('#crewView'), crewNav: $('#crewNavButton'), crewFactionSelect: $('#crewFactionSelect'),
+    crewRepCapSlider: $('#crewRepCapSlider'), crewRepCapValue: $('#crewRepCapValue'), crewFundingCapInput: $('#crewFundingCapInput'),
+    crewSearch: $('#crewSearch'), crewSort: $('#crewSort'), crewPoolCount: $('#crewPoolCount'), crewPoolTitle: $('#crewPoolTitle'),
+    crewPoolVisibleCount: $('#crewPoolVisibleCount'), crewPoolGrid: $('#crewPoolGrid'), emptyCrewPool: $('#emptyCrewPool'),
+    crewValidationSummary: $('#crewValidationSummary'), crewRepTotal: $('#crewRepTotal'), crewRepCapLabel: $('#crewRepCapLabel'),
+    crewRepMeter: $('#crewRepMeter'), crewFundingTotal: $('#crewFundingTotal'), crewFundingCapLabel: $('#crewFundingCapLabel'),
+    crewFundingMeter: $('#crewFundingMeter'), crewFundingBonusNote: $('#crewFundingBonusNote'), crewRosterCount: $('#crewRosterCount'),
+    crewRosterList: $('#crewRosterList')
   });
 
   initialize();
@@ -99,6 +124,7 @@
     elements.referenceSelectedOnly.checked = state.referenceFilters.selectedOnly;
     elements.referenceTotalCount.textContent = `${referenceEntries.length} indexed entries`;
     initializeCharacterFilters();
+    initializeCrewFilters();
     bindEvents();
     renderAll();
     applyRoute();
@@ -113,6 +139,8 @@
         filters: { ...defaults.filters, ...(parsed?.filters || {}) },
         characterFilters: { ...defaults.characterFilters, ...(parsed?.characterFilters || {}) },
         referenceFilters: { ...defaults.referenceFilters, ...(parsed?.referenceFilters || {}) },
+        crewFilters: { ...defaults.crewFilters, ...(parsed?.crewFilters || {}) },
+        crewBuilder: sanitizeCrewBuilder(parsed?.crewBuilder),
         selected: Array.isArray(parsed?.selected) ? parsed.selected.filter(id => rawCards.some(card => card.id === id)) : [],
         roster: Array.isArray(parsed?.roster) ? parsed.roster : [],
         overrides: parsed?.overrides && typeof parsed.overrides === 'object' ? parsed.overrides : {},
@@ -121,6 +149,19 @@
     } catch {
       return structuredClone(defaults);
     }
+  }
+
+  function sanitizeCrewBuilder(raw) {
+    const base = { ...structuredClone(defaults.crewBuilder), ...(raw && typeof raw === 'object' ? raw : {}) };
+    const crews = new Set(rawCharacters.flatMap(character => character.crews || (character.crew ? [character.crew] : [])));
+    if (!crews.has(base.crew)) base.crew = '';
+    base.repCap = Number.isFinite(Number(base.repCap)) ? Number(base.repCap) : defaults.crewBuilder.repCap;
+    base.fundingCap = Number.isFinite(Number(base.fundingCap)) ? Number(base.fundingCap) : defaults.crewBuilder.fundingCap;
+    base.roster = Array.isArray(base.roster)
+      ? [...new Set(base.roster)].filter(id => rawCharacters.some(character => character.id === id && (!base.crew || (character.crews || [character.crew]).includes(base.crew))))
+      : [];
+    base.bossId = base.roster.includes(base.bossId) ? base.bossId : null;
+    return base;
   }
 
   function persist() {
@@ -163,6 +204,14 @@
     state.characterFilters.sort = elements.characterSort.value;
     elements.characterTotalCount.textContent = `${rawCharacters.length} unique character card${rawCharacters.length === 1 ? '' : 's'}`;
     elements.characterCrewCount.textContent = `${crews.length} crew${crews.length === 1 ? '' : 's'}`;
+  }
+
+  function initializeCrewFilters() {
+    if (!elements.crewFactionSelect) return;
+    const crews = [...new Set(rawCharacters.flatMap(character => character.crews || (character.crew ? [character.crew] : [])))]
+      .filter(crew => crew && crew !== 'Unknown')
+      .sort((a,b) => a.localeCompare(b));
+    elements.crewFactionSelect.innerHTML = '<option value="">Choose a crew…</option>' + crews.map(crew => `<option value="${escapeHtml(crew)}">${escapeHtml(crew)}</option>`).join('');
   }
 
   function bindEvents() {
@@ -248,6 +297,15 @@
     elements.playSkipAction.addEventListener('click', handlePlaySkipAction);
     elements.playUndo.addEventListener('click', undoPlayAction);
     elements.playHand.addEventListener('click', handlePlayHandClick);
+    elements.playCrewList.addEventListener('click', handlePlayCrewListClick);
+    elements.playDrawCard.addEventListener('click', drawCardManually);
+    elements.playSearchInput.addEventListener('input', event => {
+      playSearchQuery = event.target.value;
+      renderPlaySearch();
+    });
+    elements.playSearchResults.addEventListener('click', handlePlaySearchResultsClick);
+    elements.playDiscardList.addEventListener('click', handlePlayDiscardListClick);
+    elements.playDiscardShuffleAll.addEventListener('click', shuffleDiscardPileIntoDeck);
     $('[data-close-play]').addEventListener('click', () => elements.playDialog.close());
     $('#restartPlay').addEventListener('click', restartPlaySession);
     $('#endPlay').addEventListener('click', endPlaySession);
@@ -306,6 +364,68 @@
     });
     $('[data-close-character]').addEventListener('click', () => elements.characterDialog.close());
     elements.characterDialog.addEventListener('click', event => { if (event.target === elements.characterDialog) elements.characterDialog.close(); });
+
+    elements.crewNav.addEventListener('click', () => navigateTo('crew'));
+    elements.crewFactionSelect.addEventListener('change', event => {
+      const cb = state.crewBuilder;
+      const nextCrew = event.target.value;
+      if (cb.roster.length && !confirm('Changing crews clears your current roster. Continue?')) {
+        event.target.value = cb.crew;
+        return;
+      }
+      cb.crew = nextCrew;
+      cb.roster = [];
+      cb.bossId = null;
+      persist(); renderCrewBuilder();
+    });
+    elements.crewRepCapSlider.addEventListener('input', event => {
+      state.crewBuilder.repCap = Number(event.target.value);
+      elements.crewRepCapValue.textContent = state.crewBuilder.repCap;
+      persist(); renderCrewBuilder();
+    });
+    elements.crewFundingCapInput.addEventListener('input', event => {
+      const value = Number(event.target.value);
+      state.crewBuilder.fundingCap = Number.isFinite(value) ? Math.max(0, value) : 0;
+      persist(); renderCrewBuilder();
+    });
+    elements.crewSearch.addEventListener('input', event => {
+      state.crewFilters.search = event.target.value;
+      persist(); renderCrewBuilder();
+    });
+    elements.crewSort.addEventListener('change', event => {
+      state.crewFilters.sort = event.target.value;
+      persist(); renderCrewBuilder();
+    });
+    $('#resetCrewFilters').addEventListener('click', () => {
+      state.crewFilters = structuredClone(defaults.crewFilters);
+      persist(); renderCrewBuilder();
+    });
+    elements.crewPoolGrid.addEventListener('click', event => {
+      const tile = event.target.closest('[data-character-id]');
+      if (!tile || event.target.closest('[data-rule-ref]')) return;
+      if (event.target.closest('[data-action="recruit"]')) {
+        const id = tile.dataset.characterId;
+        if (state.crewBuilder.roster.includes(id)) removeCrewMember(id); else recruitCharacter(id);
+        return;
+      }
+      if (event.target.closest('.character-image-button')) openCharacter(tile.dataset.characterId);
+    });
+    elements.crewRosterList.addEventListener('click', event => {
+      const row = event.target.closest('[data-character-id]');
+      if (!row) return;
+      if (event.target.closest('[data-action="remove"]')) removeCrewMember(row.dataset.characterId);
+      else if (event.target.closest('[data-action="toggle-boss"]')) toggleCrewBoss(row.dataset.characterId);
+    });
+    $('#clearCrew').addEventListener('click', () => {
+      if (!state.crewBuilder.roster.length || confirm('Remove every recruited model from this crew?')) {
+        state.crewBuilder.roster = []; state.crewBuilder.bossId = null; persist(); renderCrewBuilder();
+      }
+    });
+    $('#exportCrewJson').addEventListener('click', exportCrewJson);
+    $('#exportCrewText').addEventListener('click', exportCrewText);
+    $('#importCrewJson').addEventListener('change', importCrewJson);
+    $('#printCrew').addEventListener('click', () => window.print());
+
     elements.referenceSearch.addEventListener('input', event => {
       state.referenceFilters.search = event.target.value;
       persist(); renderReference();
@@ -357,6 +477,7 @@
     renderDeck();
     if (!elements.characterView.hidden) renderCharacters();
     if (!elements.referenceView.hidden) renderReference();
+    if (!elements.crewView.hidden) renderCrewBuilder();
   }
 
   function libraryPool() {
@@ -755,6 +876,7 @@
     });
     shuffleCards(physicalDeck);
     const hand = physicalDeck.splice(0, 4);
+    playSearchQuery = '';
     state.play = {
       active: true,
       sessionId,
@@ -929,6 +1051,10 @@
     elements.playDeckCountSide.textContent = `${play.drawPile.length} card${play.drawPile.length === 1 ? '' : 's'}`;
     elements.playDiscardCountSide.textContent = `${play.discardPile.length} card${play.discardPile.length === 1 ? '' : 's'}`;
     elements.playUndo.disabled = play.undoStack.length === 0;
+    elements.playDrawCard.disabled = play.phase !== 'playing' || play.drawPile.length === 0;
+    elements.playDrawCard.title = play.phase !== 'playing'
+      ? 'Resolve the opening hand before drawing extra cards'
+      : 'Draw the top card of the deck into your hand (for card effects that say "draw a card")';
 
     if (play.phase === 'mulligan') {
       elements.playPhaseEyebrow.textContent = 'Before deployment';
@@ -951,21 +1077,203 @@
     elements.playHand.innerHTML = play.hand.map(instance => renderPlayCard(instance, play.selectedUids.includes(instance.uid))).join('');
     if (!play.hand.length) elements.playHand.innerHTML = '<div class="empty-state"><h3>Your hand is empty</h3><p>No Objective cards remain in hand.</p></div>';
 
-    const topDiscard = play.discardPile.at(-1);
-    if (!topDiscard) {
-      elements.playDiscardPreview.className = 'discard-preview empty-note';
-      elements.playDiscardPreview.textContent = 'No discarded cards.';
-    } else {
-      const card = getCard(topDiscard.cardId);
-      elements.playDiscardPreview.className = 'discard-preview has-card';
-      elements.playDiscardPreview.innerHTML = card
-        ? `<img src="${escapeHtml(card.thumbnail || card.image)}" alt=""><div><strong>${escapeHtml(card.title)}</strong><span>Top of discard pile</span></div>`
-        : '<span>Unknown discarded card</span>';
-    }
-
     const log = [...play.actionLog].reverse();
     elements.playLog.innerHTML = log.length ? log.map(item => `<li>${escapeHtml(item.text)}</li>`).join('') : '<li>No actions yet.</li>';
+    renderPlayCrewPanel();
+    renderPlaySearch();
+    renderPlayDiscardList();
     updatePlayLaunchButton();
+  }
+
+  function drawCardManually() {
+    const play = state.play;
+    if (!play?.active || play.phase !== 'playing' || !play.drawPile.length) return;
+    checkpointPlay('Undo manual draw');
+    const [drawn] = play.drawPile.splice(0, 1);
+    play.hand.push(drawn);
+    const card = getCard(drawn.cardId);
+    appendPlayLog(`Drew an extra card from the deck: ${card?.title || 'Unknown card'}.`);
+    persist();
+    renderPlayScreen();
+    toast(`${card?.title || 'Card'} drawn`);
+  }
+
+  function searchDrawPile(query) {
+    const play = state.play;
+    if (!play?.active) return [];
+    const search = normalize(query);
+    if (!search) return [];
+    const counts = new Map();
+    play.drawPile.forEach(instance => counts.set(instance.cardId, (counts.get(instance.cardId) || 0) + 1));
+    return [...counts.entries()]
+      .map(([cardId, count]) => ({ card: getCard(cardId), count }))
+      .filter(entry => entry.card && normalize(entry.card.title).includes(search))
+      .sort((a, b) => a.card.title.localeCompare(b.card.title));
+  }
+
+  function renderPlaySearch() {
+    if (!elements.playSearchResults) return;
+    const play = state.play;
+    elements.playSearchInput.value = playSearchQuery;
+    if (!play?.active || play.phase !== 'playing') {
+      elements.playSearchResults.innerHTML = '<p class="empty-note">Resolve the opening hand before searching the deck.</p>';
+      return;
+    }
+    if (!playSearchQuery.trim()) {
+      elements.playSearchResults.innerHTML = '<p class="muted">Search the draw pile by title and add a card straight to your hand.</p>';
+      return;
+    }
+    const results = searchDrawPile(playSearchQuery);
+    elements.playSearchResults.innerHTML = results.length
+      ? results.map(({ card, count }) => `<article class="play-search-result">
+          <img src="${escapeHtml(card.thumbnail || card.image)}" alt="">
+          <div><strong>${escapeHtml(card.title)}</strong><span>${count} in draw pile</span></div>
+          <button class="button ghost compact" data-action="search-add" data-card-id="${escapeHtml(card.id)}" type="button">Add to hand</button>
+        </article>`).join('')
+      : '<p class="empty-note">No matching cards remain in the draw pile.</p>';
+  }
+
+  function handlePlaySearchResultsClick(event) {
+    const button = event.target.closest('[data-action="search-add"]');
+    if (!button) return;
+    addCardFromDrawPile(button.dataset.cardId);
+  }
+
+  function addCardFromDrawPile(cardId) {
+    const play = state.play;
+    if (!play?.active || play.phase !== 'playing') return;
+    const index = play.drawPile.findIndex(instance => instance.cardId === cardId);
+    if (index === -1) return;
+    checkpointPlay('Undo deck search');
+    const [instance] = play.drawPile.splice(index, 1);
+    play.hand.push(instance);
+    shuffleCards(play.drawPile);
+    const card = getCard(cardId);
+    appendPlayLog(`Searched the draw pile for "${card?.title || 'a card'}", added it to hand, and shuffled the remaining deck.`);
+    persist();
+    renderPlayScreen();
+    toast(`${card?.title || 'Card'} added to hand`);
+  }
+
+  function groupDiscardPile() {
+    const play = state.play;
+    if (!play?.active) return [];
+    const counts = new Map();
+    play.discardPile.forEach(instance => counts.set(instance.cardId, (counts.get(instance.cardId) || 0) + 1));
+    return [...counts.entries()]
+      .map(([cardId, count]) => ({ card: getCard(cardId), count }))
+      .filter(entry => entry.card)
+      .sort((a, b) => a.card.title.localeCompare(b.card.title));
+  }
+
+  function renderPlayDiscardList() {
+    if (!elements.playDiscardList) return;
+    const play = state.play;
+    const groups = groupDiscardPile();
+    const pileSize = play?.discardPile?.length || 0;
+    elements.playDiscardSummary.textContent = pileSize
+      ? `${pileSize} card${pileSize === 1 ? '' : 's'} — tap to view`
+      : 'No discarded cards';
+    elements.playDiscardShuffleAll.disabled = !play?.active || play.phase !== 'playing' || !pileSize;
+    if (!play?.active || play.phase !== 'playing') {
+      elements.playDiscardList.innerHTML = '<p class="empty-note">Resolve the opening hand before managing the discard pile.</p>';
+      return;
+    }
+    elements.playDiscardList.innerHTML = groups.length
+      ? groups.map(({ card, count }) => `<article class="play-discard-row">
+          <img src="${escapeHtml(card.thumbnail || card.image)}" alt="">
+          <strong>${escapeHtml(card.title)}</strong>
+          <span>${count} in discard pile</span>
+          <div class="play-discard-row-actions">
+            <button class="button ghost compact" data-action="discard-shuffle-one" data-card-id="${escapeHtml(card.id)}" type="button">Shuffle 1 into deck</button>
+            <button class="button ghost compact" data-action="discard-return" data-card-id="${escapeHtml(card.id)}" type="button">Return 1 to hand</button>
+          </div>
+        </article>`).join('')
+      : '<p class="empty-note">No discarded cards.</p>';
+  }
+
+  function handlePlayDiscardListClick(event) {
+    const button = event.target.closest('button[data-action]');
+    if (!button) return;
+    if (button.dataset.action === 'discard-return') addCardFromDiscardPile(button.dataset.cardId);
+    else if (button.dataset.action === 'discard-shuffle-one') shuffleCardFromDiscardToDeck(button.dataset.cardId);
+  }
+
+  function addCardFromDiscardPile(cardId) {
+    const play = state.play;
+    if (!play?.active || play.phase !== 'playing') return;
+    const index = play.discardPile.findIndex(instance => instance.cardId === cardId);
+    if (index === -1) return;
+    checkpointPlay('Undo return from discard pile');
+    const [instance] = play.discardPile.splice(index, 1);
+    play.hand.push(instance);
+    const card = getCard(cardId);
+    appendPlayLog(`Returned "${card?.title || 'a card'}" from the discard pile to hand.`);
+    persist();
+    renderPlayScreen();
+    toast(`${card?.title || 'Card'} returned to hand`);
+  }
+
+  function shuffleCardFromDiscardToDeck(cardId) {
+    const play = state.play;
+    if (!play?.active || play.phase !== 'playing') return;
+    const index = play.discardPile.findIndex(instance => instance.cardId === cardId);
+    if (index === -1) return;
+    checkpointPlay('Undo shuffle from discard pile');
+    const [instance] = play.discardPile.splice(index, 1);
+    play.drawPile.push(instance);
+    shuffleCards(play.drawPile);
+    const card = getCard(cardId);
+    appendPlayLog(`Shuffled "${card?.title || 'a card'}" from the discard pile back into the deck.`);
+    persist();
+    renderPlayScreen();
+    toast(`${card?.title || 'Card'} shuffled into deck`);
+  }
+
+  function shuffleDiscardPileIntoDeck() {
+    const play = state.play;
+    if (!play?.active || play.phase !== 'playing' || !play.discardPile.length) return;
+    checkpointPlay('Undo shuffle discard pile into deck');
+    const count = play.discardPile.length;
+    play.drawPile.push(...play.discardPile.splice(0, play.discardPile.length));
+    shuffleCards(play.drawPile);
+    appendPlayLog(`Shuffled the entire discard pile (${count} card${count === 1 ? '' : 's'}) back into the deck.`);
+    persist();
+    renderPlayScreen();
+    toast('Discard pile shuffled into deck');
+  }
+
+  function renderPlayCrewPanel() {
+    if (!elements.playCrewList) return;
+    const rosterCharacters = crewRosterCharacters();
+    elements.playCrewCount.textContent = rosterCharacters.length
+      ? `${rosterCharacters.length} model${rosterCharacters.length === 1 ? '' : 's'} recruited`
+      : 'No crew recruited yet';
+    elements.playCrewList.innerHTML = rosterCharacters.length
+      ? rosterCharacters.map(renderPlayCrewCard).join('')
+      : '<p class="empty-note">Recruit models in the Crew Builder to see their traits here during play.</p>';
+  }
+
+  function renderPlayCrewCard(character) {
+    const isBoss = state.crewBuilder.bossId === character.id;
+    const rules = characterRules(character);
+    return `<article class="play-crew-card ${isBoss ? 'is-boss' : ''}" data-character-id="${escapeHtml(character.id)}">
+      <div class="play-crew-card-top">
+        <img src="${escapeHtml(character.thumbnail || character.image)}" alt="">
+        <div class="play-crew-card-heading-wrap">
+          <div class="play-crew-card-heading"><strong>${escapeHtml(character.name)}</strong>${isBoss ? '<span class="badge">Boss</span>' : ''}</div>
+          <p class="character-alias">${escapeHtml(character.alias || 'Alias unknown')}</p>
+        </div>
+      </div>
+      <div class="rule-ref-row">${rules.map(renderCharacterRuleChip).join('') || '<span class="muted">No traits transcribed.</span>'}</div>
+      <button class="button ghost compact" data-action="view-character" type="button">Full card</button>
+    </article>`;
+  }
+
+  function handlePlayCrewListClick(event) {
+    const card = event.target.closest('[data-character-id]');
+    if (!card) return;
+    openCharacter(card.dataset.characterId);
   }
 
   function renderPlayCard(instance, selected) {
@@ -1091,10 +1399,233 @@
   }
 
 
+  function crewRosterCharacters() {
+    return state.crewBuilder.roster.map(id => rawCharacters.find(character => character.id === id)).filter(Boolean);
+  }
+
+  function crewFundingBonuses(rosterCharacters) {
+    const bossId = state.crewBuilder.bossId;
+    const bonuses = [];
+    rosterCharacters.forEach(character => {
+      (character.traits || []).forEach(trait => {
+        const rule = FUNDING_BONUS_TRAITS[trait.referenceId];
+        if (!rule) return;
+        if (rule.bossOnly && character.id !== bossId) return;
+        bonuses.push({ characterId: character.id, characterName: character.name, label: rule.label, amount: rule.amount });
+      });
+    });
+    return bonuses;
+  }
+
+  function validateCrew(rosterCharacters) {
+    const errors = [], warnings = [];
+    const cb = state.crewBuilder;
+    if (!cb.crew) errors.push('Choose a crew / faction before recruiting.');
+    const repTotal = rosterCharacters.reduce((sum, character) => sum + (character.reputation || 0), 0);
+    const fundingTotal = rosterCharacters.reduce((sum, character) => sum + (character.funding || 0), 0);
+    const bonuses = crewFundingBonuses(rosterCharacters);
+    const bonusTotal = bonuses.reduce((sum, bonus) => sum + bonus.amount, 0);
+    const effectiveFundingCap = cb.fundingCap + bonusTotal;
+    if (repTotal > cb.repCap) errors.push(`Reputation spent (${repTotal}) exceeds the cap (${cb.repCap}).`);
+    if (fundingTotal > effectiveFundingCap) errors.push(`Funding spent ($${fundingTotal}) exceeds the cap ($${effectiveFundingCap}).`);
+    rosterCharacters.filter(character => cb.crew && !(character.crews || [character.crew]).includes(cb.crew))
+      .forEach(character => errors.push(`${character.name} does not belong to the ${cb.crew} crew.`));
+    if (rosterCharacters.length && !cb.bossId) warnings.push('No Boss designated — Boss-only funding traits (Dirty Money, Lord of Business, etc.) will not apply until a model is marked as Boss.');
+    return { valid: errors.length === 0, errors, warnings, repTotal, fundingTotal, bonuses, bonusTotal, effectiveFundingCap };
+  }
+
+  function filteredCrewPool() {
+    const cb = state.crewBuilder;
+    if (!cb.crew) return [];
+    const search = normalize(state.crewFilters.search);
+    let pool = rawCharacters.filter(character => (character.crews || [character.crew]).includes(cb.crew));
+    if (search) {
+      pool = pool.filter(character => {
+        const rules = characterRules(character).map(rule => rule.label).join(' ');
+        const haystack = normalize([character.name, character.alias, rules].join(' '));
+        return search.split(' ').every(token => haystack.includes(token));
+      });
+    }
+    const sorters = {
+      name: (a,b) => a.name.localeCompare(b.name),
+      'reputation-asc': (a,b) => (a.reputation||0) - (b.reputation||0) || a.name.localeCompare(b.name),
+      'reputation-desc': (a,b) => (b.reputation||0) - (a.reputation||0) || a.name.localeCompare(b.name),
+      'funding-asc': (a,b) => (a.funding||0) - (b.funding||0) || a.name.localeCompare(b.name),
+      'funding-desc': (a,b) => (b.funding||0) - (a.funding||0) || a.name.localeCompare(b.name)
+    };
+    pool.sort(sorters[state.crewFilters.sort] || sorters.name);
+    return pool;
+  }
+
+  function renderCrewPoolTile(character) {
+    const recruited = state.crewBuilder.roster.includes(character.id);
+    const rules = characterRules(character).slice(0,3);
+    return `<article class="character-tile ${recruited ? 'recruited' : ''}" data-character-id="${escapeHtml(character.id)}">
+      <button class="character-image-button" type="button" aria-label="View ${escapeHtml(character.name)}">
+        <img src="${escapeHtml(character.thumbnail || character.image)}" loading="lazy" alt="${escapeHtml(character.name)}">
+      </button>
+      <div class="character-card-info">
+        <h3>${escapeHtml(character.name)}</h3>
+        <p class="character-alias">${escapeHtml(character.alias || 'Alias unknown')}</p>
+        <div class="character-card-meta">
+          <span class="badge">${character.reputation ?? '—'} REP</span>
+          <span class="badge">${character.funding ?? '—'} $</span>
+        </div>
+        <div class="rule-ref-row character-rule-preview">${rules.map(renderCharacterRuleChip).join('')}</div>
+        <div class="card-actions single"><button class="button ${recruited ? 'ghost' : ''}" data-action="recruit" type="button">${recruited ? 'Remove from crew' : 'Recruit'}</button></div>
+      </div>
+    </article>`;
+  }
+
+  function renderCrewRosterItem(character) {
+    const isBoss = state.crewBuilder.bossId === character.id;
+    return `<article class="deck-item ${isBoss ? 'is-boss' : ''}" data-character-id="${escapeHtml(character.id)}">
+      <img src="${escapeHtml(character.thumbnail || character.image)}" alt="">
+      <div><strong>${escapeHtml(character.name)}</strong><span>${character.reputation ?? 0} REP · $${character.funding ?? 0}${isBoss ? ' · Boss' : ''}</span></div>
+      <div class="crew-roster-item-actions">
+        <button class="icon-button boss-toggle ${isBoss ? 'active' : ''}" data-action="toggle-boss" type="button" title="${isBoss ? 'Remove Boss' : 'Set as Boss'}" aria-label="${isBoss ? 'Remove Boss' : 'Set as Boss'}">★</button>
+        <button data-action="remove" type="button" aria-label="Remove ${escapeHtml(character.name)}">×</button>
+      </div>
+    </article>`;
+  }
+
+  function renderCrewBuilder() {
+    if (!elements.crewPoolGrid) return;
+    const cb = state.crewBuilder;
+    elements.crewFactionSelect.value = cb.crew;
+    elements.crewRepCapSlider.value = cb.repCap;
+    elements.crewRepCapValue.textContent = cb.repCap;
+    elements.crewFundingCapInput.value = cb.fundingCap;
+    elements.crewSearch.value = state.crewFilters.search;
+    elements.crewSort.value = state.crewFilters.sort;
+
+    const pool = filteredCrewPool();
+    elements.crewPoolTitle.textContent = cb.crew ? `${cb.crew} recruits` : 'Choose a crew to begin recruiting';
+    elements.crewPoolVisibleCount.textContent = pool.length;
+    elements.crewPoolGrid.innerHTML = pool.map(renderCrewPoolTile).join('');
+    elements.emptyCrewPool.hidden = !cb.crew || pool.length > 0;
+    const poolTotal = cb.crew ? rawCharacters.filter(character => (character.crews || [character.crew]).includes(cb.crew)).length : 0;
+    elements.crewPoolCount.textContent = cb.crew ? `${poolTotal} recruitable in ${cb.crew}` : 'Choose a crew to begin';
+
+    const rosterCharacters = crewRosterCharacters();
+    const validation = validateCrew(rosterCharacters);
+
+    elements.crewRepTotal.textContent = validation.repTotal;
+    elements.crewRepCapLabel.textContent = cb.repCap;
+    setMeter(elements.crewRepMeter, validation.repTotal, cb.repCap);
+
+    elements.crewFundingTotal.textContent = validation.fundingTotal;
+    elements.crewFundingCapLabel.textContent = validation.effectiveFundingCap;
+    setMeter(elements.crewFundingMeter, validation.fundingTotal, validation.effectiveFundingCap);
+
+    if (validation.bonuses.length) {
+      elements.crewFundingBonusNote.hidden = false;
+      elements.crewFundingBonusNote.innerHTML = `<strong>Funding bonuses active (+$${validation.bonusTotal})</strong><ul>${validation.bonuses.map(bonus => `<li>${escapeHtml(bonus.characterName)} — ${escapeHtml(bonus.label)} (+$${bonus.amount})</li>`).join('')}</ul>`;
+    } else {
+      elements.crewFundingBonusNote.hidden = true;
+      elements.crewFundingBonusNote.innerHTML = '';
+    }
+
+    elements.crewRosterCount.textContent = `${rosterCharacters.length} model${rosterCharacters.length === 1 ? '' : 's'}`;
+    if (!rosterCharacters.length) {
+      elements.crewRosterList.className = 'deck-list empty-note';
+      elements.crewRosterList.textContent = 'Recruit models from the pool.';
+    } else {
+      elements.crewRosterList.className = 'deck-list';
+      elements.crewRosterList.innerHTML = rosterCharacters
+        .slice()
+        .sort((a,b) => (b.id === cb.bossId) - (a.id === cb.bossId) || a.name.localeCompare(b.name))
+        .map(renderCrewRosterItem).join('');
+    }
+
+    const headline = validation.errors.length ? (rosterCharacters.length ? 'Crew needs attention' : 'Start recruiting') : 'Crew legal';
+    elements.crewValidationSummary.className = `validation-summary ${validation.errors.length ? 'invalid' : 'valid'}`;
+    const errorItems = validation.errors.map(message => `<li>${escapeHtml(message)}</li>`).join('');
+    const warningItems = validation.warnings.map(message => `<li class="warning">${escapeHtml(message)}</li>`).join('');
+    const list = errorItems || warningItems ? `<ul>${errorItems}${warningItems}</ul>` : '';
+    elements.crewValidationSummary.innerHTML = `<strong>${headline}</strong>${list || '<br>Reputation and funding are within the caps.'}`;
+  }
+
+  function recruitCharacter(id) {
+    const character = rawCharacters.find(item => item.id === id);
+    const cb = state.crewBuilder;
+    if (!character || !cb.crew || !(character.crews || [character.crew]).includes(cb.crew)) return;
+    if (!cb.roster.includes(id)) cb.roster.push(id);
+    persist(); renderCrewBuilder();
+  }
+
+  function removeCrewMember(id) {
+    const cb = state.crewBuilder;
+    cb.roster = cb.roster.filter(item => item !== id);
+    if (cb.bossId === id) cb.bossId = null;
+    persist(); renderCrewBuilder();
+  }
+
+  function toggleCrewBoss(id) {
+    const cb = state.crewBuilder;
+    cb.bossId = cb.bossId === id ? null : id;
+    persist(); renderCrewBuilder();
+  }
+
+  function exportCrewJson() {
+    const rosterCharacters = crewRosterCharacters();
+    const validation = validateCrew(rosterCharacters);
+    const cb = state.crewBuilder;
+    const payload = {
+      application: 'Batman Crew Builder', version: 1, exportedAt: new Date().toISOString(),
+      crew: cb.crew, repCap: cb.repCap, fundingCap: cb.fundingCap, bossId: cb.bossId,
+      roster: rosterCharacters.map(character => ({ id: character.id, name: character.name, alias: character.alias, reputation: character.reputation, funding: character.funding, boss: character.id === cb.bossId })),
+      totals: { reputation: validation.repTotal, funding: validation.fundingTotal, fundingBonuses: validation.bonuses, effectiveFundingCap: validation.effectiveFundingCap },
+      validation
+    };
+    download(`${slug(cb.crew || 'crew')}-crew.json`, JSON.stringify(payload,null,2), 'application/json');
+  }
+
+  function exportCrewText() {
+    const rosterCharacters = crewRosterCharacters();
+    const validation = validateCrew(rosterCharacters);
+    const cb = state.crewBuilder;
+    const lines = [
+      `${cb.crew || 'Untitled'} Crew`,
+      '='.repeat(Math.max(20, (cb.crew || 'Untitled').length + 6)), '',
+      `Status: ${validation.valid ? 'LEGAL' : 'NEEDS ATTENTION'}`,
+      ...validation.errors.map(error => `- ${error}`), '',
+      `Reputation: ${validation.repTotal} / ${cb.repCap}`,
+      `Funding: $${validation.fundingTotal} / $${validation.effectiveFundingCap}${validation.bonusTotal ? ` (base $${cb.fundingCap} + $${validation.bonusTotal} bonus)` : ''}`, '',
+      'ROSTER',
+      ...rosterCharacters.slice().sort((a,b) => a.name.localeCompare(b.name)).map(character => `- ${character.name}${character.alias ? ` / ${character.alias}` : ''} — ${character.reputation ?? 0} REP, $${character.funding ?? 0}${character.id === cb.bossId ? ' [BOSS]' : ''}`)
+    ];
+    if (validation.bonuses.length) lines.push('', 'FUNDING BONUSES', ...validation.bonuses.map(bonus => `- ${bonus.characterName}: ${bonus.label} (+$${bonus.amount})`));
+    download(`${slug(cb.crew || 'crew')}-crew.txt`, lines.join('\n'), 'text/plain');
+  }
+
+  async function importCrewJson(event) {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+    if (!file) return;
+    try {
+      const payload = JSON.parse(await file.text());
+      const ids = Array.isArray(payload.roster) ? payload.roster.map(item => typeof item === 'string' ? item : item.id) : [];
+      const crew = typeof payload.crew === 'string' ? payload.crew : '';
+      const validIds = [...new Set(ids)].filter(id => rawCharacters.some(character => character.id === id && (!crew || (character.crews || [character.crew]).includes(crew))));
+      state.crewBuilder = {
+        crew,
+        repCap: Number.isFinite(Number(payload.repCap)) ? Number(payload.repCap) : defaults.crewBuilder.repCap,
+        fundingCap: Number.isFinite(Number(payload.fundingCap)) ? Number(payload.fundingCap) : defaults.crewBuilder.fundingCap,
+        bossId: validIds.includes(payload.bossId) ? payload.bossId : null,
+        roster: validIds
+      };
+      persist(); renderCrewBuilder(); toast(`Imported ${validIds.length} crew member${validIds.length === 1 ? '' : 's'}`);
+    } catch (error) {
+      alert(`Could not import this crew file: ${error.message}`);
+    }
+  }
+
+
   function navigateTo(view, entryId = '') {
     const target = view === 'reference'
       ? `#reference${entryId ? `/${entryId}` : ''}`
-      : view === 'characters' ? '#characters' : '#builder';
+      : view === 'characters' ? '#characters' : view === 'crew' ? '#crew' : '#builder';
     if (location.hash === target) applyRoute();
     else location.hash = target;
   }
@@ -1104,19 +1635,24 @@
     const [page, entryId] = route.split('/');
     const showReference = page === 'reference';
     const showCharacters = page === 'characters';
-    const showBuilder = !showReference && !showCharacters;
+    const showCrew = page === 'crew';
+    const showBuilder = !showReference && !showCharacters && !showCrew;
     elements.builderView.hidden = !showBuilder;
     elements.characterView.hidden = !showCharacters;
     elements.referenceView.hidden = !showReference;
+    elements.crewView.hidden = !showCrew;
     elements.builderNav.classList.toggle('active', showBuilder);
     elements.characterNav.classList.toggle('active', showCharacters);
     elements.referenceNav.classList.toggle('active', showReference);
+    elements.crewNav.classList.toggle('active', showCrew);
     elements.builderNav.setAttribute('aria-current', showBuilder ? 'page' : 'false');
     elements.characterNav.setAttribute('aria-current', showCharacters ? 'page' : 'false');
     elements.referenceNav.setAttribute('aria-current', showReference ? 'page' : 'false');
-    document.title = showReference ? 'BMG Compendium Reference' : showCharacters ? 'BMG Character Card Archive' : 'Batman Objective Deck Builder';
+    elements.crewNav.setAttribute('aria-current', showCrew ? 'page' : 'false');
+    document.title = showReference ? 'BMG Compendium Reference' : showCharacters ? 'BMG Character Card Archive' : showCrew ? 'BMG Crew Builder' : 'Batman Objective Deck Builder';
     hideRuleTooltip();
     if (showCharacters) renderCharacters();
+    if (showCrew) renderCrewBuilder();
     if (showReference) {
       renderReference();
       if (entryId) requestAnimationFrame(() => focusReferenceEntry(entryId));
