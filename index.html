@@ -17,6 +17,7 @@
     <div class="header-actions">
       <nav class="view-nav" aria-label="Application pages">
         <button id="builderNavButton" class="button ghost nav-button active" type="button">Deck Builder</button>
+        <button id="crewNavButton" class="button ghost nav-button" type="button">Crew Builder</button>
         <button id="characterNavButton" class="button ghost nav-button" type="button">Character Cards</button>
         <button id="referenceNavButton" class="button ghost nav-button" type="button">Compendium</button>
       </nav>
@@ -181,6 +182,113 @@
         <button id="exportText" class="button ghost" type="button">Export list</button>
         <label class="button ghost file-button">Import JSON<input id="importJson" type="file" accept="application/json"></label>
         <button id="printDeck" class="button ghost" type="button">Print</button>
+      </div>
+    </aside>
+  </main>
+
+
+  <main id="crewView" class="app-shell view-panel" hidden>
+    <aside class="filters panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Pre-crew setup</p>
+          <h2>Crew settings</h2>
+        </div>
+        <button id="resetCrewFilters" class="icon-button" title="Reset search &amp; sort" aria-label="Reset search &amp; sort">↺</button>
+      </div>
+
+      <label class="field">
+        <span>Crew / faction</span>
+        <select id="crewFactionSelect">
+          <option value="">Choose a crew…</option>
+        </select>
+      </label>
+
+      <label class="field slider-field">
+        <span>Reputation cap <strong id="crewRepCapValue">350</strong></span>
+        <input id="crewRepCapSlider" type="range" min="100" max="700" step="10" value="350">
+      </label>
+
+      <label class="field">
+        <span>Funding cap ($)</span>
+        <input id="crewFundingCapInput" type="number" min="0" step="50" value="1500">
+      </label>
+
+      <label class="field search-field">
+        <span>Search recruits</span>
+        <input id="crewSearch" type="search" placeholder="Name, alias, trait…" autocomplete="off">
+      </label>
+
+      <label class="field">
+        <span>Sort</span>
+        <select id="crewSort">
+          <option value="name">Character name</option>
+          <option value="reputation-asc">Lowest reputation</option>
+          <option value="reputation-desc">Highest reputation</option>
+          <option value="funding-asc">Lowest funding</option>
+          <option value="funding-desc">Highest funding</option>
+        </select>
+      </label>
+
+      <section class="reference-source-note">
+        <strong>Recruiting pool</strong>
+        <span id="crewPoolCount">Choose a crew to begin</span>
+        <span>Locked to one crew, matching normal crew-building rules.</span>
+      </section>
+    </aside>
+
+    <section class="library panel">
+      <div class="panel-heading library-heading">
+        <div>
+          <p class="eyebrow">Available models</p>
+          <h2 id="crewPoolTitle">Choose a crew to begin recruiting</h2>
+        </div>
+        <div class="library-stats"><strong id="crewPoolVisibleCount">0</strong><span>models shown</span></div>
+      </div>
+      <div id="crewPoolGrid" class="character-grid" aria-live="polite"></div>
+      <div id="emptyCrewPool" class="empty-state" hidden>
+        <h3>No recruits match</h3>
+        <p>Clear the search or choose a crew above.</p>
+      </div>
+    </section>
+
+    <aside class="deck panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Current crew</p>
+          <h2>Crew roster</h2>
+        </div>
+        <button id="clearCrew" class="icon-button danger" title="Clear roster" aria-label="Clear roster">×</button>
+      </div>
+
+      <section id="crewValidationSummary" class="validation-summary"></section>
+
+      <div class="meter-grid">
+        <div class="meter-card">
+          <span>Reputation</span>
+          <strong><span id="crewRepTotal">0</span>/<span id="crewRepCapLabel">350</span></strong>
+          <div class="meter"><i id="crewRepMeter"></i></div>
+        </div>
+        <div class="meter-card">
+          <span>Funding</span>
+          <strong>$<span id="crewFundingTotal">0</span>/$<span id="crewFundingCapLabel">1500</span></strong>
+          <div class="meter"><i id="crewFundingMeter"></i></div>
+        </div>
+      </div>
+
+      <div id="crewFundingBonusNote" class="funding-bonus-note" hidden></div>
+
+      <div class="deck-section-heading">
+        <h3>Recruited models</h3>
+        <span id="crewRosterCount">0 models</span>
+      </div>
+      <div id="crewRosterList" class="deck-list empty-note">Recruit models from the pool.</div>
+
+      <div class="deck-actions">
+        <button id="exportCrewJson" class="button ghost" type="button">Export JSON</button>
+        <button id="exportCrewText" class="button ghost" type="button">Export list</button>
+        <label class="button ghost file-button">Import JSON<input id="importCrewJson" type="file" accept="application/json"></label>
+        <button id="printCrew" class="button ghost" type="button">Print</button>
       </div>
     </aside>
   </main>
@@ -442,6 +550,17 @@
         </div>
       </section>
 
+      <details class="play-crew-panel">
+        <summary>
+          <div>
+            <p class="eyebrow">Reference</p>
+            <h3>Your crew &amp; traits</h3>
+          </div>
+          <span id="playCrewCount" class="muted"></span>
+        </summary>
+        <div id="playCrewList" class="play-crew-list"></div>
+      </details>
+
       <section class="play-board">
         <div class="play-hand-area">
           <div class="play-section-heading">
@@ -462,11 +581,20 @@
               <strong>BATMAN</strong>
               <small>Top card hidden</small>
             </div>
+            <button id="playDrawCard" class="button ghost compact play-draw-button" type="button">Draw a card</button>
+            <div class="play-search-deck">
+              <input id="playSearchInput" type="search" placeholder="Search draw pile for a card…" aria-label="Search draw pile for a card" autocomplete="off">
+              <div id="playSearchResults" class="play-search-results"></div>
+            </div>
           </section>
 
           <section class="play-pile-panel">
             <div class="play-section-heading"><h3>Discard pile</h3><span id="playDiscardCountSide" class="muted"></span></div>
-            <div id="playDiscardPreview" class="discard-preview empty-note">No discarded cards.</div>
+            <details id="playDiscardListPanel" class="play-discard-panel">
+              <summary><span id="playDiscardSummary">No discarded cards</span></summary>
+              <button id="playDiscardShuffleAll" class="button ghost compact" type="button" disabled>Shuffle entire pile into deck</button>
+              <div id="playDiscardList" class="play-discard-list"></div>
+            </details>
           </section>
 
           <section class="play-log-panel">

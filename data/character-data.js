@@ -105,7 +105,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "For My Lords!",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "a46ad064b3e0"
       },
       {
         "label": "Minion (3)",
@@ -236,7 +237,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Herald of Spades",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "10a24c21478f"
       },
       {
         "label": "Instinctive Shooting",
@@ -245,7 +247,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Jack of Spades",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "e46d4006032a"
       },
       {
         "label": "One of the Boys",
@@ -317,7 +320,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Card Fly",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "d2272365342c"
       },
       {
         "label": "Cheat",
@@ -326,7 +330,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "King of Spades",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "6961c4677b99"
       },
       {
         "label": "Leadership",
@@ -396,7 +401,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Aversion (Harley Quinn)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "30a943925e5c"
       },
       {
         "label": "Fast (3)",
@@ -405,11 +411,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Fire Catalyst",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "55af4ac53186"
       },
       {
         "label": "Hail to the Queen!",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "3f9b3adb844a"
       },
       {
         "label": "Inspire",
@@ -499,7 +507,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Queen of Spades",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "7376ef94c0ac"
       },
       {
         "label": "Realistic Illusions",
@@ -768,7 +777,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bio-Chemical Recharge",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "b94c8cfc6eae"
       }
     ],
     "weaponRules": [
@@ -1035,7 +1045,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Affinity (Harley Quinn)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "df6854570fbc"
       },
       {
         "label": "Animal",
@@ -1321,7 +1332,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Joker)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [
@@ -1397,7 +1409,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Joker)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [
@@ -1458,11 +1471,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Faint",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "d6cf8cb95703"
       },
       {
         "label": "Mindless Gas Attack",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5e1f62d30539"
       },
       {
         "label": "Minion (3)",
@@ -1533,11 +1548,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Faint",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "d6cf8cb95703"
       },
       {
         "label": "Mindless Gas Attack",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5e1f62d30539"
       },
       {
         "label": "Minion (3)",
@@ -1608,11 +1625,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Faint",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "d6cf8cb95703"
       },
       {
         "label": "Mindless Gas Attack",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5e1f62d30539"
       },
       {
         "label": "Minion (3)",
@@ -1813,7 +1832,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Affinity (Poison Ivy)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "df6854570fbc"
       },
       {
         "label": "Always on the Move",
@@ -1842,11 +1862,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Release the Boys!",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "23c27feb6750"
       },
       {
         "label": "True Love (Joker)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [
@@ -1925,7 +1947,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Brainwash",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "53ba120c276d"
       },
       {
         "label": "Fast (2)",
@@ -1939,7 +1962,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Lieutenant (Joker (Titan))",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "308401b7e98e"
       },
       {
         "label": "Psychiatrist",
@@ -1948,7 +1972,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Joker)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [
@@ -2024,7 +2049,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Joker)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [
@@ -2100,7 +2126,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Affinity (Poison Ivy)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "df6854570fbc"
       },
       {
         "label": "Discourage",
@@ -2119,7 +2146,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Joker)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [
@@ -2710,7 +2738,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "If You're Good at Something...",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "d4a704d68cd1"
       },
       {
         "label": "Kaos Agent",
@@ -2734,7 +2763,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Psychopath",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "57ef6cddc268"
       },
       {
         "label": "Undercover",
@@ -2795,11 +2825,13 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Aware of What He Did",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "9ed64bed9007"
       },
       {
         "label": "Catwoman's Target",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c1a267cee099"
       },
       {
         "label": "Kaos Agent",
@@ -2813,7 +2845,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Pulling the Strings",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "72a4c052c333"
       },
       {
         "label": "Trickster",
@@ -3010,7 +3043,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Psychopath",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "57ef6cddc268"
       }
     ],
     "weaponRules": [
@@ -3202,7 +3236,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Find the Better Joker",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "31b326a40499"
       },
       {
         "label": "Good Aim",
@@ -3307,7 +3342,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Like Flies to Me",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "f1cc30eedd43"
       },
       {
         "label": "Luck",
@@ -3341,7 +3377,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "The One and Only Joker",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "e1fe3f48a6d7"
       }
     ],
     "weaponRules": [
@@ -3931,7 +3968,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Faint",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "d6cf8cb95703"
       },
       {
         "label": "Horde",
@@ -3992,7 +4030,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Faint",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "d6cf8cb95703"
       },
       {
         "label": "Horde",
@@ -4058,7 +4097,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Faint",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "d6cf8cb95703"
       },
       {
         "label": "Horde",
@@ -4114,7 +4154,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Affinity (Harley Quinn)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "df6854570fbc"
       },
       {
         "label": "Animal",
@@ -4209,11 +4250,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Joker)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       },
       {
         "label": "True Psychopath",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "57ef6cddc268"
       }
     ],
     "weaponRules": [
@@ -4700,7 +4743,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Umbrella's Knout Gas",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "316a18417cf2"
       },
       {
         "label": "Wah! Wah! Wah!",
@@ -4796,7 +4840,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Trap Master",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "cc40ece2bac9"
       },
       {
         "label": "Trickster",
@@ -4867,7 +4912,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bio-Chemical Recharge",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "b94c8cfc6eae"
       },
       {
         "label": "Charge",
@@ -4896,7 +4942,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teamwork (1) (Borgon)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "91af06dfb307"
       }
     ],
     "weaponRules": [
@@ -4962,7 +5009,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Embrace the Chaos",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "add836a172ae"
       },
       {
         "label": "Hardened",
@@ -4971,7 +5019,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "He Was the Best of Us",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "4505b59ed1aa"
       },
       {
         "label": "Hidden",
@@ -5128,7 +5177,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite Boss (SWAT)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5a20e4c75163"
       },
       {
         "label": "Hardened",
@@ -5487,7 +5537,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Detective",
@@ -5526,7 +5577,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Treasure Hunter",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "a2326950a23a"
       }
     ],
     "weaponRules": [
@@ -5607,7 +5659,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Leading From the Shadows",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "45583c79ae88"
       },
       {
         "label": "Master of Stealth",
@@ -5703,7 +5756,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "I'm Vengeance",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "2d3afdeb05bc"
       },
       {
         "label": "Investigator",
@@ -5827,7 +5881,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Reveal the Bat",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "87ee1ca18cce"
       },
       {
         "label": "Shadows Agent",
@@ -5968,7 +6023,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teamwork (1) (Green Arrow)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "91af06dfb307"
       }
     ],
     "weaponRules": [
@@ -6109,7 +6165,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Required (Batman (Dark Knight Rises))",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "d4e1f9064a89"
       },
       {
         "label": "Undercover",
@@ -6190,7 +6247,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Required (Batman (Dark Knight Rises))",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "d4e1f9064a89"
       },
       {
         "label": "Sneak Attack",
@@ -6261,7 +6319,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Combo (Whip)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c6c8b3494878"
       },
       {
         "label": "Fast (2)",
@@ -6275,7 +6334,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Required (Batman (Michael Keaton))",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "e819e210cd4a"
       },
       {
         "label": "Sneak Attack",
@@ -6413,7 +6473,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Affinity (Batman)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "df6854570fbc"
       },
       {
         "label": "Air Support",
@@ -6452,7 +6513,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite Boss (SWAT)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5a20e4c75163"
       },
       {
         "label": "Take Cover!",
@@ -6702,7 +6764,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Beast Boy)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       },
       {
         "label": "Undercover",
@@ -6757,7 +6820,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite (SWAT)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Street Guy",
@@ -7187,11 +7251,13 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Artist",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "4527c2860f0b"
       },
       {
         "label": "Holiday",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "8f498411db20"
       },
       {
         "label": "Intel Support (5)",
@@ -7251,7 +7317,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Hunter",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "9dbe8a75c4d8"
       },
       {
         "label": "Master Marksman",
@@ -7265,11 +7332,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teamwork (1) (Black Canary)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "91af06dfb307"
       },
       {
         "label": "The Quiver",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "35f6ca1fd0f5"
       }
     ],
     "weaponRules": [
@@ -7324,11 +7393,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Affinity (Batman)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "df6854570fbc"
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Desensitized",
@@ -7616,7 +7687,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Incorruptible",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "7f62c9dd1faa"
       },
       {
         "label": "Observation",
@@ -7691,7 +7763,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Incorruptible",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "7f62c9dd1faa"
       },
       {
         "label": "Lantern",
@@ -7700,7 +7773,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Lieutenant (Chief Mackenzie)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c3fe2f116a87"
       },
       {
         "label": "Order",
@@ -7709,7 +7783,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Support (Batman (Robert Pattinson))",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "24e6da9452ce"
       }
     ],
     "weaponRules": [
@@ -7755,7 +7830,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Countermeasures",
@@ -7810,7 +7886,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Block It Out",
@@ -7829,7 +7906,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Pulling the Strings",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "72a4c052c333"
       },
       {
         "label": "Required (Terry McGinnis)",
@@ -8085,7 +8163,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Batclaw",
@@ -8124,7 +8203,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       }
     ],
     "weaponRules": [
@@ -8277,7 +8357,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Incorruptible",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "7f62c9dd1faa"
       }
     ],
     "weaponRules": [
@@ -8362,7 +8443,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Crazy Jane)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       },
       {
         "label": "Unstoppable",
@@ -8489,7 +8571,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite (SWAT)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Hardened",
@@ -8564,7 +8647,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite (SWAT)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       }
     ],
     "weaponRules": [
@@ -8635,7 +8719,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite (SWAT)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Radio",
@@ -8716,7 +8801,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite (SWAT)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Radio",
@@ -8904,7 +8990,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Reveal the Bat",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "87ee1ca18cce"
       },
       {
         "label": "Shadows Agent",
@@ -9210,7 +9297,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Small Nightmare",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1d829d7aa516"
       },
       {
         "label": "Tangible Fear",
@@ -9596,7 +9684,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Control Through Fear",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "ec5c7c620fd0"
       },
       {
         "label": "Induction",
@@ -9725,7 +9814,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Ozymandias)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [],
@@ -9872,7 +9962,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Smartest Man Alive",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "4ac81482374a"
       }
     ],
     "weaponRules": [],
@@ -9986,7 +10077,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Combo (Unarmed)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c6c8b3494878"
       },
       {
         "label": "Counter Attack",
@@ -10138,7 +10230,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Dark Influence",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1b17fb8ea8e4"
       },
       {
         "label": "Death Pack",
@@ -10218,11 +10311,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Faint",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "d6cf8cb95703"
       },
       {
         "label": "Freed",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "e4f198d8bd50"
       },
       {
         "label": "Mindless Monster",
@@ -10236,7 +10331,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Walking Suspects",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "7834e578cd6f"
       }
     ],
     "weaponRules": [
@@ -10286,7 +10382,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "He Freed Me",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "4b09522ec1aa"
       },
       {
         "label": "Horde",
@@ -10356,7 +10453,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Dark Influence",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1b17fb8ea8e4"
       },
       {
         "label": "Detective",
@@ -10482,7 +10580,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Dark Influence",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1b17fb8ea8e4"
       },
       {
         "label": "Detective",
@@ -10491,7 +10590,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Disposable Minions",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "292262f08f10"
       },
       {
         "label": "Goad",
@@ -10505,7 +10605,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Insider Agent",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "88389f46f72b"
       },
       {
         "label": "Veteran",
@@ -10759,7 +10860,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Expendable Penguin 1",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "d39a687ef6e9"
       },
       {
         "label": "Minion (3)",
@@ -10819,7 +10921,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Hypnotic Radio Waves",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c4c6e0db9c7a"
       },
       {
         "label": "It's Mine",
@@ -10997,7 +11100,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Lieutenant (The Penguin)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "8a2cfe7e291b"
       },
       {
         "label": "Mobster",
@@ -11083,7 +11187,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Expendable Penguin 2",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "4515d826cb08"
       },
       {
         "label": "Minion (3)",
@@ -11154,7 +11259,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Explosive Sense",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "8fdef7adfab1"
       },
       {
         "label": "Take Cover!",
@@ -11534,7 +11640,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Expendable Penguin 2",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "4515d826cb08"
       },
       {
         "label": "Minion (3)",
@@ -11672,7 +11779,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Hold 'Em Still",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "4caa7c195c2f"
       },
       {
         "label": "Mobster",
@@ -12213,11 +12321,13 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Criminal Empire",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "ad44f6b584a8"
       },
       {
         "label": "In the End",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "dd7e2326f64a"
       },
       {
         "label": "Lord of Business",
@@ -12312,7 +12422,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Hidden Penguins",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "92e8f2731239"
       },
       {
         "label": "Mayor Cobblepot",
@@ -12617,7 +12728,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Combo (Poisoned Sai)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c6c8b3494878"
       },
       {
         "label": "Poison Catalyst",
@@ -12951,7 +13063,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Combo (Unarmed)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c6c8b3494878"
       },
       {
         "label": "Martial Artist",
@@ -13078,7 +13191,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Combo (Knives)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c6c8b3494878"
       },
       {
         "label": "Martial Expert",
@@ -13430,7 +13544,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Bane)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       },
       {
         "label": "Undercover",
@@ -13486,7 +13601,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite Boss (Ninja)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5a20e4c75163"
       },
       {
         "label": "Exhaustive Planner",
@@ -13500,7 +13616,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Lazarus Pit Owner",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "657e94f4ea73"
       },
       {
         "label": "Martial Artist",
@@ -13514,7 +13631,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Shadows Command",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c8ee050dbbbc"
       },
       {
         "label": "Strategist",
@@ -13615,7 +13733,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Damian Wayne)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       },
       {
         "label": "Weapon Master",
@@ -13768,7 +13887,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Lieutenant (Ra's al Ghul)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "965c42fd281c"
       },
       {
         "label": "Martial Artist",
@@ -13910,7 +14030,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Lieutenant (The Riddler)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db348f9e56fd"
       },
       {
         "label": "Treacherous",
@@ -14120,7 +14241,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Combo (?Knuckles)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c6c8b3494878"
       },
       {
         "label": "Small",
@@ -14166,7 +14288,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Combo (Short Sickle)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c6c8b3494878"
       },
       {
         "label": "Distract",
@@ -14351,7 +14474,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Combo (?Heavy)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c6c8b3494878"
       },
       {
         "label": "Electric Storm",
@@ -14407,7 +14531,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Combo (Bat)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c6c8b3494878"
       },
       {
         "label": "Street Guy",
@@ -14625,7 +14750,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "As Blind as a Bat",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "0f057fa8a289"
       },
       {
         "label": "Detonate",
@@ -14644,7 +14770,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Knowledge is Power",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "9a83ceb42959"
       },
       {
         "label": "Showmanship!",
@@ -14797,7 +14924,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "No More Lies",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "56d346d12e4d"
       },
       {
         "label": "Not Him",
@@ -14821,7 +14949,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Unmask the Truth",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "b0ab90a96a2d"
       }
     ],
     "weaponRules": [
@@ -15374,7 +15503,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Rapid Reload",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "fbe9649d8c63"
       }
     ],
     "weaponRules": [
@@ -15521,7 +15651,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Rapid Reload",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "fbe9649d8c63"
       }
     ],
     "weaponRules": [
@@ -15667,7 +15798,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Gambling Time",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "6aef27d15ced"
       },
       {
         "label": "Gangsters",
@@ -15748,7 +15880,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Duo (Sugar)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "57b7ddfb5f06"
       },
       {
         "label": "One of the Boys",
@@ -15767,11 +15900,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teamwork (2) (Sugar)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "91af06dfb307"
       },
       {
         "label": "True Love (Harvey Dent)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [
@@ -15846,7 +15981,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Duo (Spice)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "57b7ddfb5f06"
       },
       {
         "label": "One of the Boys",
@@ -15865,11 +16001,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teamwork (2) (Spice)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "91af06dfb307"
       },
       {
         "label": "True Love (Harvey Dent)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [
@@ -15929,7 +16067,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Cleaning the Scene",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "8d9f182bf003"
       },
       {
         "label": "Concealment",
@@ -16028,7 +16167,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Counter Argument",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "f1afa6df4020"
       },
       {
         "label": "Evidence Tampering",
@@ -16042,7 +16182,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Gang Lord",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "44ded63d233d"
       },
       {
         "label": "Gangsters",
@@ -16056,7 +16197,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Rapid Reload",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "fbe9649d8c63"
       },
       {
         "label": "Reinforced Gloves",
@@ -16136,7 +16278,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Coin Flip",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "be26e30bc871"
       },
       {
         "label": "Expert Marksman",
@@ -16150,11 +16293,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Listen to the Coin",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "2510bb715d02"
       },
       {
         "label": "Order in the Court",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "a87fea8aa0f1"
       },
       {
         "label": "Reinforced Gloves",
@@ -16229,7 +16374,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Coin Flip",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "be26e30bc871"
       },
       {
         "label": "Expert Marksman",
@@ -16253,7 +16399,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teamwork (1) (Sugar & Spice)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "91af06dfb307"
       },
       {
         "label": "Vengeance",
@@ -16557,7 +16704,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite Boss (Plants)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5a20e4c75163"
       },
       {
         "label": "Green Web",
@@ -16571,7 +16719,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Parliament of Flowers",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "bd1cd708d65c"
       },
       {
         "label": "Plant",
@@ -16585,7 +16734,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Walking Plant",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "a1084a2b2c7e"
       }
     ],
     "weaponRules": [
@@ -16631,7 +16781,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite (Plants)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Plant",
@@ -16645,7 +16796,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Suspicius Plant",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "27c375228692"
       }
     ],
     "weaponRules": [
@@ -16798,7 +16950,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Poison Ivy)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [
@@ -16864,15 +17017,18 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teamwork (1) (Dove)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "91af06dfb307"
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       },
       {
         "label": "True Love (Dove)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [
@@ -17182,7 +17338,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Combo (Unarmed)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c6c8b3494878"
       },
       {
         "label": "Martial Artist",
@@ -17247,7 +17404,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Elite (Plants)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Plant",
@@ -17298,7 +17456,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Elite (Plants)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Plant",
@@ -17364,7 +17523,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite (Plants)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Plant",
@@ -17429,7 +17589,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite Boss (Plants)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5a20e4c75163"
       },
       {
         "label": "Green Web",
@@ -17530,7 +17691,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Affinity (Mr. Freeze (1997))",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "df6854570fbc"
       },
       {
         "label": "Control Pheromones",
@@ -17539,11 +17701,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite Boss (Plants)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5a20e4c75163"
       },
       {
         "label": "Let's Cool It for Now",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "885dd6d6f5e2"
       },
       {
         "label": "Mortal Kiss",
@@ -17552,7 +17716,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Nature's Arm",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "05851353f195"
       },
       {
         "label": "Poison Immunity",
@@ -17643,7 +17808,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite (Plants)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Plant",
@@ -17652,7 +17818,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Walking Plant",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "a1084a2b2c7e"
       }
     ],
     "weaponRules": [
@@ -17698,11 +17865,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite (Plants)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Growling Hound",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "e1eae7b9d537"
       },
       {
         "label": "Plant",
@@ -17711,7 +17880,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Walking Plant",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "a1084a2b2c7e"
       }
     ],
     "weaponRules": [
@@ -18525,7 +18695,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Cryo-Charge",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "7af2fffb8b5b"
       },
       {
         "label": "Drop It!",
@@ -18591,7 +18762,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Cryo-Charge",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "7af2fffb8b5b"
       },
       {
         "label": "Minion (3)",
@@ -18667,7 +18839,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Cryo-Charge",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "7af2fffb8b5b"
       },
       {
         "label": "Desensitized",
@@ -18894,7 +19067,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Nora Fries)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       },
       {
         "label": "Vulnerability to Fire",
@@ -19017,7 +19191,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Nora Fries)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       },
       {
         "label": "Vulnerability to Fire",
@@ -19311,7 +19486,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Living Arsenal",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "65c80126298a"
       },
       {
         "label": "Martial Artist",
@@ -19382,7 +19558,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Like Flies to Me",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "f1cc30eedd43"
       },
       {
         "label": "Medium Armor",
@@ -19488,7 +19665,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Super Speed (3)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "a539ce0017e6"
       }
     ],
     "weaponRules": [
@@ -19659,7 +19837,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Kobra Swarm",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "0d330b80ce02"
       },
       {
         "label": "Poison Master",
@@ -19770,7 +19949,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "The Good Command",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "2c0da89a3427"
       }
     ],
     "weaponRules": [
@@ -21431,7 +21611,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite Boss (Soldier of Fortune)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5a20e4c75163"
       },
       {
         "label": "Large",
@@ -21480,7 +21661,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Venom Dose (2)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "180dd25b2ae2"
       }
     ],
     "weaponRules": [],
@@ -21525,7 +21707,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Combo (Unarmed)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c6c8b3494878"
       },
       {
         "label": "Desensitized",
@@ -21554,7 +21737,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Talia)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [],
@@ -21604,7 +21788,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite Boss (Soldier of Fortune)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5a20e4c75163"
       },
       {
         "label": "I Will Break You",
@@ -21633,7 +21818,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Venom Dose (2)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "180dd25b2ae2"
       },
       {
         "label": "Venom Enrage",
@@ -21723,7 +21909,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Venom Dose (1)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "180dd25b2ae2"
       },
       {
         "label": "Venom Enrage",
@@ -21794,11 +21981,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Like Flies to Me",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "f1cc30eedd43"
       },
       {
         "label": "Recover the Titan",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "ade58e64760c"
       },
       {
         "label": "Savage Throw",
@@ -21807,11 +21996,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Titan Addict",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5a511f390c31"
       },
       {
         "label": "Titan Dose (4)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "116fc80a6d20"
       },
       {
         "label": "Tough Guy",
@@ -21872,11 +22063,13 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Accelerated Venom",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c4a2d8171627"
       },
       {
         "label": "Breaking the Bat",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "10ea4014dd2e"
       },
       {
         "label": "Desensitized",
@@ -21885,7 +22078,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite Boss (Soldier of Fortune)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5a20e4c75163"
       },
       {
         "label": "Grudge Match",
@@ -21899,7 +22093,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Like Flies to Me",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "f1cc30eedd43"
       },
       {
         "label": "Tough Guy",
@@ -21908,7 +22103,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Venom Dose (4)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "180dd25b2ae2"
       },
       {
         "label": "Venom Enrage",
@@ -22051,7 +22247,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Paramedic",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "6e91b0fbfcf9"
       },
       {
         "label": "Precise Blow",
@@ -22121,7 +22318,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite Boss (Soldier of Fortune)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5a20e4c75163"
       },
       {
         "label": "Military Tradition",
@@ -22202,7 +22400,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Elite Boss (Soldier of Fortune)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5a20e4c75163"
       },
       {
         "label": "Falconry",
@@ -22412,7 +22611,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite (Soldier of Fortune)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Light Armor",
@@ -22468,7 +22668,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Elite (Soldier of Fortune)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Light Armor",
@@ -22760,7 +22961,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Raised with Venom",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "d0e757a7d04c"
       },
       {
         "label": "Reinforced Gloves",
@@ -22779,7 +22981,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Venom Dose (2)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "180dd25b2ae2"
       },
       {
         "label": "Veteran",
@@ -22824,7 +23027,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Paramedic",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "6e91b0fbfcf9"
       },
       {
         "label": "Veteran",
@@ -23014,15 +23218,18 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Moment of Glory",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "46403542fcb6"
       },
       {
         "label": "Teamwork (1) (Wrestlers)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "91af06dfb307"
       },
       {
         "label": "The Dude",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "498d6ac44cab"
       },
       {
         "label": "Wrestler",
@@ -23068,7 +23275,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Elite (Soldier of Fortune)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Gas Mask",
@@ -23139,7 +23347,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Elite (Soldier of Fortune)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Hold Breath",
@@ -23302,7 +23511,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite (Soldier of Fortune)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Stealth",
@@ -23373,7 +23583,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite (Soldier of Fortune)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Hardened",
@@ -23454,7 +23665,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Hunter",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "9dbe8a75c4d8"
       },
       {
         "label": "Tracking",
@@ -23530,15 +23742,18 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Moment of Glory",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "46403542fcb6"
       },
       {
         "label": "Protein's Shaker (Dose)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "89af48faf805"
       },
       {
         "label": "Teamwork (1) (Wrestlers)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "91af06dfb307"
       },
       {
         "label": "Wrestler",
@@ -23604,7 +23819,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Raised with Venom",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "d0e757a7d04c"
       },
       {
         "label": "Reinforced Gloves",
@@ -23623,7 +23839,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Venom Dose (4)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "180dd25b2ae2"
       },
       {
         "label": "Venom Enrage",
@@ -23668,7 +23885,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Bionic Eye",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "e2a40abbb220"
       },
       {
         "label": "Criminal",
@@ -23692,7 +23910,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Lieutenant (Black Mask)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "bd456376b6ad"
       },
       {
         "label": "Smuggler",
@@ -23773,7 +23992,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite (Gangster)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Take Cover!",
@@ -24375,7 +24595,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Inside Man",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "dcd37b4cbb01"
       },
       {
         "label": "Mobster",
@@ -24559,7 +24780,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Pulling the Strings",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "72a4c052c333"
       },
       {
         "label": "Strategist",
@@ -24568,7 +24790,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "This Is My City",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "9de2031aacbc"
       }
     ],
     "weaponRules": [
@@ -24716,7 +24939,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Protect the Shadows",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "ae3785d80224"
       },
       {
         "label": "Shady Dealings",
@@ -24849,7 +25073,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Lieutenant (Black Mask)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "bd456376b6ad"
       },
       {
         "label": "Psycho",
@@ -24878,7 +25103,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Black Mask)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [
@@ -24986,7 +25212,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Made Man",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "e426ac25da2f"
       },
       {
         "label": "Mobster",
@@ -25273,7 +25500,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite Boss (Gangster)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5a20e4c75163"
       },
       {
         "label": "Hidden Sniper",
@@ -25354,7 +25582,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite (Gangster)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Multifire",
@@ -25645,7 +25874,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Lieutenant (Carmine Falcone)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eb526a77190b"
       },
       {
         "label": "Order",
@@ -25716,7 +25946,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite Boss (Gangster)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5a20e4c75163"
       },
       {
         "label": "Grand Strategist",
@@ -25862,7 +26093,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Widespread Corruption",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "ee505f36822c"
       }
     ],
     "weaponRules": [],
@@ -25917,7 +26149,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Showing the Ropes",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "72b7a05fc53d"
       }
     ],
     "weaponRules": [],
@@ -25952,7 +26185,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Elite Boss (Gangster)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5a20e4c75163"
       },
       {
         "label": "Elusive",
@@ -26090,7 +26324,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Elite (Gangster)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "db9d49110f53"
       },
       {
         "label": "Undercover",
@@ -26176,7 +26411,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Pulling the Strings",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "72a4c052c333"
       },
       {
         "label": "Reckless Leader",
@@ -26236,7 +26472,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Living Arsenal",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "65c80126298a"
       },
       {
         "label": "Outlaw Field Commander",
@@ -26327,7 +26564,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Melee Boomerang",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "b9881d6d9632"
       },
       {
         "label": "Monitoring Device",
@@ -26403,7 +26641,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Boomerang's Arsenal",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "8eb5bd169404"
       },
       {
         "label": "Designated",
@@ -27039,7 +27278,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Inspiring Presence (Peacemaker)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "d0e4b5807ed3"
       },
       {
         "label": "Required (Peacemaker)",
@@ -27053,11 +27293,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teamwork (2) (Peacemaker)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "91af06dfb307"
       },
       {
         "label": "True Love (Peacemaker)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [],
@@ -27097,7 +27339,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Tracking Device",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "9d961b91003a"
       },
       {
         "label": "Volunteer",
@@ -27484,7 +27727,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Configurable Weapon",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "6ea91d03c5fa"
       },
       {
         "label": "Good Aim",
@@ -27966,7 +28210,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Eagly)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [
@@ -28118,7 +28363,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Releasing the Dots",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "3956d35a2d7e"
       }
     ],
     "weaponRules": [
@@ -28203,7 +28449,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Tamer Device",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "fa1d08d5a441"
       }
     ],
     "weaponRules": [],
@@ -28258,7 +28505,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       }
     ],
     "weaponRules": [
@@ -28416,7 +28664,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Charismatic Rat",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "441ca854aadc"
       },
       {
         "label": "Poison Immunity",
@@ -28487,7 +28736,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Batclaw/Grapple Gun",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "6f96392931e0"
       },
       {
         "label": "Bulletproof Vest",
@@ -28748,7 +28998,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Combo (Owl Knife)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c6c8b3494878"
       },
       {
         "label": "Exhaustive Planner",
@@ -29007,7 +29258,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Feral",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "ceff31775d7e"
       },
       {
         "label": "Really Tenacious",
@@ -29062,7 +29314,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Arkham Asylum Dr.",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "9e6ebfdeea35"
       },
       {
         "label": "Drop It!",
@@ -29081,7 +29334,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Required (Dr. Hugo Strange)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "94480a48f485"
       },
       {
         "label": "Subliminal Suggestion",
@@ -29156,7 +29410,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Arkham Asylum Dr.",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "9e6ebfdeea35"
       },
       {
         "label": "Crucial Information",
@@ -29175,7 +29430,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Required (Dr. Hugo Strange)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "94480a48f485"
       },
       {
         "label": "Subliminal Suggestion",
@@ -29254,7 +29510,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Computer Console",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c277ee22fc86"
       },
       {
         "label": "Computer Intrusion",
@@ -29268,7 +29525,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Visor Projections",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "9125097b7f0c"
       }
     ],
     "weaponRules": [
@@ -29324,7 +29582,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Seasonal Criminal",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "02b75606fd11"
       },
       {
         "label": "Strategist",
@@ -29419,7 +29678,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Hunter",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "9dbe8a75c4d8"
       },
       {
         "label": "Precise Blow",
@@ -29592,11 +29852,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Combo (Unarmed)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c6c8b3494878"
       },
       {
         "label": "Disguise",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "67853348a51d"
       },
       {
         "label": "Don't Mind Me",
@@ -29657,7 +29919,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Bodyguard",
@@ -30049,7 +30312,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Arkham Asylum Dr.",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "9e6ebfdeea35"
       },
       {
         "label": "Mastermind",
@@ -30058,7 +30322,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Mind Control",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "054cf2e070d6"
       },
       {
         "label": "Psychiatrist",
@@ -30230,7 +30495,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "A Bit of Magic",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "34240d744486"
       },
       {
         "label": "Acrobat",
@@ -30259,7 +30525,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Joker)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [
@@ -30402,7 +30669,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Configurable Weapon",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "6ea91d03c5fa"
       },
       {
         "label": "Good Aim",
@@ -30645,7 +30913,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Hand!!",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c7ec112fbc6e"
       },
       {
         "label": "Hardened",
@@ -30726,7 +30995,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "True Love (Poison Ivy)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "eac371255606"
       }
     ],
     "weaponRules": [],
@@ -30811,7 +31081,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "The Main Man",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "a1ebd7766bee"
       }
     ],
     "weaponRules": [
@@ -31054,7 +31325,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Hypnotic Radio Waves",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c4c6e0db9c7a"
       },
       {
         "label": "Lantern",
@@ -31342,11 +31614,13 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Back to the Nightmare",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "168fb9707adb"
       },
       {
         "label": "Fear of the Dark",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "29d1e6466ac9"
       },
       {
         "label": "Gas Mask",
@@ -31512,8 +31786,9 @@ window.BATMAN_CHARACTER_DATA = [
         "referenceId": "6bb17b4c20fc"
       },
       {
-        "label": "Electromatic Control D",
-        "category": "trait"
+        "label": "Electromatic Control Device",
+        "category": "trait",
+        "referenceId": "664715268130"
       },
       {
         "label": "Fully Equipped",
@@ -31706,7 +31981,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Super-Sight",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "686f0e89b36f"
       }
     ],
     "weaponRules": [
@@ -32049,7 +32325,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Combo (Machete)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "c6c8b3494878"
       },
       {
         "label": "Death Marks",
@@ -32140,11 +32417,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Detective Best Friend",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "01913d402513"
       },
       {
         "label": "True Love (Robin)",
@@ -32199,7 +32478,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Batcave Support",
@@ -32208,11 +32488,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Business Agent",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "2e327b2974ad"
       },
       {
         "label": "Informer",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "56c937a7d173"
       },
       {
         "label": "Intel Support (4)",
@@ -32221,15 +32503,18 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Radio",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "30410945ba83"
       },
       {
         "label": "The Dark Knight Returns",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "9474a4578159"
       },
       {
         "label": "Veteran",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "4080d5bbb2e9"
       }
     ],
     "weaponRules": [
@@ -32288,7 +32573,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Flaming Wave",
@@ -32317,7 +32603,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Suit of Sorrows",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "9f7568bca839"
       }
     ],
     "weaponRules": [
@@ -32383,7 +32670,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Batclaw",
@@ -32422,7 +32710,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       }
     ],
     "weaponRules": [
@@ -32478,11 +32767,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Batclaw/Grapple Gun",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "6f96392931e0"
       },
       {
         "label": "Combo (Unarmed)",
@@ -32563,7 +32854,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Batclaw",
@@ -32649,7 +32941,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Bat-Armor Mk I",
@@ -32760,7 +33053,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Bat-Armor Mk III",
@@ -32799,7 +33093,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "The Tomorrow Knight",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "586f8e6d4286"
       }
     ],
     "weaponRules": [
@@ -32860,7 +33155,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Bat-Armor Mk II",
@@ -32961,7 +33257,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Bat-Armor Mk I",
@@ -32970,7 +33267,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Changing the Tempo",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "aa3a74d4908b"
       },
       {
         "label": "Charismatic",
@@ -33091,7 +33389,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Bat-Armor Mk I",
@@ -33187,7 +33486,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Detective",
@@ -33297,7 +33597,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Bat-Armor Mk I",
@@ -33403,7 +33704,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Bat-Armor Mk I",
@@ -33412,7 +33714,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Batclaw/Grapple Gun",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "6f96392931e0"
       },
       {
         "label": "Close Combat Master",
@@ -33493,7 +33796,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Batclaw",
@@ -33592,7 +33896,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Bat-Armor Mk III",
@@ -33611,7 +33916,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Flying Kick",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "59f61ea1b85a"
       },
       {
         "label": "I'm Batman",
@@ -33687,7 +33993,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Detective",
@@ -33721,7 +34028,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "War Scream",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "fae8363741dd"
       }
     ],
     "weaponRules": [
@@ -33792,7 +34100,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Bat-Armor Mk I",
@@ -33801,7 +34110,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Batclaw/Grapple Gun",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "6f96392931e0"
       },
       {
         "label": "Criminology",
@@ -33901,7 +34211,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Shapeshifting Gorilla Profile",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "577d98220b76"
       },
       {
         "label": "Shapeshifting",
@@ -33910,11 +34221,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       },
       {
         "label": "Tough Skin",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "62bb0e262687"
       }
     ],
     "weaponRules": [
@@ -33960,7 +34273,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Claws",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "ab7ce1945918"
       },
       {
         "label": "Dodge",
@@ -33979,7 +34293,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Shapeshifting Hawk Profile",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "ff217d50196c"
       },
       {
         "label": "Shapeshifting",
@@ -33988,7 +34303,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       }
     ],
     "weaponRules": [],
@@ -34028,7 +34344,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Shapeshifting Human Profile",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "fdde8536511b"
       },
       {
         "label": "Shapeshifting",
@@ -34037,7 +34354,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       },
       {
         "label": "Vigilante's Work",
@@ -34087,7 +34405,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Shapeshifting Tiger Profile",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "fcb6ba47ff3b"
       },
       {
         "label": "Shapeshifting",
@@ -34101,7 +34420,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       }
     ],
     "weaponRules": [
@@ -34152,7 +34472,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Canary Cry",
@@ -34166,7 +34487,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Team Player",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "4dfcd1ed36bf"
       },
       {
         "label": "Teamwork (2) (Green Arrow)",
@@ -34226,7 +34548,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Bluff",
@@ -34250,7 +34573,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Stealthy Cats",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "2e84cc93aba2"
       }
     ],
     "weaponRules": [
@@ -34296,7 +34620,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Climbing Claws",
@@ -34310,7 +34635,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Pleasant Surprise",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "72a11155a3f8"
       }
     ],
     "weaponRules": [
@@ -34356,7 +34682,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Bodyguard",
@@ -34457,11 +34784,13 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Antagonist (2-Trickster)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "32c1e08d1bb9"
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Devastating Blow",
@@ -34557,7 +34886,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       }
     ],
     "weaponRules": [
@@ -34617,7 +34947,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Bodyguard",
@@ -34646,7 +34977,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       },
       {
         "label": "Tough Skin",
@@ -34702,7 +35034,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Instinctive Shooting",
@@ -34711,7 +35044,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Put More Effort",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "a62daaa05365"
       },
       {
         "label": "Sharpshooter",
@@ -34781,7 +35115,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Desensitized",
@@ -34876,7 +35211,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Distract",
@@ -34885,7 +35221,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Harlequinade",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "5777a5766627"
       },
       {
         "label": "No More Joker",
@@ -34894,7 +35231,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Required (Batman (The Animated Series))",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "56c7370a84f7"
       }
     ],
     "weaponRules": [
@@ -34970,7 +35308,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       },
       {
         "label": "True Love (Dove)",
@@ -35025,7 +35364,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Good Aim",
@@ -35049,7 +35389,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Vendetta",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "7438f73c0e44"
       }
     ],
     "weaponRules": [
@@ -35130,7 +35471,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Molecular Control (1)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "0499ca6dfa0c"
       },
       {
         "label": "Speed Force Master (1)",
@@ -35144,11 +35486,13 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Super Speed (2)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "a539ce0017e6"
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       }
     ],
     "weaponRules": [
@@ -35222,7 +35566,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Countermeasures",
@@ -35277,7 +35622,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Block It Out",
@@ -35296,7 +35642,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Pulling the Strings",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "72a4c052c333"
       },
       {
         "label": "Required (Terry McGinnis)",
@@ -35361,7 +35708,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Batclaw",
@@ -35395,7 +35743,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       },
       {
         "label": "Vigilante's Work",
@@ -35466,7 +35815,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Hacking",
@@ -35551,7 +35901,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       }
     ],
     "weaponRules": [
@@ -35602,7 +35953,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Dark Intimidation (Spell)",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "9b85556a973a"
       },
       {
         "label": "Demon",
@@ -35636,7 +35988,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       }
     ],
     "weaponRules": [
@@ -35706,7 +36059,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Brutal",
@@ -35802,7 +36156,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Handyman",
@@ -35836,7 +36191,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       },
       {
         "label": "Troublemaker",
@@ -35912,7 +36268,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Batclaw",
@@ -35951,7 +36308,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       }
     ],
     "weaponRules": [
@@ -36116,7 +36474,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Batclaw",
@@ -36150,7 +36509,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       }
     ],
     "weaponRules": [
@@ -36220,7 +36580,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Boy Wonder",
@@ -36296,7 +36657,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Bat-Armor Mk III",
@@ -36387,7 +36749,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Boy Wonder",
@@ -36421,7 +36784,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       }
     ],
     "weaponRules": [
@@ -36507,7 +36871,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       },
       {
         "label": "True Love (Starfire)",
@@ -36580,7 +36945,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Batclaw",
@@ -36604,7 +36970,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       }
     ],
     "weaponRules": [
@@ -36670,7 +37037,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Brutal",
@@ -36746,7 +37114,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Dirty Fighter",
@@ -36827,7 +37196,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Bluff",
@@ -36892,7 +37262,8 @@ window.BATMAN_CHARACTER_DATA = [
     "traits": [
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Combo (Baton)",
@@ -36921,7 +37292,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Unmask the Truth",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "b0ab90a96a2d"
       }
     ],
     "weaponRules": [
@@ -36992,7 +37364,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       },
       {
         "label": "True Love (Dick Grayson)",
@@ -37076,7 +37449,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Bat Family",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "800c4a88c9b3"
       },
       {
         "label": "Escape Artist",
@@ -37202,7 +37576,8 @@ window.BATMAN_CHARACTER_DATA = [
       },
       {
         "label": "Teen Titans",
-        "category": "trait"
+        "category": "trait",
+        "referenceId": "1e32ab04adcd"
       },
       {
         "label": "Weapon Master",
