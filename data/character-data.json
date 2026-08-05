@@ -122,7 +122,8 @@
     "weaponRules": [
       {
         "label": "Boosted (1)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "6918cf39962f"
       },
       {
         "label": "Sharp",
@@ -198,7 +199,8 @@
     "weaponRules": [
       {
         "label": "Boosted (2)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "6918cf39962f"
       },
       {
         "label": "Overwhelming",
@@ -279,7 +281,8 @@
       },
       {
         "label": "Boosted (1)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "6918cf39962f"
       },
       {
         "label": "Sharp",
@@ -352,7 +355,8 @@
     "weaponRules": [
       {
         "label": "Boosted (1)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "6918cf39962f"
       },
       {
         "label": "Fire",
@@ -448,7 +452,8 @@
     "weaponRules": [
       {
         "label": "Poison",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "11656d47f164"
       },
       {
         "label": "Sharp",
@@ -539,7 +544,8 @@
       },
       {
         "label": "Boosted (1)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "6918cf39962f"
       },
       {
         "label": "Sharp",
@@ -723,7 +729,8 @@
     "weaponRules": [
       {
         "label": "CRT (Stunned)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Heavy",
@@ -1788,7 +1795,8 @@
     "weaponRules": [
       {
         "label": "Pull (4)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "97416091945d"
       },
       {
         "label": "Short Range",
@@ -1884,11 +1892,13 @@
       },
       {
         "label": "Boosted (3)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "6918cf39962f"
       },
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Devastating",
@@ -2297,7 +2307,8 @@
     "weaponRules": [
       {
         "label": "CRT (Paralyze)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Short Range",
@@ -2393,7 +2404,8 @@
     "weaponRules": [
       {
         "label": "CRT (Poison)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Sharp",
@@ -2872,7 +2884,8 @@
       },
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Reload",
@@ -3182,7 +3195,8 @@
       },
       {
         "label": "Blind",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "078d9b8e7f9b"
       },
       {
         "label": "Short Range",
@@ -3273,7 +3287,8 @@
     "weaponRules": [
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Reload",
@@ -4674,7 +4689,8 @@
       },
       {
         "label": "Motion (2)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "da5361dcae31"
       },
       {
         "label": "Blunt (3)",
@@ -5041,7 +5057,8 @@
     "weaponRules": [
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Firearm",
@@ -5788,7 +5805,8 @@
     "weaponRules": [
       {
         "label": "Pull (4)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "97416091945d"
       },
       {
         "label": "Mechanical",
@@ -5807,7 +5825,8 @@
       },
       {
         "label": "CRT (Stunned)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       }
     ],
     "image": "characters/police/batman-robert-pattinson.webp",
@@ -5903,7 +5922,8 @@
       },
       {
         "label": "CRT (Stunned)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       }
     ],
     "image": "characters/police/batman-on-bike.webp",
@@ -6030,7 +6050,8 @@
     "weaponRules": [
       {
         "label": "CRT (Paralyze)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Overwhelming",
@@ -6837,7 +6858,8 @@
     "weaponRules": [
       {
         "label": "Blind",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "078d9b8e7f9b"
       },
       {
         "label": "Short Range",
@@ -6965,7 +6987,8 @@
     "weaponRules": [
       {
         "label": "CRT (Stunned)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Reach (3)",
@@ -7344,7 +7367,8 @@
     "weaponRules": [
       {
         "label": "Acceleration",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "86bae9ad64e4"
       },
       {
         "label": "Aim",
@@ -7440,7 +7464,8 @@
     "weaponRules": [
       {
         "label": "Acceleration",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "86bae9ad64e4"
       },
       {
         "label": "Mechanical",
@@ -7516,7 +7541,8 @@
     "weaponRules": [
       {
         "label": "Concealed",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "340fdd719f68"
       },
       {
         "label": "Light",
@@ -7709,7 +7735,8 @@
       },
       {
         "label": "CRT (Paralyze)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Overwhelming",
@@ -7923,7 +7950,8 @@
     "weaponRules": [
       {
         "label": "Limited Attack",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "24901650f45c"
       },
       {
         "label": "Steal",
@@ -8364,7 +8392,8 @@
     "weaponRules": [
       {
         "label": "CRT (Paralyze)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Overwhelming",
@@ -8588,7 +8617,8 @@
     "weaponRules": [
       {
         "label": "CRT (Stunned)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Reach (3)",
@@ -9159,11 +9189,13 @@
       },
       {
         "label": "Boosted (3)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "6918cf39962f"
       },
       {
         "label": "Pull (4)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "97416091945d"
       }
     ],
     "image": "characters/scarecrow/dr-friitawa.webp",
@@ -9239,11 +9271,13 @@
     "weaponRules": [
       {
         "label": "True Fear",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "5cf110435f07"
       },
       {
         "label": "Terror",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "a1571c47a8d3"
       }
     ],
     "image": "characters/scarecrow/fearbeast-nightmare.webp",
@@ -9309,7 +9343,8 @@
     "weaponRules": [
       {
         "label": "CRT (True Fear)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Scared",
@@ -9390,11 +9425,13 @@
     "weaponRules": [
       {
         "label": "CRT (True Fear)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Terror",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "a1571c47a8d3"
       },
       {
         "label": "Devastating",
@@ -9465,7 +9502,8 @@
     "weaponRules": [
       {
         "label": "CRT (True Fear)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Poison",
@@ -9541,11 +9579,13 @@
     "weaponRules": [
       {
         "label": "True Fear",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "5cf110435f07"
       },
       {
         "label": "CRT (Terror)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Devastating",
@@ -9616,7 +9656,8 @@
     "weaponRules": [
       {
         "label": "CRT (True Fear)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Scared",
@@ -9625,7 +9666,8 @@
       },
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Mechanical",
@@ -9721,7 +9763,8 @@
     "weaponRules": [
       {
         "label": "True Fear",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "5cf110435f07"
       },
       {
         "label": "Mechanical",
@@ -9740,7 +9783,8 @@
       },
       {
         "label": "Terror",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "a1571c47a8d3"
       },
       {
         "label": "Sharp",
@@ -10272,7 +10316,8 @@
     "weaponRules": [
       {
         "label": "Infected",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "6e3f960aca47"
       }
     ],
     "image": "characters/who-laughs/damian-who-laughs.webp",
@@ -10338,7 +10383,8 @@
     "weaponRules": [
       {
         "label": "Infected",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "6e3f960aca47"
       }
     ],
     "image": "characters/who-laughs/infected-who-laughs.webp",
@@ -10414,7 +10460,8 @@
     "weaponRules": [
       {
         "label": "Infected",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "6e3f960aca47"
       }
     ],
     "image": "characters/who-laughs/robin-who-laughs.webp",
@@ -10704,7 +10751,8 @@
       },
       {
         "label": "Motion (3)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "da5361dcae31"
       },
       {
         "label": "Short Range",
@@ -12253,11 +12301,13 @@
     "weaponRules": [
       {
         "label": "Exposure",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "bff000d26f58"
       },
       {
         "label": "Cryo-Weapon",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "85da26097378"
       },
       {
         "label": "Cold",
@@ -12373,7 +12423,8 @@
     "weaponRules": [
       {
         "label": "CRT (Fire)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       }
     ],
     "image": "characters/penguin/penguin-arkham-knight.webp",
@@ -13265,7 +13316,8 @@
     "weaponRules": [
       {
         "label": "Acceleration",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "86bae9ad64e4"
       },
       {
         "label": "Mechanical",
@@ -13336,7 +13388,8 @@
     "weaponRules": [
       {
         "label": "Acceleration",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "86bae9ad64e4"
       },
       {
         "label": "Mechanical",
@@ -14706,7 +14759,8 @@
     "weaponRules": [
       {
         "label": "Limited Attack",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "24901650f45c"
       },
       {
         "label": "Steal",
@@ -15286,7 +15340,8 @@
     "weaponRules": [
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Reload",
@@ -15439,7 +15494,8 @@
     "weaponRules": [
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Reload",
@@ -15510,7 +15566,8 @@
     "weaponRules": [
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Short Range",
@@ -15658,7 +15715,8 @@
     "weaponRules": [
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Reload",
@@ -15734,7 +15792,8 @@
     "weaponRules": [
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Reload",
@@ -15912,7 +15971,8 @@
     "weaponRules": [
       {
         "label": "Small Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "667fddbdeb9e"
       },
       {
         "label": "Short Range",
@@ -16013,7 +16073,8 @@
     "weaponRules": [
       {
         "label": "Small Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "667fddbdeb9e"
       },
       {
         "label": "Short Range",
@@ -16094,7 +16155,8 @@
     "weaponRules": [
       {
         "label": "Concealed",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "340fdd719f68"
       },
       {
         "label": "Reload",
@@ -16103,7 +16165,8 @@
       },
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Firearm",
@@ -16219,7 +16282,8 @@
     "weaponRules": [
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Reload",
@@ -16315,7 +16379,8 @@
     "weaponRules": [
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Reload",
@@ -16416,7 +16481,8 @@
       },
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Firearm",
@@ -16497,7 +16563,8 @@
       },
       {
         "label": "CRT (Stunned)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Throwing",
@@ -17034,7 +17101,8 @@
     "weaponRules": [
       {
         "label": "Motion (3)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "da5361dcae31"
       }
     ],
     "image": "characters/birds-of-prey/hawk.webp",
@@ -17274,7 +17342,8 @@
     "weaponRules": [
       {
         "label": "Exposure",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "bff000d26f58"
       },
       {
         "label": "Cold",
@@ -17535,7 +17604,8 @@
     "weaponRules": [
       {
         "label": "CRT (Paralyze)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Handy",
@@ -18031,7 +18101,8 @@
     "weaponRules": [
       {
         "label": "Motion (3)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "da5361dcae31"
       },
       {
         "label": "Fire",
@@ -18102,7 +18173,8 @@
     "weaponRules": [
       {
         "label": "Recoil (3)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "713a572cd47e"
       },
       {
         "label": "Grenade",
@@ -18557,11 +18629,13 @@
     "weaponRules": [
       {
         "label": "Exposure",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "bff000d26f58"
       },
       {
         "label": "Cryo-Weapon",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "85da26097378"
       },
       {
         "label": "Cold",
@@ -18632,11 +18706,13 @@
     "weaponRules": [
       {
         "label": "Exposure",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "bff000d26f58"
       },
       {
         "label": "Cryo-Weapon",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "85da26097378"
       },
       {
         "label": "Cold",
@@ -18973,7 +19049,8 @@
     "weaponRules": [
       {
         "label": "Exposure",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "bff000d26f58"
       },
       {
         "label": "Cold",
@@ -19084,7 +19161,8 @@
       },
       {
         "label": "Crit Freeze",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Brutal",
@@ -19098,7 +19176,8 @@
       },
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Medium Range",
@@ -19107,7 +19186,8 @@
       },
       {
         "label": "Cryo-Weapon",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "85da26097378"
       },
       {
         "label": "Push (4)",
@@ -19208,11 +19288,13 @@
       },
       {
         "label": "Cryo-Weapon",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "85da26097378"
       },
       {
         "label": "Exposure",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "bff000d26f58"
       },
       {
         "label": "Cold",
@@ -19303,11 +19385,13 @@
       },
       {
         "label": "Cryo-Weapon",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "85da26097378"
       },
       {
         "label": "Exposure",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "bff000d26f58"
       },
       {
         "label": "Mechanical",
@@ -19408,11 +19492,13 @@
     "weaponRules": [
       {
         "label": "Exposure",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "bff000d26f58"
       },
       {
         "label": "Cryo-Weapon",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "85da26097378"
       },
       {
         "label": "Devastating",
@@ -20289,7 +20375,8 @@
       },
       {
         "label": "CRT (Paralyze)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       }
     ],
     "image": "characters/the-cult/kobra-hybrid.webp",
@@ -21018,7 +21105,8 @@
       },
       {
         "label": "CRT (Paralyze)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Sharp",
@@ -22274,7 +22362,8 @@
       },
       {
         "label": "Shield Breaker",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "ecfc7f0e0efc"
       }
     ],
     "image": "characters/bane/batman-thomas-wayne.webp",
@@ -26428,7 +26517,8 @@
     "weaponRules": [
       {
         "label": "Limited Attack",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "24901650f45c"
       },
       {
         "label": "Steal",
@@ -27112,7 +27202,8 @@
       },
       {
         "label": "Boosted (1)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "6918cf39962f"
       },
       {
         "label": "Overwhelming",
@@ -27366,7 +27457,8 @@
       },
       {
         "label": "CRT (Paralyze)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Overwhelming",
@@ -27499,7 +27591,8 @@
     "weaponRules": [
       {
         "label": "Limited Attack",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "24901650f45c"
       },
       {
         "label": "Steal",
@@ -28217,7 +28310,8 @@
     "weaponRules": [
       {
         "label": "High Caliber",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9e2c751eafa"
       },
       {
         "label": "Devastating",
@@ -28370,7 +28464,8 @@
     "weaponRules": [
       {
         "label": "Exposure",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "bff000d26f58"
       },
       {
         "label": "Bleed (2)",
@@ -28902,7 +28997,8 @@
     "weaponRules": [
       {
         "label": "Limited Attack",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "24901650f45c"
       },
       {
         "label": "Steal",
@@ -29366,7 +29462,8 @@
       },
       {
         "label": "Terror",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "a1571c47a8d3"
       },
       {
         "label": "Poison",
@@ -29452,7 +29549,8 @@
       },
       {
         "label": "Pull (3)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "97416091945d"
       },
       {
         "label": "Handy",
@@ -29466,7 +29564,8 @@
       },
       {
         "label": "Terror",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "a1571c47a8d3"
       },
       {
         "label": "Poison",
@@ -29599,7 +29698,8 @@
     "weaponRules": [
       {
         "label": "CRT (Stunned)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Reach (3)",
@@ -30181,7 +30281,8 @@
       },
       {
         "label": "CRT (Blind)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Expansive",
@@ -30354,7 +30455,8 @@
     "weaponRules": [
       {
         "label": "Terror",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "a1571c47a8d3"
       },
       {
         "label": "Poison",
@@ -31277,11 +31379,13 @@
       },
       {
         "label": "Terror",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "a1571c47a8d3"
       },
       {
         "label": "Motion (4)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "da5361dcae31"
       }
     ],
     "image": "characters/unknown/man-bat.webp",
@@ -31342,11 +31446,13 @@
     "weaponRules": [
       {
         "label": "Limited Attack",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "24901650f45c"
       },
       {
         "label": "CRT (Blind)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Reach (4)",
@@ -31565,7 +31671,8 @@
       },
       {
         "label": "Terror",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "a1571c47a8d3"
       },
       {
         "label": "Mechanical",
@@ -31656,7 +31763,8 @@
     "weaponRules": [
       {
         "label": "Terror",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "a1571c47a8d3"
       },
       {
         "label": "Poison",
@@ -32444,7 +32552,8 @@
       },
       {
         "label": "Expansive",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "d9910db01f67"
       }
     ],
     "image": "characters/batman/ace.webp",
@@ -32520,11 +32629,13 @@
     "weaponRules": [
       {
         "label": "Limited Attack",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "24901650f45c"
       },
       {
         "label": "Steal",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "9f9fff11edd4"
       }
     ],
     "image": "characters/batman/alfred-pennyworth.webp",
@@ -33543,7 +33654,8 @@
     "weaponRules": [
       {
         "label": "CRT (Stunned)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Sonic",
@@ -33838,7 +33950,8 @@
       },
       {
         "label": "Motion (2)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "da5361dcae31"
       },
       {
         "label": "Throwing",
@@ -33852,7 +33965,8 @@
       },
       {
         "label": "Motion (4)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "da5361dcae31"
       },
       {
         "label": "Red Dot",
@@ -34147,7 +34261,8 @@
     "weaponRules": [
       {
         "label": "CRT (Stunned)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Throwing",
@@ -34428,7 +34543,7 @@
       {
         "label": "Terror",
         "category": "weapon",
-        "referenceId": "a6bebd0b4b07"
+        "referenceId": "a1571c47a8d3"
       },
       {
         "label": "Sharp",
@@ -34499,7 +34614,8 @@
     "weaponRules": [
       {
         "label": "CRT (Paralyze)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "886b15da2b74"
       },
       {
         "label": "Overwhelming",
@@ -34893,7 +35009,8 @@
     "weaponRules": [
       {
         "label": "Healing Radiance",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "e0e2bfadeb96"
       },
       {
         "label": "Throwing",
@@ -35061,7 +35178,8 @@
     "weaponRules": [
       {
         "label": "Acceleration",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "86bae9ad64e4"
       },
       {
         "label": "Aim",
@@ -35157,7 +35275,8 @@
     "weaponRules": [
       {
         "label": "Acceleration",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "86bae9ad64e4"
       },
       {
         "label": "Mechanical",
@@ -35320,7 +35439,8 @@
     "weaponRules": [
       {
         "label": "Motion (3)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "da5361dcae31"
       }
     ],
     "image": "characters/batman/hawk.webp",
@@ -35659,7 +35779,8 @@
     "weaponRules": [
       {
         "label": "Limited Attack",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "24901650f45c"
       },
       {
         "label": "Steal",
@@ -35842,7 +35963,8 @@
     "weaponRules": [
       {
         "label": "Limited Attack",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "24901650f45c"
       },
       {
         "label": "Steal",
@@ -36001,7 +36123,7 @@
       {
         "label": "Terror",
         "category": "weapon",
-        "referenceId": "a6bebd0b4b07"
+        "referenceId": "a1571c47a8d3"
       },
       {
         "label": "Throwing",
@@ -36020,7 +36142,8 @@
       },
       {
         "label": "Suggest",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "429f180182ca"
       }
     ],
     "image": "characters/batman/raven.webp",
@@ -36531,7 +36654,8 @@
       },
       {
         "label": "Boosted (2)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "6918cf39962f"
       },
       {
         "label": "Handy",
@@ -37376,7 +37500,8 @@
     "weaponRules": [
       {
         "label": "Motion (4)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "da5361dcae31"
       },
       {
         "label": "Throwing",
@@ -37410,7 +37535,8 @@
       },
       {
         "label": "Motion (3)",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "da5361dcae31"
       }
     ],
     "image": "characters/batman/starfire.webp",
@@ -37593,7 +37719,8 @@
       },
       {
         "label": "Shield Breaker",
-        "category": "weapon"
+        "category": "weapon",
+        "referenceId": "ecfc7f0e0efc"
       },
       {
         "label": "Protective",
