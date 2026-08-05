@@ -6893,7 +6893,9 @@ window.BATMAN_REFERENCE_DATA = {
       "matchable": true,
       "aliases": [
         "Enervating",
-        "Enervating X"
+        "Enervating X",
+        "Enervating (X)",
+        "Ennervating"
       ],
       "kind": "effect"
     },
@@ -11055,6 +11057,263 @@ window.BATMAN_REFERENCE_DATA = {
       "matchable": true,
       "aliases": [],
       "kind": "trait"
+    },
+    {
+      "id": "7d9fc9a9c328",
+      "section": "Objective Card Keywords",
+      "subsection": "",
+      "title": "Burn (X)",
+      "body": "Spend X Resource Points to play this Resource. Discard the card from your hand and place it on the bottom of your Objective deck.",
+      "page": 41,
+      "order": 907,
+      "matchable": true,
+      "aliases": [
+        "Burn",
+        "Burn X",
+        "Burn (X)"
+      ],
+      "kind": "objective-keyword"
+    },
+    {
+      "id": "a9dd7ace85c1",
+      "section": "Objective Card Keywords",
+      "subsection": "",
+      "title": "Trap",
+      "body": "This Resource cannot be played normally. When the card is revealed through its Trap trigger, resolve the Trap effect. This does not count as playing a Resource that round. The card does not enter the Spent Resource pile; if scored, place it with the scored cards, otherwise discard it.",
+      "page": 41,
+      "order": 908,
+      "matchable": true,
+      "aliases": [
+        "Trap"
+      ],
+      "kind": "objective-keyword"
+    },
+    {
+      "id": "6918cf39962f",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "Boosted (X)",
+      "body": "When making an attack with this weapon, roll X additional attack dice.",
+      "page": 42,
+      "order": 909,
+      "matchable": true,
+      "aliases": [
+        "Boosted"
+      ],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "886b15da2b74",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "CRT (X)",
+      "body": "A model normally scores a Critical Result by rolling a natural 6 on its Strength die, although some traits can change the required result. On a Critical Result, this weapon inflicts the Status listed in parentheses.",
+      "page": 42,
+      "order": 910,
+      "matchable": true,
+      "aliases": [
+        "CRT",
+        "Crit Freeze"
+      ],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "97416091945d",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "Pull (X)",
+      "body": "The affected model is moved directly towards the attacker X”.",
+      "page": 42,
+      "order": 911,
+      "matchable": true,
+      "aliases": [
+        "Pull"
+      ],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "d9e2c751eafa",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "High Caliber",
+      "body": "This weapon’s Strength die is the last that must be removed from the attack if the target is within effective range.",
+      "page": 42,
+      "order": 912,
+      "matchable": true,
+      "aliases": [],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "da5361dcae31",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "Motion (X)",
+      "body": "When using this weapon, if any hits are scored the wielder may immediately Move X”.",
+      "page": 42,
+      "order": 913,
+      "matchable": true,
+      "aliases": [
+        "Motion"
+      ],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "86bae9ad64e4",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "Acceleration",
+      "body": "When this weapon is used against a target that is not within 8”, the target cannot use the Dodge trait. Also, the first die that would cause it to lose the Strength die becomes a normal Attack die. Any further dice loss occurs as normal.",
+      "page": 42,
+      "order": 914,
+      "matchable": true,
+      "aliases": [],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "340fdd719f68",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "Concealed",
+      "body": "To use this weapon, you first need to perform 2 Efforts.",
+      "page": 42,
+      "order": 915,
+      "matchable": true,
+      "aliases": [],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "24901650f45c",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "Limited Attack",
+      "body": "An attack with this weapon inflicts damage only once, regardless of the number of successful Hits, and does not inflict Knocked Down when scoring a CRT.",
+      "page": 42,
+      "order": 916,
+      "matchable": true,
+      "aliases": [],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "5cf110435f07",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "True Fear",
+      "body": "When scoring any number of successful Hits during an Attack, add 1 Fear card to your Objective deck.",
+      "page": 42,
+      "order": 917,
+      "matchable": true,
+      "aliases": [],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "a1571c47a8d3",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "Terror",
+      "body": "When an enemy model suffers the Terror Status, draw 1 Objective card from the top of your opponent’s Objective deck and place it facedown in your Terror pile. When an enemy model would make an Attack dice roll, Defense dice roll, or a Willpower roll, the opponent may reveal up to 3 cards from your Terror pile. Apply the Poison Status a number of times equal to the number of cards revealed. If the model already has, or reaches, Poison (4) as a result of this action, it immediately makes a Poison test. After applying this Status, put the cards on the bottom of the original owner’s deck. If you cannot draw, the enemy model instead suffers [[B]] [[B]] Damage.",
+      "page": 42,
+      "order": 918,
+      "matchable": true,
+      "aliases": [],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "6e3f960aca47",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "Infected",
+      "body": "If the target suffers damage as a result of an Attack made with this weapon, it becomes Infected.",
+      "page": 42,
+      "order": 919,
+      "matchable": true,
+      "aliases": [],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "bff000d26f58",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "Exposure",
+      "body": "For each additional successful hit after the first, the target suffers 1 additional damage marker (any type).",
+      "page": 42,
+      "order": 920,
+      "matchable": true,
+      "aliases": [],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "85da26097378",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "Cryo-Weapon",
+      "body": "After the first successful hit, choose another model and 1 Suspect within 2” of the target. The chosen model suffers 1 hit from that weapon (which cannot trigger this rule again), and the Suspect becomes Frozen.",
+      "page": 42,
+      "order": 921,
+      "matchable": true,
+      "aliases": [],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "667fddbdeb9e",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "Small Caliber",
+      "body": "This weapon loses 2 dice instead of 1 if the target is not in effective range.",
+      "page": 42,
+      "order": 922,
+      "matchable": true,
+      "aliases": [],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "713a572cd47e",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "Recoil (X)",
+      "body": "When using this weapon, after resolving the attack, the wielder immediately Moves X” directly away from the target or template position.",
+      "page": 42,
+      "order": 923,
+      "matchable": true,
+      "aliases": [
+        "Recoil"
+      ],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "ecfc7f0e0efc",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "Shield Breaker",
+      "body": "Rules text not yet documented — the description was blank in the submitted trait list. Update this entry once the official wording is available.",
+      "page": 42,
+      "order": 924,
+      "matchable": true,
+      "aliases": [],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "e0e2bfadeb96",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "Healing Radiance",
+      "body": "A friendly model within 4” of the target of the attack removes up to 1 Damage.",
+      "page": 42,
+      "order": 925,
+      "matchable": true,
+      "aliases": [],
+      "kind": "weapon-rule"
+    },
+    {
+      "id": "429f180182ca",
+      "section": "Weapon Rules",
+      "subsection": "",
+      "title": "Suggest",
+      "body": "If any Damage is dealt with this weapon, Set an enemy Suspect in contact with the target (if able).",
+      "page": 42,
+      "order": 926,
+      "matchable": true,
+      "aliases": [],
+      "kind": "weapon-rule"
     }
   ]
 };

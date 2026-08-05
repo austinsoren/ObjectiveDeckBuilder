@@ -7,7 +7,7 @@
   const referenceData = window.BATMAN_REFERENCE_DATA && typeof window.BATMAN_REFERENCE_DATA === 'object' ? window.BATMAN_REFERENCE_DATA : { entries: [] };
   const referenceEntries = Array.isArray(referenceData.entries) ? referenceData.entries : [];
   const referenceById = new Map(referenceEntries.map(entry => [entry.id, entry]));
-  const referenceSectionOrder = ['Core Rules','Traits','Weapon Rules','Templates','Effects','Equipment'];
+  const referenceSectionOrder = ['Core Rules','Traits','Weapon Rules','Templates','Effects','Equipment','Objective Card Keywords'];
 
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
