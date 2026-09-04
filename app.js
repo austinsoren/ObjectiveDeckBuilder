@@ -92,6 +92,43 @@
     return traits.some(trait => trait.label === recruitAllowance.keyword);
   }
 
+  // Boss-independent lookup of the strongest "recruit up to X Henchmen with the Y trait"
+  // allowance granted by a set of in-crew models (e.g. Carmine Falcone's Corrupt trait letting a
+  // Crime Family crew bribe in Cops). Used when resolving a roster's valid ids — at that point
+  // there is no boss context yet, unlike the full crewRuleEffects() used during live validation.
+  function computeRecruitAllowance(rosterCharacters) {
+    let recruitAllowance = null;
+    rosterCharacters.forEach(character => {
+      (character.traits || []).forEach(trait => {
+        const match = RECRUIT_ALLOWANCE_RE.exec(traitReferenceBody(trait));
+        if (match) {
+          const cap = parseInt(match[1], 10);
+          const keyword = match[2].trim();
+          if (!recruitAllowance || cap > recruitAllowance.cap) recruitAllowance = { cap, keyword, grantedBy: trait.label };
+        }
+      });
+    });
+    return recruitAllowance;
+  }
+
+  // Resolves a stored/imported roster's character ids to the ones that are actually legal to
+  // keep: models native to the crew, plus any cross-recruited models (e.g. Cops bribed in via a
+  // Corrupt trait) that a native member's trait allows. Used wherever a roster is read back from
+  // persistence (save slots, share links, JSON import) so those models aren't silently dropped.
+  function resolveCrewRosterIds(ids, crew) {
+    const uniqueIds = [...new Set(Array.isArray(ids) ? ids : [])];
+    const inCrewIds = uniqueIds.filter(id => rawCharacters.some(character => character.id === id && (!crew || (character.crews || [character.crew]).includes(crew))));
+    if (!crew) return inCrewIds;
+    const inCrewCharacters = inCrewIds.map(id => rawCharacters.find(character => character.id === id)).filter(Boolean);
+    const recruitAllowance = computeRecruitAllowance(inCrewCharacters);
+    const crossRecruitIds = uniqueIds.filter(id => {
+      if (inCrewIds.includes(id)) return false;
+      const character = rawCharacters.find(c => c.id === id);
+      return character && isCrossRecruitEligible(character, recruitAllowance);
+    });
+    return [...inCrewIds, ...crossRecruitIds];
+  }
+
   // Derives crew-building effects (funding cost overrides + non-blocking warnings) from the
   // roster's traits: leader-conditional Lieutenant costs, Required(X) prerequisites, Elite/Elite
   // Boss type caps, "cannot be recruited" auto-add models, and Corrupt-style cross-affiliation
@@ -330,9 +367,7 @@
     if (!crews.has(base.crew)) base.crew = '';
     base.repCap = Number.isFinite(Number(base.repCap)) ? Number(base.repCap) : defaults.crewBuilder.repCap;
     base.fundingCap = Number.isFinite(Number(base.fundingCap)) ? Number(base.fundingCap) : defaults.crewBuilder.fundingCap;
-    base.roster = Array.isArray(base.roster)
-      ? [...new Set(base.roster)].filter(id => rawCharacters.some(character => character.id === id && (!base.crew || (character.crews || [character.crew]).includes(base.crew))))
-      : [];
+    base.roster = resolveCrewRosterIds(base.roster, base.crew);
     base.bossId = base.roster.includes(base.bossId) ? base.bossId : null;
     return base;
   }
@@ -1093,9 +1128,7 @@
 
   function applySharedCrew(payload) {
     const crew = typeof payload.crew === 'string' ? payload.crew : '';
-    const validIds = Array.isArray(payload.roster)
-      ? [...new Set(payload.roster)].filter(id => rawCharacters.some(character => character.id === id && (!crew || (character.crews || [character.crew]).includes(crew))))
-      : [];
+    const validIds = resolveCrewRosterIds(payload.roster, crew);
     state.crewBuilder = {
       crew,
       repCap: Number.isFinite(Number(payload.repCap)) ? Number(payload.repCap) : defaults.crewBuilder.repCap,
@@ -1954,7 +1987,7 @@
       const payload = JSON.parse(await file.text());
       const ids = Array.isArray(payload.roster) ? payload.roster.map(item => typeof item === 'string' ? item : item.id) : [];
       const crew = typeof payload.crew === 'string' ? payload.crew : '';
-      const validIds = [...new Set(ids)].filter(id => rawCharacters.some(character => character.id === id && (!crew || (character.crews || [character.crew]).includes(crew))));
+      const validIds = resolveCrewRosterIds(ids, crew);
       state.crewBuilder = {
         crew,
         repCap: Number.isFinite(Number(payload.repCap)) ? Number(payload.repCap) : defaults.crewBuilder.repCap,
