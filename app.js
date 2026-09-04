@@ -2,6 +2,8 @@
   'use strict';
 
   const STORAGE_KEY = 'batman-objective-deck-builder-v1';
+  const SAVES_KEY = 'batman-objective-deck-builder-saves-v1';
+  const ACTIVE_SLOT_KEY = 'batman-objective-deck-builder-active-slot-v1';
   const rawCards = Array.isArray(window.BATMAN_CARD_DATA) ? window.BATMAN_CARD_DATA : [];
   const rawCharacters = Array.isArray(window.BATMAN_CHARACTER_DATA) ? window.BATMAN_CHARACTER_DATA.map(normalizeCharacterRecord) : [];
   const referenceData = window.BATMAN_REFERENCE_DATA && typeof window.BATMAN_REFERENCE_DATA === 'object' ? window.BATMAN_REFERENCE_DATA : { entries: [] };
@@ -39,7 +41,7 @@
     filters: { search: '', category: 'buildable', copies: 'all', sort: 'title', availableOnly: false, tags: [] },
     characterFilters: { search: '', crew: 'all', baseSize: 'all', sort: 'name' },
     referenceFilters: { search: '', section: 'all', sort: 'source', selectedOnly: false, letter: 'all' },
-    crewFilters: { search: '', sort: 'name' },
+    crewFilters: { search: '', sort: 'name', rank: 'all' },
     crewBuilder: { crew: '', repCap: 350, fundingCap: 1500, bossId: null, roster: [] }
   };
 
@@ -52,7 +54,121 @@
     'c61e010e5d3a': { amount: 300, bossOnly: false, label: 'Public Resources' }
   };
 
-  let state = loadState();
+  // Crew composition rank order — a crew may hold at most one Leader and one Sidekick.
+  const RANK_ORDER = { Leader: 0, Sidekick: 1, Henchman: 2, 'Free Agent': 3 };
+  const rankSortIndex = rank => RANK_ORDER[rank] ?? 4;
+
+  // Generic pattern-based crew-building rule detectors. Rather than hand-curating every
+  // trait, these match against the trait label (for bracketed "Trait (X)" rules, where X is
+  // parsed straight from the label) or the compendium rule body (for phrasing that recurs
+  // across traits, such as "cannot be recruited").
+  const LIEUTENANT_RE = /^Lieutenant\s*\(([^)]+)\)$/i;
+  const REQUIRED_RE = /^Required\s*\(([^)]+)\)$/i;
+  const ELITE_RE = /^Elite\s*\(([^)]+)\)$/i;
+  const ELITE_BOSS_RE = /^Elite\s*Boss\s*\(([^)]+)\)$/i;
+  const RECRUIT_ALLOWANCE_RE = /recruit up to (\d+) Henchm\w* with the ([\w][\w\s]*?) trait/i;
+  const PREREQUISITE_TRAIT_RE = /can only be hired in a crew if there is a model with the (.+?) trait/i;
+
+  const stripActorSuffix = (value = '') => value.replace(/\s*\([^)]*\)\s*$/, '').trim();
+
+  function characterMatchesName(character, query) {
+    const target = normalize(stripActorSuffix(query));
+    if (!target) return false;
+    return [character.name, character.alias].filter(Boolean).some(value =>
+      normalize(stripActorSuffix(value)) === target || normalize(value) === normalize(query));
+  }
+
+  function traitReferenceBody(trait) {
+    return referenceById.get(trait.referenceId)?.body || '';
+  }
+
+  // Cross-affiliation "recruit up to X Henchmen with the Y trait" rules (e.g. Crime Family
+  // bribing Cops) never apply to models with the Incorruptible trait — it can only be recruited
+  // into a crew whose Boss shares its own affiliation.
+  function isCrossRecruitEligible(character, recruitAllowance) {
+    if (!recruitAllowance || character.rank !== 'Henchman') return false;
+    const traits = character.traits || [];
+    if (traits.some(trait => trait.label === 'Incorruptible')) return false;
+    return traits.some(trait => trait.label === recruitAllowance.keyword);
+  }
+
+  // Derives crew-building effects (funding cost overrides + non-blocking warnings) from the
+  // roster's traits: leader-conditional Lieutenant costs, Required(X) prerequisites, Elite/Elite
+  // Boss type caps, "cannot be recruited" auto-add models, and Corrupt-style cross-affiliation
+  // recruiting allowances. Per project convention, none of this ever blocks an action — it only
+  // informs the validation summary and (for funding) the totals.
+  function crewRuleEffects(rosterCharacters) {
+    const cb = state.crewBuilder;
+    const boss = rosterCharacters.find(character => character.id === cb.bossId) || null;
+    const warnings = [];
+    const fundingOverrides = new Map();
+    const eliteByType = new Map();
+    const eliteBossTypes = new Set();
+    let recruitAllowance = null;
+
+    rosterCharacters.forEach(character => {
+      (character.traits || []).forEach(trait => {
+        const label = trait.label || '';
+        let match;
+        if ((match = LIEUTENANT_RE.exec(label))) {
+          if (boss && characterMatchesName(boss, match[1])) {
+            fundingOverrides.set(character.id, { amount: 0, reason: `Lieutenant (${match[1]})` });
+          }
+        } else if ((match = REQUIRED_RE.exec(label))) {
+          const present = rosterCharacters.some(other => other.id !== character.id && characterMatchesName(other, match[1]));
+          if (!present) warnings.push(`${character.name} requires ${match[1]} in the crew (Required trait).`);
+        } else if ((match = ELITE_BOSS_RE.exec(label))) {
+          eliteBossTypes.add(match[1].trim().toLowerCase());
+        } else if ((match = ELITE_RE.exec(label))) {
+          const type = match[1].trim();
+          if (!eliteByType.has(type)) eliteByType.set(type, []);
+          eliteByType.get(type).push(character);
+        }
+
+        const body = traitReferenceBody(trait);
+        if (/cannot be recruited/i.test(body)) {
+          warnings.push(`${character.name} (${label}) is not normally hand-recruited — it's meant to be added automatically by another model's trait.`);
+        }
+        if ((match = RECRUIT_ALLOWANCE_RE.exec(body))) {
+          const cap = parseInt(match[1], 10);
+          const keyword = match[2].trim();
+          if (!recruitAllowance || cap > recruitAllowance.cap) recruitAllowance = { cap, keyword, grantedBy: label };
+        }
+        if ((match = PREREQUISITE_TRAIT_RE.exec(body))) {
+          const requiredTraits = match[1].split(/\s*(?:and\/or|,|\bor\b|\band\b)\s*/i).map(value => value.trim()).filter(Boolean);
+          const present = rosterCharacters.some(other => other.id !== character.id &&
+            (other.traits || []).some(otherTrait => requiredTraits.includes(otherTrait.label)));
+          if (!present) warnings.push(`${character.name} requires a model with the ${requiredTraits.join(' or ')} trait in the crew (${label}).`);
+        }
+      });
+    });
+
+    eliteByType.forEach((members, type) => {
+      if (members.length > 1 && !eliteBossTypes.has(type.toLowerCase())) {
+        warnings.push(`Crew includes ${members.length} Elite (${type}) models but no Elite Boss (${type}) — normally only 1 is allowed.`);
+      }
+    });
+
+    if (recruitAllowance) {
+      const matches = rosterCharacters.filter(character => isCrossRecruitEligible(character, recruitAllowance));
+      recruitAllowance.matchedCharacters = matches;
+      if (matches.length > recruitAllowance.cap) {
+        warnings.push(`Crew includes ${matches.length} Henchmen with the ${recruitAllowance.keyword} trait; ${recruitAllowance.grantedBy} normally allows up to ${recruitAllowance.cap}.`);
+      }
+    }
+
+    return { warnings, fundingOverrides, recruitAllowance };
+  }
+
+  function effectiveCharacterFunding(character, fundingOverrides) {
+    const override = fundingOverrides && fundingOverrides.get(character.id);
+    return override ? override.amount : (character.funding || 0);
+  }
+
+  let saves = migrateLegacyStorage(loadSaves());
+  let activeSlotId = localStorage.getItem(ACTIVE_SLOT_KEY);
+  if (!saves[activeSlotId]) activeSlotId = Object.keys(saves)[0];
+  let state = sanitizeState(saves[activeSlotId]?.data);
   let activeCardId = null;
   let activeCardContext = 'builder';
   let toastTimer = null;
@@ -66,6 +182,8 @@
     affiliationTotal: $('#affiliationTotal'), singleTotal: $('#singleTotal'), bonusTotal: $('#bonusTotal'), baseMeter: $('#baseMeter'),
     generalMeter: $('#generalMeter'), singleMeter: $('#singleMeter'), bonusMeter: $('#bonusMeter'), selectedDesignCount: $('#selectedDesignCount'),
     rosterList: $('#rosterList'), modelForm: $('#modelForm'), saveStatus: $('#saveStatus'), toast: $('#toast'),
+    saveSlotSelect: $('#saveSlotSelect'), newSaveSlot: $('#newSaveSlot'), renameSaveSlot: $('#renameSaveSlot'), deleteSaveSlot: $('#deleteSaveSlot'),
+    copyDeckLink: $('#copyDeckLink'), copyCrewLink: $('#copyCrewLink'),
     cardDialog: $('#cardDialog'), dialogImage: $('#dialogImage'), dialogTitle: $('#dialogTitle'), dialogCategory: $('#dialogCategory'),
     dialogBadges: $('#dialogBadges'), dialogRequirement: $('#dialogRequirement'), dialogText: $('#dialogText'), dialogToggle: $('#dialogToggleCard'),
     metadataDialog: $('#metadataDialog'), metadataForm: $('#metadataForm'), editTitle: $('#editTitle'), editSubtitle: $('#editSubtitle'),
@@ -99,7 +217,7 @@
   Object.assign(elements, {
     crewView: $('#crewView'), crewNav: $('#crewNavButton'), crewFactionSelect: $('#crewFactionSelect'),
     crewRepCapSlider: $('#crewRepCapSlider'), crewRepCapValue: $('#crewRepCapValue'), crewFundingCapInput: $('#crewFundingCapInput'),
-    crewSearch: $('#crewSearch'), crewSort: $('#crewSort'), crewPoolCount: $('#crewPoolCount'), crewPoolTitle: $('#crewPoolTitle'),
+    crewSearch: $('#crewSearch'), crewSort: $('#crewSort'), crewRankFilter: $('#crewRankFilter'), crewPoolCount: $('#crewPoolCount'), crewPoolTitle: $('#crewPoolTitle'),
     crewPoolVisibleCount: $('#crewPoolVisibleCount'), crewPoolGrid: $('#crewPoolGrid'), emptyCrewPool: $('#emptyCrewPool'),
     crewValidationSummary: $('#crewValidationSummary'), crewRepTotal: $('#crewRepTotal'), crewRepCapLabel: $('#crewRepCapLabel'),
     crewRepMeter: $('#crewRepMeter'), crewFundingTotal: $('#crewFundingTotal'), crewFundingCapLabel: $('#crewFundingCapLabel'),
@@ -111,6 +229,14 @@
 
   function initialize() {
     elements.affiliation.innerHTML = affiliations.map(name => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join('');
+    elements.referenceTotalCount.textContent = `${referenceEntries.length} indexed entries`;
+    initializeCrewFilters();
+    bindEvents();
+    renderSaveSlots();
+    loadSharedLinkThenRender();
+  }
+
+  function syncControlsFromState() {
     elements.affiliation.value = affiliations.includes(state.affiliation) ? state.affiliation : (affiliations[0] || '');
     state.affiliation = elements.affiliation.value;
     elements.search.value = state.filters.search;
@@ -122,20 +248,21 @@
     elements.referenceSection.value = state.referenceFilters.section;
     elements.referenceSort.value = state.referenceFilters.sort;
     elements.referenceSelectedOnly.checked = state.referenceFilters.selectedOnly;
-    elements.referenceTotalCount.textContent = `${referenceEntries.length} indexed entries`;
     initializeCharacterFilters();
-    initializeCrewFilters();
-    bindEvents();
+  }
+
+  async function loadSharedLinkThenRender() {
+    await importSharedLinkIfPresent();
+    syncControlsFromState();
     renderAll();
     applyRoute();
   }
 
-  function loadState() {
+  function sanitizeState(parsed) {
     try {
-      const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY));
       return {
         ...structuredClone(defaults),
-        ...parsed,
+        ...(parsed || {}),
         filters: { ...defaults.filters, ...(parsed?.filters || {}) },
         characterFilters: { ...defaults.characterFilters, ...(parsed?.characterFilters || {}) },
         referenceFilters: { ...defaults.referenceFilters, ...(parsed?.referenceFilters || {}) },
@@ -149,6 +276,52 @@
     } catch {
       return structuredClone(defaults);
     }
+  }
+
+  function generateId() {
+    return crypto.randomUUID ? crypto.randomUUID() : `id-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  }
+
+  function loadSaves() {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(SAVES_KEY));
+      return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch {
+      return {};
+    }
+  }
+
+  function persistSaves(savesToStore) {
+    localStorage.setItem(SAVES_KEY, JSON.stringify(savesToStore));
+  }
+
+  // One-time upgrade path: older versions of this app kept a single save under STORAGE_KEY.
+  // Wrap that save as the first named slot so existing players don't lose their deck.
+  function migrateLegacyStorage(existingSaves) {
+    if (Object.keys(existingSaves).length) return existingSaves;
+    let legacy = null;
+    try { legacy = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch {}
+    const id = generateId();
+    const migrated = { [id]: { name: 'My Save', updatedAt: Date.now(), data: legacy } };
+    persistSaves(migrated);
+    localStorage.setItem(ACTIVE_SLOT_KEY, id);
+    if (legacy) localStorage.removeItem(STORAGE_KEY);
+    return migrated;
+  }
+
+  function renderSaveSlots() {
+    if (!elements.saveSlotSelect) return;
+    const entries = Object.entries(saves).sort((a, b) => a[1].name.localeCompare(b[1].name));
+    elements.saveSlotSelect.innerHTML = entries.map(([id, slot]) => `<option value="${id}">${escapeHtml(slot.name)}</option>`).join('');
+    elements.saveSlotSelect.value = activeSlotId;
+  }
+
+  function switchToSlot(id) {
+    activeSlotId = id;
+    localStorage.setItem(ACTIVE_SLOT_KEY, activeSlotId);
+    state = sanitizeState(saves[activeSlotId]?.data);
+    syncControlsFromState();
+    renderAll();
   }
 
   function sanitizeCrewBuilder(raw) {
@@ -166,7 +339,11 @@
 
   function persist() {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      saves[activeSlotId] = saves[activeSlotId] || { name: 'My Save', updatedAt: 0, data: null };
+      saves[activeSlotId].data = state;
+      saves[activeSlotId].updatedAt = Date.now();
+      persistSaves(saves);
+      localStorage.setItem(ACTIVE_SLOT_KEY, activeSlotId);
       elements.saveStatus.textContent = 'Saved locally';
     } catch {
       elements.saveStatus.textContent = 'Session only';
@@ -215,6 +392,42 @@
   }
 
   function bindEvents() {
+    elements.saveSlotSelect.addEventListener('change', event => {
+      switchToSlot(event.target.value);
+      toast(`Switched to “${saves[activeSlotId].name}”`);
+    });
+    elements.newSaveSlot.addEventListener('click', () => {
+      const name = prompt('Name this save:', `Save ${Object.keys(saves).length + 1}`);
+      if (name === null) return;
+      const id = generateId();
+      saves[id] = { name: name.trim() || 'Untitled save', updatedAt: Date.now(), data: structuredClone(defaults) };
+      persistSaves(saves);
+      switchToSlot(id);
+      renderSaveSlots();
+      toast(`Created save “${saves[id].name}”`);
+    });
+    elements.renameSaveSlot.addEventListener('click', () => {
+      const slot = saves[activeSlotId];
+      if (!slot) return;
+      const name = prompt('Rename this save:', slot.name);
+      if (name === null || !name.trim()) return;
+      slot.name = name.trim();
+      persistSaves(saves);
+      renderSaveSlots();
+    });
+    elements.deleteSaveSlot.addEventListener('click', () => {
+      const ids = Object.keys(saves);
+      if (ids.length <= 1) { alert('At least one save must remain.'); return; }
+      const slot = saves[activeSlotId];
+      if (!confirm(`Delete save “${slot?.name || 'this save'}”? This cannot be undone.`)) return;
+      delete saves[activeSlotId];
+      persistSaves(saves);
+      switchToSlot(Object.keys(saves)[0]);
+      renderSaveSlots();
+      toast('Save deleted');
+    });
+    elements.copyDeckLink.addEventListener('click', copyDeckShareLink);
+    elements.copyCrewLink.addEventListener('click', copyCrewShareLink);
     elements.affiliation.addEventListener('change', event => {
       state.affiliation = event.target.value;
       persist(); renderAll();
@@ -310,10 +523,8 @@
     $('#restartPlay').addEventListener('click', restartPlaySession);
     $('#endPlay').addEventListener('click', endPlaySession);
     $('#autoBuild').addEventListener('click', autoBuild);
-    $('#exportJson').addEventListener('click', exportJson);
     $('#exportText').addEventListener('click', exportText);
     $('#printDeck').addEventListener('click', () => window.print());
-    $('#importJson').addEventListener('change', importJson);
     $('#helpButton').addEventListener('click', () => elements.rulesDialog.showModal());
     $('[data-close-rules]').addEventListener('click', () => elements.rulesDialog.close());
     $('[data-close-dialog]').addEventListener('click', () => elements.cardDialog.close());
@@ -394,6 +605,10 @@
     });
     elements.crewSort.addEventListener('change', event => {
       state.crewFilters.sort = event.target.value;
+      persist(); renderCrewBuilder();
+    });
+    elements.crewRankFilter.addEventListener('change', event => {
+      state.crewFilters.rank = event.target.value;
       persist(); renderCrewBuilder();
     });
     $('#resetCrewFilters').addEventListener('click', () => {
@@ -589,7 +804,7 @@
     elements.affiliationTotal.textContent = affiliated;
     elements.singleTotal.textContent = singles;
     elements.bonusTotal.textContent = bonusTotal;
-    setMeter(elements.baseMeter, baseTotal, 20);
+    setMeter(elements.baseMeter, baseTotal, 30);
     setMeter(elements.generalMeter, general, Math.max(affiliated,1), general > affiliated);
     setMeter(elements.singleMeter, singles, 10);
     setMeter(elements.bonusMeter, bonusTotal, Math.max(bonusTotal,4));
@@ -609,14 +824,15 @@
 
     updatePlayLaunchButton(validation);
 
-    if (validation.valid) {
+    if (validation.valid && !validation.warnings.length) {
       elements.validation.className = 'validation-summary valid';
       elements.validation.innerHTML = '<strong>Deck legal</strong><br>All supplied deck-building rules are satisfied.';
     } else {
-      elements.validation.className = 'validation-summary invalid';
+      elements.validation.className = `validation-summary ${validation.valid ? 'warning-only' : 'invalid'}`;
       const errors = validation.errors.map(message => `<li>${escapeHtml(message)}</li>`).join('');
       const warnings = validation.warnings.map(message => `<li class="warning">${escapeHtml(message)}</li>`).join('');
-      elements.validation.innerHTML = `<strong>${selected.length ? 'Deck needs attention' : 'Start building'}</strong><ul>${errors}${warnings}</ul>`;
+      const heading = !selected.length ? 'Start building' : validation.valid ? 'Deck legal, with warnings' : 'Deck needs attention';
+      elements.validation.innerHTML = `<strong>${heading}</strong><ul>${errors}${warnings}</ul>`;
     }
   }
 
@@ -629,8 +845,8 @@
     const affiliated = base.filter(card => card.category === 'affiliation').reduce((sum,card) => sum + card.requiredCopies,0);
     const singles = base.filter(card => card.isSingle).reduce((sum,card) => sum + card.requiredCopies,0);
 
-    if (baseTotal !== 20) errors.push(`Base deck contains ${baseTotal} cards; it must contain exactly 20.`);
-    if (general > affiliated) errors.push(`General cards (${general}) outnumber crew-specific cards (${affiliated}).`);
+    if (baseTotal !== 30) errors.push(`Base deck contains ${baseTotal} cards; it must contain exactly 30.`);
+    if (general > affiliated) warnings.push(`General cards (${general}) outnumber crew-specific cards (${affiliated}).`);
     if (singles > 10) errors.push(`The deck contains ${singles} single cards; the maximum is 10.`);
     base.filter(card => card.category === 'affiliation' && card.affiliation !== state.affiliation).forEach(card => errors.push(`${card.title} does not belong to ${state.affiliation}.`));
 
@@ -705,8 +921,8 @@
     elements.dialogRuleRefList.innerHTML = ruleEntries.map(entry => renderRuleRefChip(entry)).join('');
     elements.dialogRequirement.textContent = card.category === 'character'
       ? (card.subtitle && card.rank ? `Requires a crew model named or aliased “${card.subtitle}” with rank “${card.rank}”.` : 'Character eligibility metadata has not been confirmed. Use Edit metadata to enter the printed subtitle and rank icon.')
-      : card.category === 'general' ? 'General Objective card. Counts toward the normal 20-card deck.'
-      : card.category === 'affiliation' ? `${card.affiliation} Objective card. Counts toward the normal 20-card deck.`
+      : card.category === 'general' ? 'General Objective card. Counts toward the normal 30-card deck.'
+      : card.category === 'affiliation' ? `${card.affiliation} Objective card. Counts toward the normal 30-card deck.`
       : 'Reference card. It is browsable but is not added to the Objective deck.';
     const buildable = ['general','affiliation','character'].includes(card.category);
     const viewingFromPlay = activeCardContext === 'play';
@@ -767,7 +983,7 @@
         const nt = total + quantity;
         const ng = general + (card.category === 'general' ? quantity : 0);
         const ns = singles + (card.isSingle ? quantity : 0);
-        if (nt > 20 || ns > 10 || ng > 10) return;
+        if (nt > 30 || ns > 10 || ng > 15) return;
         const nkey = `${nt}|${ng}|${ns}`;
         if (!next.has(nkey)) next.set(nkey, [...ids, card.id]);
       });
@@ -775,27 +991,138 @@
     });
     const choices = [...dp.entries()]
       .map(([key,ids]) => ({ values:key.split('|').map(Number), ids }))
-      .filter(item => item.values[0] === 20 && item.values[1] <= 10 && item.values[2] <= 10)
-      .sort((a,b) => Math.abs(10-a.values[1]) - Math.abs(10-b.values[1]) || a.values[2] - b.values[2]);
+      .filter(item => item.values[0] === 30 && item.values[1] <= 15 && item.values[2] <= 10)
+      .sort((a,b) => Math.abs(15-a.values[1]) - Math.abs(15-b.values[1]) || a.values[2] - b.values[2]);
     if (!choices.length) {
       alert('No legal example could be generated from the current metadata.');
       return;
     }
     const bonusIds = state.selected.filter(id => getCard(id)?.category === 'character');
     state.selected = [...choices[0].ids, ...bonusIds];
-    persist(); renderAll(); toast('Built a legal 20-card example');
+    persist(); renderAll(); toast('Built a legal 30-card example');
   }
 
-  function exportJson() {
-    const selected = state.selected.map(getCard).filter(Boolean);
-    const payload = {
-      application: 'Batman Objective Deck Builder', version: 3, exportedAt: new Date().toISOString(),
-      affiliation: state.affiliation, roster: state.roster, selectedCardIds: state.selected,
-      deck: selected.map(card => ({ id:card.id, title:card.title, category:card.category, affiliation:card.affiliation, copies:card.requiredCopies, subtitle:card.subtitle, rank:card.rank })),
-      metadataOverrides: state.overrides,
-      validation: validateDeck(selected)
+  // Shareable links: state is JSON-encoded, gzip-compressed where the browser supports
+  // CompressionStream, then base64url-encoded into a `deck=`/`crew=` query param. A leading
+  // '1'/'0' marker records whether gzip was used, so older/unsupported browsers can still decode
+  // links created by newer ones (they just skip decompression and read raw JSON).
+  function bufferToBase64Url(bytes) {
+    let binary = '';
+    bytes.forEach(byte => { binary += String.fromCharCode(byte); });
+    return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+
+  function base64UrlToBuffer(value) {
+    const padded = value.replace(/-/g, '+').replace(/_/g, '/').padEnd(value.length + (4 - value.length % 4) % 4, '=');
+    const binary = atob(padded);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    return bytes;
+  }
+
+  async function encodeSharePayload(payload) {
+    const json = JSON.stringify(payload);
+    if (typeof CompressionStream === 'function') {
+      try {
+        const stream = new Blob([json]).stream().pipeThrough(new CompressionStream('gzip'));
+        const buffer = await new Response(stream).arrayBuffer();
+        return `1${bufferToBase64Url(new Uint8Array(buffer))}`;
+      } catch { /* fall through to uncompressed encoding */ }
+    }
+    return `0${bufferToBase64Url(new TextEncoder().encode(json))}`;
+  }
+
+  async function decodeSharePayload(encoded) {
+    const marker = encoded[0];
+    const bytes = base64UrlToBuffer(encoded.slice(1));
+    if (marker === '1' && typeof DecompressionStream === 'function') {
+      const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+      const buffer = await new Response(stream).arrayBuffer();
+      return JSON.parse(new TextDecoder().decode(buffer));
+    }
+    return JSON.parse(new TextDecoder().decode(bytes));
+  }
+
+  async function copyLinkToClipboard(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      window.prompt('Copy this link:', text);
+    }
+  }
+
+  async function copyDeckShareLink() {
+    try {
+      const payload = {
+        v: 1, affiliation: state.affiliation, selected: state.selected, roster: state.roster,
+        overrides: Object.fromEntries(Object.entries(state.overrides).filter(([id]) => state.selected.includes(id)))
+      };
+      const encoded = await encodeSharePayload(payload);
+      const url = new URL(location.href);
+      url.search = '';
+      url.searchParams.set('deck', encoded);
+      await copyLinkToClipboard(url.toString());
+      toast('Deck link copied to clipboard');
+    } catch (error) {
+      alert(`Could not build a share link: ${error.message}`);
+    }
+  }
+
+  async function copyCrewShareLink() {
+    try {
+      const cb = state.crewBuilder;
+      const payload = { v: 1, crew: cb.crew, repCap: cb.repCap, fundingCap: cb.fundingCap, bossId: cb.bossId, roster: cb.roster };
+      const encoded = await encodeSharePayload(payload);
+      const url = new URL(location.href);
+      url.search = '';
+      url.searchParams.set('crew', encoded);
+      await copyLinkToClipboard(url.toString());
+      toast('Crew link copied to clipboard');
+    } catch (error) {
+      alert(`Could not build a share link: ${error.message}`);
+    }
+  }
+
+  function applySharedDeck(payload) {
+    const ids = Array.isArray(payload.selected) ? payload.selected : [];
+    state.selected = [...new Set(ids)].filter(id => rawCards.some(card => card.id === id));
+    if (affiliations.includes(payload.affiliation)) state.affiliation = payload.affiliation;
+    if (Array.isArray(payload.roster)) state.roster = payload.roster;
+    if (payload.overrides && typeof payload.overrides === 'object') state.overrides = { ...state.overrides, ...payload.overrides };
+  }
+
+  function applySharedCrew(payload) {
+    const crew = typeof payload.crew === 'string' ? payload.crew : '';
+    const validIds = Array.isArray(payload.roster)
+      ? [...new Set(payload.roster)].filter(id => rawCharacters.some(character => character.id === id && (!crew || (character.crews || [character.crew]).includes(crew))))
+      : [];
+    state.crewBuilder = {
+      crew,
+      repCap: Number.isFinite(Number(payload.repCap)) ? Number(payload.repCap) : defaults.crewBuilder.repCap,
+      fundingCap: Number.isFinite(Number(payload.fundingCap)) ? Number(payload.fundingCap) : defaults.crewBuilder.fundingCap,
+      bossId: validIds.includes(payload.bossId) ? payload.bossId : null,
+      roster: validIds
     };
-    download(`${slug(state.affiliation || 'batman')}-objective-deck.json`, JSON.stringify(payload,null,2), 'application/json');
+  }
+
+  async function importSharedLinkIfPresent() {
+    const params = new URLSearchParams(location.search);
+    const deckParam = params.get('deck');
+    const crewParam = params.get('crew');
+    if (!deckParam && !crewParam) return;
+    try {
+      if (deckParam) applySharedDeck(await decodeSharePayload(deckParam));
+      if (crewParam) applySharedCrew(await decodeSharePayload(crewParam));
+      persist();
+      location.hash = deckParam && !crewParam ? '#builder' : crewParam && !deckParam ? '#crew' : location.hash || '#builder';
+      toast(deckParam && crewParam ? 'Loaded shared deck and crew' : deckParam ? 'Loaded shared deck' : 'Loaded shared crew');
+    } catch (error) {
+      alert(`Could not load the shared link: ${error.message}`);
+    } finally {
+      const url = new URL(location.href);
+      url.search = '';
+      history.replaceState(null, '', url.toString());
+    }
   }
 
   function exportText() {
@@ -817,33 +1144,13 @@
     download(`${slug(state.affiliation || 'batman')}-objective-deck.txt`, lines.join('\n'), 'text/plain');
   }
 
-  async function importJson(event) {
-    const file = event.target.files?.[0];
-    event.target.value = '';
-    if (!file) return;
-    try {
-      const payload = JSON.parse(await file.text());
-      const ids = Array.isArray(payload.selectedCardIds) ? payload.selectedCardIds : Array.isArray(payload.deck) ? payload.deck.map(item => item.id) : [];
-      state.selected = [...new Set(ids)].filter(id => rawCards.some(card => card.id === id));
-      if (affiliations.includes(payload.affiliation)) state.affiliation = payload.affiliation;
-      if (Array.isArray(payload.roster)) state.roster = payload.roster;
-      if (payload.metadataOverrides && typeof payload.metadataOverrides === 'object') state.overrides = { ...state.overrides, ...payload.metadataOverrides };
-      elements.affiliation.value = state.affiliation;
-      persist(); renderAll(); toast(`Imported ${state.selected.length} card designs`);
-    } catch (error) {
-      alert(`Could not import this deck file: ${error.message}`);
-    }
-  }
-
-
-
   function updatePlayLaunchButton(validation = validateDeck(state.selected.map(getCard).filter(Boolean))) {
     if (!elements.startPlay) return;
     const active = Boolean(state.play?.active);
     elements.startPlay.textContent = active ? 'Resume play screen' : 'Start play screen';
     elements.startPlay.disabled = !active && state.selected.length === 0;
     if (!active) {
-      elements.startPlay.title = validation.valid ? 'Shuffle this deck and draw the opening hand' : 'The deck must be legal before play mode can start';
+      elements.startPlay.title = validation.valid ? 'Shuffle this deck and draw the opening hand' : 'Shuffle this deck and draw the opening hand (this deck has validation issues, but you can still test it)';
     } else {
       elements.startPlay.title = 'Return to the saved game session';
     }
@@ -860,9 +1167,8 @@
 
   function beginPlaySession(replacing = false) {
     const selected = state.selected.map(getCard).filter(Boolean);
-    const validation = validateDeck(selected);
-    if (!validation.valid) {
-      alert(`The Objective deck must be legal before play mode can start:\n\n${validation.errors.join('\n')}`);
+    if (!selected.length) {
+      alert('Select at least one card before starting play mode.');
       return false;
     }
     if (replacing && state.play?.active && !confirm('Restart the game with a freshly shuffled deck and a new opening hand?')) return false;
@@ -1422,23 +1728,48 @@
     const cb = state.crewBuilder;
     if (!cb.crew) errors.push('Choose a crew / faction before recruiting.');
     const repTotal = rosterCharacters.reduce((sum, character) => sum + (character.reputation || 0), 0);
-    const fundingTotal = rosterCharacters.reduce((sum, character) => sum + (character.funding || 0), 0);
+    const ruleEffects = crewRuleEffects(rosterCharacters);
+    const fundingTotal = rosterCharacters.reduce((sum, character) => sum + effectiveCharacterFunding(character, ruleEffects.fundingOverrides), 0);
     const bonuses = crewFundingBonuses(rosterCharacters);
     const bonusTotal = bonuses.reduce((sum, bonus) => sum + bonus.amount, 0);
     const effectiveFundingCap = cb.fundingCap + bonusTotal;
     if (repTotal > cb.repCap) errors.push(`Reputation spent (${repTotal}) exceeds the cap (${cb.repCap}).`);
     if (fundingTotal > effectiveFundingCap) errors.push(`Funding spent ($${fundingTotal}) exceeds the cap ($${effectiveFundingCap}).`);
-    rosterCharacters.filter(character => cb.crew && !(character.crews || [character.crew]).includes(cb.crew))
-      .forEach(character => errors.push(`${character.name} does not belong to the ${cb.crew} crew.`));
+    const { recruitAllowance } = ruleEffects;
+    rosterCharacters.filter(character => {
+      if (!cb.crew || (character.crews || [character.crew]).includes(cb.crew)) return false;
+      return !isCrossRecruitEligible(character, recruitAllowance);
+    }).forEach(character => errors.push(`${character.name} does not belong to the ${cb.crew} crew.`));
+    const leaders = rosterCharacters.filter(character => character.rank === 'Leader');
+    const sidekicks = rosterCharacters.filter(character => character.rank === 'Sidekick');
+    if (leaders.length > 1) errors.push(`A crew may only have 1 Leader (found ${leaders.length}: ${leaders.map(character => character.name).join(', ')}).`);
+    if (sidekicks.length > 1) errors.push(`A crew may only have 1 Sidekick (found ${sidekicks.length}: ${sidekicks.map(character => character.name).join(', ')}).`);
     if (rosterCharacters.length && !cb.bossId) warnings.push('No Boss designated — Boss-only funding traits (Dirty Money, Lord of Business, etc.) will not apply until a model is marked as Boss.');
-    return { valid: errors.length === 0, errors, warnings, repTotal, fundingTotal, bonuses, bonusTotal, effectiveFundingCap };
+    warnings.push(...ruleEffects.warnings);
+    return { valid: errors.length === 0, errors, warnings, repTotal, fundingTotal, bonuses, bonusTotal, effectiveFundingCap, ruleEffects };
   }
 
   function filteredCrewPool() {
     const cb = state.crewBuilder;
     if (!cb.crew) return [];
     const search = normalize(state.crewFilters.search);
-    let pool = rawCharacters.filter(character => (character.crews || [character.crew]).includes(cb.crew));
+    const rosterCharacters = crewRosterCharacters();
+    const { recruitAllowance } = crewRuleEffects(rosterCharacters);
+    let pool = rawCharacters.filter(character => {
+      if ((character.crews || [character.crew]).includes(cb.crew)) return true;
+      if (isCrossRecruitEligible(character, recruitAllowance)) return true;
+      return false;
+    });
+    const hasLeader = rosterCharacters.some(character => character.rank === 'Leader');
+    const hasSidekick = rosterCharacters.some(character => character.rank === 'Sidekick');
+    pool = pool.filter(character => {
+      if (hasLeader && character.rank === 'Leader' && !cb.roster.includes(character.id)) return false;
+      if (hasSidekick && character.rank === 'Sidekick' && !cb.roster.includes(character.id)) return false;
+      return true;
+    });
+    if (state.crewFilters.rank !== 'all') {
+      pool = pool.filter(character => character.rank === state.crewFilters.rank);
+    }
     if (search) {
       pool = pool.filter(character => {
         const rules = characterRules(character).map(rule => rule.label).join(' ');
@@ -1470,6 +1801,7 @@
         <div class="character-card-meta">
           <span class="badge">${character.reputation ?? '—'} REP</span>
           <span class="badge">${character.funding ?? '—'} $</span>
+          ${character.rank ? `<span class="badge">${escapeHtml(character.rank)}</span>` : ''}
         </div>
         <div class="rule-ref-row character-rule-preview">${rules.map(renderCharacterRuleChip).join('')}</div>
         <div class="card-actions single"><button class="button ${recruited ? 'ghost' : ''}" data-action="recruit" type="button">${recruited ? 'Remove from crew' : 'Recruit'}</button></div>
@@ -1477,11 +1809,13 @@
     </article>`;
   }
 
-  function renderCrewRosterItem(character) {
+  function renderCrewRosterItem(character, fundingOverrides) {
     const isBoss = state.crewBuilder.bossId === character.id;
+    const override = fundingOverrides && fundingOverrides.get(character.id);
+    const fundingLabel = override ? `$0 (was $${character.funding ?? 0} — ${override.reason})` : `$${character.funding ?? 0}`;
     return `<article class="deck-item ${isBoss ? 'is-boss' : ''}" data-character-id="${escapeHtml(character.id)}">
       <img src="${escapeHtml(character.thumbnail || character.image)}" alt="">
-      <div><strong>${escapeHtml(character.name)}</strong><span>${character.reputation ?? 0} REP · $${character.funding ?? 0}${isBoss ? ' · Boss' : ''}</span></div>
+      <div><strong>${escapeHtml(character.name)}</strong><span>${character.reputation ?? 0} REP · ${fundingLabel}${character.rank ? ` · ${escapeHtml(character.rank)}` : ''}${isBoss ? ' · Boss' : ''}</span></div>
       <div class="crew-roster-item-actions">
         <button class="icon-button boss-toggle ${isBoss ? 'active' : ''}" data-action="toggle-boss" type="button" title="${isBoss ? 'Remove Boss' : 'Set as Boss'}" aria-label="${isBoss ? 'Remove Boss' : 'Set as Boss'}">★</button>
         <button data-action="remove" type="button" aria-label="Remove ${escapeHtml(character.name)}">×</button>
@@ -1498,6 +1832,7 @@
     elements.crewFundingCapInput.value = cb.fundingCap;
     elements.crewSearch.value = state.crewFilters.search;
     elements.crewSort.value = state.crewFilters.sort;
+    elements.crewRankFilter.value = state.crewFilters.rank;
 
     const pool = filteredCrewPool();
     elements.crewPoolTitle.textContent = cb.crew ? `${cb.crew} recruits` : 'Choose a crew to begin recruiting';
@@ -1534,12 +1869,14 @@
       elements.crewRosterList.className = 'deck-list';
       elements.crewRosterList.innerHTML = rosterCharacters
         .slice()
-        .sort((a,b) => (b.id === cb.bossId) - (a.id === cb.bossId) || a.name.localeCompare(b.name))
-        .map(renderCrewRosterItem).join('');
+        .sort((a,b) => rankSortIndex(a.rank) - rankSortIndex(b.rank) || (b.id === cb.bossId) - (a.id === cb.bossId) || a.name.localeCompare(b.name))
+        .map(character => renderCrewRosterItem(character, validation.ruleEffects.fundingOverrides)).join('');
     }
 
-    const headline = validation.errors.length ? (rosterCharacters.length ? 'Crew needs attention' : 'Start recruiting') : 'Crew legal';
-    elements.crewValidationSummary.className = `validation-summary ${validation.errors.length ? 'invalid' : 'valid'}`;
+    const hasErrors = validation.errors.length > 0;
+    const hasWarnings = validation.warnings.length > 0;
+    const headline = hasErrors ? (rosterCharacters.length ? 'Crew needs attention' : 'Start recruiting') : hasWarnings ? 'Crew legal, with warnings' : 'Crew legal';
+    elements.crewValidationSummary.className = `validation-summary ${hasErrors ? 'invalid' : hasWarnings ? 'warning-only' : 'valid'}`;
     const errorItems = validation.errors.map(message => `<li>${escapeHtml(message)}</li>`).join('');
     const warningItems = validation.warnings.map(message => `<li class="warning">${escapeHtml(message)}</li>`).join('');
     const list = errorItems || warningItems ? `<ul>${errorItems}${warningItems}</ul>` : '';
@@ -1549,8 +1886,18 @@
   function recruitCharacter(id) {
     const character = rawCharacters.find(item => item.id === id);
     const cb = state.crewBuilder;
-    if (!character || !cb.crew || !(character.crews || [character.crew]).includes(cb.crew)) return;
-    if (!cb.roster.includes(id)) cb.roster.push(id);
+    if (!character || !cb.crew) return;
+    const inCrew = (character.crews || [character.crew]).includes(cb.crew);
+    if (!inCrew) {
+      const { recruitAllowance } = crewRuleEffects(crewRosterCharacters());
+      if (!isCrossRecruitEligible(character, recruitAllowance)) return;
+    }
+    if (cb.roster.includes(id)) return;
+    const rosterCharacters = crewRosterCharacters();
+    if (character.rank === 'Leader' && rosterCharacters.some(member => member.rank === 'Leader')) return;
+    if (character.rank === 'Sidekick' && rosterCharacters.some(member => member.rank === 'Sidekick')) return;
+    cb.roster.push(id);
+    if (character.rank === 'Leader') cb.bossId = id;
     persist(); renderCrewBuilder();
   }
 

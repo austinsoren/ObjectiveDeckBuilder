@@ -21,6 +21,12 @@
         <button id="characterNavButton" class="button ghost nav-button" type="button">Character Cards</button>
         <button id="referenceNavButton" class="button ghost nav-button" type="button">Compendium</button>
       </nav>
+      <div class="save-slot-controls">
+        <select id="saveSlotSelect" class="save-slot-select" aria-label="Active save"></select>
+        <button id="newSaveSlot" class="icon-button" title="New save" aria-label="New save">+</button>
+        <button id="renameSaveSlot" class="icon-button" title="Rename save" aria-label="Rename save">✎</button>
+        <button id="deleteSaveSlot" class="icon-button danger" title="Delete save" aria-label="Delete save">×</button>
+      </div>
       <span id="saveStatus" class="save-status">Saved locally</span>
       <button id="helpButton" class="button ghost" type="button">Deck rules</button>
     </div>
@@ -149,7 +155,7 @@
       <div class="meter-grid">
         <div class="meter-card">
           <span>Base deck</span>
-          <strong><span id="baseTotal">0</span>/20</strong>
+          <strong><span id="baseTotal">0</span>/30</strong>
           <div class="meter"><i id="baseMeter"></i></div>
         </div>
         <div class="meter-card">
@@ -178,9 +184,8 @@
       <div class="deck-actions">
         <button id="startPlay" class="button play-button" type="button">Start play screen</button>
         <button id="autoBuild" class="button" type="button">Build legal example</button>
-        <button id="exportJson" class="button ghost" type="button">Export JSON</button>
+        <button id="copyDeckLink" class="button ghost" type="button">Copy share link</button>
         <button id="exportText" class="button ghost" type="button">Export list</button>
-        <label class="button ghost file-button">Import JSON<input id="importJson" type="file" accept="application/json"></label>
         <button id="printDeck" class="button ghost" type="button">Print</button>
       </div>
     </aside>
@@ -227,6 +232,17 @@
           <option value="reputation-desc">Highest reputation</option>
           <option value="funding-asc">Lowest funding</option>
           <option value="funding-desc">Highest funding</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Rank</span>
+        <select id="crewRankFilter">
+          <option value="all">All ranks</option>
+          <option value="Leader">Leader</option>
+          <option value="Sidekick">Sidekick</option>
+          <option value="Henchman">Henchman</option>
+          <option value="Free Agent">Free Agent</option>
         </select>
       </label>
 
@@ -285,6 +301,7 @@
       <div id="crewRosterList" class="deck-list empty-note">Recruit models from the pool.</div>
 
       <div class="deck-actions">
+        <button id="copyCrewLink" class="button ghost" type="button">Copy share link</button>
         <button id="exportCrewJson" class="button ghost" type="button">Export JSON</button>
         <button id="exportCrewText" class="button ghost" type="button">Export list</button>
         <label class="button ghost file-button">Import JSON<input id="importCrewJson" type="file" accept="application/json"></label>
@@ -510,11 +527,12 @@
     <p class="eyebrow">Validation rules</p>
     <h2>Objective deck requirements</h2>
     <div class="rules-copy">
-      <p>The normal Objective deck contains exactly <strong>20 cards</strong>.</p>
-      <p>General cards cannot outnumber cards unique to the selected crew affiliation.</p>
+      <p>The normal Objective deck contains exactly <strong>30 cards</strong>.</p>
+      <p>General cards should not outnumber cards unique to the selected crew affiliation — this is a warning, not a hard requirement.</p>
       <p>No more than <strong>10 cards</strong> may come from single-card designs.</p>
       <p>Every selectable design is treated as a fixed bundle. A card printed in three copies is added as exactly three copies.</p>
-      <p>Character objectives sit outside the normal 20. Their subtitle and rank must match a model in the crew roster.</p>
+      <p>Character objectives sit outside the normal 30. Their subtitle and rank must match a model in the crew roster.</p>
+      <p>Warnings and errors are shown to help you build a legal deck, but they never block the play screen — you can always shuffle and test whatever cards are selected.</p>
     </div>
   </dialog>
 
