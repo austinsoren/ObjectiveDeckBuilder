@@ -527,13 +527,13 @@
       const rank = $('#modelRank').value.trim();
       if (!name || !rank) return;
       state.roster.push({ id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()), name, alias, rank });
-      event.target.reset(); persist(); renderRoster(); renderDeck();
+      event.target.reset(); persist(); renderRoster(); renderDeck(); renderLibrary();
     });
     elements.rosterList.addEventListener('click', event => {
       const button = event.target.closest('[data-remove-model]');
       if (!button) return;
       state.roster = state.roster.filter(model => model.id !== button.dataset.removeModel);
-      persist(); renderRoster(); renderDeck();
+      persist(); renderRoster(); renderDeck(); renderLibrary();
     });
     $('#clearDeck').addEventListener('click', () => {
       if (!state.selected.length || confirm('Clear every selected card bundle?')) {
@@ -730,9 +730,23 @@
     if (!elements.crewView.hidden) renderCrewBuilder();
   }
 
+  function characterRequirementMet(card) {
+    if (!card.subtitle || !card.rank) return false;
+    const requirement = normalize(card.subtitle);
+    const rank = normalize(card.rank);
+    const nameMatches = name => name === requirement || name.startsWith(`${requirement} `);
+    const manualMatch = state.roster.some(model => {
+      const names = [model.name, model.alias].map(normalize).filter(Boolean);
+      return names.some(nameMatches) && normalize(model.rank) === rank;
+    });
+    if (manualMatch) return true;
+    return crewRosterCharacters().some(character => nameMatches(normalize(character.name)) && normalize(character.rank) === rank);
+  }
+
   function libraryPool() {
     const category = state.filters.category;
     return allCards().filter(card => {
+      if (card.hiddenUntilRequirementMet && !characterRequirementMet(card)) return false;
       if (category === 'buildable') return card.category === 'general' || (card.category === 'affiliation' && card.affiliation === state.affiliation);
       if (category === 'character') return card.category === 'character';
       if (category === 'reference') return ['event','encounter','speedforce','special'].includes(card.category);
@@ -901,13 +915,7 @@
         errors.push(`${card.title} needs its printed subtitle and rank entered in metadata.`);
         return;
       }
-      const requirement = normalize(card.subtitle);
-      const rank = normalize(card.rank);
-      const match = state.roster.some(model => {
-        const names = [model.name, model.alias].map(normalize).filter(Boolean);
-        return names.includes(requirement) && normalize(model.rank) === rank;
-      });
-      if (!match) errors.push(`${card.title} requires ${card.subtitle} (${card.rank}) in the crew roster.`);
+      if (!characterRequirementMet(card)) errors.push(`${card.title} requires ${card.subtitle} (${card.rank}) in the crew roster.`);
     });
 
     const needsReview = selected.filter(card => card.metadataStatus === 'ocr-review');
@@ -2031,6 +2039,7 @@
     elements.crewNav.setAttribute('aria-current', showCrew ? 'page' : 'false');
     document.title = showReference ? 'BMG Compendium Reference' : showCharacters ? 'BMG Character Card Archive' : showCrew ? 'BMG Crew Builder' : 'Batman Objective Deck Builder';
     hideRuleTooltip();
+    if (showBuilder) { renderLibrary(); renderDeck(); }
     if (showCharacters) renderCharacters();
     if (showCrew) renderCrewBuilder();
     if (showReference) {
