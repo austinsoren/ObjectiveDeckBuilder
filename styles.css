@@ -487,3 +487,65 @@ pre { white-space:pre-wrap; font-family:inherit; color:var(--muted); font-size:.
   #characterView:not([hidden]) .character-grid { grid-template-columns:repeat(3,1fr); }
   #characterView:not([hidden]) .character-tile { break-inside:avoid; }
 }
+
+/* Crew equipment: highlighted traits granted by equipment, the Equipment screen, and print tags */
+.character-rule-chip.from-equipment { border-color:var(--green); background:rgba(85,213,139,.12); color:#c9f7da; }
+.character-rule-chip.from-equipment.linked:hover,.character-rule-chip.from-equipment.linked:focus-visible { border-color:var(--yellow); color:#fff2ae; }
+.character-rule-chip .rule-origin { font-size:.9em; font-weight:600; color:#8fdcae; margin-left:5px; }
+.character-rule-chip .rule-origin::before { content:"⚙ "; }
+.deck-item .character-rule-chip { font-size:.58rem; padding:3px 6px; color:#c9f7da; background:rgba(85,213,139,.12); }
+.deck-item .equip-button { color:var(--text); background:#22272f; font-size:.95rem; width:28px; height:28px; }
+.deck-item .equip-button.active { color:#0c1a11; background:var(--green); }
+.roster-equipment { margin-top:4px; }
+.roster-equipment-items { display:block; color:#8fdcae!important; }
+.roster-equipment .rule-ref-row { margin:4px 0 0; gap:4px; }
+.equipment-model-list { max-height:none; margin-bottom:4px; }
+.equipment-model-row { cursor:pointer; }
+.equipment-model-row:hover { border-color:#4a525e; }
+.equipment-model-row:focus-visible { outline:2px solid var(--yellow); outline-offset:1px; }
+.equipment-model-row.selected { border-color:var(--yellow); box-shadow:0 0 0 2px rgba(255,210,31,.16); }
+.equipment-model-row .equipment-model-gear { display:block; }
+.equipment-model-count { min-width:22px; height:22px; border-radius:999px; display:grid; place-items:center; font-weight:800; }
+.equipment-model-count.active { background:var(--green); color:#0c1a11!important; }
+.equipment-model-summary { display:grid; grid-template-columns:84px 1fr; gap:12px; border:1px solid var(--line); background:#0d1014; border-radius:10px; padding:10px; margin-bottom:14px; }
+.equipment-model-summary img { width:84px; aspect-ratio:1320/2569; object-fit:cover; border-radius:7px; }
+.equipment-model-summary .rule-ref-row { margin:4px 0 8px; }
+.equipment-added-heading { margin:6px 0 0; color:var(--muted); font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.08em; }
+.equipment-toolbar { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 14px; align-items:end; }
+.equipment-toolbar .toggle-row { margin:0 0 20px; }
+.equipment-section-title { margin:14px 0 8px; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+.equipment-section-title span { color:var(--text); margin-left:4px; }
+.equipment-section { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px; }
+.equipment-item { display:flex; flex-direction:column; gap:7px; border:1px solid var(--line); background:#0f1216; border-radius:11px; padding:11px; min-width:0; }
+.equipment-item.owned { border-color:var(--green); box-shadow:0 0 0 2px rgba(85,213,139,.14); }
+.equipment-item.unavailable { opacity:.62; }
+.equipment-item-head { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+.equipment-item-head h3 { font-size:.86rem; line-height:1.25; }
+.equipment-cost { color:var(--yellow); font-weight:800; font-size:.78rem; white-space:nowrap; }
+.equipment-item .badge.over { color:#ffc2c7; border-color:#6a363c; background:#2c171a; }
+.equipment-description { margin:0; color:#cdd3dc; font-size:.74rem; line-height:1.45; }
+.equipment-item .rule-ref-row { margin:0; }
+.equipment-choice { margin:0; }
+.equipment-choice select { padding:7px 9px; font-size:.76rem; }
+.equipment-reason { margin:0; color:#ffd983; font-size:.7rem; line-height:1.4; }
+.equipment-item-actions { margin-top:auto; display:flex; justify-content:flex-end; }
+.equipment-hidden-note { margin-top:14px; }
+.equipment-crew-list { display:grid; gap:8px; }
+.equipment-crew-model { border:1px solid var(--line); background:#0e1115; border-radius:9px; padding:8px 10px; }
+.equipment-crew-model .text-button { display:flex; justify-content:space-between; width:100%; font-size:.76rem; }
+.equipment-crew-model .text-button span { color:var(--muted); }
+.equipment-crew-model ul { list-style:none; margin:6px 0 0; padding:0; display:grid; gap:3px; }
+.equipment-crew-model li { display:grid; grid-template-columns:1fr auto auto; gap:8px; align-items:center; font-size:.72rem; color:#c9f7da; }
+.equipment-crew-model li span:nth-child(2) { color:var(--muted); font-size:.66rem; }
+.equipment-crew-model li button { background:transparent; border:0; color:var(--red); font-size:1rem; line-height:1; padding:0 2px; }
+@media (max-width:760px) {
+  .equipment-toolbar { grid-template-columns:1fr; }
+  .equipment-toolbar .toggle-row { margin:0 0 12px; }
+  .equipment-section { grid-template-columns:1fr; }
+}
+/* Equipment on the print sheets: boxed tag so it reads in black and white. */
+.print-equipment-tag { display:inline-block; font-size:.78em; font-weight:700; border:0.75pt solid #333; border-radius:3pt; padding:0 3pt; margin-left:3pt; }
+.print-equipment-source { font-size:.75em; font-weight:400; color:#555; }
+.print-rule.from-equipment { border-left:2pt solid #333; padding-left:4pt; }
+.loadout-attributes td.stat-modified { background:#eee; print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+.loadout-attributes td.stat-modified small { display:block; font-size:6pt; font-weight:600; }

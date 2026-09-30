@@ -18,6 +18,7 @@
       <nav class="view-nav" aria-label="Application pages">
         <button id="builderNavButton" class="button ghost nav-button active" type="button">Deck Builder</button>
         <button id="crewNavButton" class="button ghost nav-button" type="button">Crew Builder</button>
+        <button id="equipmentNavButton" class="button ghost nav-button" type="button">Equipment</button>
         <button id="characterNavButton" class="button ghost nav-button" type="button">Character Cards</button>
         <button id="referenceNavButton" class="button ghost nav-button" type="button">Compendium</button>
       </nav>
@@ -312,6 +313,93 @@
   </main>
 
 
+  <main id="equipmentView" class="app-shell view-panel" hidden>
+    <aside class="filters panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Active roster</p>
+          <h2>Models</h2>
+        </div>
+      </div>
+
+      <label class="field">
+        <span>Equipment list</span>
+        <select id="equipmentListSelect"></select>
+      </label>
+
+      <div id="equipmentModelList" class="deck-list equipment-model-list"></div>
+
+      <section class="reference-source-note">
+        <strong>Equipment rules</strong>
+        <span>Henchmen and Free Agents buy from their crew's list; other ranks only where an item says so.</span>
+        <span>Costs are per item and come out of the crew's Funding (and Reputation where listed).</span>
+        <span>The range before each item (e.g. 0-2) is the limit for the whole crew. A model can't take the same item twice, or gain a trait it already has.</span>
+      </section>
+    </aside>
+
+    <section class="library panel">
+      <div class="panel-heading library-heading">
+        <div>
+          <p id="equipmentModelEyebrow" class="eyebrow">Equipment</p>
+          <h2 id="equipmentModelTitle">Choose a model</h2>
+        </div>
+        <div class="library-stats"><strong id="equipmentModelCost">$0</strong><span>equipment on this model</span></div>
+      </div>
+      <div id="equipmentModelSummary"></div>
+      <div id="equipmentToolbar" class="equipment-toolbar">
+        <label class="field search-field">
+          <span>Search equipment</span>
+          <input id="equipmentSearch" type="search" placeholder="Name, rule, effect…" autocomplete="off">
+        </label>
+        <label class="toggle-row">
+          <input id="equipmentShowUnavailable" type="checkbox">
+          <span>Show items this model can't take</span>
+        </label>
+      </div>
+      <div id="equipmentItemGrid" class="equipment-grid" aria-live="polite"></div>
+      <div id="emptyEquipment" class="empty-state" hidden>
+        <h3 id="emptyEquipmentTitle">No equipment to show</h3>
+        <p id="emptyEquipmentText"></p>
+      </div>
+    </section>
+
+    <aside class="deck panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Current crew</p>
+          <h2>Crew equipment</h2>
+        </div>
+        <button id="clearModelEquipment" class="icon-button danger" title="Remove this model's equipment" aria-label="Remove this model's equipment">×</button>
+      </div>
+
+      <section id="equipmentValidationSummary" class="validation-summary"></section>
+
+      <div class="meter-grid">
+        <div class="meter-card">
+          <span>Reputation</span>
+          <strong><span id="equipmentRepTotal">0</span>/<span id="equipmentRepCapLabel">350</span></strong>
+          <div class="meter"><i id="equipmentRepMeter"></i></div>
+        </div>
+        <div class="meter-card">
+          <span>Funding</span>
+          <strong>$<span id="equipmentFundingTotal">0</span>/$<span id="equipmentFundingCapLabel">1500</span></strong>
+          <div class="meter"><i id="equipmentFundingMeter"></i></div>
+        </div>
+      </div>
+
+      <div class="deck-section-heading">
+        <h3>Purchased</h3>
+        <span id="equipmentCrewCount">0 items</span>
+      </div>
+      <div id="equipmentCrewList" class="equipment-crew-list"></div>
+
+      <div class="deck-actions">
+        <button id="equipmentBackToCrew" class="button ghost" type="button">Back to Crew Builder</button>
+        <button id="printEquipmentCrew" class="button ghost" type="button">Print</button>
+      </div>
+    </aside>
+  </main>
+
   <main id="characterView" class="character-shell view-panel" hidden>
     <aside class="character-filters panel">
       <div class="panel-heading">
@@ -534,7 +622,7 @@
       </button>
       <button class="print-choice" type="button" data-print-layout="loadout">
         <strong>Half-Page Loadouts</strong>
-        <span>2 models per page: character card, printed statistics, and the full text of that model's traits and weapon rules.</span>
+        <span>2 models per page: character card, printed statistics, purchased equipment, and the full text of that model's traits and weapon rules.</span>
       </button>
     </div>
   </dialog>
@@ -657,6 +745,7 @@
   <script src="data/cards-data.js"></script>
   <script src="data/character-data.js"></script>
   <script src="data/reference-data.js"></script>
+  <script src="data/equipment-data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

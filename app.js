@@ -42,7 +42,8 @@
     characterFilters: { search: '', crew: 'all', baseSize: 'all', sort: 'name' },
     referenceFilters: { search: '', section: 'all', sort: 'source', selectedOnly: false, letter: 'all' },
     crewFilters: { search: '', sort: 'name', rank: 'all' },
-    crewBuilder: { crew: '', repCap: 350, fundingCap: 1500, bossId: null, roster: [] }
+    equipmentFilters: { characterId: '', search: '', showUnavailable: false },
+    crewBuilder: { crew: '', repCap: 350, fundingCap: 1500, bossId: null, roster: [], equipmentList: '', equipment: {} }
   };
 
   // Traits that raise a crew's Funding cap when recruited (some only while the model is the Boss).
@@ -202,6 +203,204 @@
     return override ? override.amount : (character.funding || 0);
   }
 
+  // ---- Equipment -------------------------------------------------------------------------------
+  // Crew equipment lists transcribed from the compendium (data/equipment-data.js, built by
+  // tools/build_equipment_data.py). Purchases are stored per model as
+  // state.crewBuilder.equipment[characterId] = [{ id, choice }].
+  const equipmentData = window.BATMAN_EQUIPMENT_DATA && Array.isArray(window.BATMAN_EQUIPMENT_DATA.lists) ? window.BATMAN_EQUIPMENT_DATA : { lists: [] };
+  const equipmentLists = equipmentData.lists;
+  const equipmentById = new Map(equipmentLists.flatMap(list => list.items.map(item => [item.id, { ...item, listId: list.id }])));
+  // Lists hand out the same records (with listId) so group limits work wherever an item comes from.
+  equipmentLists.forEach(list => { list.items = list.items.map(item => equipmentById.get(item.id)); });
+  // Item ids from the first data build (compendium PDF list names), renamed when the lists were
+  // re-transcribed from the official app.
+  const LEGACY_EQUIPMENT_PREFIXES = [
+    ['batman-crew-', 'batman-'], ['joker-crew-', 'joker-'], ['penguin-crew-', 'penguin-'],
+    ['soldiers-of-fortune-crew-', 'bane-soldiers-of-fortune-'], ['court-of-owls-crew-', 'court-of-owls-'],
+    ['the-riddler-crew-', 'riddler-'], ['mr-freeze-crew-', 'mr-freeze-'], ['league-of-assassins-crew-', 'league-of-assassins-'],
+    ['birds-of-prey-crew-', 'birds-of-prey-'], ['organized-crime-crew-', 'organized-crime-']
+  ];
+  function upgradeEquipmentId(id) {
+    if (equipmentById.has(id)) return id;
+    const legacy = LEGACY_EQUIPMENT_PREFIXES.find(([prefix]) => id.startsWith(prefix));
+    return legacy ? legacy[1] + id.slice(legacy[0].length) : id;
+  }
+
+  // Ranks that may buy equipment unless an item says otherwise (Special Equipment, compendium p.35).
+  const EQUIPMENT_DEFAULT_RANKS = ['Henchman', 'Free Agent'];
+  const referenceByTitle = new Map(referenceEntries.map(entry => [entry.title.toLowerCase(), entry]));
+
+  function defaultEquipmentListId(crew) {
+    return equipmentLists.find(list => list.crews.includes(crew))?.id || '';
+  }
+
+  function activeEquipmentList(cb = state.crewBuilder) {
+    const id = cb.equipmentList || defaultEquipmentListId(cb.crew);
+    return equipmentLists.find(list => list.id === id) || null;
+  }
+
+  // Compendium "Name:"/"Alias:" references use real names ("Harleen Quinzel", "Oswald C. Cobblepot")
+  // or code names ("Joker", "Penguin (Arkham Knight)"), which map onto this app's alias / name
+  // fields respectively, with varying middle names and leading "The"/"Dr.".
+  function modelMatchesName(character, query) {
+    const clean = value => normalize(value).replace(/^(the|dr) /, '');
+    const target = clean(query);
+    if (!target) return false;
+    const fields = [character.name, character.alias].filter(value => value && normalize(value) !== 'unknown');
+    if (fields.some(value => clean(value) === target || clean(stripActorSuffix(value)) === target)) return true;
+    const tokens = target.split(' ').filter(token => token.length > 1);
+    return tokens.length > 1 && fields.some(value => {
+      const have = new Set(clean(value).split(' '));
+      return tokens.every(token => have.has(token));
+    });
+  }
+
+  function characterHasTrait(character, traitName) {
+    const target = normalize(traitName);
+    return (character.traits || []).some(trait => {
+      const label = normalize(trait.label);
+      return label === target || label.startsWith(`${target} `) && /\(/.test(trait.label.slice(traitName.length));
+    });
+  }
+
+  // Duplicate-trait key: the compendium entry, following "See X." redirects (Grapple Gun → Batclaw).
+  function ruleKey(rule) {
+    let entry = rule.referenceId ? referenceById.get(rule.referenceId) : null;
+    const redirect = entry && /^See ([^.]+)\.?$/.exec(entry.body.trim());
+    if (redirect && referenceByTitle.has(redirect[1].toLowerCase())) entry = referenceByTitle.get(redirect[1].toLowerCase());
+    return entry ? entry.id : `${rule.category}:${normalize(rule.label)}`;
+  }
+
+  function modelEquipment(characterId, cb = state.crewBuilder) {
+    return (cb.equipment?.[characterId] || [])
+      .map(entry => ({ ...entry, item: equipmentById.get(entry.id) }))
+      .filter(entry => entry.item);
+  }
+
+  function equipmentChoice(entry) {
+    return entry.item.choices?.find(choice => choice.id === entry.choice) || null;
+  }
+
+  function equipmentEntryLabel(entry) {
+    const choice = equipmentChoice(entry);
+    return choice ? `${entry.item.name}: ${choice.label}` : entry.item.name;
+  }
+
+  function equipmentGrantedRules(entry) {
+    return [...entry.item.grants, ...(equipmentChoice(entry)?.grants || [])];
+  }
+
+  // Printed traits/weapon rules plus everything granted by purchased equipment. Granted rules carry
+  // `equipment` (the item label) so the UI and print sheets can highlight where they came from.
+  function rosterCharacterRules(character) {
+    const granted = modelEquipment(character.id).flatMap(entry =>
+      equipmentGrantedRules(entry).map(rule => ({ ...rule, equipment: equipmentEntryLabel(entry), stacks: !!entry.item.stacks })));
+    return [...characterRules(character), ...granted];
+  }
+
+  function equipmentTotals(cb = state.crewBuilder) {
+    let funding = 0, rep = 0, count = 0;
+    cb.roster.forEach(id => modelEquipment(id, cb).forEach(({ item }) => { funding += item.cost || 0; rep += item.rep || 0; count += 1; }));
+    return { funding, rep, count };
+  }
+
+  function characterEquipmentCost(characterId) {
+    return modelEquipment(characterId).reduce((sum, { item }) => sum + (item.cost || 0), 0);
+  }
+
+  // How many of each item, item choice, and item group (e.g. Iceberg Lounge options) the whole crew has bought.
+  function crewEquipmentCounts(cb = state.crewBuilder) {
+    const items = new Map(), choices = new Map(), groups = new Map();
+    const bump = (map, key) => map.set(key, (map.get(key) || 0) + 1);
+    cb.roster.forEach(id => modelEquipment(id, cb).forEach(entry => {
+      bump(items, entry.item.id);
+      if (entry.choice) bump(choices, `${entry.item.id}:${entry.choice}`);
+      if (entry.item.group) bump(groups, `${entry.item.listId}:${entry.item.group}`);
+    }));
+    return { items, choices, groups };
+  }
+
+  // A list-level group whose items share one crew-wide limit, e.g. "only 1 Iceberg Lounge option".
+  function equipmentGroup(item) {
+    return item.group ? equipmentLists.find(list => list.id === item.listId)?.groups?.[item.group] || null : null;
+  }
+
+  function formatEquipmentCost(item) {
+    return `$${item.cost}${item.rep ? ` + ${item.rep} Rep` : ''}`;
+  }
+
+  function formatEquipmentLimit(item) {
+    const [min, max] = item.limit;
+    return max == null ? 'No limit' : `${min}-${max}`;
+  }
+
+  // Reasons this model cannot hold the item at all (rank / name / trait / Boss restrictions and
+  // crew prerequisites). An empty list means the item is available to the model.
+  function equipmentRestrictionReasons(item, character, rosterCharacters, cb = state.crewBuilder) {
+    const reasons = [];
+    const only = item.only || {};
+    if (only.names) {
+      if (!only.names.some(name => modelMatchesName(character, name))) reasons.push(`Only ${only.names.join(' / ')} can take this.`);
+    } else {
+      const ranks = only.ranks || EQUIPMENT_DEFAULT_RANKS;
+      if (!ranks.includes(character.rank)) reasons.push(`Only ${ranks.join(' / ')} models can take this.`);
+    }
+    if (only.traits && !only.traits.some(trait => characterHasTrait(character, trait))) reasons.push(`Requires the ${only.traits.join(' or ')} trait.`);
+    if (only.notTraits && only.notTraits.some(trait => characterHasTrait(character, trait))) reasons.push(`Models with the ${only.notTraits.join(' / ')} trait cannot take this.`);
+    if (only.bossOnly && cb.bossId !== character.id) reasons.push('This model must be the Boss.');
+    if (item.requiresBossTrait) {
+      const boss = rosterCharacters.find(member => member.id === cb.bossId);
+      if (!boss || !characterHasTrait(boss, item.requiresBossTrait)) reasons.push(`Your Boss must have the ${item.requiresBossTrait} trait.`);
+    }
+    if (item.requires && !rosterCharacters.some(member => item.requires.some(name => modelMatchesName(member, name)))) {
+      reasons.push(`Needs ${item.requires.join(' or ')} in the crew.`);
+    }
+    if (item.requiresEquipment && !crewEquipmentCounts(cb).items.has(item.requiresEquipment)) {
+      reasons.push(`Needs ${equipmentById.get(item.requiresEquipment)?.name || 'another item'} bought first.`);
+    }
+    return reasons;
+  }
+
+  // Traits this item (or choice) would give the model that it already has — printed or from other
+  // equipment. A model cannot have the same trait more than once (Equipment Rules, NB).
+  function duplicateEquipmentTraits(character, item, choiceId, ignoreItemId = item.id) {
+    if (item.stacks) return [];
+    const existing = new Map();
+    characterRules(character).forEach(rule => existing.set(ruleKey(rule), rule.label));
+    modelEquipment(character.id).filter(entry => entry.item.id !== ignoreItemId).forEach(entry =>
+      equipmentGrantedRules(entry).forEach(rule => existing.set(ruleKey(rule), `${rule.label} (${equipmentEntryLabel(entry)})`)));
+    const granted = [...item.grants, ...(item.choices?.find(choice => choice.id === choiceId)?.grants || [])];
+    return granted.filter(rule => rule.category === 'trait' && existing.has(ruleKey(rule))).map(rule => rule.label);
+  }
+
+  function validateEquipment(rosterCharacters, cb = state.crewBuilder) {
+    const errors = [];
+    const list = activeEquipmentList(cb);
+    const counts = crewEquipmentCounts(cb);
+    rosterCharacters.forEach(character => modelEquipment(character.id, cb).forEach(entry => {
+      const label = `${character.name}'s ${equipmentEntryLabel(entry)}`;
+      if (!list || entry.item.listId !== list.id) errors.push(`${label} is not on the ${list ? list.title : 'selected'} equipment list.`);
+      equipmentRestrictionReasons(entry.item, character, rosterCharacters, cb).forEach(reason => errors.push(`${label}: ${reason}`));
+      if (entry.item.choices && !equipmentChoice(entry)) errors.push(`${label}: choose an option.`);
+      const duplicates = duplicateEquipmentTraits(character, entry.item, entry.choice);
+      if (duplicates.length) errors.push(`${label} grants ${duplicates.join(', ')}, which ${character.name} already has — a model cannot have the same trait twice.`);
+    }));
+    counts.items.forEach((count, id) => {
+      const item = equipmentById.get(id);
+      const max = item?.limit?.[1];
+      if (max != null && count > max) errors.push(`${count} × ${item.name} bought; the crew limit is ${formatEquipmentLimit(item)}.`);
+      (item?.choices || []).forEach(choice => {
+        const chosen = counts.choices.get(`${id}:${choice.id}`) || 0;
+        if (choice.limit != null && chosen > choice.limit) errors.push(`${chosen} × ${choice.label} bought; the crew limit is 0-${choice.limit}.`);
+      });
+    });
+    equipmentLists.forEach(list => Object.entries(list.groups || {}).forEach(([groupId, group]) => {
+      const bought = counts.groups.get(`${list.id}:${groupId}`) || 0;
+      if (bought > group.limit) errors.push(`${bought} ${group.label} bought; only ${group.limit} may be selected.`);
+    }));
+    return errors;
+  }
+
   let saves = migrateLegacyStorage(loadSaves());
   let activeSlotId = localStorage.getItem(ACTIVE_SLOT_KEY);
   if (!saves[activeSlotId]) activeSlotId = Object.keys(saves)[0];
@@ -261,6 +460,16 @@
     crewFundingMeter: $('#crewFundingMeter'), crewFundingBonusNote: $('#crewFundingBonusNote'), crewRosterCount: $('#crewRosterCount'),
     crewRosterList: $('#crewRosterList')
   });
+  Object.assign(elements, {
+    equipmentView: $('#equipmentView'), equipmentNav: $('#equipmentNavButton'), equipmentListSelect: $('#equipmentListSelect'),
+    equipmentModelList: $('#equipmentModelList'), equipmentModelEyebrow: $('#equipmentModelEyebrow'), equipmentModelTitle: $('#equipmentModelTitle'),
+    equipmentModelCost: $('#equipmentModelCost'), equipmentModelSummary: $('#equipmentModelSummary'), equipmentToolbar: $('#equipmentToolbar'),
+    equipmentSearch: $('#equipmentSearch'), equipmentShowUnavailable: $('#equipmentShowUnavailable'), equipmentItemGrid: $('#equipmentItemGrid'),
+    emptyEquipment: $('#emptyEquipment'), emptyEquipmentTitle: $('#emptyEquipmentTitle'), emptyEquipmentText: $('#emptyEquipmentText'),
+    equipmentValidationSummary: $('#equipmentValidationSummary'), equipmentRepTotal: $('#equipmentRepTotal'), equipmentRepCapLabel: $('#equipmentRepCapLabel'),
+    equipmentRepMeter: $('#equipmentRepMeter'), equipmentFundingTotal: $('#equipmentFundingTotal'), equipmentFundingCapLabel: $('#equipmentFundingCapLabel'),
+    equipmentFundingMeter: $('#equipmentFundingMeter'), equipmentCrewCount: $('#equipmentCrewCount'), equipmentCrewList: $('#equipmentCrewList')
+  });
 
   initialize();
 
@@ -304,6 +513,7 @@
         characterFilters: { ...defaults.characterFilters, ...(parsed?.characterFilters || {}) },
         referenceFilters: { ...defaults.referenceFilters, ...(parsed?.referenceFilters || {}) },
         crewFilters: { ...defaults.crewFilters, ...(parsed?.crewFilters || {}) },
+        equipmentFilters: { ...defaults.equipmentFilters, ...(parsed?.equipmentFilters || {}) },
         crewBuilder: sanitizeCrewBuilder(parsed?.crewBuilder),
         selected: Array.isArray(parsed?.selected) ? parsed.selected.filter(id => rawCards.some(card => card.id === id)) : [],
         roster: Array.isArray(parsed?.roster) ? parsed.roster : [],
@@ -369,7 +579,28 @@
     base.fundingCap = Number.isFinite(Number(base.fundingCap)) ? Number(base.fundingCap) : defaults.crewBuilder.fundingCap;
     base.roster = resolveCrewRosterIds(base.roster, base.crew);
     base.bossId = base.roster.includes(base.bossId) ? base.bossId : null;
+    base.equipmentList = equipmentLists.some(list => list.id === base.equipmentList) ? base.equipmentList : '';
+    base.equipment = sanitizeEquipment(base.equipment, base.roster);
     return base;
+  }
+
+  // Keeps only purchases of known items by models still on the roster, one of each item per model.
+  function sanitizeEquipment(raw, roster) {
+    const clean = {};
+    if (!raw || typeof raw !== 'object') return clean;
+    roster.forEach(id => {
+      const seen = new Set();
+      const entries = (Array.isArray(raw[id]) ? raw[id] : []).map(entry => typeof entry === 'string' ? { id: entry } : entry)
+        .map(entry => entry && typeof entry.id === 'string' ? { ...entry, id: upgradeEquipmentId(entry.id) } : entry)
+        .filter(entry => entry && equipmentById.has(entry.id) && !seen.has(entry.id) && seen.add(entry.id))
+        .map(entry => {
+          const item = equipmentById.get(entry.id);
+          const choice = item.choices?.some(option => option.id === entry.choice) ? entry.choice : null;
+          return { id: entry.id, choice };
+        });
+      if (entries.length) clean[id] = entries;
+    });
+    return clean;
   }
 
   function persist() {
@@ -623,6 +854,8 @@
       cb.crew = nextCrew;
       cb.roster = [];
       cb.bossId = null;
+      cb.equipment = {};
+      cb.equipmentList = '';
       persist(); renderCrewBuilder();
     });
     elements.crewRepCapSlider.addEventListener('input', event => {
@@ -664,12 +897,14 @@
     elements.crewRosterList.addEventListener('click', event => {
       const row = event.target.closest('[data-character-id]');
       if (!row) return;
+      if (event.target.closest('[data-rule-ref]')) return;
       if (event.target.closest('[data-action="remove"]')) removeCrewMember(row.dataset.characterId);
       else if (event.target.closest('[data-action="toggle-boss"]')) toggleCrewBoss(row.dataset.characterId);
+      else if (event.target.closest('[data-action="equip"]')) navigateTo('equipment', row.dataset.characterId);
     });
     $('#clearCrew').addEventListener('click', () => {
       if (!state.crewBuilder.roster.length || confirm('Remove every recruited model from this crew?')) {
-        state.crewBuilder.roster = []; state.crewBuilder.bossId = null; persist(); renderCrewBuilder();
+        state.crewBuilder.roster = []; state.crewBuilder.bossId = null; state.crewBuilder.equipment = {}; persist(); renderCrewBuilder();
       }
     });
     $('#exportCrewJson').addEventListener('click', exportCrewJson);
@@ -685,6 +920,62 @@
       if (choice.dataset.printLayout === 'loadout') printCrewLoadouts();
       else printCrewProxies();
     });
+
+    elements.equipmentNav.addEventListener('click', () => navigateTo('equipment'));
+    elements.equipmentListSelect.addEventListener('change', event => {
+      state.crewBuilder.equipmentList = event.target.value;
+      persist(); renderEquipment();
+    });
+    elements.equipmentSearch.addEventListener('input', event => {
+      state.equipmentFilters.search = event.target.value;
+      persist(); renderEquipment();
+    });
+    elements.equipmentShowUnavailable.addEventListener('change', event => {
+      state.equipmentFilters.showUnavailable = event.target.checked;
+      persist(); renderEquipment();
+    });
+    elements.equipmentModelList.addEventListener('click', event => {
+      const row = event.target.closest('[data-character-id]');
+      if (row && !event.target.closest('[data-rule-ref]')) navigateTo('equipment', row.dataset.characterId);
+    });
+    elements.equipmentModelList.addEventListener('keydown', event => {
+      const row = event.target.closest('[data-character-id]');
+      if (!row || (event.key !== 'Enter' && event.key !== ' ')) return;
+      event.preventDefault();
+      navigateTo('equipment', row.dataset.characterId);
+    });
+    elements.equipmentItemGrid.addEventListener('click', event => {
+      const card = event.target.closest('[data-equipment-id]');
+      const action = event.target.closest('[data-action]');
+      if (!card || !action || action.disabled) return;
+      const characterId = state.equipmentFilters.characterId;
+      if (action.dataset.action === 'add-equipment') {
+        const choice = card.querySelector('[data-equipment-choice]')?.value || null;
+        addEquipment(characterId, card.dataset.equipmentId, choice);
+      } else if (action.dataset.action === 'remove-equipment') {
+        removeEquipment(characterId, card.dataset.equipmentId);
+      }
+    });
+    elements.equipmentItemGrid.addEventListener('change', event => {
+      const select = event.target.closest('[data-equipment-choice]');
+      if (select) renderEquipment();
+    });
+    elements.equipmentCrewList.addEventListener('click', event => {
+      const remove = event.target.closest('[data-action="remove-equipment"]');
+      if (remove) { removeEquipment(remove.dataset.characterId, remove.dataset.equipmentId); return; }
+      const model = event.target.closest('[data-action="select-model"]');
+      if (model) navigateTo('equipment', model.dataset.characterId);
+    });
+    $('#clearModelEquipment').addEventListener('click', () => {
+      const id = state.equipmentFilters.characterId;
+      const character = rawCharacters.find(item => item.id === id);
+      if (!character || !modelEquipment(id).length) return;
+      if (!confirm(`Remove all equipment from ${character.name}?`)) return;
+      delete state.crewBuilder.equipment[id];
+      persist(); renderEquipment();
+    });
+    $('#equipmentBackToCrew').addEventListener('click', () => navigateTo('crew'));
+    $('#printEquipmentCrew').addEventListener('click', printCrewRoster);
 
     elements.referenceSearch.addEventListener('input', event => {
       state.referenceFilters.search = event.target.value;
@@ -738,6 +1029,7 @@
     if (!elements.characterView.hidden) renderCharacters();
     if (!elements.referenceView.hidden) renderReference();
     if (!elements.crewView.hidden) renderCrewBuilder();
+    if (!elements.equipmentView.hidden) renderEquipment();
   }
 
   function characterRequirementMet(card) {
@@ -859,15 +1151,17 @@
     await printProxySheet(cards, 'contain', renderCrewRulesPrintPage(rosterCharacters));
   }
 
-  // One entry per compendium rule referenced by the given models, grouped by traits / weapon rules.
+  // One entry per compendium rule referenced by the given models (including rules granted by their
+  // equipment, which remember the item they came from), grouped by traits / weapon rules.
   function collectPrintRules(characters) {
     const rules = new Map();
-    characters.forEach(character => characterRules(character).forEach(rule => {
+    characters.forEach(character => rosterCharacterRules(character).forEach(rule => {
       const entry = rule.referenceId ? referenceById.get(rule.referenceId) : null;
       const key = entry ? entry.id : `${rule.category}:${normalize(rule.label)}`;
-      if (!rules.has(key)) rules.set(key, { entry, category: rule.category, title: entry?.title || rule.label, labels: new Set(), models: new Set() });
+      if (!rules.has(key)) rules.set(key, { entry, category: rule.category, title: entry?.title || rule.label, labels: new Set(), models: new Set(), equipment: new Set() });
       rules.get(key).labels.add(rule.label);
-      rules.get(key).models.add(character.name);
+      rules.get(key).models.add(rule.equipment ? `${character.name} (${rule.equipment})` : character.name);
+      if (rule.equipment) rules.get(key).equipment.add(rule.equipment);
     }));
     return [['trait', 'Traits', 'Trait'], ['weapon', 'Weapon Rules', 'Weapon Rule']].map(([category, heading, kind]) => ({
       heading, kind,
@@ -878,7 +1172,8 @@
   function renderPrintRule(rule, kind, showModels) {
     const labels = [...rule.labels].sort().join(', ');
     const body = rule.entry?.body || 'No compendium entry found for this rule.';
-    return `<div class="print-rule"><p><strong>[${escapeHtml(rule.title)}]</strong> - ${kind}${labels !== rule.title ? ` <em>(${escapeHtml(labels)})</em>` : ''}</p>
+    const origin = rule.equipment?.size ? ` <span class="print-equipment-tag">Equipment: ${escapeHtml([...rule.equipment].sort().join(', '))}</span>` : '';
+    return `<div class="print-rule${origin ? ' from-equipment' : ''}"><p><strong>[${escapeHtml(rule.title)}]</strong> - ${kind}${labels !== rule.title ? ` <em>(${escapeHtml(labels)})</em>` : ''}${origin}</p>
       <p class="print-rule-body">${renderDamageMarkers(escapeHtml(body)).replace(/\n/g, '<br>')}</p>
       ${showModels ? `<p class="print-rule-models">${escapeHtml([...rule.models].sort().join(', '))}</p>` : ''}</div>`;
   }
@@ -886,7 +1181,35 @@
   function renderCrewRulesPrintPage(rosterCharacters) {
     const sections = collectPrintRules(rosterCharacters).map(group =>
       `<h2>${group.heading}</h2>${group.items.map(rule => renderPrintRule(rule, group.kind, true)).join('')}`).join('');
-    return `<section class="print-rules"><h1>${escapeHtml(state.crewBuilder.crew || 'Crew')} — Rules Reference</h1>${sections}</section>`;
+    return `<section class="print-rules"><h1>${escapeHtml(state.crewBuilder.crew || 'Crew')} — Rules Reference</h1>${renderEquipmentPrintSection(rosterCharacters, 'h2', true)}${sections}</section>`;
+  }
+
+  // Purchased equipment (one entry per item/choice) with its cost and full text, so items that
+  // don't grant a compendium rule (Magazine, Med-pack…) still appear on the printed sheets.
+  function renderEquipmentPrintSection(characters, heading, showModels) {
+    const items = new Map();
+    characters.forEach(character => modelEquipment(character.id).forEach(entry => {
+      const label = equipmentEntryLabel(entry);
+      if (!items.has(label)) items.set(label, { entry, label, models: [] });
+      items.get(label).models.push(character.name);
+    }));
+    if (!items.size) return '';
+    const list = activeEquipmentList();
+    const rows = [...items.values()].sort((a,b) => a.label.localeCompare(b.label)).map(({ entry, label, models }) => {
+      const granted = equipmentGrantedRules(entry).map(rule => rule.label);
+      return `<div class="print-rule from-equipment"><p><strong>[${escapeHtml(label)}]</strong> - Equipment <em>(${escapeHtml(formatEquipmentCost(entry.item))}${showModels ? ` each · crew limit ${escapeHtml(formatEquipmentLimit(entry.item))}` : ''})</em></p>
+        <p class="print-rule-body">${renderDamageMarkers(escapeHtml(entry.item.description))}${granted.length ? ` <em>Grants: ${escapeHtml(granted.join(', '))}.</em>` : ''}${entry.item.unbreakable ? ' <em>Cannot be affected by Broken Equipment.</em>' : ''}</p>
+        ${showModels ? `<p class="print-rule-models">${escapeHtml(models.sort().join(', '))}</p>` : ''}</div>`;
+    }).join('');
+    return `<${heading}>Equipment${showModels && list ? ` <em class="print-equipment-source">${escapeHtml(list.title)} list</em>` : ''}</${heading}>${rows}`;
+  }
+
+  // Printed statistic plus any equipment modifier (e.g. Upgraded Batsuit's +1 Endurance).
+  function modifiedStat(character, key) {
+    const base = character.stats?.[key];
+    const mod = modelEquipment(character.id).reduce((sum, { item }) => sum + (item.statMods?.[key] || 0), 0);
+    if (!mod || !Number.isFinite(Number(base))) return { value: base, mod: 0 };
+    return { value: Number(base) + mod, mod };
   }
 
   function renderLoadoutHalf(character) {
@@ -894,8 +1217,10 @@
     const stats = character.stats || {};
     const alias = character.alias && normalize(character.alias) !== 'unknown' ? character.alias : '';
     const row = (label, value) => `<div><dt>${label}</dt><dd>${escapeHtml(value ?? '—')}</dd></div>`;
-    const rules = collectPrintRules([character]).map(group =>
+    const rules = renderEquipmentPrintSection([character], 'h3', false) + collectPrintRules([character]).map(group =>
       `<h3>${group.heading}</h3>${group.items.map(rule => renderPrintRule(rule, group.kind, false)).join('')}`).join('');
+    const gearCost = characterEquipmentCost(character.id);
+    const gearRep = modelEquipment(character.id).reduce((sum, { item }) => sum + (item.rep || 0), 0);
     // The card floats left so the rules can use the space under the stats, then run full width below it.
     return `<article class="loadout">
         <img class="loadout-card" src="${escapeHtml(character.image)}" alt="${escapeHtml(character.name)}">
@@ -905,13 +1230,16 @@
           <dl class="loadout-info">
             ${row('Crew', (character.crews || [character.crew]).filter(Boolean).join(', '))}
             ${row('Rank', character.rank)}
-            ${row('Reputation', character.reputation)}
-            ${row('Funding', character.funding != null ? `$${character.funding}` : null)}
+            ${row('Reputation', gearRep ? `${character.reputation ?? 0} + ${gearRep} equipment` : character.reputation)}
+            ${row('Funding', gearCost ? `$${character.funding ?? 0} + $${gearCost} equipment` : character.funding != null ? `$${character.funding}` : null)}
             ${row('Base', character.baseSizeMm ? `${character.baseSizeMm} mm` : null)}
           </dl>
           <table class="loadout-attributes">
             <tr><th>Willpower</th><th>Endurance</th><th>Attack</th><th>Defense</th><th>Strength</th><th>Movement</th></tr>
-            <tr>${['willpower','endurance','attack','defense','strength','movement'].map(key => `<td>${escapeHtml(stats[key] ?? '—')}</td>`).join('')}</tr>
+            <tr>${['willpower','endurance','attack','defense','strength','movement'].map(key => {
+              const { value, mod } = modifiedStat(character, key);
+              return mod ? `<td class="stat-modified">${escapeHtml(value)}<small>${mod > 0 ? '+' : ''}${mod} equip.</small></td>` : `<td>${escapeHtml(stats[key] ?? '—')}</td>`;
+            }).join('')}</tr>
           </table>
         </div>
       <div class="loadout-rules">${rules || '<p class="print-rule-body">No traits or weapon rules transcribed.</p>'}</div>
@@ -1276,7 +1604,7 @@
   async function copyCrewShareLink() {
     try {
       const cb = state.crewBuilder;
-      const payload = { v: 1, crew: cb.crew, repCap: cb.repCap, fundingCap: cb.fundingCap, bossId: cb.bossId, roster: cb.roster };
+      const payload = { v: 1, crew: cb.crew, repCap: cb.repCap, fundingCap: cb.fundingCap, bossId: cb.bossId, roster: cb.roster, equipmentList: cb.equipmentList, equipment: cb.equipment };
       const encoded = await encodeSharePayload(payload);
       const url = new URL(location.href);
       url.search = '';
@@ -1304,7 +1632,9 @@
       repCap: Number.isFinite(Number(payload.repCap)) ? Number(payload.repCap) : defaults.crewBuilder.repCap,
       fundingCap: Number.isFinite(Number(payload.fundingCap)) ? Number(payload.fundingCap) : defaults.crewBuilder.fundingCap,
       bossId: validIds.includes(payload.bossId) ? payload.bossId : null,
-      roster: validIds
+      roster: validIds,
+      equipmentList: equipmentLists.some(list => list.id === payload.equipmentList) ? payload.equipmentList : '',
+      equipment: sanitizeEquipment(payload.equipment, validIds)
     };
   }
 
@@ -1835,7 +2165,7 @@
 
   function renderPlayCrewCard(character) {
     const isBoss = state.crewBuilder.bossId === character.id;
-    const rules = characterRules(character);
+    const rules = rosterCharacterRules(character);
     return `<article class="play-crew-card ${isBoss ? 'is-boss' : ''}" data-character-id="${escapeHtml(character.id)}">
       <div class="play-crew-card-top">
         <img src="${escapeHtml(character.thumbnail || character.image)}" alt="">
@@ -1917,11 +2247,20 @@
     elements.characterActiveFilters.innerHTML = filters.map(filter => `<span class="badge">${escapeHtml(filter)}</span>`).join('');
   }
 
+  // Rules granted by equipment are highlighted and name the item they came from.
   function renderCharacterRuleChip(rule) {
+    const origin = rule.equipment ? `<small class="rule-origin">${escapeHtml(rule.equipment)}</small>` : '';
+    const extraClass = rule.equipment ? ' from-equipment' : '';
+    const title = rule.equipment ? ` title="Added by equipment: ${escapeHtml(rule.equipment)}"` : '';
     if (rule.referenceId && referenceById.has(rule.referenceId)) {
-      return `<button class="character-rule-chip linked" data-rule-ref="${escapeHtml(rule.referenceId)}" type="button">${escapeHtml(rule.label)}</button>`;
+      return `<button class="character-rule-chip linked${extraClass}" data-rule-ref="${escapeHtml(rule.referenceId)}"${title} type="button">${escapeHtml(rule.label)}${origin}</button>`;
     }
-    return `<span class="character-rule-chip">${escapeHtml(rule.label)}</span>`;
+    return `<span class="character-rule-chip${extraClass}"${title}>${escapeHtml(rule.label)}${origin}</span>`;
+  }
+
+  function renderEquipmentRuleChips(characterId) {
+    return modelEquipment(characterId).flatMap(entry =>
+      equipmentGrantedRules(entry).map(rule => renderCharacterRuleChip({ ...rule, equipment: equipmentEntryLabel(entry) }))).join('');
   }
 
   function renderCharacterTile(character) {
@@ -2000,9 +2339,10 @@
     const errors = [], warnings = [];
     const cb = state.crewBuilder;
     if (!cb.crew) errors.push('Choose a crew / faction before recruiting.');
-    const repTotal = rosterCharacters.reduce((sum, character) => sum + (character.reputation || 0), 0);
+    const equipment = equipmentTotals(cb);
+    const repTotal = rosterCharacters.reduce((sum, character) => sum + (character.reputation || 0), 0) + equipment.rep;
     const ruleEffects = crewRuleEffects(rosterCharacters);
-    const fundingTotal = rosterCharacters.reduce((sum, character) => sum + effectiveCharacterFunding(character, ruleEffects.fundingOverrides), 0);
+    const fundingTotal = rosterCharacters.reduce((sum, character) => sum + effectiveCharacterFunding(character, ruleEffects.fundingOverrides), 0) + equipment.funding;
     const bonuses = crewFundingBonuses(rosterCharacters);
     const bonusTotal = bonuses.reduce((sum, bonus) => sum + bonus.amount, 0);
     const effectiveFundingCap = cb.fundingCap + bonusTotal;
@@ -2017,9 +2357,10 @@
     const sidekicks = rosterCharacters.filter(character => character.rank === 'Sidekick');
     if (leaders.length > 1) errors.push(`A crew may only have 1 Leader (found ${leaders.length}: ${leaders.map(character => character.name).join(', ')}).`);
     if (sidekicks.length > 1) errors.push(`A crew may only have 1 Sidekick (found ${sidekicks.length}: ${sidekicks.map(character => character.name).join(', ')}).`);
+    errors.push(...validateEquipment(rosterCharacters, cb));
     if (rosterCharacters.length && !cb.bossId) warnings.push('No Boss designated — Boss-only funding traits (Dirty Money, Lord of Business, etc.) will not apply until a model is marked as Boss.');
     warnings.push(...ruleEffects.warnings);
-    return { valid: errors.length === 0, errors, warnings, repTotal, fundingTotal, bonuses, bonusTotal, effectiveFundingCap, ruleEffects };
+    return { valid: errors.length === 0, errors, warnings, repTotal, fundingTotal, bonuses, bonusTotal, effectiveFundingCap, ruleEffects, equipment };
   }
 
   function filteredCrewPool() {
@@ -2086,10 +2427,17 @@
     const isBoss = state.crewBuilder.bossId === character.id;
     const override = fundingOverrides && fundingOverrides.get(character.id);
     const fundingLabel = override ? `$0 (was $${character.funding ?? 0} — ${override.reason})` : `$${character.funding ?? 0}`;
+    const gear = modelEquipment(character.id);
+    const gearCost = characterEquipmentCost(character.id);
+    const gearLabel = gear.length ? ` · +$${gearCost} gear` : '';
+    const gearList = gear.length
+      ? `<div class="roster-equipment"><span class="roster-equipment-items">${gear.map(entry => escapeHtml(equipmentEntryLabel(entry))).join(' · ')}</span><div class="rule-ref-row">${renderEquipmentRuleChips(character.id)}</div></div>`
+      : '';
     return `<article class="deck-item ${isBoss ? 'is-boss' : ''}" data-character-id="${escapeHtml(character.id)}">
       <img src="${escapeHtml(character.thumbnail || character.image)}" alt="">
-      <div><strong>${escapeHtml(character.name)}</strong><span>${character.reputation ?? 0} REP · ${fundingLabel}${character.rank ? ` · ${escapeHtml(character.rank)}` : ''}${isBoss ? ' · Boss' : ''}</span></div>
+      <div><strong>${escapeHtml(character.name)}</strong><span>${character.reputation ?? 0} REP · ${fundingLabel}${gearLabel}${character.rank ? ` · ${escapeHtml(character.rank)}` : ''}${isBoss ? ' · Boss' : ''}</span>${gearList}</div>
       <div class="crew-roster-item-actions">
+        <button class="icon-button equip-button ${gear.length ? 'active' : ''}" data-action="equip" type="button" title="Equipment" aria-label="Equipment for ${escapeHtml(character.name)}">⚙</button>
         <button class="icon-button boss-toggle ${isBoss ? 'active' : ''}" data-action="toggle-boss" type="button" title="${isBoss ? 'Remove Boss' : 'Set as Boss'}" aria-label="${isBoss ? 'Remove Boss' : 'Set as Boss'}">★</button>
         <button data-action="remove" type="button" aria-label="Remove ${escapeHtml(character.name)}">×</button>
       </div>
@@ -2178,6 +2526,7 @@
     const cb = state.crewBuilder;
     cb.roster = cb.roster.filter(item => item !== id);
     if (cb.bossId === id) cb.bossId = null;
+    delete cb.equipment[id];
     persist(); renderCrewBuilder();
   }
 
@@ -2193,9 +2542,12 @@
     const cb = state.crewBuilder;
     const payload = {
       application: 'Batman Crew Builder', version: 1, exportedAt: new Date().toISOString(),
-      crew: cb.crew, repCap: cb.repCap, fundingCap: cb.fundingCap, bossId: cb.bossId,
-      roster: rosterCharacters.map(character => ({ id: character.id, name: character.name, alias: character.alias, reputation: character.reputation, funding: character.funding, boss: character.id === cb.bossId })),
-      totals: { reputation: validation.repTotal, funding: validation.fundingTotal, fundingBonuses: validation.bonuses, effectiveFundingCap: validation.effectiveFundingCap },
+      crew: cb.crew, repCap: cb.repCap, fundingCap: cb.fundingCap, bossId: cb.bossId, equipmentList: activeEquipmentList(cb)?.id || '',
+      roster: rosterCharacters.map(character => ({
+        id: character.id, name: character.name, alias: character.alias, reputation: character.reputation, funding: character.funding, boss: character.id === cb.bossId,
+        equipment: modelEquipment(character.id).map(entry => ({ id: entry.item.id, choice: entry.choice || null, name: equipmentEntryLabel(entry), cost: entry.item.cost, rep: entry.item.rep }))
+      })),
+      totals: { reputation: validation.repTotal, funding: validation.fundingTotal, equipmentFunding: validation.equipment.funding, equipmentReputation: validation.equipment.rep, fundingBonuses: validation.bonuses, effectiveFundingCap: validation.effectiveFundingCap },
       validation
     };
     download(`${slug(cb.crew || 'crew')}-crew.json`, JSON.stringify(payload,null,2), 'application/json');
@@ -2213,10 +2565,225 @@
       `Reputation: ${validation.repTotal} / ${cb.repCap}`,
       `Funding: $${validation.fundingTotal} / $${validation.effectiveFundingCap}${validation.bonusTotal ? ` (base $${cb.fundingCap} + $${validation.bonusTotal} bonus)` : ''}`, '',
       'ROSTER',
-      ...rosterCharacters.slice().sort((a,b) => a.name.localeCompare(b.name)).map(character => `- ${character.name}${character.alias ? ` / ${character.alias}` : ''} — ${character.reputation ?? 0} REP, $${character.funding ?? 0}${character.id === cb.bossId ? ' [BOSS]' : ''}`)
+      ...rosterCharacters.slice().sort((a,b) => a.name.localeCompare(b.name)).flatMap(character => [
+        `- ${character.name}${character.alias ? ` / ${character.alias}` : ''} — ${character.reputation ?? 0} REP, $${character.funding ?? 0}${character.id === cb.bossId ? ' [BOSS]' : ''}`,
+        ...modelEquipment(character.id).map(entry => `    + ${equipmentEntryLabel(entry)} (${formatEquipmentCost(entry.item)})`)
+      ])
     ];
+    if (validation.equipment.count) lines.splice(lines.indexOf('ROSTER'), 0, `Equipment: ${validation.equipment.count} item${validation.equipment.count === 1 ? '' : 's'}, $${validation.equipment.funding}${validation.equipment.rep ? ` + ${validation.equipment.rep} Rep` : ''} (${activeEquipmentList(cb)?.title || 'no list'})`, '');
     if (validation.bonuses.length) lines.push('', 'FUNDING BONUSES', ...validation.bonuses.map(bonus => `- ${bonus.characterName}: ${bonus.label} (+$${bonus.amount})`));
     download(`${slug(cb.crew || 'crew')}-crew.txt`, lines.join('\n'), 'text/plain');
+  }
+
+  // ---- Equipment screen --------------------------------------------------------------------------
+
+  function addEquipment(characterId, itemId, choice) {
+    const cb = state.crewBuilder;
+    const item = equipmentById.get(itemId);
+    if (!item || !cb.roster.includes(characterId)) return;
+    const entries = cb.equipment[characterId] || [];
+    if (entries.some(entry => entry.id === itemId)) return;
+    if (item.choices && !item.choices.some(option => option.id === choice)) return;
+    cb.equipment[characterId] = [...entries, { id: itemId, choice: item.choices ? choice : null }];
+    persist(); renderEquipment();
+  }
+
+  function removeEquipment(characterId, itemId) {
+    const cb = state.crewBuilder;
+    const entries = (cb.equipment[characterId] || []).filter(entry => entry.id !== itemId);
+    if (entries.length) cb.equipment[characterId] = entries; else delete cb.equipment[characterId];
+    persist(); renderEquipment();
+  }
+
+  function sortedRosterByRank(rosterCharacters) {
+    const bossId = state.crewBuilder.bossId;
+    return rosterCharacters.slice().sort((a,b) => rankSortIndex(a.rank) - rankSortIndex(b.rank) || (b.id === bossId) - (a.id === bossId) || a.name.localeCompare(b.name));
+  }
+
+  // Why the model can't add this item right now: `blocked` reasons mean the item is off-limits to
+  // the model entirely; `full` reasons (crew limit reached, duplicate trait) depend on other purchases.
+  function equipmentAvailability(item, character, rosterCharacters, counts, choiceId) {
+    const blocked = equipmentRestrictionReasons(item, character, rosterCharacters);
+    const full = [];
+    const max = item.limit[1];
+    if (max != null && (counts.items.get(item.id) || 0) >= max) full.push(`Crew limit reached (${formatEquipmentLimit(item)}).`);
+    const group = equipmentGroup(item);
+    if (group && (counts.groups.get(`${item.listId}:${item.group}`) || 0) >= group.limit) full.push(`Only ${group.limit} of the ${group.label} may be selected.`);
+    const choice = item.choices?.find(option => option.id === choiceId);
+    if (choice?.limit != null && (counts.choices.get(`${item.id}:${choice.id}`) || 0) >= choice.limit) full.push(`${choice.label}: crew limit reached (0-${choice.limit}).`);
+    const duplicates = duplicateEquipmentTraits(character, item, choiceId);
+    if (duplicates.length) full.push(`Already has ${duplicates.join(', ')}.`);
+    return { blocked, full };
+  }
+
+  function renderEquipmentModelRow(character, selectedId) {
+    const gear = modelEquipment(character.id);
+    const cost = characterEquipmentCost(character.id);
+    const isBoss = state.crewBuilder.bossId === character.id;
+    return `<article class="deck-item equipment-model-row ${character.id === selectedId ? 'selected' : ''} ${isBoss ? 'is-boss' : ''}" data-character-id="${escapeHtml(character.id)}" tabindex="0" role="button" aria-pressed="${character.id === selectedId}">
+      <img src="${escapeHtml(character.thumbnail || character.image)}" alt="">
+      <div><strong>${escapeHtml(character.name)}</strong><span>${escapeHtml(character.rank || 'Unranked')}${isBoss ? ' · Boss' : ''}</span>
+        <span class="equipment-model-gear">${gear.length ? `${gear.length} item${gear.length === 1 ? '' : 's'} · $${cost}` : 'No equipment'}</span></div>
+      <span class="equipment-model-count ${gear.length ? 'active' : ''}">${gear.length || ''}</span>
+    </article>`;
+  }
+
+  // `pickedChoice` is the option currently selected in the card's dropdown (for items like SWAT
+  // Special Training where the buyer picks one granted rule).
+  function renderEquipmentItemCard(item, character, rosterCharacters, counts, ownedEntry, pickedChoice) {
+    const bought = counts.items.get(item.id) || 0;
+    const choiceId = ownedEntry ? ownedEntry.choice : (pickedChoice || item.choices?.[0]?.id || null);
+    const { blocked, full } = ownedEntry ? { blocked: [], full: [] } : equipmentAvailability(item, character, rosterCharacters, counts, choiceId);
+    const reasons = blocked.length ? blocked : full;
+    const choice = item.choices?.find(option => option.id === choiceId);
+    const label = ownedEntry ? equipmentEntryLabel(ownedEntry) : item.name;
+    const grants = [...item.grants, ...(choice?.grants || [])];
+    const choiceSelect = item.choices && !ownedEntry
+      ? `<label class="field equipment-choice"><span>Option</span><select data-equipment-choice>${item.choices.map(option =>
+          `<option value="${escapeHtml(option.id)}" ${option.id === choiceId ? 'selected' : ''}>${escapeHtml(option.label)}${option.limit != null ? ` (0-${option.limit})` : ''}</option>`).join('')}</select></label>`
+      : '';
+    const limitText = `${item.limit[1] == null ? 'No limit' : formatEquipmentLimit(item)} · ${bought} bought`;
+    const action = ownedEntry
+      ? '<button class="button ghost compact" data-action="remove-equipment" type="button">Remove</button>'
+      : blocked.length ? '' : `<button class="button compact" data-action="add-equipment" type="button" ${full.length ? 'disabled' : ''}>Add · ${escapeHtml(formatEquipmentCost(item))}</button>`;
+    return `<article class="equipment-item ${ownedEntry ? 'owned' : ''} ${blocked.length ? 'unavailable' : ''}" data-equipment-id="${escapeHtml(item.id)}">
+      <div class="equipment-item-head">
+        <h3>${escapeHtml(label)}</h3>
+        <span class="equipment-cost">${escapeHtml(formatEquipmentCost(item))}</span>
+      </div>
+      <div class="badge-row">
+        <span class="badge ${item.limit[1] != null && bought > item.limit[1] ? 'over' : ''}">${escapeHtml(limitText)}</span>
+        ${item.requires ? `<span class="badge character">Needs ${escapeHtml(item.requires.join(' / '))}</span>` : ''}
+        ${item.unbreakable ? '<span class="badge copy" title="Cannot be affected by the Broken Equipment rule">Unbreakable</span>' : ''}
+      </div>
+      <p class="equipment-description">${renderDamageMarkers(escapeHtml(item.description))}</p>
+      ${grants.length ? `<div class="rule-ref-row">${grants.map(rule => renderCharacterRuleChip(ownedEntry ? { ...rule, equipment: label } : rule)).join('')}</div>` : ''}
+      ${choiceSelect}
+      ${reasons.length ? `<p class="equipment-reason">${reasons.map(escapeHtml).join(' ')}</p>` : ''}
+      ${action ? `<div class="equipment-item-actions">${action}</div>` : ''}
+    </article>`;
+  }
+
+  function renderEquipment() {
+    if (!elements.equipmentView) return;
+    const cb = state.crewBuilder;
+    const filters = state.equipmentFilters;
+    const rosterCharacters = crewRosterCharacters();
+    const sortedRoster = sortedRosterByRank(rosterCharacters);
+    const list = activeEquipmentList(cb);
+    const defaultList = equipmentLists.find(item => item.id === defaultEquipmentListId(cb.crew));
+
+    elements.equipmentListSelect.innerHTML = `<option value="">${defaultList ? `Crew default (${escapeHtml(defaultList.title)})` : 'Crew default (none for this crew)'}</option>` +
+      equipmentLists.map(item => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.title)}${item.source === 'compendium' ? ` · compendium p.${item.page}` : ''}</option>`).join('');
+    elements.equipmentListSelect.value = cb.equipmentList || '';
+    elements.equipmentSearch.value = filters.search;
+    elements.equipmentShowUnavailable.checked = filters.showUnavailable;
+
+    if (!rosterCharacters.some(character => character.id === filters.characterId)) {
+      const firstBuyer = sortedRoster.find(character => EQUIPMENT_DEFAULT_RANKS.includes(character.rank)) || sortedRoster[0];
+      filters.characterId = firstBuyer ? firstBuyer.id : '';
+    }
+    const character = rosterCharacters.find(item => item.id === filters.characterId) || null;
+
+    elements.equipmentModelList.className = rosterCharacters.length ? 'deck-list equipment-model-list' : 'deck-list equipment-model-list empty-note';
+    elements.equipmentModelList.innerHTML = rosterCharacters.length
+      ? sortedRoster.map(member => renderEquipmentModelRow(member, filters.characterId)).join('')
+      : 'Recruit models in the Crew Builder first.';
+
+    const validation = validateCrew(rosterCharacters);
+    elements.equipmentRepTotal.textContent = validation.repTotal;
+    elements.equipmentRepCapLabel.textContent = cb.repCap;
+    setMeter(elements.equipmentRepMeter, validation.repTotal, cb.repCap);
+    elements.equipmentFundingTotal.textContent = validation.fundingTotal;
+    elements.equipmentFundingCapLabel.textContent = validation.effectiveFundingCap;
+    setMeter(elements.equipmentFundingMeter, validation.fundingTotal, validation.effectiveFundingCap);
+    const messages = [...validateEquipment(rosterCharacters), ...validation.errors.filter(message => /exceeds the cap/.test(message))];
+    elements.equipmentValidationSummary.className = `validation-summary ${messages.length ? 'invalid' : 'valid'}`;
+    elements.equipmentValidationSummary.innerHTML = messages.length
+      ? `<strong>Equipment needs attention</strong><ul>${messages.map(message => `<li>${escapeHtml(message)}</li>`).join('')}</ul>`
+      : `<strong>Equipment legal</strong><br>${validation.equipment.count ? `${validation.equipment.count} item${validation.equipment.count === 1 ? '' : 's'} costing $${validation.equipment.funding}${validation.equipment.rep ? ` + ${validation.equipment.rep} Rep` : ''}.` : 'No equipment purchased yet.'}`;
+    renderEquipmentCrewList(sortedRoster, validation);
+
+    const showEmpty = (title, text) => {
+      elements.equipmentItemGrid.innerHTML = '';
+      elements.emptyEquipment.hidden = false;
+      elements.emptyEquipmentTitle.textContent = title;
+      elements.emptyEquipmentText.textContent = text;
+    };
+    elements.equipmentToolbar.hidden = !character || !list;
+    if (!character) {
+      elements.equipmentModelEyebrow.textContent = 'Equipment';
+      elements.equipmentModelTitle.textContent = cb.crew ? 'Choose a model' : 'Choose a crew first';
+      elements.equipmentModelCost.textContent = '$0';
+      elements.equipmentModelSummary.innerHTML = '';
+      showEmpty('No model selected', cb.crew ? 'Recruit models in the Crew Builder, then pick one on the left to buy its equipment.' : 'Pick a crew and recruit models in the Crew Builder first.');
+      return;
+    }
+
+    const gear = modelEquipment(character.id);
+    elements.equipmentModelEyebrow.textContent = `${character.rank || 'Unranked'}${cb.bossId === character.id ? ' · Boss' : ''}${list ? ` · ${list.title} list` : ''}`;
+    elements.equipmentModelTitle.textContent = character.name;
+    elements.equipmentModelCost.textContent = `$${characterEquipmentCost(character.id)}`;
+    const nativeChips = characterRules(character).filter(rule => rule.category === 'trait').map(renderCharacterRuleChip).join('');
+    const equipmentChips = renderEquipmentRuleChips(character.id);
+    elements.equipmentModelSummary.innerHTML = `<div class="equipment-model-summary">
+      <img src="${escapeHtml(character.thumbnail || character.image)}" alt="${escapeHtml(character.name)}">
+      <div>
+        <p class="character-alias">${escapeHtml(character.alias && normalize(character.alias) !== 'unknown' ? character.alias : 'Alias unknown')} · ${character.reputation ?? 0} REP · $${character.funding ?? 0}</p>
+        <p class="equipment-added-heading">Printed traits</p>
+        <div class="rule-ref-row">${nativeChips || '<span class="muted">No traits transcribed.</span>'}</div>
+        ${equipmentChips ? `<p class="equipment-added-heading">Added by equipment</p><div class="rule-ref-row">${equipmentChips}</div>` : ''}
+        ${EQUIPMENT_DEFAULT_RANKS.includes(character.rank) ? '' : `<p class="equipment-reason">${escapeHtml(character.rank || 'Unranked')} models can only take equipment that specifically allows them.</p>`}
+      </div>
+    </div>`;
+
+    if (!list) {
+      showEmpty('No equipment list for this crew', `The compendium has no equipment list for ${cb.crew}. Choose one from “Equipment list” on the left if your group uses one.`);
+      return;
+    }
+
+    // Keep each dropdown's picked option across re-renders so its Add button reflects that option.
+    const pickedChoices = new Map($$('[data-equipment-choice]', elements.equipmentItemGrid)
+      .map(select => [select.closest('[data-equipment-id]').dataset.equipmentId, select.value]));
+    const counts = crewEquipmentCounts(cb);
+    const search = normalize(filters.search);
+    const matchesSearch = item => !search || search.split(' ').every(token =>
+      normalize([item.name, item.description, ...item.grants.map(rule => rule.label), ...(item.choices || []).map(option => option.label)].join(' ')).includes(token));
+    const ownedIds = new Set(gear.map(entry => entry.item.id));
+    const available = [], unavailable = [];
+    list.items.filter(item => !ownedIds.has(item.id) && matchesSearch(item)).forEach(item => {
+      (equipmentRestrictionReasons(item, character, rosterCharacters).length ? unavailable : available).push(item);
+    });
+    const card = (item, ownedEntry = null) => renderEquipmentItemCard(item, character, rosterCharacters, counts, ownedEntry, pickedChoices.get(item.id));
+    const section = (title, cards) => cards.length ? `<h3 class="equipment-section-title">${title} <span>${cards.length}</span></h3><div class="equipment-section">${cards.join('')}</div>` : '';
+    const html = section('Equipped', gear.filter(entry => matchesSearch(entry.item)).map(entry => card(entry.item, entry))) +
+      section('Available', available.map(item => card(item))) +
+      (filters.showUnavailable ? section(`Not available to ${escapeHtml(character.name)}`, unavailable.map(item => card(item))) : '');
+    if (!html) {
+      showEmpty('No equipment matches', search ? 'Clear the search to see the full list.' : `Nothing on the ${list.title} list is available to ${character.name}. Tick “Show items this model can't take” to see why.`);
+      return;
+    }
+    elements.emptyEquipment.hidden = true;
+    const hiddenNote = !filters.showUnavailable && unavailable.length
+      ? `<p class="muted equipment-hidden-note">${unavailable.length} item${unavailable.length === 1 ? '' : 's'} on this list can't be taken by ${escapeHtml(character.name)} — tick “Show items this model can't take” to see why.</p>`
+      : '';
+    elements.equipmentItemGrid.innerHTML = html + hiddenNote;
+  }
+
+  function renderEquipmentCrewList(sortedRoster, validation) {
+    const withGear = sortedRoster.filter(character => modelEquipment(character.id).length);
+    elements.equipmentCrewCount.textContent = `${validation.equipment.count} item${validation.equipment.count === 1 ? '' : 's'} · $${validation.equipment.funding}`;
+    if (!withGear.length) {
+      elements.equipmentCrewList.className = 'equipment-crew-list empty-note';
+      elements.equipmentCrewList.textContent = 'No equipment purchased yet.';
+      return;
+    }
+    elements.equipmentCrewList.className = 'equipment-crew-list';
+    elements.equipmentCrewList.innerHTML = withGear.map(character => `<section class="equipment-crew-model">
+      <button class="text-button" data-action="select-model" data-character-id="${escapeHtml(character.id)}" type="button">${escapeHtml(character.name)} <span>$${characterEquipmentCost(character.id)}</span></button>
+      <ul>${modelEquipment(character.id).map(entry => `<li><span>${escapeHtml(equipmentEntryLabel(entry))}</span><span>${escapeHtml(formatEquipmentCost(entry.item))}</span>
+        <button data-action="remove-equipment" data-character-id="${escapeHtml(character.id)}" data-equipment-id="${escapeHtml(entry.item.id)}" type="button" aria-label="Remove ${escapeHtml(equipmentEntryLabel(entry))} from ${escapeHtml(character.name)}">×</button></li>`).join('')}</ul>
+    </section>`).join('');
   }
 
   async function importCrewJson(event) {
@@ -2228,12 +2795,16 @@
       const ids = Array.isArray(payload.roster) ? payload.roster.map(item => typeof item === 'string' ? item : item.id) : [];
       const crew = typeof payload.crew === 'string' ? payload.crew : '';
       const validIds = resolveCrewRosterIds(ids, crew);
+      const equipment = payload.equipment && typeof payload.equipment === 'object' ? payload.equipment
+        : Object.fromEntries((Array.isArray(payload.roster) ? payload.roster : []).filter(item => item && Array.isArray(item.equipment)).map(item => [item.id, item.equipment]));
       state.crewBuilder = {
         crew,
         repCap: Number.isFinite(Number(payload.repCap)) ? Number(payload.repCap) : defaults.crewBuilder.repCap,
         fundingCap: Number.isFinite(Number(payload.fundingCap)) ? Number(payload.fundingCap) : defaults.crewBuilder.fundingCap,
         bossId: validIds.includes(payload.bossId) ? payload.bossId : null,
-        roster: validIds
+        roster: validIds,
+        equipmentList: equipmentLists.some(list => list.id === payload.equipmentList) ? payload.equipmentList : '',
+        equipment: sanitizeEquipment(equipment, validIds)
       };
       persist(); renderCrewBuilder(); toast(`Imported ${validIds.length} crew member${validIds.length === 1 ? '' : 's'}`);
     } catch (error) {
@@ -2245,6 +2816,7 @@
   function navigateTo(view, entryId = '') {
     const target = view === 'reference'
       ? `#reference${entryId ? `/${entryId}` : ''}`
+      : view === 'equipment' ? `#equipment${entryId ? `/${entryId}` : ''}`
       : view === 'characters' ? '#characters' : view === 'crew' ? '#crew' : '#builder';
     if (location.hash === target) applyRoute();
     else location.hash = target;
@@ -2256,11 +2828,15 @@
     const showReference = page === 'reference';
     const showCharacters = page === 'characters';
     const showCrew = page === 'crew';
-    const showBuilder = !showReference && !showCharacters && !showCrew;
+    const showEquipment = page === 'equipment';
+    const showBuilder = !showReference && !showCharacters && !showCrew && !showEquipment;
     elements.builderView.hidden = !showBuilder;
     elements.characterView.hidden = !showCharacters;
     elements.referenceView.hidden = !showReference;
     elements.crewView.hidden = !showCrew;
+    elements.equipmentView.hidden = !showEquipment;
+    elements.equipmentNav.classList.toggle('active', showEquipment);
+    elements.equipmentNav.setAttribute('aria-current', showEquipment ? 'page' : 'false');
     elements.builderNav.classList.toggle('active', showBuilder);
     elements.characterNav.classList.toggle('active', showCharacters);
     elements.referenceNav.classList.toggle('active', showReference);
@@ -2269,11 +2845,15 @@
     elements.characterNav.setAttribute('aria-current', showCharacters ? 'page' : 'false');
     elements.referenceNav.setAttribute('aria-current', showReference ? 'page' : 'false');
     elements.crewNav.setAttribute('aria-current', showCrew ? 'page' : 'false');
-    document.title = showReference ? 'BMG Compendium Reference' : showCharacters ? 'BMG Character Card Archive' : showCrew ? 'BMG Crew Builder' : 'Batman Objective Deck Builder';
+    document.title = showReference ? 'BMG Compendium Reference' : showCharacters ? 'BMG Character Card Archive' : showCrew ? 'BMG Crew Builder' : showEquipment ? 'BMG Crew Equipment' : 'Batman Objective Deck Builder';
     hideRuleTooltip();
     if (showBuilder) { renderLibrary(); renderDeck(); }
     if (showCharacters) renderCharacters();
     if (showCrew) renderCrewBuilder();
+    if (showEquipment) {
+      if (entryId) state.equipmentFilters.characterId = entryId;
+      renderEquipment();
+    }
     if (showReference) {
       renderReference();
       if (entryId) requestAnimationFrame(() => focusReferenceEntry(entryId));
