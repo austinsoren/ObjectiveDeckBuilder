@@ -238,7 +238,7 @@
     characterCrew: $('#characterCrew'), characterBaseSize: $('#characterBaseSize'), characterSort: $('#characterSort'),
     characterGrid: $('#characterGrid'), characterVisibleCount: $('#characterVisibleCount'), characterTotalCount: $('#characterTotalCount'),
     characterCrewCount: $('#characterCrewCount'), characterTitle: $('#characterTitle'), characterActiveFilters: $('#characterActiveFilters'),
-    emptyCharacters: $('#emptyCharacters'), characterDialog: $('#characterDialog'), characterDialogImage: $('#characterDialogImage'),
+    emptyCharacters: $('#emptyCharacters'), characterDialog: $('#characterDialog'), crewPrintDialog: $('#crewPrintDialog'), characterDialogImage: $('#characterDialogImage'),
     characterDialogCrew: $('#characterDialogCrew'), characterDialogTitle: $('#characterDialogTitle'), characterDialogAlias: $('#characterDialogAlias'),
     characterDialogBadges: $('#characterDialogBadges'), characterDialogStats: $('#characterDialogStats'),
     characterDialogTraits: $('#characterDialogTraits'), characterDialogWeapons: $('#characterDialogWeapons'), characterDialogSource: $('#characterDialogSource')
@@ -559,7 +559,8 @@
     $('#endPlay').addEventListener('click', endPlaySession);
     $('#autoBuild').addEventListener('click', autoBuild);
     $('#exportText').addEventListener('click', exportText);
-    $('#printDeck').addEventListener('click', () => window.print());
+    $('#importText').addEventListener('change', importText);
+    $('#printDeck').addEventListener('click', printDeckProxies);
     $('#helpButton').addEventListener('click', () => elements.rulesDialog.showModal());
     $('[data-close-rules]').addEventListener('click', () => elements.rulesDialog.close());
     $('[data-close-dialog]').addEventListener('click', () => elements.cardDialog.close());
@@ -674,7 +675,16 @@
     $('#exportCrewJson').addEventListener('click', exportCrewJson);
     $('#exportCrewText').addEventListener('click', exportCrewText);
     $('#importCrewJson').addEventListener('change', importCrewJson);
-    $('#printCrew').addEventListener('click', () => window.print());
+    $('#printCrew').addEventListener('click', printCrewRoster);
+    $('[data-close-crew-print]').addEventListener('click', () => elements.crewPrintDialog.close());
+    elements.crewPrintDialog.addEventListener('click', event => {
+      if (event.target === elements.crewPrintDialog) { elements.crewPrintDialog.close(); return; }
+      const choice = event.target.closest('[data-print-layout]');
+      if (!choice) return;
+      elements.crewPrintDialog.close();
+      if (choice.dataset.printLayout === 'loadout') printCrewLoadouts();
+      else printCrewProxies();
+    });
 
     elements.referenceSearch.addEventListener('input', event => {
       state.referenceFilters.search = event.target.value;
@@ -824,6 +834,158 @@
         ${buildable ? `<div class="card-actions"><button class="button ${selected ? 'ghost' : ''}" data-action="toggle" type="button">${selected ? 'Remove bundle' : `Add ${card.requiredCopies}`}</button><button class="button ghost details-button" data-action="details" type="button" aria-label="Card details">•••</button></div>` : '<p class="reference-note">Reference library card</p>'}
       </div>
     </article>`;
+  }
+
+  async function printDeckProxies() {
+    const selected = state.selected.map(getCard).filter(Boolean)
+      .sort((a,b) => a.category.localeCompare(b.category) || a.title.localeCompare(b.title));
+    if (!selected.length) { alert('Select at least one card before printing.'); return; }
+    const copies = selected.flatMap(card => Array.from({ length: card.requiredCopies || 1 }, () => ({ image: card.image, title: card.title })));
+    await printProxySheet(copies);
+  }
+
+  function printCrewRoster() {
+    if (!crewRosterCharacters().length) { alert('Recruit at least one model before printing.'); return; }
+    elements.crewPrintDialog.showModal();
+  }
+
+  function sortedRosterForPrint() {
+    return crewRosterCharacters().sort((a,b) => a.name.localeCompare(b.name));
+  }
+
+  async function printCrewProxies() {
+    const rosterCharacters = sortedRosterForPrint();
+    const cards = rosterCharacters.map(character => ({ image: character.image, title: character.name }));
+    await printProxySheet(cards, 'contain', renderCrewRulesPrintPage(rosterCharacters));
+  }
+
+  // One entry per compendium rule referenced by the given models, grouped by traits / weapon rules.
+  function collectPrintRules(characters) {
+    const rules = new Map();
+    characters.forEach(character => characterRules(character).forEach(rule => {
+      const entry = rule.referenceId ? referenceById.get(rule.referenceId) : null;
+      const key = entry ? entry.id : `${rule.category}:${normalize(rule.label)}`;
+      if (!rules.has(key)) rules.set(key, { entry, category: rule.category, title: entry?.title || rule.label, labels: new Set(), models: new Set() });
+      rules.get(key).labels.add(rule.label);
+      rules.get(key).models.add(character.name);
+    }));
+    return [['trait', 'Traits', 'Trait'], ['weapon', 'Weapon Rules', 'Weapon Rule']].map(([category, heading, kind]) => ({
+      heading, kind,
+      items: [...rules.values()].filter(rule => rule.category === category).sort((a,b) => a.title.localeCompare(b.title))
+    })).filter(group => group.items.length);
+  }
+
+  function renderPrintRule(rule, kind, showModels) {
+    const labels = [...rule.labels].sort().join(', ');
+    const body = rule.entry?.body || 'No compendium entry found for this rule.';
+    return `<div class="print-rule"><p><strong>[${escapeHtml(rule.title)}]</strong> - ${kind}${labels !== rule.title ? ` <em>(${escapeHtml(labels)})</em>` : ''}</p>
+      <p class="print-rule-body">${renderDamageMarkers(escapeHtml(body)).replace(/\n/g, '<br>')}</p>
+      ${showModels ? `<p class="print-rule-models">${escapeHtml([...rule.models].sort().join(', '))}</p>` : ''}</div>`;
+  }
+
+  function renderCrewRulesPrintPage(rosterCharacters) {
+    const sections = collectPrintRules(rosterCharacters).map(group =>
+      `<h2>${group.heading}</h2>${group.items.map(rule => renderPrintRule(rule, group.kind, true)).join('')}`).join('');
+    return `<section class="print-rules"><h1>${escapeHtml(state.crewBuilder.crew || 'Crew')} — Rules Reference</h1>${sections}</section>`;
+  }
+
+  function renderLoadoutHalf(character) {
+    const isBoss = state.crewBuilder.bossId === character.id;
+    const stats = character.stats || {};
+    const alias = character.alias && normalize(character.alias) !== 'unknown' ? character.alias : '';
+    const row = (label, value) => `<div><dt>${label}</dt><dd>${escapeHtml(value ?? '—')}</dd></div>`;
+    const rules = collectPrintRules([character]).map(group =>
+      `<h3>${group.heading}</h3>${group.items.map(rule => renderPrintRule(rule, group.kind, false)).join('')}`).join('');
+    // The card floats left so the rules can use the space under the stats, then run full width below it.
+    return `<article class="loadout">
+        <img class="loadout-card" src="${escapeHtml(character.image)}" alt="${escapeHtml(character.name)}">
+        <div class="loadout-stats">
+          <h2>${escapeHtml(character.name)}${isBoss ? ' <span class="loadout-boss">Boss</span>' : ''}</h2>
+          ${alias ? `<p class="loadout-alias">${escapeHtml(alias)}</p>` : ''}
+          <dl class="loadout-info">
+            ${row('Crew', (character.crews || [character.crew]).filter(Boolean).join(', '))}
+            ${row('Rank', character.rank)}
+            ${row('Reputation', character.reputation)}
+            ${row('Funding', character.funding != null ? `$${character.funding}` : null)}
+            ${row('Base', character.baseSizeMm ? `${character.baseSizeMm} mm` : null)}
+          </dl>
+          <table class="loadout-attributes">
+            <tr><th>Willpower</th><th>Endurance</th><th>Attack</th><th>Defense</th><th>Strength</th><th>Movement</th></tr>
+            <tr>${['willpower','endurance','attack','defense','strength','movement'].map(key => `<td>${escapeHtml(stats[key] ?? '—')}</td>`).join('')}</tr>
+          </table>
+        </div>
+      <div class="loadout-rules">${rules || '<p class="print-rule-body">No traits or weapon rules transcribed.</p>'}</div>
+    </article>`;
+  }
+
+  async function printCrewLoadouts() {
+    const html = sortedRosterForPrint().map(renderLoadoutHalf).join('');
+    await printSheetHtml(`<section class="loadout-page">${html}</section>`, paginateLoadouts);
+  }
+
+  // Fit each model's rules into half a page, shrinking the text down to a readable minimum; models
+  // whose rules still don't fit get a full page. Then pair the half-page models two per page.
+  function paginateLoadouts(sheet) {
+    sheet.classList.add('measuring');
+    const loadouts = [...sheet.querySelectorAll('.loadout')];
+    const fits = (loadout, min) => {
+      const box = loadout.querySelector('.loadout-rules');
+      let size = 8.5;
+      const overflowing = () => loadout.scrollHeight > loadout.clientHeight + 1;
+      box.style.fontSize = `${size}pt`;
+      while (overflowing() && size > min) {
+        size -= 0.25;
+        box.style.fontSize = `${size}pt`;
+      }
+      return !overflowing();
+    };
+    loadouts.forEach(loadout => {
+      if (fits(loadout, 6)) return;
+      loadout.classList.add('full');
+      fits(loadout, 5.5);
+    });
+    sheet.classList.remove('measuring');
+    const pages = [];
+    let pending = null;
+    loadouts.forEach(loadout => {
+      if (loadout.classList.contains('full')) {
+        pages.push([loadout]);
+      } else if (pending) {
+        pages.push([pending, loadout]); pending = null;
+      } else {
+        pending = loadout;
+      }
+    });
+    if (pending) pages.push([pending]);
+    sheet.replaceChildren(...pages.map(page => {
+      const section = document.createElement('section');
+      section.className = 'loadout-page';
+      section.append(...page);
+      return section;
+    }));
+  }
+
+  async function printProxySheet(cards, fit = 'cover', extraHtml = '') {
+    const perPage = 9;
+    const pages = [];
+    for (let i = 0; i < cards.length; i += perPage) pages.push(cards.slice(i, i + perPage));
+    await printSheetHtml(pages.map(page => `<section class="print-page">${page.map(card =>
+      `<div class="print-card fit-${fit}"><img src="${escapeHtml(card.image)}" alt="${escapeHtml(card.title)}"></div>`).join('')}</section>`).join('') + extraHtml);
+  }
+
+  async function printSheetHtml(html, afterLoad) {
+    const sheet = $('#printSheet');
+    sheet.innerHTML = html;
+    await Promise.all([...sheet.querySelectorAll('img')].map(img => img.complete ? null : new Promise(resolve => { img.onload = img.onerror = resolve; })));
+    if (afterLoad) afterLoad(sheet);
+    document.body.classList.add('printing-deck');
+    const cleanup = () => {
+      document.body.classList.remove('printing-deck');
+      sheet.innerHTML = '';
+      window.removeEventListener('afterprint', cleanup);
+    };
+    window.addEventListener('afterprint', cleanup);
+    window.print();
   }
 
   function toggleCard(id, force) {
@@ -1183,6 +1345,76 @@
     if (bonus.length) lines.push('', 'CHARACTER OBJECTIVES', ...bonus.map(card => `${card.requiredCopies}x ${card.title}${card.subtitle ? ` — ${card.subtitle} (${card.rank || 'rank unset'})` : ''}`));
     if (state.roster.length) lines.push('', 'CREW ROSTER', ...state.roster.map(model => `- ${model.name}${model.alias ? ` / ${model.alias}` : ''} — ${model.rank}`));
     download(`${slug(state.affiliation || 'batman')}-objective-deck.txt`, lines.join('\n'), 'text/plain');
+  }
+
+  async function importText(event) {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+    if (!file) return;
+    try {
+      const result = parseDeckText(await file.text());
+      if (!result.selected.length) throw new Error('No objective cards were recognised in this file.');
+      if (state.selected.length && !confirm('Replace the current objective deck with the imported list?')) return;
+      if (result.affiliation) state.affiliation = result.affiliation;
+      state.selected = result.selected;
+      if (result.roster) state.roster = result.roster;
+      persist(); renderAll();
+      toast(`Imported ${result.selected.length} design${result.selected.length === 1 ? '' : 's'}`);
+      if (result.unmatched.length) alert(`These lines could not be matched to a card and were skipped:\n\n${result.unmatched.join('\n')}`);
+    } catch (error) {
+      alert(`Could not import this deck list: ${error.message}`);
+    }
+  }
+
+  function parseDeckText(text) {
+    const norm = value => String(value || '').toLowerCase().replace(/[’‘`]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ').trim();
+    const cards = allCards().filter(card => ['general','affiliation','character'].includes(card.category));
+    const lines = text.split(/\r?\n/).map(line => line.trim());
+    const affiliations = [...elements.affiliation.options].map(option => option.value).filter(Boolean);
+    const header = lines.find(line => /objective deck$/i.test(line));
+    const headerName = header ? norm(header.replace(/\s*objective deck$/i, '')) : '';
+    const affiliation = affiliations.find(name => norm(name) === headerName) || '';
+    const selected = [];
+    const unmatched = [];
+    let roster = null;
+    let section = '';
+    const pick = (candidates, copies) => {
+      const open = candidates.filter(card => !selected.includes(card.id));
+      return open.find(card => card.requiredCopies === copies) || open[0];
+    };
+    for (const line of lines) {
+      if (/^base deck$/i.test(line)) { section = 'base'; continue; }
+      if (/^character objectives$/i.test(line)) { section = 'character'; continue; }
+      if (/^crew roster$/i.test(line)) { section = 'roster'; roster = []; continue; }
+      if (!line) continue;
+      if (section === 'roster') {
+        const match = line.match(/^-\s*(.+?)(?:\s+\/\s+(.+?))?\s+—\s+(.+)$/);
+        if (match) roster.push({ id: crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${roster.length}`, name: match[1], alias: match[2] || '', rank: match[3] });
+        continue;
+      }
+      const countMatch = line.match(/^(\d+)x\s+(.+)$/i);
+      if (!countMatch || !section) continue;
+      const copies = Number(countMatch[1]);
+      let card;
+      if (section === 'base') {
+        const match = countMatch[2].match(/^(.+?)(?:\s+\[([^\]]+)\])?$/);
+        const title = norm(match[1]);
+        const group = norm(match[2]);
+        const byTitle = cards.filter(item => item.category !== 'character' && norm(item.title) === title);
+        const byGroup = byTitle.filter(item => !group || (group === 'general' ? item.category === 'general' : norm(item.affiliation) === group));
+        card = pick(byGroup.length ? byGroup : byTitle, copies);
+      } else {
+        const match = countMatch[2].match(/^(.+?)(?:\s+—\s+(.+?)\s+\(([^()]+)\))?$/);
+        const title = norm(match[1]);
+        const subtitle = norm(match[2]);
+        const byTitle = cards.filter(item => item.category === 'character' && norm(item.title) === title);
+        const bySubtitle = byTitle.filter(item => !subtitle || norm(item.subtitle) === subtitle);
+        card = pick(bySubtitle.length ? bySubtitle : byTitle, copies);
+      }
+      if (card) selected.push(card.id);
+      else unmatched.push(line);
+    }
+    return { affiliation, selected, unmatched, roster };
   }
 
   function updatePlayLaunchButton(validation = validateDeck(state.selected.map(getCard).filter(Boolean))) {

@@ -186,6 +186,7 @@
         <button id="autoBuild" class="button" type="button">Build legal example</button>
         <button id="copyDeckLink" class="button ghost" type="button">Copy share link</button>
         <button id="exportText" class="button ghost" type="button">Export list</button>
+        <label class="button ghost file-button">Import list<input id="importText" type="file" accept=".txt,text/plain"></label>
         <button id="printDeck" class="button ghost" type="button">Print</button>
       </div>
     </aside>
@@ -522,6 +523,22 @@
     </form>
   </dialog>
 
+  <dialog id="crewPrintDialog" class="rules-dialog print-choice-dialog">
+    <button class="dialog-close" data-close-crew-print aria-label="Close">×</button>
+    <p class="eyebrow">Print crew roster</p>
+    <h2>Choose a print layout</h2>
+    <div class="print-choice-list">
+      <button class="print-choice" type="button" data-print-layout="cards">
+        <strong>Proxy Card Sheet</strong>
+        <span>9 playing-card-sized character cards per page, followed by a combined rules reference for the whole crew.</span>
+      </button>
+      <button class="print-choice" type="button" data-print-layout="loadout">
+        <strong>Half-Page Loadouts</strong>
+        <span>2 models per page: character card, printed statistics, and the full text of that model's traits and weapon rules.</span>
+      </button>
+    </div>
+  </dialog>
+
   <dialog id="rulesDialog" class="rules-dialog">
     <button class="dialog-close" data-close-rules aria-label="Close">×</button>
     <p class="eyebrow">Validation rules</p>
@@ -635,6 +652,7 @@
 
   <div id="ruleTooltip" class="rule-tooltip" role="tooltip" hidden></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="printSheet" class="print-sheet" aria-hidden="true"></div>
 
   <script src="data/cards-data.js"></script>
   <script src="data/character-data.js"></script>
